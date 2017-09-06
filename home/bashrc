@@ -213,6 +213,9 @@ alias vim='vim -O'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias please='sudo'
+alias ag="ag --color -H"
+alias less="less -r"
+alias tree="tree -C"
 
 alias c='clear'
 alias cls="clear && ls -l"
@@ -223,7 +226,7 @@ alias lt='ls -lhtc'
 alias la='ls -lha'
 alias ll='ls -l'
 alias rm='rm -I'
-alias grep='grep -i'
+alias grep='grep -i --color'
 
 id_rsas=$(ls --ignore="*.pub" -w 1 ~/.ssh/ | grep "^id_" | tr '\n' ' ')
 alias kchour="eval \`keychain --eval --agents ssh --timeout 60 --quiet $id_rsas\`"
