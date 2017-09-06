@@ -64,11 +64,6 @@ function success_prompt() {
 }
 
 function bash_prompt() {
-    #local files
-    #local files_prompt
-    #files=$(find -maxdepth 1 | wc | awk '{print $1}')
-    #files_prompt="${files} files"
-
     last_status=$(success_prompt)
 
     local login
@@ -135,7 +130,6 @@ function bash_prompt() {
             count_staged=""
         fi
 
-
         # M == Modified and Unstaged ●
         # D == Deleted  -
         # R == Renamed  R
@@ -200,14 +194,15 @@ gitcopush() {
     set +eu
 }
 
+export PATH="$PATH:~/arc/arcanist/bin/"
+export TERM='rxvt-256color'
+export EDITOR='vim'
+export HISTSIZE=5000
+
 PROMPT_COMMAND='PS1="$(bash_prompt)"'
 
 BASE16_SHELL="$HOME/.config/base16-shell/scripts/base16-tomorrow-night.sh"
 [[ -s "$BASE16_SHELL" ]] && source $BASE16_SHELL
-
-export TERM='rxvt-256color'
-export EDITOR='vim'
-export HISTSIZE=5000
 
 alias vim='vim -O'
 alias ..='cd ..'
