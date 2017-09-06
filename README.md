@@ -1,6 +1,7 @@
 # Desktop
 
-These are my updated dotfiles with a clean and safe deploy script. This will symbolically link config files for:
+These are my updated dotfiles with a clean and safe deploy script. This will
+symbolically link config files for:
 
  - Terminal Coloring
  - Xresources
@@ -9,6 +10,18 @@ These are my updated dotfiles with a clean and safe deploy script. This will sym
  - bashrc
  - vim
  - vimrc
+
+## Installation
+
+Use `deploy.sh`
+
+## Adding Submodule
+
+```
+$ git submodule add -- url.com/a/b submodules/a/b
+$ vim deploy.sh
+# Change it to make symlinks
+```
 
 # TODO: Install any required packages for the files/scripts that get installed.
 # Ex: dmenu2 from AUR, etc
