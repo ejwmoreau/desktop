@@ -114,6 +114,10 @@ checkfile "${HOME}/.bashrc"
 ln -sfT "${cwd}/home/bashrc"     "${HOME}/.bashrc"
 checkfile "${HOME}/.git-completion.bash"
 ln -sfT "${cwd}/home/git-completion.bash" "${HOME}/.git-completion.bash"
+
+checkfile "${HOME}/.bash_aliases"
+ln -sfT "${cwd}/home/bash_aliases"     "${HOME}/.bash_aliases"
+
 checkfile "${HOME}/.Xresources"
 ln -sfT "${cwd}/home/Xresources" "${HOME}/.Xresources"
 checkfile "${HOME}/.inputrc"

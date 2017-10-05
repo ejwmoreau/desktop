@@ -11,6 +11,8 @@
 # This just ensures everything is there.
 xrdb ~/.Xresources
 
+source ~/.bash_aliases
+
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
@@ -224,12 +226,12 @@ alias rm='rm -I'
 alias grep='grep -i --color'
 
 id_rsas=$(ls --ignore="*.pub" -w 1 ~/.ssh/ | grep "^id_" | tr '\n' ' ')
-alias kcday="eval \`keychain --eval --agents ssh --timeout 480 --quiet $id_rsas\`"
+alias kc="eval \`keychain --eval --agents ssh --timeout 480 --quiet $id_rsas\`"
 
 # Aliases for Git:
 alias g='/usr/bin/git status'
-alias gu='kcday && /usr/bin/git pull'
-alias gp='kcday && /usr/bin/git push'
+alias gu='kc && /usr/bin/git pull'
+alias gp='kc && /usr/bin/git push'
 alias ga='/usr/bin/git add'
 alias gd='/usr/bin/git diff'
 alias gs='/usr/bin/git stash'
