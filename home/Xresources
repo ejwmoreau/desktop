@@ -19,9 +19,9 @@
 #define base0E #b294bb
 #define base0F #a3685a
 
-*.foreground:  base05
-*.background:  base00
-*.cursorColor: base05
+*.foreground:   base05
+*.background:   base00
+*.cursorColor:  base05
 *.color0:       base00
 *.color1:       base08
 *.color2:       base0B
@@ -56,7 +56,6 @@ Xft.hintstyle:              hintslight
 Xft.rgba:                   rgb
 !===============================================================================
 
-
 !===============================================================================
 ! URXVT settings
 !===============================================================================
@@ -83,7 +82,7 @@ urxvt.scrollBar_floating:   true
 urxvt.scrollstyle:          plain
 urxvt.shading:              100
 urxvt.thickness:            3
-urxvt.tintcolor:            #FFFFFF
+!urxvt.tintcolor:            #FFFFFF
 urxvt.transparent:          false
 urxvt.urgentOnBell:         false
 urxvt.visualBell:           false

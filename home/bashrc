@@ -2,7 +2,6 @@
 
 # ~/.bashrc
 
-
 # This is a dirty hack to make it easier to reset the keyboard. Udev rules did
 # not solve this problem. Something about the right session not getting the new
 # keyboard changes.

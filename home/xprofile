@@ -13,4 +13,6 @@ middle=HDMI-1
 right=eDP-1
 xrandr --output $middle --auto --output $right --auto --primary --right-of $middle --output $left --auto --left-of $middle
 
+which compton && compton -b
+
 urxvtd -q -o -f &
