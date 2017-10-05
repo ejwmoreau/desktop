@@ -96,9 +96,9 @@ ln -sfT\
     "${cwd}/submodules/github.com/NuckChorris/assault/awesomewm/assault.lua"\
     "${HOME}/.config/awesome/assault.lua"
 
-#ln -sTf\
-#    "${cwd}/submodules/github.com/copycat-killer/lain"\
-#    "${HOME}/.config/awesome/lain"
+ln -sTf\
+    "${cwd}/submodules/github.com/scottgreenup/lain"\
+    "${HOME}/.config/awesome/lain"
 
 ln -sTf\
     "${cwd}/submodules/github.com/Mic92/vicious"\
