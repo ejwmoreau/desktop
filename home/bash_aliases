@@ -114,10 +114,7 @@ source /usr/bin/virtualenvwrapper.sh
 alias workoff='deactivate'
 alias mkvirtualenv2="mkvirtualenv -p /usr/bin/python2.7"
 
-# GO, Ruby, NodeJS Path
-export GOPATH=$HOME/go
-export GOBIN=$GOPATH/bin
-export PATH=$PATH:$HOME/node_modules/.bin:$HOME/.gem/ruby/2.5.0/bin:$GOBIN
+# Set up nvm
 source /usr/share/nvm/init-nvm.sh
 
 # Look at logs of all containers that listen on port 8080
