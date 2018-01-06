@@ -288,4 +288,18 @@ base16
 export PATH="$PATH:$HOME/node_modules/.bin:$HOME/.gem/ruby/2.5.0/bin:$HOME/go/bin"
 export TERM='rxvt-256color'
 export EDITOR='vim'
-export HISTSIZE=5000
+
+export HISTFILESIZE=500000
+export HISTCONTROL=ignoreboth
+export HISTSIZE=500000
+
+# &    => ignore duplicate commands
+# [ ]* => ignore commands starting with a space
+# exit => forget exit
+export HISTIGNORE="&:[ ]*:exit:ls:clear:l:la:c:gla:g"
+export HISTTIMEFORMAT='%F %T '
+
+shopt -s histappend
+PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+
+source "/usr/bin/virtualenvwrapper.sh" 1>/dev/null

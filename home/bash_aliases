@@ -57,7 +57,7 @@ alias g='/usr/bin/git status'
 alias gu='kc && /usr/bin/git pull'
 alias gp='kc && /usr/bin/git push'
 alias ga='/usr/bin/git add'
-alias gd='/usr/bin/git diff'
+alias gda='/usr/bin/git diff -U99999'
 alias gs='/usr/bin/git stash'
 alias gb='/usr/bin/git branch'
 alias gba='/usr/bin/git branch -a'
@@ -111,7 +111,6 @@ alias rebuild_ctags="cd ~/code/; ctags -R --python-kinds=-i"
 # Python virtualenv
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
 export WORKON_HOME=/home/rothaq/.virtualenvs
-source /usr/bin/virtualenvwrapper.sh
 alias workoff='deactivate'
 alias mkvirtualenv2="mkvirtualenv -p /usr/bin/python2.7"
 
