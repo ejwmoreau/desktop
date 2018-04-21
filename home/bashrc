@@ -2,6 +2,9 @@
 
 # ~/.bashrc
 
+# Need to be PC
+alias person=man
+
 # This is a dirty hack to make it easier to reset the keyboard. Udev rules did
 # not solve this problem. Something about the right session not getting the new
 # keyboard changes.
@@ -285,7 +288,8 @@ function base16 () {
 base16
 
 # Environment variables
-export PATH="$PATH:$HOME/node_modules/.bin:$HOME/.gem/ruby/2.5.0/bin:$HOME/go/bin"
+export GOPATH="$HOME/go"
+export PATH="$PATH:$HOME/node_modules/.bin:$HOME/.gem/ruby/2.5.0/bin:$GOPATH/bin"
 export TERM='rxvt-256color'
 export EDITOR='vim'
 
@@ -303,3 +307,22 @@ shopt -s histappend
 PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
 source "/usr/bin/virtualenvwrapper.sh" 1>/dev/null
+# TODO: Check this
+#source "/etc/profile.d/autojump.bash"
+
+SSH_ENV="$HOME/.ssh/agent-environment"
+
+function start_agent {
+    /usr/bin/ssh-agent > "${SSH_ENV}"
+    . "${SSH_ENV}" > /dev/null
+    /usr/bin/ssh-add $HOME/.ssh/atlassian
+}
+
+if [[ -f "${SSH_ENV}" ]]; then
+    . "${SSH_ENV}" > /dev/null
+    ps -ef | grep ${SSH_AGENT_PID} | grep -e "ssh-agent$" > /dev/null || {
+        start_agent
+    }
+else
+    start_agent
+fi

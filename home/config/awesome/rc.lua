@@ -79,7 +79,7 @@ beautiful.init(theme_dir .. "xathereal/theme.lua")
 local home   = os.getenv("HOME")
 local exec   = function (s) awful.util.spawn(s, false) end
 local shexec = awful.util.spawn_with_shell
-local modkey = "Mod1"
+local modkey = "Mod4"
 
 -- This is used later as the default terminal and editor to run.
 programs = {}
@@ -576,7 +576,7 @@ globalkeys = awful.util.table.join(
     -- Standard program
     awful.key({ "Mod4",           }, "w", function ()       spawn_program(programs["browser"]) end),
     awful.key({ modkey, "Shift"   }, "Return", function ()  spawn_program(programs["terminal"]) end),
-    awful.key({ "Mod4",           }, "l", function ()       spawn_program(programs["lock"]) end),
+    awful.key({ modkey, "Control" }, "l", function ()       spawn_program(programs["lock"]) end),
     awful.key({ "Mod4",           }, "a", function ()       spawn_program(programs["randr"]) end),
 
     -- Awesome Control
@@ -773,7 +773,10 @@ for i = 1, 9 do
 end
 
 clientbuttons = awful.util.table.join(
-    awful.button({ }, 1, function (c) client.focus = c; c:raise() end),
+    awful.button({ }, 1, function (c)
+        client.focus = c;
+        --c:raise()
+    end),
     awful.button({ modkey }, 1, awful.mouse.client.move),
     awful.button({ modkey }, 3, awful.mouse.client.resize))
 
@@ -808,6 +811,13 @@ awful.rules.rules = {
         },
         properties = { floating = true }
     },
+
+    {
+        rule_any = {
+            name = { "win.*", },
+        },
+        properties = {focusable = false, ontop = true}
+    }
 }
 
 -- {{{ Signals
