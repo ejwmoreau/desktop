@@ -3,12 +3,10 @@
 # ~/.bashrc
 
 
-fortune -a -e
-
 # This is a dirty hack to make it easier to reset the keyboard. Udev rules did
 # not solve this problem. Something about the right session not getting the new
 # keyboard changes.
-setxkbmap -option caps:escape
+#setxkbmap -option caps:escape
 
 # This just ensures everything is there.
 xrdb ~/.Xresources
@@ -263,4 +261,48 @@ alias C7="awk '{print \$7}'"
 alias C8="awk '{print \$8}'"
 alias sum="awk '{sum+=\$1} END {print sum}'"
 
-alias rebuild_ctags="cd ~/fbcode/; ctags -R -L ~/.ctags.list --python-kinds=-i"
+# Custom from Elie
+
+# Python virtualenv
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
+export WORKON_HOME=/home/rothaq/.virtualenvs
+source /usr/bin/virtualenvwrapper.sh
+alias workoff='deactivate'
+alias mkvirtualenv2="mkvirtualenv -p /usr/bin/python2.7"
+
+# Allow StrideSender to be imported
+export PYTHONPATH=$PYTHONPATH:~/code/intsys-scripts/stride
+
+# AWS CLI
+. ~/code/awscli-saml-auth/bashrc_additions
+if [[ -f /home/rothaq/.virtualenvs/awscli/share/cloudtoken/shell_additions/bashrc_additions ]]; then
+    source /home/rothaq/.virtualenvs/awscli/share/cloudtoken/shell_additions/bashrc_additions
+fi
+
+# GO, Ruby, NodeJS Path
+export GOPATH=$HOME/go
+export GOBIN=$GOPATH/bin
+export PATH=$PATH:$HOME/node_modules/.bin:$HOME/.gem/ruby/2.5.0/bin:$GOBIN
+source /usr/share/nvm/init-nvm.sh
+
+# Look at logs of all containers that listen on port 8080
+alias docker-logs-check='while ((1)); do sudo docker logs -f $(sudo docker ps | grep 8080 | cut -f1 -d" ") 2>/dev/null; sleep 1; echo No docker container; done'
+
+# Redirect screenshots to ~/shots
+alias scrot="scrot ~/shots/%Y-%m-%d-%T-screenshot.png"
+
+# Docker requires sudo access
+alias docker="/usr/bin/sudo /usr/bin/docker"
+alias docker-compose="/usr/bin/sudo /usr/bin/docker-compose"
+
+# Arch Linux way of handling Java versions
+source /etc/profile.d/jre.sh
+
+alias ag="ag --width 200"
+alias untar="tar -xvzf"
+
+# Mount and set permissions properly (files: rw- r-- r--, dir: rwxr-xr-x)
+alias m="sudo mount -o uid=$USER,fmask=0133,dmask=0022"
+
+# Source additional bashrc config specific to work
+source ~/.bashrc_work
