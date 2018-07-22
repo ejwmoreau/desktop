@@ -593,6 +593,11 @@ end
 --debug_print(string.format("%d\n", spotify_tag.index))
 --spotify_tag.selected = false
 
+-- Changing default notification size
+naughty.config.defaults['icon_size'] = 90
+naughty.config.defaults['height'] = 100
+naughty.config.defaults['width'] = 300
+
 -- onkey we need to move_tag_to_screen that is focused, then select that client
 -- offkey we need to move_tag_to_scratchpad, then select another client
 
