@@ -322,7 +322,7 @@ fswidget:set_bgimage(beautiful.widget_display)
 
 net_widgetdl = wibox.widget.textbox()
 net_widgetul = lain.widget.net({
-    iface = "wlp3s0",
+    iface = "wlp2s0",
     settings = function()
         widget:set_markup(markup.font("Tamsyn 1", "  ") .. net_now.sent)
         net_widgetdl:set_markup(markup.font("Tamsyn 1", " ") .. net_now.received .. markup.font("Tamsyn 1", " "))
@@ -613,9 +613,9 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end),
     awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end),
 
-    awful.key({ modkey,           }, "w", function () focus_on_screen(1, 1, rows) end),
-    awful.key({ modkey,           }, "e", function () focus_on_screen(2, 1, rows) end),
-    awful.key({ modkey,           }, "r", function () focus_on_screen(3, 1, rows) end),
+    awful.key({ modkey,           }, "w", function () focus_on_screen(3, 1, rows) end),
+    awful.key({ modkey,           }, "e", function () focus_on_screen(1, 1, rows) end),
+    awful.key({ modkey,           }, "r", function () focus_on_screen(2, 1, rows) end),
 
     awful.key({ modkey,           }, "s", function () focus_on_screen(1, 2, rows) end),
     awful.key({ modkey,           }, "d", function () focus_on_screen(2, 2, rows) end),
@@ -644,13 +644,13 @@ globalkeys = awful.util.table.join(
 
     -- Audio Control
     awful.key({}, "XF86AudioRaiseVolume", function()
-        awful.util.spawn("amixer -D pulse set Master 10%+")
+        awful.util.spawn("amixer -M set Master 5%+")
     end),
     awful.key({}, "XF86AudioLowerVolume", function()
-        awful.util.spawn("amixer -D pulse set Master 10%-")
+        awful.util.spawn("amixer -M set Master 5%-")
     end),
     awful.key({}, "XF86AudioMute", function()
-        awful.util.spawn("amixer -D pulse sset Master toggle")
+        awful.util.spawn("amixer -M sset Master toggle")
     end),
 
     -- Brightness
