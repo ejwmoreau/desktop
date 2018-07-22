@@ -19,6 +19,29 @@ xrdb ~/.Xresources
 bash_completion="/usr/share/bash-completion/bash_completion"
 [[ -f "${bash_completion}" ]] && . "${bash_completion}"
 
+# Add git completion to standard git commands and aliases.
+if [ -f ~/.git-completion.bash ]; then
+    . ~/.git-completion.bash
+
+    # Add git completion to aliases
+    __git_complete g  __git_main
+    __git_complete gu  _git_pull
+    __git_complete gp  _git_push
+    __git_complete ga  _git_add
+    __git_complete gd  _git_diff
+    __git_complete gs  _git_stash
+    __git_complete gb  _git_branch
+    __git_complete gba _git_branch
+    __git_complete gc  _git_commit
+    __git_complete gca _git_commit
+    __git_complete gco _git_checkout
+    __git_complete gm  _git_merge
+    __git_complete gff _git_merge
+    __git_complete gl  _git_log
+    __git_complete gla _git_log
+    __git_complete gll _git_log
+fi
+
 function color() {
     echo "\[$(tput setaf "${1}")\]"
 
@@ -43,12 +66,10 @@ function success_prompt() {
 }
 
 function bash_prompt() {
-
     #local files
     #local files_prompt
     #files=$(find -maxdepth 1 | wc | awk '{print $1}')
     #files_prompt="${files} files"
-
 
     last_status=$(success_prompt)
 
@@ -105,7 +126,7 @@ function bash_prompt() {
         fi
 
         if [[ ${count_modified} != 0 ]]; then
-            count_modified=" $(color 1)✚${count_modified}$(reset_color)"
+            count_modified=" $(color 1)+${count_modified}$(reset_color)"
         else
             count_modified=""
         fi
@@ -141,6 +162,46 @@ function bash_prompt() {
     echo "$ "
 }
 
+date-utc-to-au() {
+    FOUNDEPOCH=$(TZ=UTC date +%s -d "$@")
+    echo -en "$FOUNDEPOCH\t"
+    TZ="Australia/Sydney" date -d @${FOUNDEPOCH}
+}
+
+gitcopush() {
+    set -eu
+
+    GIT_DESCRIPTION=$*
+    JIRA_URL='https://extranet.atlassian.com/jira'
+    TICKET_NUM="${1^^}"
+
+    if [[ ${TICKET_NUM:0:7} != "PURSRE-" && ${TICKET_NUM:0:4} != "PUR-" && ${TICKET_NUM:0:5} != "PLSE-" ]]; then
+        echo "No ticket detected. Creating new ticket"
+
+        PROJECT_KEY="PURSRE"
+        TICKET_NUM=$(curl \
+            --silent \
+            --data "{ \"fields\": { \"reporter\":{\"name\": \"${USER}\" }, \"assignee\":{\"name\":\"${USER}\"}, \"project\": { \"key\": \"$PROJECT_KEY\" }, \"summary\": \"$GIT_DESCRIPTION\", \"description\": \"$GIT_DESCRIPTION\", \"issuetype\": { \"name\": \"Task\" } } }" \
+            --user "${USER}" \
+            -X POST \
+            --header "Content-Type: application/json" \
+            $JIRA_URL/rest/api/2/issue/ | \
+            jq '.key')
+        TICKET_NUM="${TICKET_NUM//\"/}"
+        GIT_DESCRIPTION="${TICKET_NUM} ${GIT_DESCRIPTION}"
+    fi
+
+    BRANCH_NAME="${GIT_DESCRIPTION//[ \.]/_}"
+    git checkout -b "$BRANCH_NAME"
+    git commit --patch --interactive -m "$GIT_DESCRIPTION"
+    git push 2>&1 | tee "/tmp/$BRANCH_NAME"
+
+    google-chrome $(grep -A1 "Create pull request for" "/tmp/$BRANCH_NAME" | perl -nle 'print $1 if m#(https://(stash.atlassian.com|bitbucket.org)\S+)#')
+    sleep 0.5
+    google-chrome "${JIRA_URL}/browse/${TICKET_NUM}"
+    set +eu
+}
+
 PROMPT_COMMAND='PS1="$(bash_prompt)"'
 
 BASE16_SHELL="$HOME/.config/base16-shell/scripts/base16-tomorrow-night.sh"
@@ -166,15 +227,17 @@ alias ll='ls -l'
 alias rm='rm -I'
 alias grep='grep -i'
 
-alias kc="eval \`keychain --eval --agents ssh --timeout 300 --quiet id_rsa\`"
-alias kchour="eval \`keychain --eval --agents ssh --timeout 3600 --quiet id_rsa\`"
+id_rsas=$(ls --ignore={*.pub,config,known_hosts} -w 0 ~/.ssh/)
+alias kchour="eval \`keychain --eval --agents ssh --timeout 60 --quiet $id_rsas\`"
+alias kcday="eval \`keychain --eval --agents ssh --timeout 480 --quiet $id_rsas\`"
 
 # Aliases for Git:
 alias g='/usr/bin/git status'
-alias gu='/usr/bin/git pull'
-alias gp='/usr/bin/git push'
+alias gu='kcday && /usr/bin/git pull'
+alias gp='kcday && /usr/bin/git push'
 alias ga='/usr/bin/git add'
 alias gd='/usr/bin/git diff'
+alias gs='/usr/bin/git stash'
 alias gb='/usr/bin/git branch'
 alias gba='/usr/bin/git branch -a'
 alias gc='/usr/bin/git commit'
