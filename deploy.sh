@@ -78,10 +78,14 @@ checkfile "${HOME}/.config/awesome/assault.lua"
 ln -sfT\
     "${cwd}/submodules/github.com/NuckChorris/assault/awesomewm/assault.lua"\
     "${HOME}/.config/awesome/assault.lua"
-#
+
 #ln -sTf\
 #    "${cwd}/submodules/github.com/copycat-killer/lain"\
 #    "${HOME}/.config/awesome/lain"
+
+ln -sTf\
+    "${cwd}/submodules/github.com/Mic92/vicious"\
+    "${HOME}/.config/awesome/vicious"
 
 ## [ Miscellaneous ] ##
 
@@ -100,6 +104,8 @@ checkfile "${HOME}/.xprofile"
 ln -sfT "${cwd}/home/xprofile"   "${HOME}/.xprofile"
 checkfile "${HOME}/.bashrc"
 ln -sfT "${cwd}/home/bashrc"     "${HOME}/.bashrc"
+checkfile "${HOME}/.git-completion.bash"
+ln -sfT "${cwd}/home/git-completion.bash" "${HOME}/.git-completion.bash"
 checkfile "${HOME}/.Xresources"
 ln -sfT "${cwd}/home/Xresources" "${HOME}/.Xresources"
 checkfile "${HOME}/.inputrc"
