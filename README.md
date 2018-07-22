@@ -9,3 +9,6 @@ These are my updated dotfiles with a clean and safe deploy script. This will sym
  - bashrc
  - vim
  - vimrc
+
+# TODO: Install any required packages for the files/scripts that get installed.
+# Ex: dmenu2 from AUR, etc
