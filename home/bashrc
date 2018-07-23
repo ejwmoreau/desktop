@@ -225,7 +225,7 @@ alias ll='ls -l'
 alias rm='rm -I'
 alias grep='grep -i'
 
-id_rsas=$(ls --ignore={*.pub,config,known_hosts} -w 0 ~/.ssh/)
+id_rsas=$(ls --ignore="*.pub" -w 1 ~/.ssh/ | grep "^id_" | tr '\n' ' ')
 alias kchour="eval \`keychain --eval --agents ssh --timeout 60 --quiet $id_rsas\`"
 alias kcday="eval \`keychain --eval --agents ssh --timeout 480 --quiet $id_rsas\`"
 
