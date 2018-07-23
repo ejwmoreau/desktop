@@ -213,7 +213,7 @@ alias vim='vim -O'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias please='sudo'
-alias ag="ag --color -H"
+alias ag="ag --color -H --width 200"
 alias less="less -r"
 alias tree="tree -C"
 
@@ -316,7 +316,6 @@ alias docker-compose="/usr/bin/sudo /usr/bin/docker-compose"
 # Arch Linux way of handling Java versions
 source /etc/profile.d/jre.sh
 
-alias ag="ag --width 200"
 alias untar="tar -xvzf"
 
 # Mount and set permissions properly (files: rw- r-- r--, dir: rwxr-xr-x)
