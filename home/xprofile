@@ -8,9 +8,9 @@ setxkbmap -option caps:escape
 [[ "$(which nm-applet)" == "/usr/bin/nm-applet" ]] && /usr/bin/nm-applet &
 [[ -f ~/.screenlayout/main.sh ]] && ~/.screenlayout/main.sh
 
-left=DP2
-middle=HDMI1
-right=eDP1
+left=DP-2
+middle=HDMI-1
+right=eDP-1
 xrandr --output $middle --auto --output $right --auto --primary --right-of $middle --output $left --auto --left-of $middle
 
 urxvtd -q -o -f &
