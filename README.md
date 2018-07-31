@@ -24,6 +24,3 @@ $ git submodule add -- url.com/a/b submodules/a/b
 $ vim deploy.sh
 # Change it to make symlinks
 ```
-
-# TODO: Install any required packages for the files/scripts that get installed.
-# Ex: dmenu2 from AUR, etc
