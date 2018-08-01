@@ -135,5 +135,8 @@ alias untar="tar -xvzf"
 # Mount and set permissions properly (files: rw- r-- r--, dir: rwxr-xr-x)
 alias m="sudo mount -o uid=$USER,fmask=0133,dmask=0022"
 
+# Rick Roll
+alias rick-roll="curl -s -L http://bit.ly/10hA8iC | bash"
+
 # Source additional bashrc config specific to work
 source ~/.bashrc_work

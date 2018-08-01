@@ -92,7 +92,8 @@ programs["editor_cmd"]  = programs["terminal"] .. " -e " .. programs["editor"]
 
 local layouts = {
     awful.layout.suit.tile,
-    lain.layout.centerwork_leftright,
+    --lain.layout.centerwork_leftright,
+    lain.layout.centerwork,
     awful.layout.suit.max,
     awful.layout.suit.max.fullscreen,
     awful.layout.suit.magnifier
