@@ -315,7 +315,7 @@ SSH_ENV="$HOME/.ssh/agent-environment"
 function start_agent {
     /usr/bin/ssh-agent > "${SSH_ENV}"
     . "${SSH_ENV}" > /dev/null
-    /usr/bin/ssh-add $HOME/.ssh/atlassian
+    #/usr/bin/ssh-add $HOME/.ssh/atlassian
 }
 
 if [[ -f "${SSH_ENV}" ]]; then
