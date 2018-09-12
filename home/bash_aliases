@@ -64,6 +64,7 @@ alias gb='/usr/bin/git branch'
 alias gba='/usr/bin/git branch -a'
 alias gc='/usr/bin/git commit'
 alias gca='/usr/bin/git commit -a'
+alias gcl='kc && /usr/bin/git clone'
 alias gco='/usr/bin/git checkout'
 alias gm="/usr/bin/git merge --no-ff"
 alias gff="/usr/bin/git merge --ff-only"
@@ -110,8 +111,6 @@ alias rebuild_ctags="cd ~/code/; ctags -R --python-kinds=-i"
 # Custom from Elie
 
 # Python virtualenv
-export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
-export WORKON_HOME=/home/rothaq/.virtualenvs
 alias workoff='deactivate'
 alias mkvirtualenv2="mkvirtualenv -p /usr/bin/python2.7"
 

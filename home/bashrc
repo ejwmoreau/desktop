@@ -289,7 +289,7 @@ base16
 
 # Environment variables
 export GOPATH="$HOME/go"
-export PATH="$PATH:$HOME/node_modules/.bin:$HOME/.gem/ruby/2.5.0/bin:$GOPATH/bin"
+export PATH=$PATH:$HOME/node_modules/.bin:$HOME/.gem/ruby/2.5.0/bin:$GOPATH/bin
 export TERM='rxvt-256color'
 export EDITOR='vim'
 
@@ -306,6 +306,8 @@ export HISTTIMEFORMAT='%F %T '
 shopt -s histappend
 PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
+export WORKON_HOME=/home/rothaq/.virtualenvs
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
 source "/usr/bin/virtualenvwrapper.sh" 1>/dev/null
 # TODO: Check this
 #source "/etc/profile.d/autojump.bash"
