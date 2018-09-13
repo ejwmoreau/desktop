@@ -15,4 +15,5 @@ xrandr --output $middle --auto --output $right --auto --primary --right-of $midd
 
 which compton && compton -b
 
+#xautolock -time 5 -locker "i3lock -c 000000 -f" -notify 30 -notifier "notify-send -u critical 'Screen will lock in 30 seconds.'" &
 urxvtd -q -o -f &

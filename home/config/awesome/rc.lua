@@ -65,11 +65,26 @@ end
 --------------------------------------------------------------------------------
 local function debug_print(words)
     naughty.notify({
-        preset = naughty.config.presets.normal,
+        preset = naughty.config.presets.critical,
         title = "Debug Message",
         text = words,
         width = 400
     })
+end
+
+naughty.config.notify_callback = function(args)
+
+    if args.timeout == nil or args.timeout < 10 then
+        args.timeout = 10
+    end
+
+    if args.icon then
+        if args.icon_size == nil or args.icon_size > 50 then
+            args.icon_size = 50
+        end
+    end
+
+    return args
 end
 
 -- Themes define colours, icons, font and wallpapers.
@@ -87,6 +102,7 @@ programs = {}
 programs["browser"]     = "chromium"
 programs["terminal"]    = "urxvt"
 programs["lock"]        = "xscreensaver-command --lock"
+--programs["lock"]        = "i3lock -c 000000 -f"
 programs["randr"]       = "arandr"
 programs["editor"]      = os.getenv("EDITOR") or "vim"
 programs["editor_cmd"]  = programs["terminal"] .. " -e " .. programs["editor"]
@@ -137,28 +153,6 @@ for i = 2, screen.count() do
 end
 
 
-
-
--- | Menu | --
-
-menu_main = awful.menu({
-    items = {
-        { "Terminal",           programs["terminal"] },
-        { "------------------", "" },
-        { "Power Off",          "sudo poweroff" },
-        { "Reboot",             "sudo reboot" },
-        { "------------------", "" },
-        { "Restart Awesome",    awesome.restart },
-        { "Quit Awesome",       awesome.quit },
-    }
-})
-
-
-menu_launcher = awful.widget.launcher({
-    image = beautiful.awesome_icon,
-    menu = menu_main
-})
-
 -- | Markup | --
 
 local markup = lain.util.markup
@@ -168,8 +162,6 @@ local vspace1 = '<span font="Roboto 3"> </span>'
 local vspace2 = '<span font="Roboto 3">  </span>'
 
 -- | Widgets | --
-
---local sep_vertical = wibox.widget.imagebox(theme.bottom_bar)
 
 spr = wibox.widget.imagebox()
 spr:set_image(beautiful.spr)
@@ -219,9 +211,8 @@ battery_widget = lain.widget.bat({
     end
 })
 
--- widget_bat = wibox.widget.imagebox()
--- widget_bat:set_image(beautiful.widget_bat)
-
+widget_bat = wibox.widget.imagebox()
+widget_bat:set_image(beautiful.widget_bat)
 batwidget = wibox.widget.background()
 batwidget:set_widget(battery_widget.widget)
 batwidget:set_bgimage(beautiful.widget_display)
@@ -231,7 +222,7 @@ batwidget:set_bgimage(beautiful.widget_display)
 
 mem_widget = lain.widget.mem({
     settings = function()
-        widget:set_markup(space3 .. mem_now.used .. "MB" .. markup.font("Tamsyn 4", " "))
+        widget:set_markup(space3 .. mem_now.perc .. "%" .. markup.font("Tamsyn 4", " "))
     end
 })
 
@@ -410,6 +401,7 @@ for s = 1, screen.count() do
 
     right_layout:add(spr)
 
+    right_layout:add(widget_mem)
     right_layout:add(widget_display_l)
     right_layout:add(batwidget)
     right_layout:add(widget_display_r)
@@ -518,9 +510,9 @@ end
 --spotify_tag.selected = false
 
 -- Changing default notification size
-naughty.config.defaults['icon_size'] = 90
-naughty.config.defaults['height'] = 100
-naughty.config.defaults['width'] = 300
+--naughty.config.defaults['icon_size'] = 90
+--naughty.config.defaults['height'] = 100
+--naughty.config.defaults['width'] = 300
 
 -- onkey we need to move_tag_to_screen that is focused, then select that client
 -- offkey we need to move_tag_to_scratchpad, then select another client
@@ -576,8 +568,12 @@ globalkeys = awful.util.table.join(
     -- Standard program
     awful.key({ "Mod4",           }, "w", function ()       spawn_program(programs["browser"]) end),
     awful.key({ modkey, "Shift"   }, "Return", function ()  spawn_program(programs["terminal"]) end),
-    awful.key({ modkey, "Control" }, "l", function ()       spawn_program(programs["lock"]) end),
+    awful.key({ modkey, "Shift"   }, "l", function ()       spawn_program(programs["lock"]) end),
     awful.key({ "Mod4",           }, "a", function ()       spawn_program(programs["randr"]) end),
+
+    awful.key({ modkey, "Mod1"     }, "4", function ()
+        awful.spawn.with_shell("sleep 0.2 && scrot --quality 100 --select -e 'echo $n' | xclip -in")
+    end),
 
     -- Awesome Control
     awful.key({ modkey, "Control" }, "r", awesome.restart),
@@ -693,6 +689,39 @@ clientkeys = awful.util.table.join(
     awful.key({ modkey, "Shift"   }, "c",       function (c) kill_select(c) end),
     awful.key({ modkey,           }, "t",       awful.client.floating.toggle ),
     awful.key({ modkey,           }, "Return",  function (c) c:swap(awful.client.getmaster()) end),
+    --awful.key({ modkey, "Control" }, "s",       function (c) c.sticky = not c.sticky end),
+    --awful.key({ modkey, "Control" }, "s",       function (c) c.ontop = not c.ontop end),
+    awful.key({ modkey, "Control" }, "s",       function (c)
+        debug_print(
+            string.format("window = %s\n", c.window) ..
+            string.format("name = %s\n", c.name) ..
+            string.format("skip_taskbar = %s\n", tostring(c.skip_taskbar)) ..
+            string.format("type = %s\n", c.type) ..
+            string.format("class = %s\n", c.class) ..
+            string.format("instance = %s\n", c.instance) ..
+            string.format("pid = %d\n", c.pid) ..
+            string.format("role = %s\n", c.role) ..
+            string.format("machine = %s\n", c.machine) ..
+            string.format("icon_name = %s\n", c.icon_name) ..
+            string.format("hidden = %s\n", tostring(c.hidden)) ..
+            string.format("minimized = %s\n", tostring(c.minimized)) ..
+            string.format("size_hints_honor = %s\n", tostring(c.size_hints_honor)) ..
+            string.format("urgent = %s\n", tostring(c.urgent)) ..
+            string.format("ontop = %s\n", tostring(c.ontop)) ..
+            string.format("above = %s\n", tostring(c.above)) ..
+            string.format("below = %s\n", tostring(c.below)) ..
+            string.format("fullscreen = %s\n", tostring(c.fullscreen)) ..
+            string.format("maxamized = %s\n", tostring(c.maxamized)) ..
+            string.format("maxamized_horizontal = %s\n", tostring(c.maxamized_horizontal)) ..
+            string.format("maxamized_vertical = %s\n", tostring(c.maxamized_veritcal)) ..
+            string.format("sticky = %s\n", tostring(c.sticky)) ..
+            string.format("modal = %s\n", tostring(c.modal)) ..
+            string.format("focusable = %s\n", tostring(c.focusable)) ..
+            string.format("marked = %s\n", tostring(c.marked)) ..
+            string.format("floating = %s\n", tostring(c.floating)) ..
+            string.format("dockable = %s\n", tostring(c.dockable))
+        )
+    end),
     awful.key({ modkey, "Shift"   }, "s",       function (c) move_client_to_screen(c, 1, screen_map) end),
     awful.key({ modkey, "Shift"   }, "d",       function (c) move_client_to_screen(c, 2, screen_map) end),
     awful.key({ modkey, "Shift"   }, "f",       function (c) move_client_to_screen(c, 3, screen_map) end),
