@@ -115,7 +115,7 @@ theme.widget_cpu    = theme.icons .. "/panel/widgets/widget_cpu.png"
 -- | MEM | --
 
 theme.widget_mem = theme.icons .. "/panel/widgets/widget_mem.png"
---theme.widget_mem = theme.icons .. "/panel/widgets/widget_bat.png"
+theme.widget_bat = theme.icons .. "/panel/widgets/widget_bat.png"
 
 -- | FS | --
 
