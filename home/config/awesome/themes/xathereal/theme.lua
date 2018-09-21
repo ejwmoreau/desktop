@@ -59,7 +59,7 @@ theme.taglist_font        = "Roboto 7"
 
 -- | Tasklist | --
 
-theme.tasklist_font                 = "Roboto 8"
+theme.tasklist_font                 = "Roboto 7"
 theme.tasklist_disable_icon         = true
 --theme.tasklist_bg_normal            = "png:" .. theme.icons .. "panel/tasklist/normal.png"
 --theme.tasklist_bg_focus             = "png:" .. theme.icons .. "panel/tasklist/focus.png"

@@ -137,6 +137,7 @@ table.insert(screen_map, 1)
 for i = 2, screen.count() do
     gi = screen[i].geometry
     inserted = false
+
     for j = 1, #screen_map do
         gj = screen[screen_map[j]].geometry
 
@@ -679,7 +680,7 @@ client.connect_signal("unmanage", function(c)
     end
 end)
 
-client.connect_signal("removed", function(c)
+screen.connect_signal("removed", function(s)
     -- TODO move those tags to another screen
     -- TODO keep tags sorted
 end)

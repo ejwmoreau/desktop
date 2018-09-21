@@ -114,6 +114,5 @@ urxvt.lineSpace:            -1
 !URxvt.font:	xft:M+ 1mn:style=normal:dpi=109:size=9
 !URxvt.font:	xft:Fantasque Sans Mono:style=light:dpi=109:size=11
 !URxvt.font:	xft:Anonymous Pro Minus:style=Regular:dpi=109:size=12
-!URxvt.font:	xft:Fantasque Sans Mono:style=light:dpi=109:size=13
 !URxvt.font:	xft:Fantasque Sans Mono:style=light:dpi=163:size=11
 URxvt.font:	xft:Anonymous Pro:style=regular:dpi=109:size=12

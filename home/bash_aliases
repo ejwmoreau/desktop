@@ -8,6 +8,7 @@ function ifconfig() {
     echo "use 'ip addr show' or 'ip a' for short"
 }
 
+
 # Specialized commands
 alias murder="shred -uvzn 20"
 alias fucking="sudo"
@@ -162,7 +163,6 @@ function kcurrctx() {
         return 1
     fi
 
-    # TODO: Install yq
     if which yq 2>&1 1>/dev/null; then
         yq -r '.["current-context"]' < "$target"
     else
