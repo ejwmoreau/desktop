@@ -86,18 +86,6 @@ urxvt.urgentOnBell:         false
 urxvt.visualBell:           false
 !===============================================================================
 
-
-!===============================================================================
-! XScreenSaver
-!===============================================================================
-xscreensaver.fade: True
-xscreensaver.fadeSeconds: 0:00:01
-xscreensaver.Dialog.borderwidth: 0
-xscreensaver.Dialog.internalBorderWidth: 0
-xscreensaver.Dialog.shadowThickness: 0
-xscreensaver.passwd.thermometer.width: 0
-!===============================================================================
-
 Xcursor.size: 20
 
 urxvt.perl-ext-common:	font-size,clipboard,default,matcher
