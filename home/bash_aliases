@@ -222,3 +222,7 @@ alias rick-roll="curl -s -L http://bit.ly/10hA8iC | bash"
 
 # Source additional bashrc config specific to work
 source ~/.bashrc_work
+
+# Suspend Hobbiton
+# ssh hobbiton
+# echo 'pm-suspend' | sudo at now + 1 minutes; exit

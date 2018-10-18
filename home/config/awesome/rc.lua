@@ -74,8 +74,8 @@ end
 
 naughty.config.notify_callback = function(args)
 
-    if args.timeout == nil or args.timeout < 30 then
-        args.timeout = 30
+    if args.timeout == nil or args.timeout < 20 then
+        args.timeout = 20
     end
 
     if args.icon then
