@@ -210,9 +210,6 @@ function bash_prompt() {
 }
 
 
-# Theme / PS1 / Colors
-export PROMPT_COMMAND=bash_prompt
-
 # base16-shell (https://github.com/chriskempson/base16-shell)
 # Base16 Shell template by Chris Kempson (http://chriskempson.com)
 # Tomorrow Night scheme by Chris Kempson (http://chriskempson.com)
@@ -298,14 +295,6 @@ function base16 () {
     unset color_cursor
 }
 
-base16
-
-# Environment variables
-export GOPATH="$HOME/go"
-export PATH=$PATH:$HOME/node_modules/.bin:$HOME/.gem/ruby/2.5.0/bin:$GOPATH/bin
-export TERM='rxvt-256color'
-export EDITOR='vim'
-
 export HISTFILESIZE=500000
 export HISTCONTROL=ignoreboth
 export HISTSIZE=500000
@@ -316,8 +305,16 @@ export HISTSIZE=500000
 export HISTIGNORE="&:[ ]*:exit:ls:clear:l:la:c:gla:g"
 export HISTTIMEFORMAT='%F %T '
 
-shopt -s histappend
-#PROMPT_COMMAND="$PROMPT_COMMAND"
+# Theme / PS1 / Colors
+export PROMPT_COMMAND=bash_prompt
+
+base16
+
+# Environment variables
+export GOPATH="$HOME/go"
+export PATH=$PATH:$HOME/node_modules/.bin:$HOME/.gem/ruby/2.5.0/bin:$GOPATH/bin
+export TERM='rxvt-256color'
+export EDITOR='vim'
 
 export WORKON_HOME=/home/rothaq/.virtualenvs
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
