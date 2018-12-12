@@ -189,7 +189,7 @@ cpu_widget = lain.widget.cpu({
 
 widget_cpu = wibox.widget.imagebox()
 widget_cpu:set_image(beautiful.widget_cpu)
-cpuwidget = wibox.widget.background()
+cpuwidget = wibox.container.background()
 cpuwidget:set_widget(cpu_widget.widget)
 cpuwidget:set_bgimage(beautiful.widget_display)
 
@@ -198,7 +198,7 @@ vicious.register(tmp_widget, vicious.widgets.thermal, vspace1 .. "$1°C" .. vspa
 
 widget_tmp = wibox.widget.imagebox()
 widget_tmp:set_image(beautiful.widget_tmp)
-tmpwidget = wibox.widget.background()
+tmpwidget = wibox.container.background()
 tmpwidget:set_widget(tmp_widget)
 tmpwidget:set_bgimage(beautiful.widget_display)
 
@@ -213,7 +213,7 @@ battery_widget = lain.widget.bat({
 
 widget_bat = wibox.widget.imagebox()
 widget_bat:set_image(beautiful.widget_bat)
-batwidget = wibox.widget.background()
+batwidget = wibox.container.background()
 batwidget:set_widget(battery_widget.widget)
 batwidget:set_bgimage(beautiful.widget_display)
 
@@ -228,7 +228,7 @@ mem_widget = lain.widget.mem({
 
 widget_mem = wibox.widget.imagebox()
 widget_mem:set_image(beautiful.widget_mem)
-memwidget = wibox.widget.background()
+memwidget = wibox.container.background()
 memwidget:set_widget(mem_widget.widget)
 memwidget:set_bgimage(beautiful.widget_display)
 
@@ -239,7 +239,7 @@ vicious.register(fs_widget, vicious.widgets.fs, vspace1 .. "${/ avail_gb}GB" .. 
 
 widget_fs = wibox.widget.imagebox()
 widget_fs:set_image(beautiful.widget_fs)
-fswidget = wibox.widget.background()
+fswidget = wibox.container.background()
 fswidget:set_widget(fs_widget)
 fswidget:set_bgimage(beautiful.widget_display)
 
@@ -256,36 +256,36 @@ net_widgetul = lain.widget.net({
 
 widget_netdl = wibox.widget.imagebox()
 widget_netdl:set_image(beautiful.widget_netdl)
-netwidgetdl = wibox.widget.background()
+netwidgetdl = wibox.container.background()
 netwidgetdl:set_widget(net_widgetdl)
 netwidgetdl:set_bgimage(beautiful.widget_display)
 
 widget_netul = wibox.widget.imagebox()
 widget_netul:set_image(beautiful.widget_netul)
-netwidgetul = wibox.widget.background()
+netwidgetul = wibox.container.background()
 netwidgetul:set_widget(net_widgetul.widget)
 netwidgetul:set_bgimage(beautiful.widget_display)
 
 -- | Clock / Calendar | --
 
-mytextclock    = awful.widget.textclock(
+mytextclock    = wibox.widget.textclock(
     markup(
         beautiful.clockgf,
         space3 .. "%H:%M" .. markup.font("Tamsyn 3", " ")))
-mytextcalendar = awful.widget.textclock(
+mytextcalendar = wibox.widget.textclock(
     markup(beautiful.clockgf, space3 .. "%a %d %b"))
 
 widget_clock = wibox.widget.imagebox()
 widget_clock:set_image(beautiful.widget_clock)
 
-clockwidget = wibox.widget.background()
+clockwidget = wibox.container.background()
 clockwidget:set_widget(mytextclock)
 clockwidget:set_bgimage(beautiful.widget_display)
 
 widget_date = wibox.widget.imagebox()
 widget_date:set_image(beautiful.widget_cal)
 
-datewidget = wibox.widget.background()
+datewidget = wibox.container.background()
 datewidget:set_widget(mytextcalendar)
 datewidget:set_bgimage(beautiful.widget_display)
 
@@ -472,7 +472,6 @@ end
 
 -- {{{ Mouse bindings
 root.buttons(awful.util.table.join(
-    awful.button({ }, 3, function () mymainmenu:toggle() end),
     awful.button({ }, 4, awful.tag.viewnext),
     awful.button({ }, 5, awful.tag.viewprev)
 ))
