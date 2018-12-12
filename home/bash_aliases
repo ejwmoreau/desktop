@@ -220,6 +220,9 @@ alias m="sudo mount -o uid=$USER,fmask=0133,dmask=0022"
 # Rick Roll
 alias rick-roll="curl -s -L http://bit.ly/10hA8iC | bash"
 
+# Starts awesome in a nested X server
+alias test-awesome="Xephyr :5 & sleep 1 ; DISPLAY=:5 awesome"
+
 # Source additional bashrc config specific to work
 source ~/.bashrc_work
 
