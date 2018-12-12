@@ -813,6 +813,25 @@ for i = 1, 9 do
 end
 
 
+-- When a screen is disconnected, the tags on that screen will be moved to
+-- another similar screen, while keeping the same tag focused on that screen.
+tag.connect_signal("request::screen", function(t)
+    for s in screen do
+        if s ~= t.screen then
+            current_tags = s.selected_tags
+
+            move_tag_to_screen(t, s.index)
+
+            awful.tag.viewnone(s)
+            awful.tag.viewmore(current_tags)
+            force_focus(s)
+
+            return
+        end
+    end
+end);
+
+
 clientbuttons = awful.util.table.join(
     awful.button({ }, 1, function (c)
         client.focus = c;
