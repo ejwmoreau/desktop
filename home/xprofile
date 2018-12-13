@@ -1,15 +1,22 @@
 #!/bin/bash
 
 export PATH="$PATH:$HOME/bin"
-pulseaudio --start
 xsetroot -cursor_name left_ptr
 setxkbmap -option caps:escape
 
 #[[ "$(which xscreensaver)" == "/usr/bin/xscreensaver" ]] && /usr/bin/xscreensaver -no-splash &
 [[ "$(which nm-applet)" == "/usr/bin/nm-applet" ]] && /usr/bin/nm-applet &
+[[ "$(which redshift-gtk)" == "/usr/bin/redshift-gtk" ]] && /usr/bin/redshift-gtk -l -33.86482:151.20773 &
 [[ -f ~/.screenlayout/main.sh ]] && ~/.screenlayout/main.sh
 
-#which compton && compton -b
+left=DP1-1
+middle=DP1-2
+right=eDP1
+xrandr --output $middle --auto \
+  --output $right --auto --primary --right-of $middle --primary \
+  --output $left --auto --left-of $middle
+
+which compton && compton -b
 
 xautolock -time 5 -locker "i3lock -c 000000 -f" -notify 30 -notifier "notify-send -u critical 'Screen will lock in 30 seconds.'" &
 urxvtd -q -o -f &

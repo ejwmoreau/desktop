@@ -1,4 +1,21 @@
-"\eOc": forward-word
-"\eOd": backward-word
-TAB:    menu-complete
-"\e[Z": menu-complete-backward
+# Ignores case when tab completing.
+set completion-ignore-case on
+# Show tab completion options on first tab.
+set show-all-if-ambiguous on
+# Color tab completion options based on file type.
+set colored-stats on
+# Keep a history of 5000 commands.
+set history-size 5000
+# Color the matching prefix of each tab completion option with purple.
+set colored-completion-prefix on
+# Treat '-' and '_' as the same when tab completing.
+set completion-map-case on
+
+#"\eOc": forward-word
+#"\eOd": backward-word
+#TAB:    menu-complete
+#"\e[Z": menu-complete-backward
+
+# Ctrl+b to remove the last part of a filename.
+# E.g. /home/user/code -> /home/user
+#bind \\C-b:unix-filename-rubout

@@ -74,8 +74,8 @@ end
 
 naughty.config.notify_callback = function(args)
 
-    if args.timeout == nil or args.timeout < 30 then
-        args.timeout = 30
+    if args.timeout == nil or args.timeout < 20 then
+        args.timeout = 20
     end
 
     if args.icon then
@@ -99,7 +99,8 @@ local modkey = "Mod4"
 -- This is used later as the default terminal and editor to run.
 programs = {}
 programs["audio"]       = "pavucontrol"
-programs["browser"]     = "firefox"
+--programs["browser"]     = "firefox"
+programs["browser"]     = "chromium"
 programs["terminal"]    = "urxvt"
 programs["lock"]        = "i3lock -c 000000 -f"
 programs["randr"]       = "arandr"
@@ -188,7 +189,7 @@ cpu_widget = lain.widget.cpu({
 
 widget_cpu = wibox.widget.imagebox()
 widget_cpu:set_image(beautiful.widget_cpu)
-cpuwidget = wibox.widget.background()
+cpuwidget = wibox.container.background()
 cpuwidget:set_widget(cpu_widget.widget)
 cpuwidget:set_bgimage(beautiful.widget_display)
 
@@ -197,7 +198,7 @@ vicious.register(tmp_widget, vicious.widgets.thermal, vspace1 .. "$1°C" .. vspa
 
 widget_tmp = wibox.widget.imagebox()
 widget_tmp:set_image(beautiful.widget_tmp)
-tmpwidget = wibox.widget.background()
+tmpwidget = wibox.container.background()
 tmpwidget:set_widget(tmp_widget)
 tmpwidget:set_bgimage(beautiful.widget_display)
 
@@ -212,7 +213,7 @@ battery_widget = lain.widget.bat({
 
 widget_bat = wibox.widget.imagebox()
 widget_bat:set_image(beautiful.widget_bat)
-batwidget = wibox.widget.background()
+batwidget = wibox.container.background()
 batwidget:set_widget(battery_widget.widget)
 batwidget:set_bgimage(beautiful.widget_display)
 
@@ -227,7 +228,7 @@ mem_widget = lain.widget.mem({
 
 widget_mem = wibox.widget.imagebox()
 widget_mem:set_image(beautiful.widget_mem)
-memwidget = wibox.widget.background()
+memwidget = wibox.container.background()
 memwidget:set_widget(mem_widget.widget)
 memwidget:set_bgimage(beautiful.widget_display)
 
@@ -238,7 +239,7 @@ vicious.register(fs_widget, vicious.widgets.fs, vspace1 .. "${/ avail_gb}GB" .. 
 
 widget_fs = wibox.widget.imagebox()
 widget_fs:set_image(beautiful.widget_fs)
-fswidget = wibox.widget.background()
+fswidget = wibox.container.background()
 fswidget:set_widget(fs_widget)
 fswidget:set_bgimage(beautiful.widget_display)
 
@@ -255,36 +256,36 @@ net_widgetul = lain.widget.net({
 
 widget_netdl = wibox.widget.imagebox()
 widget_netdl:set_image(beautiful.widget_netdl)
-netwidgetdl = wibox.widget.background()
+netwidgetdl = wibox.container.background()
 netwidgetdl:set_widget(net_widgetdl)
 netwidgetdl:set_bgimage(beautiful.widget_display)
 
 widget_netul = wibox.widget.imagebox()
 widget_netul:set_image(beautiful.widget_netul)
-netwidgetul = wibox.widget.background()
+netwidgetul = wibox.container.background()
 netwidgetul:set_widget(net_widgetul.widget)
 netwidgetul:set_bgimage(beautiful.widget_display)
 
 -- | Clock / Calendar | --
 
-mytextclock    = awful.widget.textclock(
+mytextclock    = wibox.widget.textclock(
     markup(
         beautiful.clockgf,
         space3 .. "%H:%M" .. markup.font("Tamsyn 3", " ")))
-mytextcalendar = awful.widget.textclock(
+mytextcalendar = wibox.widget.textclock(
     markup(beautiful.clockgf, space3 .. "%a %d %b"))
 
 widget_clock = wibox.widget.imagebox()
 widget_clock:set_image(beautiful.widget_clock)
 
-clockwidget = wibox.widget.background()
+clockwidget = wibox.container.background()
 clockwidget:set_widget(mytextclock)
 clockwidget:set_bgimage(beautiful.widget_display)
 
 widget_date = wibox.widget.imagebox()
 widget_date:set_image(beautiful.widget_cal)
 
-datewidget = wibox.widget.background()
+datewidget = wibox.container.background()
 datewidget:set_widget(mytextcalendar)
 datewidget:set_bgimage(beautiful.widget_display)
 
@@ -301,7 +302,7 @@ mytasklist.buttons = awful.util.table.join(
                 -- :isvisible() makes no sense
                 c.minimized = false
                 if not c:isvisible() then
-                    awful.tag.viewonly(c:tags()[1])
+                    c:tags()[1]:view_only()
                 end
                 -- This will also un-minimize
                 -- the client, if needed
@@ -471,7 +472,6 @@ end
 
 -- {{{ Mouse bindings
 root.buttons(awful.util.table.join(
-    awful.button({ }, 3, function () mymainmenu:toggle() end),
     awful.button({ }, 4, awful.tag.viewnext),
     awful.button({ }, 5, awful.tag.viewprev)
 ))
@@ -568,13 +568,13 @@ globalkeys = awful.util.table.join(
 
     -- Audio Control
     awful.key({}, "XF86AudioRaiseVolume", function()
-        awful.util.spawn("amixer set Master 10%+")
+        awful.util.spawn("amixer -M set Master 5%+")
     end),
     awful.key({}, "XF86AudioLowerVolume", function()
-        awful.util.spawn("amixer set Master 10%-")
+        awful.util.spawn("amixer -M set Master 5%-")
     end),
     awful.key({}, "XF86AudioMute", function()
-        awful.util.spawn("amixer sset Master toggle")
+        awful.util.spawn("amixer -M sset Master toggle")
     end),
 
     -- Brightness
@@ -810,6 +810,25 @@ for i = 1, 9 do
         end
     end))
 end
+
+
+-- When a screen is disconnected, the tags on that screen will be moved to
+-- another similar screen, while keeping the same tag focused on that screen.
+tag.connect_signal("request::screen", function(t)
+    for s in screen do
+        if s ~= t.screen then
+            current_tags = s.selected_tags
+
+            move_tag_to_screen(t, s.index)
+
+            awful.tag.viewnone(s)
+            awful.tag.viewmore(current_tags)
+            force_focus(s)
+
+            return
+        end
+    end
+end);
 
 
 clientbuttons = awful.util.table.join(

@@ -18,7 +18,7 @@ alias please='sudo'
 alias vim='vim -O'
 alias ..='cd ..'
 alias ...='cd ../..'
-alias ag="ag --color -H"
+alias ag="ag --color -H --width 200"
 alias tree="tree -C"
 
 alias py2='python2'
@@ -50,33 +50,36 @@ alias cp='cp -i'
 alias grep='grep -i --color'
 
 # Keychain commands
-alias kc="eval \`keychain --eval --agents ssh --timeout 5 --quiet id_rsa\`"
-alias kchour="eval \`keychain --eval --agents ssh --timeout 60 --quiet id_rsa\`"
+id_rsas=$(ls --ignore="*.pub" -w 1 ~/.ssh/ | grep "^id_" | tr '\n' ' ')
+alias kc="eval \`keychain --eval --agents ssh --timeout 480 --quiet $id_rsas\`"
 
 # Aliases for Git
 alias g='/usr/bin/git status'
-alias gu='/usr/bin/git pull'
-#alias gp='/usr/bin/git push'
+alias gu='kc && /usr/bin/git pull'
+alias gp='kc && /usr/bin/git push'
 alias ga='/usr/bin/git add'
 alias gd='/usr/bin/git diff'
 alias gda='/usr/bin/git diff -U99999'
+alias gs='/usr/bin/git stash'
 alias gb='/usr/bin/git branch'
 alias gba='/usr/bin/git branch -a'
-#alias gc='/usr/bin/git commit'
+alias gc='/usr/bin/git commit'
 alias gca='/usr/bin/git commit -a'
+alias gcl='kc && /usr/bin/git clone'
 alias gco='/usr/bin/git checkout'
 alias gm="/usr/bin/git merge --no-ff"
 alias gff="/usr/bin/git merge --ff-only"
 
 # https://git-scm.com/docs/pretty-formats
-GIT_LOG_FORMAT='%Cred%h%Creset -%C(yellow)%-d%C(reset) %s %C(green)[%cr]%C(reset) %C(bold blue)%an <%ae>%C(reset) %C(cyan)%G?%C(reset)'
+#GIT_LOG_FORMAT='%Cred%h%Creset -%C(yellow)%-d%C(reset) %s %C(green)[%cr]%C(reset) %C(bold blue)%an <%ae>%C(reset) %C(cyan)%G?%C(reset)'
+GIT_LOG_FORMAT='%Cred%h%Creset -%C(yellow)%-d%C(reset) %s %C(green)(%cr)%C(reset) %C(bold blue)%an%C(reset)'
 alias gl="/usr/bin/git log --date-order --graph --pretty=format:'${GIT_LOG_FORMAT}' --abbrev-commit --date=relative"
 alias gla="/usr/bin/git log --date-order --graph --pretty=format:'${GIT_LOG_FORMAT}' --abbrev-commit --date=relative --all"
 alias gls="/usr/bin/git log --date-order --graph --pretty=format:'${GIT_LOG_FORMAT}' --abbrev-commit --date=relative --show-signature"
 alias gll="/usr/bin/git log --date-order --graph --oneline"
 alias gs="/usr/bin/git submodule"
 
-function gc() {
+function gc_scott() {
     if git status &>/dev/null; then
         user_name=$(git config user.name)
         user_mail=$(git config user.email)
@@ -104,7 +107,7 @@ function gc() {
     /usr/bin/git commit -S "$@"
 }
 
-function gca() {
+function gca_scott() {
     if git status &>/dev/null; then
         user_name=$(git config user.name)
         user_mail=$(git config user.email)
@@ -116,7 +119,7 @@ function gca() {
     /usr/bin/git commit -a "$@"
 }
 
-function gp() {
+function gp_scott() {
     if /usr/bin/git status &>/dev/null; then
         /usr/bin/git push -nv 2>&1 | head -n -1
         echo -e "\nDo this? (enter)"
@@ -185,4 +188,44 @@ function va() {
     return 1
 }
 
-alias rebuild_ctags="cd ~/dev/; ctags -R --python-kinds=-i"
+alias rebuild_ctags="cd ~/code/; ctags -R --python-kinds=-i"
+
+# Custom from Elie
+
+# Python virtualenv
+alias workoff='deactivate'
+alias mkvirtualenv2="mkvirtualenv -p /usr/bin/python2.7"
+
+# Set up nvm
+source /usr/share/nvm/init-nvm.sh
+
+# Look at logs of all containers that listen on port 8080
+alias docker-logs-check='while ((1)); do sudo docker logs -f $(sudo docker ps | grep 8080 | cut -f1 -d" ") 2>/dev/null; sleep 1; echo No docker container; done'
+
+# Redirect screenshots to ~/shots
+alias scrot="scrot ~/shots/%Y-%m-%d-%T-screenshot.png"
+
+# Docker requires sudo access
+alias docker="/usr/bin/sudo /usr/bin/docker"
+alias docker-compose="/usr/bin/sudo /usr/bin/docker-compose"
+
+# Arch Linux way of handling Java versions
+source /etc/profile.d/jre.sh
+
+alias untar="tar -xvzf"
+
+# Mount and set permissions properly (files: rw- r-- r--, dir: rwxr-xr-x)
+alias m="sudo mount -o uid=$USER,fmask=0133,dmask=0022"
+
+# Rick Roll
+alias rick-roll="curl -s -L http://bit.ly/10hA8iC | bash"
+
+# Starts awesome in a nested X server
+alias test-awesome="Xephyr :5 & sleep 1 ; DISPLAY=:5 awesome"
+
+# Source additional bashrc config specific to work
+source ~/.bashrc_work
+
+# Suspend Hobbiton
+# ssh hobbiton
+# echo 'pm-suspend' | sudo at now + 1 minutes; exit

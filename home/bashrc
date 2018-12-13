@@ -6,12 +6,10 @@
 # Need to be PC
 alias person=man
 
-export GOPATH="$HOME/go"
-
 # This is a dirty hack to make it easier to reset the keyboard. Udev rules did
 # not solve this problem. Something about the right session not getting the new
 # keyboard changes.
-setxkbmap -option caps:escape
+#setxkbmap -option caps:escape
 
 source ~/.bash_aliases
 
@@ -20,6 +18,29 @@ source ~/.bash_aliases
 
 bash_completion="/usr/share/bash-completion/bash_completion"
 [[ -f "${bash_completion}" ]] && . "${bash_completion}"
+
+# Add git completion to standard git commands and aliases.
+if [ -f ~/.git-completion.bash ]; then
+    . ~/.git-completion.bash
+
+    # Add git completion to aliases
+    __git_complete g  __git_main
+    __git_complete gu  _git_pull
+    __git_complete gp  _git_push
+    __git_complete ga  _git_add
+    __git_complete gd  _git_diff
+    __git_complete gs  _git_stash
+    __git_complete gb  _git_branch
+    __git_complete gba _git_branch
+    __git_complete gc  _git_commit
+    __git_complete gca _git_commit
+    __git_complete gco _git_checkout
+    __git_complete gm  _git_merge
+    __git_complete gff _git_merge
+    __git_complete gl  _git_log
+    __git_complete gla _git_log
+    __git_complete gll _git_log
+fi
 
 function color() {
     echo "\[$(tput setaf "${1}")\]"
@@ -61,11 +82,11 @@ function bash_prompt_impl() {
 
     local virtualenv
 
-    local sep="─"
+    #local sep="─"
     #local sep="-"
-    #local sep="~"
-    local lb="["
-    local rb="]"
+    local sep="~"
+    local lb="("
+    local rb=")"
 
     if printenv VIRTUAL_ENV &>/dev/null; then
         virtualenv=$(printenv VIRTUAL_ENV | awk -F/ '{print $NF}')
@@ -88,7 +109,6 @@ function bash_prompt_impl() {
         local count_modified=$(git status -s | grep -E "^ [^\s]" | wc -l)
         local count_staged=$(git status -s | grep -E "^[^\s] " | wc -l)
         local count_untracked=$(git status -s | grep -E "^\?\?" | wc -l)
-
 
         if [[ ${count_untracked} != 0 ]]; then
             count_untracked=" $(color 3)...${count_untracked}$(reset_color)"
@@ -144,14 +164,51 @@ function bash_prompt_impl() {
     echo "$ "
 }
 
+date-utc-to-au() {
+    FOUNDEPOCH=$(TZ=UTC date +%s -d "$@")
+    echo -en "$FOUNDEPOCH\t"
+    TZ="Australia/Sydney" date -d @${FOUNDEPOCH}
+}
+
+gitcopush() {
+    # TODO: Needs some rework
+    set -eu
+
+    GIT_DESCRIPTION=$*
+    JIRA_URL='https://extranet.atlassian.com/jira'
+    TICKET_NUM="${1^^}"
+
+    if [[ ${TICKET_NUM:0:7} != "PURSRE-" && ${TICKET_NUM:0:4} != "PUR-" && ${TICKET_NUM:0:5} != "PLSE-" ]]; then
+        echo "No ticket detected. Creating new ticket"
+
+        PROJECT_KEY="PURSRE"
+        TICKET_NUM=$(curl \
+            --silent \
+            --data "{ \"fields\": { \"reporter\":{\"name\": \"${USER}\" }, \"assignee\":{\"name\":\"${USER}\"}, \"project\": { \"key\": \"$PROJECT_KEY\" }, \"summary\": \"$GIT_DESCRIPTION\", \"description\": \"$GIT_DESCRIPTION\", \"issuetype\": { \"name\": \"Task\" } } }" \
+            --user "${USER}" \
+            -X POST \
+            --header "Content-Type: application/json" \
+            $JIRA_URL/rest/api/2/issue/ | \
+            jq '.key')
+        TICKET_NUM="${TICKET_NUM//\"/}"
+        GIT_DESCRIPTION="${TICKET_NUM} ${GIT_DESCRIPTION}"
+    fi
+
+    BRANCH_NAME="${GIT_DESCRIPTION//[ \.]/_}"
+    git checkout -b "$BRANCH_NAME"
+    git commit --patch --interactive -m "$GIT_DESCRIPTION"
+    git push 2>&1 | tee "/tmp/$BRANCH_NAME"
+
+    google-chrome $(grep -A1 "Create pull request for" "/tmp/$BRANCH_NAME" | perl -nle 'print $1 if m#(https://(stash.atlassian.com|bitbucket.org)\S+)#')
+    sleep 0.5
+    google-chrome "${JIRA_URL}/browse/${TICKET_NUM}"
+    set +eu
+}
+
 function bash_prompt() {
 
     PS1=`bash_prompt_impl`
 }
-
-
-# Theme / PS1 / Colors
-export PROMPT_COMMAND=bash_prompt
 
 # base16-shell (https://github.com/chriskempson/base16-shell)
 # Base16 Shell template by Chris Kempson (http://chriskempson.com)
@@ -200,8 +257,7 @@ function base16 () {
         printf_template_custom="\033]%s%s\033\\"
     fi
 
-    # We only require the 256-bit colors, colors 0-15 are handled correctly by
-    # .Xresources
+    # We only require the 256-bit colors, colors 0-15 are handled correctly by .Xresources
     printf $printf_template 16 $color16
     printf $printf_template 17 $color17
     printf $printf_template 18 $color18
@@ -239,11 +295,9 @@ function base16 () {
     unset color_cursor
 }
 
-base16
-
 # Environment variables
-export PATH="$PATH:$HOME/arc/arcanist/bin/"
-export PATH="$PATH:$HOME/go/bin"
+export GOPATH="$HOME/go"
+export PATH=$PATH:$HOME/node_modules/.bin:$HOME/.gem/ruby/2.5.0/bin:$GOPATH/bin
 export TERM='rxvt-256color'
 export EDITOR='vim'
 
@@ -258,17 +312,25 @@ export HISTIGNORE="&:[ ]*:exit:ls:clear:l:la:c:gla:g"
 export HISTTIMEFORMAT='%F %T '
 
 shopt -s histappend
-#PROMPT_COMMAND="$PROMPT_COMMAND"
 
+# Theme / PS1 / Colors
+export PROMPT_COMMAND=bash_prompt
+
+base16
+
+export WORKON_HOME=/home/rothaq/.virtualenvs
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
 source "/usr/bin/virtualenvwrapper.sh" 1>/dev/null
-source "/etc/profile.d/autojump.bash"
+# TODO: Check this
+#source "/etc/profile.d/autojump.bash"
 
 SSH_ENV="$HOME/.ssh/agent-environment"
 
 function start_agent {
     /usr/bin/ssh-agent > "${SSH_ENV}"
     . "${SSH_ENV}" > /dev/null
-    /usr/bin/ssh-add $HOME/.ssh/atlassian
+    # TODO: See if I should use this
+    #/usr/bin/ssh-add $HOME/.ssh/atlassian
 }
 
 if [[ -f "${SSH_ENV}" ]]; then

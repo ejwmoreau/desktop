@@ -102,6 +102,10 @@ ln -sTf\
     "${cwd}/submodules/github.com/scottgreenup/lain"\
     "${HOME}/.config/awesome/lain"
 
+ln -sTf\
+    "${cwd}/submodules/github.com/Mic92/vicious"\
+    "${HOME}/.config/awesome/vicious"
+
 ## [ Miscellaneous ] ##
 
 if [[ -h "${HOME}/bin" ]]; then
@@ -119,6 +123,8 @@ checkfile "${HOME}/.xprofile"
 ln -sfT "${cwd}/home/xprofile"   "${HOME}/.xprofile"
 checkfile "${HOME}/.bashrc"
 ln -sfT "${cwd}/home/bashrc"     "${HOME}/.bashrc"
+checkfile "${HOME}/.git-completion.bash"
+ln -sfT "${cwd}/home/git-completion.bash" "${HOME}/.git-completion.bash"
 
 checkfile "${HOME}/.bash_aliases"
 ln -sfT "${cwd}/home/bash_aliases"     "${HOME}/.bash_aliases"
