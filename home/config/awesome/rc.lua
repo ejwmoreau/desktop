@@ -613,7 +613,7 @@ function select_next(c)
         end
         return client.focus
     end
-
+  
     idx = awful.client.idx(c)
 
     if idx == nil then
