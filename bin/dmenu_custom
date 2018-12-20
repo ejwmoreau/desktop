@@ -57,7 +57,7 @@ sp.call([
     '-p', "",
     '-f',
     '-i',
-    '-fn', "Anonymous Pro:size=9:style=Book",
+    '-fn', "Anonymous Pro:size=11:style=Book",
     '-h', geo['h'],
     '-w', geo['w'],
     '-x', geo['x'],
