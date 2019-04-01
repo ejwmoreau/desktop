@@ -18,7 +18,7 @@ alias please='sudo'
 alias vim='vim -O'
 alias ..='cd ..'
 alias ...='cd ../..'
-alias ag="ag --color -H --width 200"
+alias ag="ag --color -H --width 200 --skip-vcs-ignores"
 alias tree="tree -C"
 
 alias py2='python2'
@@ -56,6 +56,7 @@ alias kc="eval \`keychain --eval --agents ssh --timeout 480 --quiet $id_rsas\`"
 # Aliases for Git
 alias g='/usr/bin/git status'
 alias gu='kc && /usr/bin/git pull'
+alias gur='kc && /usr/bin/git pull --rebase origin master'
 alias gp='kc && /usr/bin/git push'
 alias ga='/usr/bin/git add'
 alias gd='/usr/bin/git diff'
@@ -203,7 +204,7 @@ source /usr/share/nvm/init-nvm.sh
 alias docker-logs-check='while ((1)); do sudo docker logs -f $(sudo docker ps | grep 8080 | cut -f1 -d" ") 2>/dev/null; sleep 1; echo No docker container; done'
 
 # Redirect screenshots to ~/shots
-alias scrot="scrot ~/shots/%Y-%m-%d-%T-screenshot.png"
+alias flameshot="flameshot gui -p ~/shots"
 
 # Docker requires sudo access
 alias docker="/usr/bin/sudo /usr/bin/docker"

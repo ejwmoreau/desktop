@@ -2,7 +2,6 @@
 
 # ~/.bashrc
 
-
 # Need to be PC
 alias person=man
 
@@ -19,11 +18,10 @@ source ~/.bash_aliases
 bash_completion="/usr/share/bash-completion/bash_completion"
 [[ -f "${bash_completion}" ]] && . "${bash_completion}"
 
-# Add git completion to standard git commands and aliases.
+# Add git completion to standard git commands and aliases
 if [ -f ~/.git-completion.bash ]; then
     . ~/.git-completion.bash
 
-    # Add git completion to aliases
     __git_complete g  __git_main
     __git_complete gu  _git_pull
     __git_complete gp  _git_push
