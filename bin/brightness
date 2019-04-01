@@ -1,16 +1,25 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
-dir="/sys/class/backlight/intel_backlight"
-max=$(cat "${dir}/max_brightness")
+# Script to set brightness using only certain values
+# Specifically, I want to be able to reach the lowest possible brightness,
+# while still increasing and decreasing in increments of 10 (ish)
 
-if [ "$#" -eq 0 ]; then
-    curr=$(cat "${dir}/brightness")
-    python -c "print(${curr} / ${max})"
-else
-    goal=${1}
-    goal_actual=$(python -c "print(int(${goal} * ${max}))")
-    sudo tee "${dir}/brightness" <<< "${goal_actual}"
-fi
+# The first and last values are used to make sure the range checking works
+values=(-1 0 1 10 20 30 40 50 60 70 80 90 100 101)
+curr_value=$(printf "%.0f" "$(xbacklight)")
 
+for i in "${!values[@]}"; do
+    prev_value="${values[($i-1) % ${#values[@]}]}"
+    next_value="${values[($i+1) % ${#values[@]}]}"
 
-
+    if (( prev_value < curr_value )) && (( curr_value < next_value )); then
+        new_value=$curr_value
+        if [[ $1 == "-inc" ]]; then
+            new_value=$next_value
+        elif [[ $1 == "-dec" ]]; then
+            new_value=$prev_value
+        fi
+        xbacklight -set $new_value
+        break
+    fi
+done
