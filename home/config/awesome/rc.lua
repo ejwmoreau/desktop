@@ -555,7 +555,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "u", function ()       spawn_program(programs["audio"]) end),
 
     awful.key({ modkey, "Mod1"     }, "4", function ()
-        awful.spawn.with_shell("sleep 0.2 && scrot --quality 100 --select -e 'echo $n' | xclip -in")
+        awful.spawn.with_shell("sleep 0.2 && flameshot -c")
     end),
 
     -- Awesome Control
@@ -586,10 +586,10 @@ globalkeys = awful.util.table.join(
 
     -- Brightness
     awful.key({}, "XF86MonBrightnessUp", function()
-        awful.util.spawn("xbacklight -inc 10")
+        awful.util.spawn("brightness -inc")
     end),
     awful.key({}, "XF86MonBrightnessDown", function()
-        awful.util.spawn("xbacklight -dec 10")
+        awful.util.spawn("brightness -dec")
     end),
 
     -- DMenu2
