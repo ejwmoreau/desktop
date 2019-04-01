@@ -334,7 +334,7 @@ mytasklist.buttons = awful.util.table.join(
     )
 )
 
--- Create a wibox for each screen and add it
+
 mywibox = {}
 mytaglist = {}
 mytaglist.buttons = awful.util.table.join(
@@ -347,7 +347,8 @@ mytaglist.buttons = awful.util.table.join(
 )
 
 
-for s = 1, screen.count() do
+-- Setup wibox, layout, wallpaper, etc for a particular screen
+function setup_screen(s)
 
     if beautiful.wallpaper then
         gears.wallpaper.maximized(beautiful.wallpaper, s)
@@ -446,8 +447,14 @@ for s = 1, screen.count() do
 
     mywibox[s]:set_widget(layout)
 end
--- }}}
---
+
+
+-- Create a wibox for each screen and add it
+for s = 1, screen.count() do
+    setup_screen(s)
+end
+
+
 function move_client_to_screen(c, x, screen_map)
     nextc = select_next(c)
     if x <= #screen_map then
@@ -478,9 +485,9 @@ root.buttons(awful.util.table.join(
 -- }}}
 
 function move_tag_to_screen(_tag, _screen_index)
-    awful.tag.setproperty(_tag, "hide", true)
+    _tag.selected = false
     _tag.screen = _screen_index
-    awful.tag.setproperty(_tag, "hide", false)
+    _tag.selected = true
 end
 
 function force_focus(_screen)
@@ -812,8 +819,31 @@ for i = 1, 9 do
 end
 
 
--- When a screen is disconnected, the tags on that screen will be moved to
--- another similar screen, while keeping the same tag focused on that screen.
+-- On new screen added: The first unused tag will be moved to the new screen
+screen.connect_signal("added", function()
+    -- Find the new screen that doesn't have a tag yet
+    local new_screen = nil
+    for s in screen do
+        if next(s.tags) == nil then
+            new_screen = s
+            break
+        end
+    end
+
+    setup_screen(new_screen)
+
+    -- Find a tag that isn't currently selected, and move it to the new screen
+    for _, t in pairs(root.tags()) do
+        if not t.selected then
+            move_tag_to_screen(t, new_screen.index)
+            return
+        end
+    end
+end);
+
+
+-- On screen removed: Tags on the removed screen will be moved to
+-- another similar screen, while keeping the same tag focused on that screen
 tag.connect_signal("request::screen", function(t)
     for s in screen do
         if s ~= t.screen then
@@ -822,7 +852,7 @@ tag.connect_signal("request::screen", function(t)
             move_tag_to_screen(t, s.index)
 
             awful.tag.viewnone(s)
-            awful.tag.viewmore(current_tags)
+            awful.tag.viewmore(current_tags, s)
             force_focus(s)
 
             return
