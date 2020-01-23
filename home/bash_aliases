@@ -70,15 +70,25 @@ alias gcl='kc && /usr/bin/git clone'
 alias gco='/usr/bin/git checkout'
 alias gm="/usr/bin/git merge --no-ff"
 alias gff="/usr/bin/git merge --ff-only"
+alias gt='/usr/bin/git worktree'
 
 # https://git-scm.com/docs/pretty-formats
 #GIT_LOG_FORMAT='%Cred%h%Creset -%C(yellow)%-d%C(reset) %s %C(green)[%cr]%C(reset) %C(bold blue)%an <%ae>%C(reset) %C(cyan)%G?%C(reset)'
 GIT_LOG_FORMAT='%Cred%h%Creset -%C(yellow)%-d%C(reset) %s %C(green)(%cr)%C(reset) %C(bold blue)%an%C(reset)'
+GIT_LOG_FORMAT_SIMPLE='%Cred%h%Creset - %s %C(green)(%cr)%C(reset) %C(bold blue)%an%C(reset)'
 alias gl="/usr/bin/git log --date-order --graph --pretty=format:'${GIT_LOG_FORMAT}' --abbrev-commit --date=relative"
 alias gla="/usr/bin/git log --date-order --graph --pretty=format:'${GIT_LOG_FORMAT}' --abbrev-commit --date=relative --all"
 alias gls="/usr/bin/git log --date-order --graph --pretty=format:'${GIT_LOG_FORMAT}' --abbrev-commit --date=relative --show-signature"
+alias gls="/usr/bin/git log --date-order --graph --pretty=format:'${GIT_LOG_FORMAT_SIMPLE}' --abbrev-commit --date=relative"
 alias gll="/usr/bin/git log --date-order --graph --oneline"
 alias gs="/usr/bin/git submodule"
+
+function gta() {
+    if [ $# -eq 0 ]; then echo "Please supply the branch name"; fi
+    repo_name=$(basename -s .git `git config --get remote.origin.url`)
+    git worktree add -b $1 ../$repo_name-$1 master
+    cd ../$repo_name-$1
+}
 
 function gc_scott() {
     if git status &>/dev/null; then
@@ -223,6 +233,9 @@ alias rick-roll="curl -s -L http://bit.ly/10hA8iC | bash"
 
 # Starts awesome in a nested X server
 alias test-awesome="Xephyr :5 & sleep 1 ; DISPLAY=:5 awesome"
+
+# Auto-tune any "bad" settings in powertop
+alias auto-powertop="sudo powertop --auto-tune"
 
 # Source additional bashrc config specific to work
 source ~/.bashrc_work

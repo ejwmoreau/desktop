@@ -40,6 +40,9 @@ if [ -f ~/.git-completion.bash ]; then
     __git_complete gll _git_log
 fi
 
+# Add Atlas CLI completion in bash
+source <(atlas --completion-script-bash)
+
 function color() {
     echo "\[$(tput setaf "${1}")\]"
 
@@ -312,7 +315,8 @@ export HISTTIMEFORMAT='%F %T '
 shopt -s histappend
 
 # Theme / PS1 / Colors
-export PROMPT_COMMAND=bash_prompt
+# Only append to PROMPT_COMMAND because of autojump: https://github.com/wting/autojump
+export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND ;} bash_prompt"
 
 base16
 
