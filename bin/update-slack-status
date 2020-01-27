@@ -1,0 +1,22 @@
+#!/bin/bash
+
+STATUS="Offline"
+EMOJI=":stride_away:"
+if iwgetid | grep -qs 'ESSID:"Charlie'; then
+    STATUS="Lvl 9"
+    EMOJI=":bullettrain_front:"
+elif iwgetid | grep -qs 'ESSID:"Catan'; then
+    STATUS="In Transit"
+    EMOJI=":stride_away:"
+elif iwgetid | grep -qs 'ESSID:"Felix the Cat'; then
+    STATUS="WFH"
+    EMOJI=":house:"
+fi
+
+OAUTH_ACCESS_TOKEN="xoxp-<token_here>"
+
+curl 'https://slack.com/api/users.profile.set' \
+ -X POST \
+ -H "Authorization: Bearer ${OAUTH_ACCESS_TOKEN}" \
+ -H 'Content-type: application/json; charset=utf-8' \
+ --data '{"profile":{"status_text":"'"${STATUS} $(date +"%a %d %b")"'", "status_emoji":"'"${EMOJI}"'"}}'
