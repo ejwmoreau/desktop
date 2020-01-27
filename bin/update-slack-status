@@ -4,15 +4,16 @@ STATUS="Offline"
 EMOJI=":stride_away:"
 if iwgetid | grep -qs 'ESSID:"Charlie'; then
     STATUS="Lvl 9"
-    EMOJI=":bullettrain_front:"
+    EMOJI=":sydney:"
 elif iwgetid | grep -qs 'ESSID:"Catan'; then
     STATUS="In Transit"
-    EMOJI=":stride_away:"
+    EMOJI=":bullettrain_front:"
 elif iwgetid | grep -qs 'ESSID:"Felix the Cat'; then
     STATUS="WFH"
     EMOJI=":house:"
 fi
 
+# Requires a xoxp token from a Slack bot that has `users.profile:write` OAuth scope
 OAUTH_ACCESS_TOKEN="xoxp-<token_here>"
 
 curl 'https://slack.com/api/users.profile.set' \
