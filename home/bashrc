@@ -2,13 +2,16 @@
 
 # ~/.bashrc
 
+# Timing commands. Copy the last line and add anywhere you want timing to be measured
+#curr_time() {
+#    CURR_TIME=$(date +"%s%N" | cut -b1-13)
+#}
+#
+#curr_time; BASHRC_TIME=$CURR_TIME
+#curr_time; echo "A: $(($CURR_TIME-$BASHRC_TIME))"
+
 # Need to be PC
 alias person=man
-
-# This is a dirty hack to make it easier to reset the keyboard. Udev rules did
-# not solve this problem. Something about the right session not getting the new
-# keyboard changes.
-#setxkbmap -option caps:escape
 
 source ~/.bash_aliases
 
@@ -83,8 +86,6 @@ function bash_prompt_impl() {
 
     local virtualenv
 
-    #local sep="─"
-    #local sep="-"
     local sep="~"
     local lb="("
     local rb=")"
@@ -107,9 +108,10 @@ function bash_prompt_impl() {
             gitbranch=$(git branch | egrep "^\*" | tail -c +3)
         fi
 
-        local count_modified=$(git status -s | grep -E "^ [^\s]" | wc -l)
-        local count_staged=$(git status -s | grep -E "^[^\s] " | wc -l)
-        local count_untracked=$(git status -s | grep -E "^\?\?" | wc -l)
+        local status="$(git status -s)"
+        local count_modified=$(echo "$status" | grep -E "^ [^\s]" | wc -l)
+        local count_staged=$(echo "$status" | grep -E "^[^\s] " | wc -l)
+        local count_untracked=$(echo "$status" | grep -E "^\?\?" | wc -l)
 
         if [[ ${count_untracked} != 0 ]]; then
             count_untracked=" $(color 3)...${count_untracked}$(reset_color)"
@@ -169,41 +171,6 @@ date-utc-to-au() {
     FOUNDEPOCH=$(TZ=UTC date +%s -d "$@")
     echo -en "$FOUNDEPOCH\t"
     TZ="Australia/Sydney" date -d @${FOUNDEPOCH}
-}
-
-gitcopush() {
-    # TODO: Needs some rework
-    set -eu
-
-    GIT_DESCRIPTION=$*
-    JIRA_URL='https://extranet.atlassian.com/jira'
-    TICKET_NUM="${1^^}"
-
-    if [[ ${TICKET_NUM:0:7} != "PURSRE-" && ${TICKET_NUM:0:4} != "PUR-" && ${TICKET_NUM:0:5} != "PLSE-" ]]; then
-        echo "No ticket detected. Creating new ticket"
-
-        PROJECT_KEY="PURSRE"
-        TICKET_NUM=$(curl \
-            --silent \
-            --data "{ \"fields\": { \"reporter\":{\"name\": \"${USER}\" }, \"assignee\":{\"name\":\"${USER}\"}, \"project\": { \"key\": \"$PROJECT_KEY\" }, \"summary\": \"$GIT_DESCRIPTION\", \"description\": \"$GIT_DESCRIPTION\", \"issuetype\": { \"name\": \"Task\" } } }" \
-            --user "${USER}" \
-            -X POST \
-            --header "Content-Type: application/json" \
-            $JIRA_URL/rest/api/2/issue/ | \
-            jq '.key')
-        TICKET_NUM="${TICKET_NUM//\"/}"
-        GIT_DESCRIPTION="${TICKET_NUM} ${GIT_DESCRIPTION}"
-    fi
-
-    BRANCH_NAME="${GIT_DESCRIPTION//[ \.]/_}"
-    git checkout -b "$BRANCH_NAME"
-    git commit --patch --interactive -m "$GIT_DESCRIPTION"
-    git push 2>&1 | tee "/tmp/$BRANCH_NAME"
-
-    google-chrome $(grep -A1 "Create pull request for" "/tmp/$BRANCH_NAME" | perl -nle 'print $1 if m#(https://(stash.atlassian.com|bitbucket.org)\S+)#')
-    sleep 0.5
-    google-chrome "${JIRA_URL}/browse/${TICKET_NUM}"
-    set +eu
 }
 
 function bash_prompt() {
@@ -296,11 +263,17 @@ function base16 () {
     unset color_cursor
 }
 
+path_append() {
+    if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
+        PATH="${PATH:+"$PATH:"}$1"
+    fi
+}
+
 # Environment variables
 export GOPATH="$HOME/go"
-export PATH=$PATH:$HOME/node_modules/.bin:$HOME/.gem/ruby/2.5.0/bin:$GOPATH/bin
 export TERM='rxvt-256color'
 export EDITOR='vim'
+path_append $HOME/node_modules/.bin:$HOME/.gem/ruby/2.5.0/bin:$GOPATH/bin
 
 export HISTFILESIZE=500000
 export HISTCONTROL=ignoreboth
@@ -314,15 +287,22 @@ export HISTTIMEFORMAT='%F %T '
 
 shopt -s histappend
 
+prompt_append() {
+    if [[ "$PROMPT_COMMAND" != *"$1"* ]]; then
+        PROMPT_COMMAND="${PROMPT_COMMAND:+"$PROMPT_COMMAND ;"} $1"
+    fi
+}
+
 # Theme / PS1 / Colors
-# Only append to PROMPT_COMMAND because of autojump: https://github.com/wting/autojump
-export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND ;} bash_prompt"
+# Append to PROMPT_COMMAND because of autojump: https://github.com/wting/autojump
+prompt_append bash_prompt
+export PROMPT_COMMAND
 
 base16
 
 export WORKON_HOME=/home/rothaq/.virtualenvs
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
-source "/usr/bin/virtualenvwrapper.sh" 1>/dev/null
+source "/usr/bin/virtualenvwrapper.sh"
 source "/etc/profile.d/autojump.bash"
 
 SSH_ENV="$HOME/.ssh/agent-environment"

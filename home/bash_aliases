@@ -138,6 +138,22 @@ function gp_scott() {
     fi
 }
 
+gitcopush() {
+    # TODO: Extract useful parts
+    set -eu
+
+    GIT_DESCRIPTION=$*
+    TICKET_NUM="${1^^}"
+
+    BRANCH_NAME="${GIT_DESCRIPTION//[ \.]/_}"
+    git checkout -b "$BRANCH_NAME"
+    git commit --patch --interactive -m "$GIT_DESCRIPTION"
+    git push 2>&1 | tee "/tmp/$BRANCH_NAME"
+
+    google-chrome $(grep -A1 "Create pull request for" "/tmp/$BRANCH_NAME" | perl -nle 'print $1 if m#(https://(stash.atlassian.com|bitbucket.org)\S+)#')
+    set +eu
+}
+
 # Docker
 alias d="/usr/bin/sudo /usr/bin/docker"
 alias dn="/usr/bin/sudo /usr/bin/docker network"
@@ -207,8 +223,8 @@ alias rebuild_ctags="cd ~/code/; ctags -R --python-kinds=-i"
 alias workoff='deactivate'
 alias mkvirtualenv2="mkvirtualenv -p /usr/bin/python2.7"
 
-# Set up nvm
-source /usr/share/nvm/init-nvm.sh
+# Set up nvm. --no-use speeds up the command a lot
+source /usr/share/nvm/init-nvm.sh --no-use
 
 # Look at logs of all containers that listen on port 8080
 alias docker-logs-check='while ((1)); do sudo docker logs -f $(sudo docker ps | grep 8080 | cut -f1 -d" ") 2>/dev/null; sleep 1; echo No docker container; done'
