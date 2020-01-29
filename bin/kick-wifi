@@ -1,0 +1,12 @@
+nmcli networking off
+nmcli radio wifi off
+
+sudo su
+
+echo "1" > /sys/bus/pci/devices/0000\:03\:00.0/remove
+echo "1" > /sys/bus/pci/rescan
+
+exit
+
+nmcli networking on
+nmcli radio wifi on
