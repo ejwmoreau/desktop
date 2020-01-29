@@ -259,3 +259,9 @@ source ~/.bashrc_work
 # Suspend Hobbiton
 # ssh hobbiton
 # echo 'pm-suspend' | sudo at now + 1 minutes; exit
+
+date-utc-to-au() {
+    FOUND_EPOCH=$(TZ=UTC date +%s -d "$@")
+    echo -en "$FOUND_EPOCH\t"
+    TZ="Australia/Sydney" date -d @${FOUND_EPOCH}
+}

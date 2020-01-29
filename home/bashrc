@@ -2,7 +2,9 @@
 
 # ~/.bashrc
 
+##################################################
 # Timing commands. Copy the last line and add anywhere you want timing to be measured
+##################################################
 #curr_time() {
 #    CURR_TIME=$(date +"%s%N" | cut -b1-13)
 #}
@@ -17,6 +19,42 @@ source ~/.bash_aliases
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
+
+##################################################
+# Some Global Environment Variables (PATH, HIST*, etc)
+##################################################
+
+path_append() {
+    if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
+        PATH="${PATH:+"$PATH:"}$1"
+    fi
+}
+
+# Environment variables
+export GOPATH="$HOME/go"
+export TERM='rxvt-256color'
+export EDITOR='vim'
+path_append $HOME/node_modules/.bin:$HOME/.gem/ruby/2.5.0/bin:$GOPATH/bin
+
+export HISTSIZE=100000
+export HISTFILESIZE=100000
+export HISTCONTROL=ignoreboth:erasedups
+
+# &    => ignore duplicate commands
+# [ ]* => ignore commands starting with a space
+# exit => forget exit
+export HISTIGNORE="&:[ ]*:exit:ls:clear:l:la:c:gla:g"
+export HISTTIMEFORMAT='%F %T '
+
+shopt -s histappend
+
+export WORKON_HOME=/home/rothaq/.virtualenvs
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
+source "/usr/bin/virtualenvwrapper.sh"
+
+##################################################
+# Bash Completion (Git, Atlas, etc)
+##################################################
 
 bash_completion="/usr/share/bash-completion/bash_completion"
 [[ -f "${bash_completion}" ]] && . "${bash_completion}"
@@ -45,6 +83,10 @@ fi
 
 # Add Atlas CLI completion in bash
 source <(atlas --completion-script-bash)
+
+##################################################
+# Prompt (PROMPT_COMMAND, PS1)
+##################################################
 
 function color() {
     echo "\[$(tput setaf "${1}")\]"
@@ -160,15 +202,10 @@ function bash_prompt_impl() {
     echo "$ "
 }
 
-date-utc-to-au() {
-    FOUNDEPOCH=$(TZ=UTC date +%s -d "$@")
-    echo -en "$FOUNDEPOCH\t"
-    TZ="Australia/Sydney" date -d @${FOUNDEPOCH}
-}
-
 function bash_prompt() {
     last_status=$?
 
+    # TODO: Check if history could be moved to after $PS1, so we don't need to capture $?
     # If history is in $PS1, then weird things happen
     history -a
     history -c
@@ -176,6 +213,22 @@ function bash_prompt() {
 
     PS1=`bash_prompt_impl $last_status`
 }
+
+prompt_prepend() {
+    if [[ "$PROMPT_COMMAND" != *"$1"* ]]; then
+        PROMPT_COMMAND="$1 ${PROMPT_COMMAND:+"$PROMPT_COMMAND ;"}"
+    fi
+}
+
+# Append to PROMPT_COMMAND because of autojump: https://github.com/wting/autojump
+prompt_prepend bash_prompt
+export PROMPT_COMMAND
+
+source "/etc/profile.d/autojump.bash"
+
+##################################################
+# Colors (base16)
+##################################################
 
 # base16-shell (https://github.com/chriskempson/base16-shell)
 # Base16 Shell template by Chris Kempson (http://chriskempson.com)
@@ -262,47 +315,11 @@ function base16 () {
     unset color_cursor
 }
 
-path_append() {
-    if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
-        PATH="${PATH:+"$PATH:"}$1"
-    fi
-}
-
-# Environment variables
-export GOPATH="$HOME/go"
-export TERM='rxvt-256color'
-export EDITOR='vim'
-path_append $HOME/node_modules/.bin:$HOME/.gem/ruby/2.5.0/bin:$GOPATH/bin
-
-export HISTSIZE=100000
-export HISTFILESIZE=100000
-export HISTCONTROL=ignoreboth:erasedups
-
-# &    => ignore duplicate commands
-# [ ]* => ignore commands starting with a space
-# exit => forget exit
-export HISTIGNORE="&:[ ]*:exit:ls:clear:l:la:c:gla:g"
-export HISTTIMEFORMAT='%F %T '
-
-shopt -s histappend
-
-prompt_prepend() {
-    if [[ "$PROMPT_COMMAND" != *"$1"* ]]; then
-        PROMPT_COMMAND="$1 ${PROMPT_COMMAND:+"$PROMPT_COMMAND ;"}"
-    fi
-}
-
-# Theme / PS1 / Colors
-# Append to PROMPT_COMMAND because of autojump: https://github.com/wting/autojump
-prompt_prepend bash_prompt
-export PROMPT_COMMAND
-
 base16
 
-export WORKON_HOME=/home/rothaq/.virtualenvs
-export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
-source "/usr/bin/virtualenvwrapper.sh"
-source "/etc/profile.d/autojump.bash"
+##################################################
+# SSH Keys + Agent
+##################################################
 
 SSH_ENV="$HOME/.ssh/agent-environment"
 
