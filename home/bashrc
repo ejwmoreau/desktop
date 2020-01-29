@@ -59,7 +59,8 @@ function reset_color() {
 }
 
 function success_prompt() {
-    local last_status="${?}"
+    # There's an opening parenthesis for some reason
+    local last_status="${1//\(}"
     local success="^_^"
     local failure="0_o"
     if [[ "${last_status}" != "0" ]]; then
@@ -70,19 +71,11 @@ function success_prompt() {
 }
 
 function bash_prompt_impl() {
-    last_status=$(success_prompt)
+    last_status=$(success_prompt $1)
 
-    history -a
-    history -c
-    history -r
-
-    local login
-    local time
-    local directory
-
-    login="$(color 4)\u$(reset_color)@$(color 6)\H$(reset_color)"
-    time="$(color 5)\t$(reset_color)"
-    directory="$(color 3)\w$(reset_color)"
+    local login="$(color 4)\u$(reset_color)@$(color 6)\H$(reset_color)"
+    local time="$(color 5)\t$(reset_color)"
+    local directory="$(color 3)\w$(reset_color)"
 
     local virtualenv
 
@@ -174,8 +167,14 @@ date-utc-to-au() {
 }
 
 function bash_prompt() {
+    last_status=$?
 
-    PS1=`bash_prompt_impl`
+    # If history is in $PS1, then weird things happen
+    history -a
+    history -c
+    history -r
+
+    PS1=`bash_prompt_impl $last_status`
 }
 
 # base16-shell (https://github.com/chriskempson/base16-shell)
@@ -275,9 +274,9 @@ export TERM='rxvt-256color'
 export EDITOR='vim'
 path_append $HOME/node_modules/.bin:$HOME/.gem/ruby/2.5.0/bin:$GOPATH/bin
 
-export HISTFILESIZE=500000
-export HISTCONTROL=ignoreboth
-export HISTSIZE=500000
+export HISTSIZE=100000
+export HISTFILESIZE=100000
+export HISTCONTROL=ignoreboth:erasedups
 
 # &    => ignore duplicate commands
 # [ ]* => ignore commands starting with a space
@@ -287,15 +286,15 @@ export HISTTIMEFORMAT='%F %T '
 
 shopt -s histappend
 
-prompt_append() {
+prompt_prepend() {
     if [[ "$PROMPT_COMMAND" != *"$1"* ]]; then
-        PROMPT_COMMAND="${PROMPT_COMMAND:+"$PROMPT_COMMAND ;"} $1"
+        PROMPT_COMMAND="$1 ${PROMPT_COMMAND:+"$PROMPT_COMMAND ;"}"
     fi
 }
 
 # Theme / PS1 / Colors
 # Append to PROMPT_COMMAND because of autojump: https://github.com/wting/autojump
-prompt_append bash_prompt
+prompt_prepend bash_prompt
 export PROMPT_COMMAND
 
 base16
