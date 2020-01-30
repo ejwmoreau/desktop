@@ -56,7 +56,6 @@ alias kc="eval \`keychain --eval --agents ssh --timeout 480 --quiet $id_rsas\`"
 # Aliases for Git
 alias g='/usr/bin/git status'
 alias gu='kc && /usr/bin/git pull'
-alias gur='kc && /usr/bin/git pull --rebase origin master'
 alias gp='kc && /usr/bin/git push'
 alias ga='/usr/bin/git add'
 alias gd='/usr/bin/git diff'
@@ -84,10 +83,18 @@ alias gll="/usr/bin/git log --date-order --graph --oneline"
 alias gs="/usr/bin/git submodule"
 
 function gta() {
+    # Create a new git worktree for the current repo
     if [ $# -eq 0 ]; then echo "Please supply the branch name"; fi
     repo_name=$(basename -s .git `git config --get remote.origin.url`)
     git worktree add -b $1 ../$repo_name-$1 master
     cd ../$repo_name-$1
+}
+
+function gur() {
+    # Rebase off master. Handles if there's any changes to stash
+    change=$(git stash | grep "No local changes to save")
+    kc && /usr/bin/git pull --rebase origin master
+    if [[ ! $change ]]; then git stash apply; fi
 }
 
 function gc_scott() {
