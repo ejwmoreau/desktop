@@ -1,17 +1,25 @@
 #!/bin/bash
 
-STATUS="Offline"
-EMOJI=":stride_away:"
-if iwgetid | grep -qs 'ESSID:"Charlie'; then
-    STATUS="Lvl 9"
-    EMOJI=":sydney:"
-elif iwgetid | grep -qs 'ESSID:"Catan'; then
-    STATUS="In Transit"
-    EMOJI=":bullettrain_front:"
-elif iwgetid | grep -qs 'ESSID:"Felix the Cat'; then
-    STATUS="WFH"
-    EMOJI=":house:"
-fi
+wifi_name=$(iwgetid | cut -d: -f2- | tr -d \")
+
+STATUS=""
+EMOJI=""
+EXPIRE=$(date -d "$(date +%D) 11:59:59 PM" +%s) # Expire at the end of the day
+case "$wifi_name" in
+    "Charlie")
+        STATUS="Lvl 9"
+        EMOJI=":sydney:"
+        ;;
+    "Catan")
+        STATUS="In Transit"
+        EMOJI=":bullettrain_front:"
+        EXPIRE=$(date -d '+1 hour' "+%s") # Expire in 1 hour
+        ;;
+    "Felix the Cat")
+        STATUS="WFH"
+        EMOJI=":house:"
+        ;;
+esac
 
 # Requires a xoxp token from a Slack bot that has `users.profile:write` OAuth scope
 OAUTH_ACCESS_TOKEN="xoxp-<token_here>"
@@ -20,4 +28,12 @@ curl 'https://slack.com/api/users.profile.set' \
  -X POST \
  -H "Authorization: Bearer ${OAUTH_ACCESS_TOKEN}" \
  -H 'Content-type: application/json; charset=utf-8' \
- --data '{"profile":{"status_text":"'"${STATUS} $(date +"%a %d %b")"'", "status_emoji":"'"${EMOJI}"'"}}'
+ --data-binary @- << EOF
+{
+   "profile": {
+       "status_text": "${STATUS} $(date +'%a %d %b')",
+       "status_emoji": "$EMOJI",
+       "status_expiration": "$EXPIRE",
+   }
+}
+EOF
