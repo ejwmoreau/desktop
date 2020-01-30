@@ -108,11 +108,7 @@ urxvt.lineSpace:            -1
 ! 3840x2160 @ 27   = 163
 ! 3440x1440 @ 34   = 109
 
-!URxvt.font:	xft:Fantasque Sans Mono:style=light:dpi=282:size=9
-!URxvt.font:	xft:M+ 1mn:style=thin:dpi=282:size=9
-!URxvt.font:	xft:Roboto Mono:style=light:dpi=109:size=8
-!URxvt.font:	xft:M+ 1mn:style=normal:dpi=109:size=9
-!URxvt.font:	xft:Fantasque Sans Mono:style=light:dpi=109:size=11
-!URxvt.font:	xft:Anonymous Pro Minus:style=Regular:dpi=109:size=12
-!URxvt.font:	xft:Fantasque Sans Mono:style=light:dpi=163:size=11
+! Some other fonts:
+! Fantasque Sans Mono:style=light, Roboto Mono:style=light
+! M+ 1mn:style=thin, M+ 1mn:style=normal
 URxvt.font:	xft:Anonymous Pro:style=regular:dpi=109:size=12
