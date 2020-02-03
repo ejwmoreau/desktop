@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# How to set up ADB tools with Oneplus 3 (and probably Oneplus 1 as well)
+
+echo "This file isn't meant to be run, but instead to be used as a guide" && exit
+
+# Install android-tools
+pacman -S android-tools
+
+# Follow this guide (download 2 files, etc)
+# http://bernaerts.dyndns.org/android/339-android-oneplustwo-oneplusx-enable-adb-mtp-detection-ubuntu-trusty
+
+# Instead of restarting the udev service, load new rules using these commands (maybe only 1 is needed):
+udevadm control --reload
+udevadm trigger
+# From this page: https://wiki.archlinux.org/index.php/udev
+
+# Restart adb server
+adb kill-server
+adb start-server
+
+# See the device
+adb devices
+
+# If it says unauthorized, then you will need to allow it via the popup dialog on the phone

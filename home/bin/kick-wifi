@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Script to kick wifi into working again
+
+nmcli networking off
+nmcli radio wifi off
+
+sudo su -c 'echo "1" > /sys/bus/pci/devices/0000:03:00.0/remove; echo "1" > /sys/bus/pci/rescan'
+
+nmcli networking on
+nmcli radio wifi on
