@@ -1,6 +1,0 @@
-#!/bin/bash
-
-urxvt &> /home/scott/error_urxvt
-
-
-

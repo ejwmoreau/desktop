@@ -1,8 +1,0 @@
-#!/bin/bash
-
-# Script to kick bluetooth back alive, mainly when `bluetoothctl` says:
-# 'No default controller available'
-
-sudo rfkill block bluetooth
-sudo rfkill unblock bluetooth
-sudo systemctl restart bluetooth
