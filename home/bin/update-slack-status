@@ -7,7 +7,7 @@ EMOJI=""
 EXPIRE=$(date -d "$(date +%D) 11:59:59 PM" +%s) # Expire at the end of the day
 case "$wifi_name" in
     "Charlie")
-        STATUS="Lvl 9"
+        STATUS="Lvl 30"
         EMOJI=":sydney:"
         ;;
     "Catan")
