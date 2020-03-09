@@ -1,76 +1,55 @@
-
-" This must be first, because it changes other options as side effect
+" This must be first, because it changes other options as side effect.
 set nocompatible
 
-let g:snips_author='Scott Greenup'
+syntax enable       " Enable syntax processing/highlighting.
 
-"set autoindent          " always have autoindent on
-"set copyindent          " copy the previous indentation on autoindenting
-set display+=lastline
-set expandtab           " <TAB> will insert <softtabstop> spaces
-set hidden              " can edit a new file without saving the first
-set history=1000        " more history, more commands
-set hlsearch            " highlight the searched terms
-set incsearch           " show search matches as you type "set spell
-set laststatus=2
-set nowrap              " don't wrap lines
-set number              " shows the number of the cursor line
-set relativenumber      " shows relative distance between lines
-set ruler               " bottom-right line,column number
-set shiftwidth=4        " affects how much > moves
-set showbreak=⇇
-set showmatch
-set smartcase           " ignore case if lowercaes, else, case-sensitive
-set smartindent
-"set softtabstop=4       " affects <TAB> key
-set tabstop=4
-set textwidth=80
-set title               " change terminal title
-set undolevels=5000     " more levels of undos
-set visualbell          " don't beep
-set t_vb=
-set wildmenu            " autocomplete for command menu
+" Spaces and Tabs.
+set tabstop=2       " Number of visual space per tab.
+set softtabstop=2   " Number of spaces in tab when editing.
+set shiftwidth=2    " Number of spaces used by autoindent.
+set expandtab       " Tabs are spaces.
+set listchars=tab:>.,trail:~    " Show tabs and trailing spaces.
+set list            " Show listchars characters.
+set autoindent      " Keep same level of indentation when making new line.
+set smartindent     " Helps with autoindent.
 
-set nobackup
-set noswapfile
+" UI Config.
+set ruler           " Shows line/column numbers in bottom right.
+set number          " Show line numbers.
+set wildmenu        " Visual autocomplete for command menu.
+set lazyredraw      " Redraw screen only when need to.
+set showmatch       " Highlighting matching [{()}].
+set display+=lastline   " Displays as much of last line that can fit.
+set nowrap          " Don't wrap lines.
+set linebreak       " Wrap lines based on word, not letter.
+set virtualedit=all " Allow cursor to go where there is no character.
 
-set linebreak
-set fdm=indent
+" Colours.
+set bg=dark         " Tells vim that background colour is dark.
 
-" highlight ColumnColor ctermbg=red ctermfg=red
-" highlight ColorColumn ctermbg=red ctermfg=red
-" highlight columncolor ctermbg=red ctermfg=red
-set colorcolumn=81
+" Searching.
+set incsearch       " Search as characters are entered.
+set hlsearch        " Highlight matches.
+set ignorecase      " Ignore case when searching.
+set wrapscan        " Wrap search to start of file.
 
-let g:javascript_enable_domhtmlcss = 1
+" Folding.
+set foldenable      " Enable folding.
+set foldlevelstart=10 " Open most folds by default.
+set foldnestmax=10  " 10 nested fold max.
+set foldmethod=indent " Fold based on indent level.
 
-set wrapscan
-set virtualedit=all
+" Swap/Backup files.
+set swapfile
+set dir=~/.tmp      " Where swap files will be stored.
 
-set foldenable
-set foldlevelstart=10
-set foldnestmax=3
-set foldmethod=indent
-noremap <space> za
+" Filetype specific.
+filetype plugin indent on   " Load filetype-specific indent files.
 
-syntax enable
-let base16colorspace=256
-set background=dark
-colorscheme base16-tomorrow
-
-au VimResized * exe "normal! \<c-w>="
-
-filetype plugin on
-filetype indent on
+" Allows vim-latex to be loaded for .plaintex files.
 let g:tex_flavor='latex'
 
-" Set filetypes for weird languages and abnormal filetype suffix
-au BufNewFile,BufRead *.ejs set filetype=html
-au BufNewFile,BufRead *.ts set filetype=javascript
-au BufNewFile,BufRead *.docker set filetype=Dockerfile
-au BufNewFile,BufRead *.compose set filetype=docker-compose
-
-" We hit shift-; to get : and then w... sometimes the shift isn't quite up yet..
+" Mistyping commands.
 command! WQA :wqa
 command! WqA :wqa
 command! WQa :wqa
@@ -88,198 +67,77 @@ command! QA :qa
 command! Qa :qa
 command! Q :q
 
-" Remove the help key.
-noremap  <F1> <nop>
-inoremap <F1> <nop>
-
-" Remove the hash key.
-inoremap # X<BS>#
-
-" Makes indenting easier:
-vnoremap < <gv
-vnoremap > >gv
-
-" Makes moving easier.
+" Remaps.
+let mapleader=","
+" Turn off search highlight.
+nnoremap <leader><space> :nohlsearch<CR>
+" Space open/close folds.
+nnoremap <space> za
+" Move vertically by visual line.
 nnoremap j gj
 nnoremap k gk
+" Use jk to escape.
+  " inoremap jk <ESC>
+" Toggle gundo.
+  " nnoremap <leader>u :GundoToogle<CR>
+" Edit vimrc/zshrc and load vimrc bindings.
+nnoremap <leader>ev :vsp ~/.vimrc<CR>
+nnoremap <leader>ez :vsp ~/.zshrc<CR>
+nnoremap <leader>sv :source ~/.vimrc<CR>
+" Save session (with current windows).
+nnoremap <leader>s :mksession<CR>
+" Open ag.vim.
+  " nnoremap <leader>a :Ag
+" Yanks to end of line.
+nnoremap Y y$
+" Remove manual key.
+nnoremap K <NOP>
+" Add/Remove indentation for selected lines.
+vnoremap < <gv
+vnoremap > >gv
+" Move by displayed line, instead of physical line.
+nnoremap j gj
+nnoremap k gk
+" Shift+Tab will insert an actual tab character.
+inoremap <S-Tab> <C-V><Tab>
 
-" Remove highlights on F12
-nnoremap <silent> <F12> :noh<cr>
+" Launch.
+"call pathogen#infect()
 
-" When the filetype is a gitcommit, open up the diff as a :vs
-autocmd FileType gitcommit DiffGitCached | wincmd L | wincmd p
+" Auto commands.
+" Highlight and wrap around overflow column for latex files.
+autocmd BufNewFile,BufRead *.tex setlocal colorcolumn=81 textwidth=81
+" Give markdown syntax for .md files.
+autocmd BufNewFile,BufFilePre,BufRead *.md setlocal filetype=markdown
+" Give groovy syntax for .template files, and use 3 spaces (as much as I don't like it).
+autocmd BufNewFile,BufFilePre,BufRead *.template setlocal filetype=groovy tabstop=3 softtabstop=3 shiftwidth=3
+" Equally split windows when resizing.
+autocmd VimResized * exe "normal! \<c-w>="
+" Vim, please take your time to get proper syntax highlighting.
+autocmd BufEnter *.template,*.groovy :syntax sync fromstart
+" Use tabs for Go files.
+autocmd BufNewFile,BufRead *.go setlocal noet ts=4 sw=4 sts=4
+" Use bashrc syntax highlighting for bash_aliases file
+autocmd BufNewFile,BufRead bash[_-]aliases* call dist#ft#SetFileTypeSH("bash")
 
-" Pathogen for third-party libraries
-call pathogen#infect()
-call pathogen#helptags()
-
-" NerdTree
-hi Normal ctermbg=None
-
-"===============================================================================
-" CTags
-"-------------------------------------------------------------------------------
-" ctags setup
-set tags=tags;
-
-" ctags customisations
-function! FollowTag()
-    if !exists("w:tagbrowse")
-        vsplit
-        let w:tagbrowse=1
-    endif
-    execute "tag " . expand("<cword>")
-    execute "normal! \<c-w>="
-endfunction
-nnoremap <Leader>o :call FollowTag()<CR>
-
-function! FollowTag2()
-    execute "tag " . expand("<cword>")
-    execute "normal! \<c-w>="
-endfunction
-nnoremap <Leader><Leader> :call FollowTag2()<CR>
-
-function! EditTarget()
-    let basepath = expand('%:p:h') . '/TARGETS'
-    if !filereadable(basepath)
-        let basepath = expand('%:p:h') . '/../TARGETS'
-        if !filereadable(basepath)
-            echo "Cannot find TARGETS file"
-            return
-        endif
-    endif
-    execute "vsplit " . basepath
-endfunction
-nnoremap <Leader>t :call EditTarget()<CR>
-"===============================================================================
-
-set statusline+=[%f]
-
-
-" Syntastic statusline
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
-
-" Syntastic global configuration
-let g:statline_syntastic = 0
-
-" let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_always_populate_loc_list = 0
-let g:syntastic_auto_loc_list = 0
-"let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_open = 0
-"let g:syntastic_check_on_wq = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_enable_highlighting = 1
-let g:syntastic_enable_signs = 1
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_javascript_eslint_exe = './node_modules/.bin/eslint'
-let g:syntastic_mode_map = {
-    \'mode': 'active',
-    \'active_filetypes': [],
-    \'passive_filetypes': ['html', 'ejs', 'tex', 'python']
-\}
-
-silent! nmap <F6> :SyntasticToggleMode<CR>
-
-
-" Syntastic - CPP
-let g:syntastic_cpp_compiler = 'clang++'
-let g:syntastic_cpp_compiler_options = '--std=c++11'
-
-" Syntastic - C
-let g:syntastic_c_compiler = 'clang'
-let g:syntastic_c_compiler_options = '--std=c11'
-
-" Syntastic - Python
-let g:syntastic_python_flake8_args = '--ignore=E402,E501,E711'
-let g:syntastic_python_pyflakes_args = '--ignore=E402'
-let g:syntastic_sh_shellcheck_args = '-x'
-
-" Powerline
-let g:powerline_pycmd='py3'
-
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
+if &diff
+  colorscheme vimdiff-colors
 endif
 
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
-let g:airline_symbols.branch = ''
-let g:airline_symbols.readonly = ''
-let g:airline_symbols.linenr = ''
+" Plugins to get.
+" vim-fugitive
+" vim-git
+" vim-better-whitespace
+" nerdtree
 
-"-------------------------------------------------------------------------------
-" Vim-Go
-"-------------------------------------------------------------------------------
-let g:go_disable_autoinstall = 0
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_build_constraints = 1
-
-"===============================================================================
-" Leader customisations
-"-------------------------------------------------------------------------------
-"===============================================================================
-
-"===============================================================================
-" NerdTree
-"-------------------------------------------------------------------------------
-nmap <silent> <c-n> :NERDTreeToggle<CR>
-let NERDTreeShowBookmarks = 1
-let NERDTreeIgnore = ['\.pyc$','__pycache']
-
-" Change working directory to be the directory of the focused file in NERDTree
-nmap <silent> <leader>w  :cd %:p%h<CR>
-
-" NERDTree will move to the current files location
-nnoremap <leader>r :NERDTreeFind<CR>
-"===============================================================================
-
-"===============================================================================
-" Random Remappings
-"-------------------------------------------------------------------------------
-" Quickly reload the vimrc file nmap <silent> <leader>ev :e  $MYVIMRC<CR>
-nmap <silent> <leader>sv :so $MYVIMRC<CR>
-nmap <silent> <leader>sv :so $MYVIMRC<CR>
-
-" Toggle numbers with \n
-nmap <silent> <leader>n  :set nonu! <bar> set nornu!<CR>
-
-" Toggle paste with \p
-nmap <silent> <leader>p  :set nopaste!<CR>
-
-nmap <silent> <leader>f :Files<CR>
-nmap <silent> <leader>a :Ag<CR>
-
-" Faster buffer movement
-nmap <silent> <c-d>  :bnext<CR>
-nmap <silent> <c-a>  :bprevious<CR>
-
-" Faster error movement
-"nnoremap Q <nop>
-nnoremap <silent> <c-q> :lprevious<CR>
-nnoremap <silent> <c-e> :lnext<CR>
-
-" Refresh syntax with <F5>
-noremap <F5> <Esc>:syntax sync fromstart<CR>
-
-"
-map <F7> :w<CR>:!ispell -x -d british %<CR><CR>:e<CR><CR>
-map <F10> :call CurtineIncSw()<CR>
-"===============================================================================
-
-autocmd FileType python nnoremap K :<C-u>let save_isk = &iskeyword \|
-    \ set iskeyword+=. \|
-    \ execute "!pydoc " . expand("<cword>") \|
-    \ let &iskeyword = save_isk<CR>
-
-autocmd Filetype json let g:indentLine_enabled = 0
-
-let NERDTreeMinimalUI = 1
-let NERDTreeDirArrows = 1
+"" Other settings to consider.
+" Maybe automatically correct spellings to british?
+  " map <F7> :w<CR>:!ispell -x -d british %<CR><CR>:e<CR><CR>  
+" NerdTree stuff.
+  " nmap <silent> <c-n> :NERDTreeToggle<CR>
+  " let NERDTreeShowBookmarks=1
+" Something with getting specific git settings for vim?
+  " let git_settings = system("git config --get vim.settings")
+  " if strlen(git_settings)
+  "     exe "set" git_settings
+  " endif
