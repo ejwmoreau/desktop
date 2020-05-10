@@ -26,7 +26,7 @@ Use `./deploy.sh` after installing the packages from `./packages`
 ## Adding Submodule
 
 ```
-$ git submodule add -- url.com/a/b submodules/a/b
+$ git submodule add -- https://url.com/a/b submodules/url.com/a/b
 $ vim deploy.sh
 # Change it to make symlinks
 ```
