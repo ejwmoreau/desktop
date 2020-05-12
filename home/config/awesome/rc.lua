@@ -206,6 +206,7 @@ tmpwidget:set_bgimage(beautiful.widget_display)
 
 
 battery_widget = lain.widget.bat({
+    timeout = 60,
     settings = function()
         widget:set_markup(space3 .. bat_now.perc .. "%" .. markup.font("Tamsyn 4", " "))
     end
