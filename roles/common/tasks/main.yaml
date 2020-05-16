@@ -1,4 +1,15 @@
 ---
+- name: Install common fonts
+  become: true
+  pacman: name="{{item.packages}}" update_cache=yes state=present
+  loop:
+    - packages:
+      - ttf-anonymous-pro
+      - ttf-dejavu
+      - ttf-liberation
+      - ttf-muli
+      - ttf-symbola
+
 - name: Install CLI utilities
   become: true
   pacman: name="{{item.packages}}" update_cache=yes state=present
@@ -13,3 +24,22 @@
       - the_silver_searcher
       - tree
       - unzip
+      # Separate into other roles/tasks
+      - arandr
+      - autorandr
+      - compton
+      - fzf
+      - networkmanager
+      - network-manager-applet
+      - xscreensaver
+
+- name: Install python environment
+  become: true
+  pacman: name="{{item.packages}}" update_cache=yes state=present
+  loop:
+    - packages:
+      - python
+      - python2
+      - python-virtualenv
+      - python-virtualenvwrapper
+      - tox

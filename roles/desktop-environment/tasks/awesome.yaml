@@ -1,0 +1,59 @@
+---
+- name: Install Awesome
+  pacman: name="{{item.packages}}" update_cache=yes state=present
+  loop:
+    - packages:
+      - awesome
+  become: true
+
+- name: Create .config/awesome
+  file:
+    path: "~/.config/awesome"
+    state: directory
+
+- name: Link .config/awesome/rc.lua
+  file:
+    src: "{{playbook_dir}}/home/config/awesome/rc.lua"
+    dest: "~/.config/awesome/rc.lua"
+    state: link
+
+- name: Link .config/awesome/themes
+  file:
+    src: "{{playbook_dir}}/home/config/awesome/themes"
+    dest: "~/.config/awesome/themes"
+    state: link
+
+- name: Clone repos
+  git:
+    dest: "{{playbook_dir}}/{{item.dest}}"
+    repo: "{{item.url}}"
+    version: master
+  loop:
+    - url: "https://github.com/NuckChorris/assault.git"
+      dest: "./src/github.com/NuckChorris/assault"
+    - url: "https://github.com/scottgreenup/lain.git"
+      dest: "./src/github.com/scottgreenup/lain"
+    - url: "https://github.com/majutsushi/urxvt-font-size.git"
+      dest: "./src/github.com/majutsushi/urxvt-font-size"
+    - url: "https://github.com/vicious-widgets/vicious.git"
+      dest: "./src/github.com/vicious-widgets/vicious"
+
+- name: Create .urxvt/ext
+  file:
+    path: "~/.urxvt/ext"
+    state: directory
+
+- name: Link repo contents for awesome
+  file:
+    src: "{{playbook_dir}}/{{item.src}}"
+    dest: "{{item.dest}}"
+    state: link
+  loop:
+    - src: "src/github.com/NuckChorris/assault/awesomewm/assault.lua"
+      dest: "~/.config/awesome/assault.lua"
+    - src: "src/github.com/scottgreenup/lain"
+      dest: "~/.config/awesome/lain"
+    - src: "src/github.com/majutsushi/urxvt-font-size/font-size"
+      dest: "~/.urxvt/ext/font-size"
+    - src: "src/github.com/vicious-widgets/vicious/"
+      dest: "~/.config/awesome/vicious"

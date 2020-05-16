@@ -1,32 +1,38 @@
 # Desktop
 
-## Upcoming Changes
-
- - Moving configuration management to Ansible
-
 ## Overview
 
-These are my updated dotfiles, that I am using on a daily basis.
+These are my dotfiles that I am using on a daily basis.
 
-This comes with a clean and "safe" deploy script. This will symbolically link
-config files for, and more; please read the `./deploy.sh` script.
+It comes with a number of Ansible roles that setup my dotflies and config.
 
- - Terminal Coloring
- - Xresources
- - xmodmaprc
- - lightdm
- - bashrc
- - vim
- - vimrc
+Some of the contents include:
+
+* Terminal Coloring
+* Xresources
+* lightdm
+* bashrc
+* vim
+* awesome wm
 
 ## Installation
 
-Use `./deploy.sh` after installing the packages from `./packages`
+* `sudo pacman -Sy ansible`
+* `make install`
 
 ## Adding Submodule
 
-```
-$ git submodule add -- https://url.com/a/b submodules/url.com/a/b
-$ vim deploy.sh
-# Change it to make symlinks
-```
+Change an ansible role to include:
+* Cloning the repo
+* Linking the repo contents to the relevant location
+
+Old Method:
+`git submodule add -- https://url.com/a/b src/url.com/a/b`
+
+# Implicit Contributors
+
+* Created most of the dotfile + config content
+  * [Scott Greenup](https://github.com/scottgreenup/desktop)
+* Helped with Ansible setup
+  * [Oliver Dolbeau](https://odolbeau.fr/blog/how-to-install-your-laptop-with-ansible.html)
+  * [Alexandre Carlton](https://github.com/AlexandreCarlton/ansible-archlinux)

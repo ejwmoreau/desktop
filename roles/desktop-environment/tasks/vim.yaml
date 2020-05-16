@@ -1,15 +1,13 @@
 ---
 - name: Install Vim
+  become: true
   pacman: name="{{item.packages}}" update_cache=yes state=present
   loop:
     - packages:
       - vim
-  become: true
 
 - name: Link .vimrc
   file:
     src: "{{playbook_dir}}/home/vimrc"
     dest: "~/.vimrc"
     state: link
-  tags:
-    - vim

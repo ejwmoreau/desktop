@@ -6,11 +6,17 @@
 
 # User scripts
 
-- name: Link bin/
+- name: Link home directories
   file:
-    src: "{{playbook_dir}}/bin"
-    dest: "~/bin"
+    src: "{{playbook_dir}}/{{item.src}}"
+    dest: "~/{{item.dest}}"
     state: link
+    force: yes
+  loop:
+    - src: home/autorandr
+      dest: .autorandr
+      src: home/bin
+      dest: bin
 
 # Dotfiles
 
@@ -32,5 +38,6 @@
     - src: home/inputrc
       dest: .inputrc
 
+- include: awesome.yaml
 - include: lightdm.yaml
 - include: vim.yaml
