@@ -1,0 +1,26 @@
+---
+- name: Install Lightdm
+  pacman: name="{{item.packages}}" update_cache=yes state=present
+  loop:
+    - packages:
+      - lightdm
+      - lightdm-gtk-greeter
+  become: true
+
+- name: Create /etc/lightdm
+  file:
+    path: "/etc/lightdm"
+    state: directory
+  become: true
+
+- name: Copy /etc/lightdm/lightdm.conf
+  copy:
+    src: "{{playbook_dir}}/etc/lightdm/lightdm.conf"
+    dest: "/etc/lightdm/lightdm.conf"
+  become: true
+
+- name: Enable LightDM
+  become: true
+  systemd:
+    name: lightdm
+    enabled: yes

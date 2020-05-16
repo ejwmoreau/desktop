@@ -1,5 +1,5 @@
 ---
-- name: install CLI utilities
+- name: Install CLI utilities
   become: true
   pacman: name="{{item.packages}}" update_cache=yes state=present
   loop:
@@ -13,4 +13,3 @@
       - the_silver_searcher
       - tree
       - unzip
-      - vim

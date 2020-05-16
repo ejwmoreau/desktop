@@ -20,4 +20,4 @@ RUN ./bin/setup.sh
 # Copy all the scripts/repo content
 COPY . .
 
-RUN ansible-playbook --become linux.yaml
+CMD ansible-playbook --inventory-file '127.0.0.1,' --become linux.yaml

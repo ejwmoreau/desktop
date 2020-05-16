@@ -2,7 +2,6 @@
 
 export PATH="$PATH:$HOME/bin"
 xsetroot -cursor_name left_ptr
-#setxkbmap -option caps:escape
 
 #[[ "$(which xscreensaver)" == "/usr/bin/xscreensaver" ]] && /usr/bin/xscreensaver -no-splash &
 [[ "$(which nm-applet)" == "/usr/bin/nm-applet" ]] && /usr/bin/nm-applet &

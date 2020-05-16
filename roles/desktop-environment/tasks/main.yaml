@@ -1,0 +1,36 @@
+---
+- name: Create .config
+  file:
+    path: "~/.config"
+    state: directory
+
+# User scripts
+
+- name: Link bin/
+  file:
+    src: "{{playbook_dir}}/bin"
+    dest: "~/bin"
+    state: link
+
+# Dotfiles
+
+- name: Link dotfiles
+  file:
+    src: "{{playbook_dir}}/{{item.src}}"
+    dest: "~/{{item.dest}}"
+    state: link
+    force: yes
+  loop:
+    - src: home/xprofile
+      dest: .xprofile
+    - src: home/bashrc
+      dest: .bashrc
+    - src: home/bash_aliases
+      dest: .bash_aliases
+    - src: home/Xresources
+      dest: .Xresources
+    - src: home/inputrc
+      dest: .inputrc
+
+- include: lightdm.yaml
+- include: vim.yaml
