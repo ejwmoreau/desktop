@@ -1,13 +1,23 @@
-FROM archlinux
+FROM archlinux/base
+
+# Setup pacman and sudo
+RUN pacman -Sy --noconfirm sudo
 
 # Setup user
-RUN useradd --create-home --shell /bin/bash rothaq
-USER rothaq
-WORKDIR /home/rothaq/desktop
+# Disabling for now because it would be tricky to get working. Problems unsolved:
+# 1. Adding rothaq on the sudoers list
+# 2. Passing the fake sudo password to scripts that need to run
+#RUN useradd --create-home --shell /bin/bash rothaq
+#RUN printf "rothaq\nrothaq" | passwd rothaq
+#USER rothaq
+#WORKDIR /home/rothaq/desktop
+WORKDIR /home/root/desktop
+
+# Setup Ansible and dependencies
+COPY ./bin/setup.sh ./bin/setup.sh
+RUN ./bin/setup.sh
 
 # Copy all the scripts/repo content
-COPY . /home/rothaq/desktop
+COPY . .
 
-# Run the deploy script / ansible (submodules pull, pacman install, etc)
-# Run the verify script (check some submodules are pulled, some scripts are linked, some directories are linked)
-CMD ["echo", "'Running the deploy and verify script'"]
+RUN ansible-playbook --become linux.yaml

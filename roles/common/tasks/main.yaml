@@ -1,0 +1,16 @@
+---
+- name: install CLI utilities
+  become: true
+  pacman: name="{{item.packages}}" update_cache=yes state=present
+  loop:
+    - packages:
+      - bash
+      - bash-completion
+      - git
+      - htop
+      - jq
+      - sed
+      - the_silver_searcher
+      - tree
+      - unzip
+      - vim
