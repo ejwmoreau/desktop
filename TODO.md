@@ -4,3 +4,10 @@
 * Add the following packages:
     * dmenu2 (AUR)
 * Split some of the packages in `common` to their own roles/tasks
+* Add the autorandr section below to Ansible
+
+## Autorandr
+
+`sudo make install TARGETS="bash_completion systemd udev manpage"`
+
+And the commands that autorandr asks to run (or tell the user to run commands that autorandr asks to run)
