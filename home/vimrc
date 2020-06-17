@@ -1,55 +1,69 @@
-" This must be first, because it changes other options as side effect.
+" This must be first, because it changes other options as side effect
 set nocompatible
 
-syntax enable       " Enable syntax processing/highlighting.
+" Spaces and Tabs
+set tabstop=2       " Number of visual space per tab
+set softtabstop=2   " Number of spaces in tab when editing
+set shiftwidth=2    " Number of spaces used by autoindent
+set expandtab       " Tabs are spaces
+set listchars=tab:>.,trail:~ " Show tabs and trailing spaces
+set list            " Show listchars characters
+set autoindent      " Keep same level of indentation when making new line
+set smartindent     " Helps with autoindent
 
-" Spaces and Tabs.
-set tabstop=2       " Number of visual space per tab.
-set softtabstop=2   " Number of spaces in tab when editing.
-set shiftwidth=2    " Number of spaces used by autoindent.
-set expandtab       " Tabs are spaces.
-set listchars=tab:>.,trail:~    " Show tabs and trailing spaces.
-set list            " Show listchars characters.
-set autoindent      " Keep same level of indentation when making new line.
-set smartindent     " Helps with autoindent.
+" UI Config
+set ruler           " Shows line/column numbers in bottom right
+set number          " Show line numbers
+set relativenumber  " Shows relative distance between lines (Temp testing)
+set wildmenu        " Visual autocomplete for command menu
+set lazyredraw      " Redraw screen only when need to
+set showmatch       " Highlighting matching [{()}]
+set display+=lastline " Displays as much of last line that can fit
+set nowrap          " Don't wrap lines
+set linebreak       " Wrap lines based on word, not letter
+set virtualedit=all " Allow cursor to go where there is no character
+set laststatus=2    " Always show the file status bar
+set spell           " Spell checker (Temp testing)
+set textwidth=100   " Autowrap at the number of chars (Temp testing)
+set colorcolumn=101 " Colour column at the number of chars (Temp testing)
+" set title           " Change terminal title (It's nice, but urxvt doesn't set a new title when exiting vim
+set visualbell      " Don't beep
+set t_vb=           " Also avoids some more beeps
 
-" UI Config.
-set ruler           " Shows line/column numbers in bottom right.
-set number          " Show line numbers.
-set wildmenu        " Visual autocomplete for command menu.
-set lazyredraw      " Redraw screen only when need to.
-set showmatch       " Highlighting matching [{()}].
-set display+=lastline   " Displays as much of last line that can fit.
-set nowrap          " Don't wrap lines.
-set linebreak       " Wrap lines based on word, not letter.
-set virtualedit=all " Allow cursor to go where there is no character.
+" Colours
+syntax enable       " Enable syntax processing/highlighting
+set background=dark " Tells vim that background colour is dark
+let base16colorspace=256 " Number of colours to use
+colorscheme base16-tomorrow " Use a sensible colorscheme
 
-" Colours.
-set bg=dark         " Tells vim that background colour is dark.
+" Searching
+set incsearch       " Search as characters are entered
+set hlsearch        " Highlight matches
+set ignorecase      " Case insensitive search
+set wrapscan        " Wrap search to start of file
+set history=1000    " More history, more commands
 
-" Searching.
-set incsearch       " Search as characters are entered.
-set hlsearch        " Highlight matches.
-set ignorecase      " Ignore case when searching.
-set wrapscan        " Wrap search to start of file.
+" Folding
+set foldenable        " Enable folding
+set foldlevelstart=10 " Open most folds by default
+set foldnestmax=3     " 3 nested fold max
+set foldmethod=indent " Fold based on indent level
 
-" Folding.
-set foldenable      " Enable folding.
-set foldlevelstart=10 " Open most folds by default.
-set foldnestmax=10  " 10 nested fold max.
-set foldmethod=indent " Fold based on indent level.
-
-" Swap/Backup files.
+" Swap/Backup files
 set swapfile
-set dir=~/.tmp      " Where swap files will be stored.
+set dir=~/.tmp//    " Where swap files will be stored (// keeps the path in the filename)
 
-" Filetype specific.
-filetype plugin indent on   " Load filetype-specific indent files.
+" Other
+set hidden          " Can edit (:e) a new file without saving it first
+set undolevels=5000 " More undos
 
-" Allows vim-latex to be loaded for .plaintex files.
+" Filetype specific
+filetype plugin indent on " Load filetype-specific indent files
+
+" Allows vim-latex to be loaded for .plaintex files
 let g:tex_flavor='latex'
 
-" Mistyping commands.
+" Mistyping commands
 command! WQA :wqa
 command! WqA :wqa
 command! WQa :wqa
@@ -67,73 +81,78 @@ command! QA :qa
 command! Qa :qa
 command! Q :q
 
-" Remaps.
+" Remaps
 let mapleader=","
-" Turn off search highlight.
+" Remove the help key
+noremap  <F1> <nop>
+inoremap <F1> <nop>
+" Turn off search highlight
 nnoremap <leader><space> :nohlsearch<CR>
-" Space open/close folds.
-nnoremap <space> za
-" Move vertically by visual line.
+" Folding - Space open/close folds
+noremap <space> za
+" Move vertically by visual line
 nnoremap j gj
 nnoremap k gk
-" Use jk to escape.
+" Use jk to escape (TODO)
   " inoremap jk <ESC>
-" Toggle gundo.
+" Toggle gundo (TODO)
   " nnoremap <leader>u :GundoToogle<CR>
-" Edit vimrc/zshrc and load vimrc bindings.
+" Edit vimrc/bashrc/etc and load vimrc bindings
 nnoremap <leader>ev :vsp ~/.vimrc<CR>
-nnoremap <leader>ez :vsp ~/.zshrc<CR>
+nnoremap <leader>ebr :vsp ~/.bashrc<CR>
+nnoremap <leader>ebrw :vsp ~/.bashrc_work<CR>
+nnoremap <leader>eba :vsp ~/.bash_aliases<CR>
 nnoremap <leader>sv :source ~/.vimrc<CR>
-" Save session (with current windows).
+" Save session (with current windows)
 nnoremap <leader>s :mksession<CR>
-" Open ag.vim.
+" Open ag.vim (TODO)
   " nnoremap <leader>a :Ag
-" Yanks to end of line.
+" Yanks to end of line
 nnoremap Y y$
-" Remove manual key.
+" Remove manual key
 nnoremap K <NOP>
-" Add/Remove indentation for selected lines.
+" Add/Remove indentation for selected lines
 vnoremap < <gv
 vnoremap > >gv
-" Move by displayed line, instead of physical line.
+" Move by displayed line, instead of physical line
 nnoremap j gj
 nnoremap k gk
-" Shift+Tab will insert an actual tab character.
+" Shift+Tab will insert an actual tab character
 inoremap <S-Tab> <C-V><Tab>
 
-" Launch.
+" Launch (TODO)
 "call pathogen#infect()
 
-" Auto commands.
-" Highlight and wrap around overflow column for latex files.
-autocmd BufNewFile,BufRead *.tex setlocal colorcolumn=81 textwidth=81
-" Give markdown syntax for .md files.
-autocmd BufNewFile,BufFilePre,BufRead *.md setlocal filetype=markdown
-" Give groovy syntax for .template files, and use 3 spaces (as much as I don't like it).
-autocmd BufNewFile,BufFilePre,BufRead *.template setlocal filetype=groovy tabstop=3 softtabstop=3 shiftwidth=3
-" Equally split windows when resizing.
+" Auto commands
+" Set filetypes for some unusual filetype suffixes
+autocmd BufNewFile,BufRead *.ejs set filetype=html
+autocmd BufNewFile,BufRead *.ts set filetype=javascript
+autocmd BufNewFile,BufRead *.md setlocal filetype=markdown
+autocmd BufNewFile,BufRead *.docker set filetype=Dockerfile
+autocmd BufNewFile,BufRead *.compose set filetype=docker-compose
+" Give groovy syntax for .template files, and use 3 spaces (as much as I don't like it)
+autocmd BufNewFile,BufRead *.template setlocal filetype=groovy tabstop=3 softtabstop=3 shiftwidth=3
+" Equally split windows when resizing
 autocmd VimResized * exe "normal! \<c-w>="
-" Vim, please take your time to get proper syntax highlighting.
+" Vim, please take your time to get proper syntax highlighting
 autocmd BufEnter *.template,*.groovy :syntax sync fromstart
-" Use tabs for Go files.
+" Use tabs for Go files
 autocmd BufNewFile,BufRead *.go setlocal noet ts=4 sw=4 sts=4
 " Use bashrc syntax highlighting for bash_aliases file
 autocmd BufNewFile,BufRead bash[_-]aliases* call dist#ft#SetFileTypeSH("bash")
+" When the filetype is a gitcommit, open up the diff as a :vs
+autocmd FileType gitcommit DiffGitCached | wincmd L | wincmd p
 
-if &diff
-  colorscheme vimdiff-colors
-endif
-
-" Plugins to get.
+" Plugins to get
 " vim-fugitive
 " vim-git
 " vim-better-whitespace
 " nerdtree
 
-"" Other settings to consider.
+"" Other settings to consider
 " Maybe automatically correct spellings to british?
-  " map <F7> :w<CR>:!ispell -x -d british %<CR><CR>:e<CR><CR>  
-" NerdTree stuff.
+  " map <F7> :w<CR>:!ispell -x -d british %<CR><CR>:e<CR><CR>
+" NerdTree stuff
   " nmap <silent> <c-n> :NERDTreeToggle<CR>
   " let NERDTreeShowBookmarks=1
 " Something with getting specific git settings for vim?

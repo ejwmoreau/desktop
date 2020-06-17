@@ -1,4 +1,3 @@
-
 " This must be first, because it changes other options as side effect
 set nocompatible
 
@@ -11,7 +10,8 @@ set expandtab           " <TAB> will insert <softtabstop> spaces
 set hidden              " can edit a new file without saving the first
 set history=1000        " more history, more commands
 set hlsearch            " highlight the searched terms
-set incsearch           " show search matches as you type "set spell
+set incsearch           " show search matches as you type
+set spell
 set laststatus=2
 set nowrap              " don't wrap lines
 set number              " shows the number of the cursor line
@@ -108,6 +108,8 @@ nnoremap <silent> <F12> :noh<cr>
 
 " When the filetype is a gitcommit, open up the diff as a :vs
 autocmd FileType gitcommit DiffGitCached | wincmd L | wincmd p
+
+""""" TODO: Continue from here """""
 
 " Pathogen for third-party libraries
 call pathogen#infect()
