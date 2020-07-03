@@ -1,10 +1,10 @@
 ---
 - name: Install Awesome
+  become: true
   pacman: name="{{item.packages}}" update_cache=yes state=present
   loop:
     - packages:
       - awesome
-  become: true
 
 - name: Create .config/awesome
   file:

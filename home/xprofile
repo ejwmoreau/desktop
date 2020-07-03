@@ -8,6 +8,7 @@ xsetroot -cursor_name left_ptr
 [[ "$(which redshift-gtk)" == "/usr/bin/redshift-gtk" ]] && /usr/bin/redshift-gtk -l -33.86482:151.20773 &
 [[ -f ~/.screenlayout/main.sh ]] && ~/.screenlayout/main.sh
 
+# TODO: Maybe change to picom, since the compton script is from the picom package
 #which compton && compton -b
 
 autorandr -c &

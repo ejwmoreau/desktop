@@ -1,18 +1,18 @@
 ---
 - name: Install Lightdm
+  become: true
   pacman: name="{{item.packages}}" update_cache=yes state=present
   loop:
     - packages:
       - lightdm
       - lightdm-gtk-greeter
-  become: true
 
 # TODO: Decide whether I want lightdm-gtk-greeter or lightdm-webkit2-greeter
 #- name: Copy /etc/lightdm/lightdm.conf
+#  become: true
 #  copy:
 #    src: "{{playbook_dir}}/etc/lightdm/lightdm.conf"
 #    dest: "/etc/lightdm/lightdm.conf"
-#  become: true
 
 - name: Enable LightDM
   become: true

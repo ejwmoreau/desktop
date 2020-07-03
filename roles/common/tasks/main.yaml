@@ -24,22 +24,28 @@
       - the_silver_searcher
       - tree
       - unzip
-      # Separate into other roles/tasks
+      # TODO: Separate into other roles/tasks
       - arandr
       - autorandr
-      - compton
-      - fzf
       - networkmanager
       - network-manager-applet
-      - xscreensaver
+      # TODO: Are these needed?
+      #- fzf
+      #- picom
+      #- xscreensaver
 
-- name: Install python environment
+- name: Install Python
   become: true
   pacman: name="{{item.packages}}" update_cache=yes state=present
   loop:
     - packages:
       - python
       - python2
-      - python-virtualenv
-      - python-virtualenvwrapper
+
+- name: Install Python packages
+  pip: name="{{item.packages}}" extra_args="--user" state=present
+  loop:
+    - packages:
+      - virtualenv
+      - virtualenvwrapper
       - tox
