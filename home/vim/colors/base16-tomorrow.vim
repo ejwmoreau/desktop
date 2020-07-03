@@ -1,1 +1,1 @@
-../../../submodules/github.com/chriskempson/base16-vim/colors/base16-tomorrow.vim
+/home/rothaq/desktop/src/github.com/chriskempson/base16-vim/colors/base16-tomorrow.vim

@@ -30,8 +30,8 @@
     dest: "{{playbook_dir}}/src/{{item.dest}}"
     version: master
   loop:
-    #- url: "https://github.com/chriskempson/base16-vim.git"
-    #  dest: "github.com/chriskempson/base16-vim"
+    - url: "https://github.com/chriskempson/base16-vim.git"
+      dest: "github.com/chriskempson/base16-vim"
     #- url: "https://github.com/scrooloose/nerdtree.git"
     #  dest: "github.com/scrooloose/nerdtree"
     - url: "https://github.com/ntpeters/vim-better-whitespace.git"
@@ -57,8 +57,6 @@
     dest: "~/.vim/pack/packages/start/{{item.dest}}"
     state: link
   loop:
-    #- src: "github.com/chriskempson/base16-vim"
-    #  dest: "base16-vim"
     #- src: "github.com/scrooloose/nerdtree"
     #  dest: "nerdtree"
     - src: "github.com/ntpeters/vim-better-whitespace"
@@ -77,3 +75,12 @@
     #  dest: "vim-fzf"
     #- src: "github.com/airblade/vim-gitgutter"
     #  dest: "vim-gitgutter"
+
+- name: Link vim colors
+  file:
+    src: "{{playbook_dir}}/src/{{item.src}}"
+    dest: "~/.vim/colors/{{item.dest}}"
+    state: link
+  loop:
+    - src: "github.com/chriskempson/base16-vim/colors/base16-tomorrow.vim"
+      dest: "base16-tomorrow.vim"

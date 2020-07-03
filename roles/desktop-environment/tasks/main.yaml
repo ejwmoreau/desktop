@@ -34,6 +34,24 @@
     - src: "home/inputrc"
       dest: ".inputrc"
 
+- name: Clone shell color repo
+  git:
+    repo: "{{item.url}}"
+    dest: "{{playbook_dir}}/src/{{item.dest}}"
+    version: master
+  loop:
+    - url: "https://github.com/chriskempson/base16-shell.git"
+      dest: "github.com/chriskempson/base16-shell"
+
+- name: Link shell color package
+  file:
+    src: "{{playbook_dir}}/src/{{item.src}}"
+    dest: "~/.config/{{item.dest}}"
+    state: link
+  loop:
+    - src: "github.com/chriskempson/base16-shell"
+      dest: "base16-shell"
+
 - include: awesome.yaml
 - include: lightdm.yaml
 - include: vim.yaml
