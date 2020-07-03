@@ -6,14 +6,6 @@ git submodule update --init --recursive
 
 cwd=$(pwd)
 
-#===============================================================================
-# Color
-#-------------------------------------------------------------------------------
-ln -sT\
-    "${cwd}/submodules/github.com/chriskempson/base16-shell"\
-    "/${HOME}/.config/base16-shell"
-#===============================================================================
-
 ## [ Miscellaneous ] ##
 
 ln -sfT "${cwd}/home/xmodmaprc"  "${HOME}/.Xmodmap"
