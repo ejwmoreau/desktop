@@ -7,17 +7,12 @@
       - lightdm-gtk-greeter
   become: true
 
-- name: Create /etc/lightdm
-  file:
-    path: "/etc/lightdm"
-    state: directory
-  become: true
-
-- name: Copy /etc/lightdm/lightdm.conf
-  copy:
-    src: "{{playbook_dir}}/etc/lightdm/lightdm.conf"
-    dest: "/etc/lightdm/lightdm.conf"
-  become: true
+# TODO: Decide whether I want lightdm-gtk-greeter or lightdm-webkit2-greeter
+#- name: Copy /etc/lightdm/lightdm.conf
+#  copy:
+#    src: "{{playbook_dir}}/etc/lightdm/lightdm.conf"
+#    dest: "/etc/lightdm/lightdm.conf"
+#  become: true
 
 - name: Enable LightDM
   become: true
