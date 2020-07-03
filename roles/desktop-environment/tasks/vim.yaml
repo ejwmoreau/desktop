@@ -12,6 +12,17 @@
     dest: "~/.vimrc"
     state: link
 
+- name: Link .vim
+  file:
+    src: "{{playbook_dir}}/home/vim"
+    dest: "~/.vim"
+    state: link
+
+- name: Create vim packages folder
+  file:
+    path: "~/.vim/pack/packages/start"
+    state: directory
+
 # TODO: Try more packages until all the comments are gone!
 - name: Clone vim package repos
   git:
@@ -39,12 +50,6 @@
     #  dest: "github.com/junegunn/fzf"
     #- url: "https://github.com/airblade/vim-gitgutter.git"
     #  dest: "github.com/airblade/vim-gitgutter"
-
-# TODO: Is it safe to assume ~/.vim is already created?
-- name: Create vim packages folder
-  file:
-    path: "~/.vim/pack/packages/start"
-    state: directory
 
 - name: Link vim packages
   file:
