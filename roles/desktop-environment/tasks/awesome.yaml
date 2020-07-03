@@ -11,19 +11,20 @@
     path: "~/.config/awesome"
     state: directory
 
-- name: Link .config/awesome/rc.lua
-  file:
-    src: "{{playbook_dir}}/home/config/awesome/rc.lua"
-    dest: "~/.config/awesome/rc.lua"
-    state: link
+# TODO: Link home/config/awesome to ~/.config/awesome, instead of linking all the contents
 
-- name: Link .config/awesome/themes
+- name: Link config for awesome
   file:
-    src: "{{playbook_dir}}/home/config/awesome/themes"
-    dest: "~/.config/awesome/themes"
+    src: "{{playbook_dir}}/home/config/awesome/{{item.src}}"
+    dest: "~/.config/awesome/{{item.dest}}"
     state: link
+  loop:
+    - src: "rc.lua"
+      dest: "rc.lua"
+    - src: "themes"
+      dest: "themes"
 
-- name: Clone repos
+- name: Clone awesome package repos
   git:
     repo: "{{item.url}}"
     dest: "{{playbook_dir}}/src/{{item.dest}}"
@@ -33,25 +34,8 @@
       dest: "github.com/NuckChorris/assault"
     - url: "https://github.com/scottgreenup/lain.git"
       dest: "github.com/scottgreenup/lain"
-    - url: "https://github.com/majutsushi/urxvt-font-size.git"
-      dest: "github.com/majutsushi/urxvt-font-size"
     - url: "https://github.com/vicious-widgets/vicious.git"
       dest: "github.com/vicious-widgets/vicious"
-
-# TODO: Move urxvt stuff to another task file
-- name: Create .urxvt/ext
-  file:
-    path: "~/.urxvt/ext"
-    state: directory
-
-- name: Link repo contents for urxvt
-  file:
-    src: "{{playbook_dir}}/src/{{item.src}}"
-    dest: "~/.urxvt/ext/{{item.dest}}"
-    state: link
-  loop:
-    - src: "github.com/majutsushi/urxvt-font-size/font-size"
-      dest: "font-size"
 
 - name: Link repo contents for awesome
   file:
@@ -63,5 +47,5 @@
       dest: "assault.lua"
     - src: "github.com/scottgreenup/lain"
       dest: "lain"
-    - src: "github.com/vicious-widgets/vicious/"
+    - src: "github.com/vicious-widgets/vicious"
       dest: "vicious"

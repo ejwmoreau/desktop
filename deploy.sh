@@ -27,27 +27,6 @@ ln -sT\
     "/${HOME}/.config/base16-shell"
 #===============================================================================
 
-
-## [ Awesome WM ] ##
-
-mkdir --parents "${HOME}/.config/awesome"
-checkfile "${HOME}/.config/awesome/rc.lua"
-ln -sTf "${cwd}/home/config/awesome/rc.lua" "${HOME}/.config/awesome/rc.lua"
-ln -sTf "${cwd}/home/config/awesome/themes" "${HOME}/.config/awesome/themes"
-
-checkfile "${HOME}/.config/awesome/assault.lua"
-ln -sfT\
-    "${cwd}/submodules/github.com/NuckChorris/assault/awesomewm/assault.lua"\
-    "${HOME}/.config/awesome/assault.lua"
-
-ln -sTf\
-    "${cwd}/submodules/github.com/scottgreenup/lain"\
-    "${HOME}/.config/awesome/lain"
-
-ln -sTf\
-    "${cwd}/submodules/github.com/Mic92/vicious"\
-    "${HOME}/.config/awesome/vicious"
-
 ## [ Miscellaneous ] ##
 
 checkfile "${HOME}/.Xmodmap"
