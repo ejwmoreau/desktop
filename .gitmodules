@@ -1,57 +1,21 @@
-[submodule "submodule/vim-pathogen"]
-	path = submodules/github.com/tpope/vim-pathogen
-	url = https://github.com/tpope/vim-pathogen.git
-[submodule "github.com/chriskempson/base16-vim"]
-	path = submodules/github.com/chriskempson/base16-vim
-	url = https://github.com/chriskempson/base16-vim
-[submodule "submodules/github.com/scrooloose/nerdtree"]
-	path = submodules/github.com/scrooloose/nerdtree
-	url = https://github.com/scrooloose/nerdtree.git
-[submodule "submodules/github.com/ntpeters/vim-better-whitespace"]
-	path = submodules/github.com/ntpeters/vim-better-whitespace
-	url = https://github.com/ntpeters/vim-better-whitespace.git
-[submodule "submodules/github.com/pangloss/vim-javascript"]
-	path = submodules/github.com/pangloss/vim-javascript
-	url = https://github.com/pangloss/vim-javascript.git
 [submodule "submodules/github.com/chriskempson/base16-shell"]
 	path = submodules/github.com/chriskempson/base16-shell
 	url = https://github.com/chriskempson/base16-shell.git
-[submodule "submodules/github.com/tpope/vim-pathogen"]
-	path = submodules/github.com/tpope/vim-pathogen
-	url = https://github.com/tpope/vim-pathogen.git
 [submodule "submodules/github.com/chriskempson/base16-vim"]
 	path = submodules/github.com/chriskempson/base16-vim
 	url = https://github.com/chriskempson/base16-vim
 [submodule "submodules/github.com/NuckChorris/assault"]
 	path = submodules/github.com/NuckChorris/assault
 	url = https://github.com/NuckChorris/assault.git
-[submodule "submodules/github.com/tpope/vim-fugitive.git"]
-	path = submodules/github.com/tpope/vim-fugitive
-	url = https://github.com/tpope/vim-fugitive.git
 [submodule "submodules/github.com/majutsushi/urxvt-font-size"]
 	path = submodules/github.com/majutsushi/urxvt-font-size
 	url = https://github.com/majutsushi/urxvt-font-size.git
 [submodule "submodules/github.com/copycat-killer/lain"]
 	path = submodules/github.com/copycat-killer/lain
 	url = https://github.com/copycat-killer/lain.git
-[submodule "submodules/github.com/tomlion/vim-solidity"]
-	path = submodules/github.com/tomlion/vim-solidity
-	url = https://github.com/tomlion/vim-solidity.git
 [submodule "submodules/github.com/Mic92/vicious"]
 	path = submodules/github.com/Mic92/vicious
 	url = https://github.com/Mic92/vicious
-[submodule "submodules/github.com/ekalinin/Dockerfile"]
-	path = submodules/github.com/ekalinin/Dockerfile
-	url = https://github.com/ekalinin/Dockerfile.vim.git
-[submodule "submodules/github.com/nvie/vim-flake8"]
-	path = submodules/github.com/nvie/vim-flake8
-	url = git@github.com:nvie/vim-flake8.git
-[submodule "submodules/github.com/junegunn/fzf"]
-	path = submodules/github.com/junegunn/fzf
-	url = https://github.com/junegunn/fzf.vim
-[submodule "submodules/github.com/airblade/vim-gitgutter"]
-	path = submodules/github.com/airblade/vim-gitgutter
-	url = https://github.com/airblade/vim-gitgutter.git
 [submodule "submodules/github.com/scottgreenup/lain"]
 	path = submodules/github.com/scottgreenup/lain
 	url = https://github.com/scottgreenup/lain.git
