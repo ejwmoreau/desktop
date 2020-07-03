@@ -29,63 +29,6 @@ ln -sT\
 #===============================================================================
 
 
-#===============================================================================
-# VIM
-#-------------------------------------------------------------------------------
-mkdir --parents "${cwd}/home/vim/autoload"
-mkdir --parents "${cwd}/home/vim/bundle"
-ln -sTf\
-    "${cwd}/submodules/github.com/tpope/vim-pathogen/autoload/pathogen.vim"\
-    "${cwd}/home/vim/autoload/pathogen.vim"
-
-ln -sTf\
-    "${cwd}/submodules/github.com/chriskempson/base16-vim"\
-    "${cwd}/home/vim/bundle/base16-vim"
-
-ln -sTf\
-    "${cwd}/submodules/github.com/scrooloose/nerdtree"\
-    "${cwd}/home/vim/bundle/nerdtree"
-
-ln -sTf\
-    "${cwd}/submodules/github.com/ntpeters/vim-better-whitespace"\
-    "${cwd}/home/vim/bundle/vim-better-whitespace"
-
-ln -sTf\
-    "${cwd}/submodules/github.com/pangloss/vim-javascript"\
-    "${cwd}/home/vim/bundle/vim-javascript"
-
-ln -sTf\
-    "${cwd}/submodules/github.com/tpope/vim-fugitive"\
-    "${cwd}/home/vim/bundle/vim-fugitive"
-
-ln -sTf\
-    "${cwd}/submodules/github.com/tomlion/vim-solidity"\
-    "${cwd}/home/vim/bundle/vim-solidity"
-
-ln -sTf\
-    "${cwd}/submodules/github.com/nvie/vim-flake8"\
-    "${cwd}/home/vim/bundle/vim-flake8"
-
-ln -sTf\
-    "${cwd}/submodules/github.com/ekalinin/Dockerfile"\
-    "${cwd}/home/vim/bundle/Dockerfile"
-
-ln -sTf\
-    "${cwd}/submodules/github.com/junegunn/fzf"\
-    "${cwd}/home/vim/bundle/vim-fzf"\
-
-ln -sTf\
-    "${cwd}/submodules/github.com/airblade/vim-gitgutter"\
-    "${cwd}/home/vim/bundle/vim-gitgutter"\
-
-
-checkfile "${HOME}/.vim"
-ln -sT "${cwd}/home/vim" "/${HOME}/.vim"
-
-checkfile "${HOME}/.vimrc"
-ln -sT "${cwd}/home/vimrc" "/${HOME}/.vimrc"
-#===============================================================================
-
 ## [ Awesome WM ] ##
 
 mkdir --parents "${HOME}/.config/awesome"
