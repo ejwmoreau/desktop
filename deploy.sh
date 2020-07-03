@@ -33,10 +33,3 @@ checkfile "${HOME}/.Xmodmap"
 ln -sfT "${cwd}/home/xmodmaprc"  "${HOME}/.Xmodmap"
 checkfile "${HOME}/.git-completion.bash"
 ln -sfT "${cwd}/home/git-completion.bash" "${HOME}/.git-completion.bash"
-
-mkdir --parents "${HOME}/.urxvt/ext"
-checkfile "${HOME}/.urxvt/ext/font-size"
-ln -sTf\
-    "${cwd}/submodules/github.com/majutsushi/urxvt-font-size/font-size"\
-    "${HOME}/.urxvt/ext/font-size"
-

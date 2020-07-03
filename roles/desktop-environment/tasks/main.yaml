@@ -37,3 +37,4 @@
 - include: awesome.yaml
 - include: lightdm.yaml
 - include: vim.yaml
+- include: urxvt.yaml
