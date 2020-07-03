@@ -34,7 +34,7 @@
     - src: "home/inputrc"
       dest: ".inputrc"
 
-- name: Clone shell color repo
+- name: Clone terminal color repo
   git:
     repo: "{{item.url}}"
     dest: "{{playbook_dir}}/src/{{item.dest}}"
@@ -43,7 +43,7 @@
     - url: "https://github.com/chriskempson/base16-shell.git"
       dest: "github.com/chriskempson/base16-shell"
 
-- name: Link shell color package
+- name: Link terminal color package
   file:
     src: "{{playbook_dir}}/src/{{item.src}}"
     dest: "~/.config/{{item.dest}}"

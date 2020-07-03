@@ -4,7 +4,7 @@
 
 These are my dotfiles that I am using on a daily basis.
 
-It comes with a number of Ansible roles that setup my dotflies and config.
+It comes with a number of Ansible roles that setup my dotfiles and config.
 
 Some of the contents include:
 
@@ -20,14 +20,11 @@ Some of the contents include:
 * `sudo pacman -Sy ansible`
 * `make install`
 
-## Adding Submodule
+## Adding Content From Other Repos
 
 Change an ansible role to include:
 * Cloning the repo
-* Linking the repo contents to the relevant location
-
-Old Method:
-`git submodule add -- https://url.com/a/b src/url.com/a/b`
+* Linking the repo contents in the relevant destination
 
 # Implicit Contributors
 

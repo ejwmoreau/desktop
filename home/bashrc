@@ -56,29 +56,37 @@ source "/usr/bin/virtualenvwrapper.sh"
 # Bash Completion (Git, Atlas, etc)
 ##################################################
 
+# Bash completion (including a bunch of cli tools like git, autorandr, etc)
 bash_completion="/usr/share/bash-completion/bash_completion"
-[[ -f "${bash_completion}" ]] && . "${bash_completion}"
+[[ -f $bash_completion ]] && . $bash_completion
 
-# Add git completion to standard git commands and aliases
-if [ -f ~/.git-completion.bash ]; then
-    . ~/.git-completion.bash
+# Add git completion to some custom git aliases
+# Note: The Bash completion above already includes git completion for standard commands
+git_completion="/usr/share/bash-completion/completions/git"
+if [[ -f $git_completion ]]; then
+    . $git_completion
 
     __git_complete g  __git_main
     __git_complete gu  _git_pull
+    __git_complete gur _git_pull
     __git_complete gp  _git_push
     __git_complete ga  _git_add
     __git_complete gd  _git_diff
+    __git_complete gda _git_diff
     __git_complete gs  _git_stash
     __git_complete gb  _git_branch
     __git_complete gba _git_branch
     __git_complete gc  _git_commit
     __git_complete gca _git_commit
+    __git_complete gcl _git_clone
     __git_complete gco _git_checkout
     __git_complete gm  _git_merge
     __git_complete gff _git_merge
     __git_complete gl  _git_log
     __git_complete gla _git_log
+    __git_complete gls _git_log
     __git_complete gll _git_log
+    __git_complete gta _git_worktree
 fi
 
 # Add Atlas CLI completion in bash
