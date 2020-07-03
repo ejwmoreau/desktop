@@ -4,8 +4,6 @@
     path: "~/.config"
     state: directory
 
-# User scripts
-
 - name: Link home directories
   file:
     src: "{{playbook_dir}}/{{item.src}}"
@@ -13,12 +11,10 @@
     state: link
     force: yes
   loop:
-    - src: home/autorandr
-      dest: .autorandr
-      src: home/bin
-      dest: bin
-
-# Dotfiles
+    - src: "home/autorandr"
+      dest: ".autorandr"
+    - src: "home/bin"
+      dest: "bin"
 
 - name: Link dotfiles
   file:
@@ -27,16 +23,16 @@
     state: link
     force: yes
   loop:
-    - src: home/xprofile
-      dest: .xprofile
-    - src: home/bashrc
-      dest: .bashrc
-    - src: home/bash_aliases
-      dest: .bash_aliases
-    - src: home/Xresources
-      dest: .Xresources
-    - src: home/inputrc
-      dest: .inputrc
+    - src: "home/xprofile"
+      dest: ".xprofile"
+    - src: "home/bashrc"
+      dest: ".bashrc"
+    - src: "home/bash_aliases"
+      dest: ".bash_aliases"
+    - src: "home/Xresources"
+      dest: ".Xresources"
+    - src: "home/inputrc"
+      dest: ".inputrc"
 
 - include: awesome.yaml
 - include: lightdm.yaml

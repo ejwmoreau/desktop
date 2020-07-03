@@ -21,7 +21,6 @@ function checkfile() {
 #===============================================================================
 # Color
 #-------------------------------------------------------------------------------
-mkdir --parents "${HOME}/.config"
 checkfile "${HOME}/.config/base16-shell"
 ln -sT\
     "${cwd}/submodules/github.com/chriskempson/base16-shell"\
@@ -51,31 +50,10 @@ ln -sTf\
 
 ## [ Miscellaneous ] ##
 
-if [[ -h "${HOME}/bin" ]]; then
-    rm -rf "${HOME:?}/bin"
-else
-    echo "${HOME}/bin is not a symbolic link, please remove and re-run script."
-fi
-
-checkfile "${HOME}/bin"
-ln -sfT "${cwd}/bin" "${HOME}/bin"
-
 checkfile "${HOME}/.Xmodmap"
 ln -sfT "${cwd}/home/xmodmaprc"  "${HOME}/.Xmodmap"
-checkfile "${HOME}/.xprofile"
-ln -sfT "${cwd}/home/xprofile"   "${HOME}/.xprofile"
-checkfile "${HOME}/.bashrc"
-ln -sfT "${cwd}/home/bashrc"     "${HOME}/.bashrc"
 checkfile "${HOME}/.git-completion.bash"
 ln -sfT "${cwd}/home/git-completion.bash" "${HOME}/.git-completion.bash"
-
-checkfile "${HOME}/.bash_aliases"
-ln -sfT "${cwd}/home/bash_aliases"     "${HOME}/.bash_aliases"
-
-checkfile "${HOME}/.Xresources"
-ln -sfT "${cwd}/home/Xresources" "${HOME}/.Xresources"
-checkfile "${HOME}/.inputrc"
-ln -sfT "${cwd}/home/inputrc" "${HOME}/.inputrc"
 
 mkdir --parents "${HOME}/.urxvt/ext"
 checkfile "${HOME}/.urxvt/ext/font-size"
