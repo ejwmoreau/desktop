@@ -4,6 +4,7 @@
 * Add the following packages:
     * dmenu2 (AUR)
 * Split some of the packages in `common` to their own roles/tasks
+* There's some TODOs throughout the Ansible tasks
 * Add the autorandr section below to Ansible
 
 ## Autorandr

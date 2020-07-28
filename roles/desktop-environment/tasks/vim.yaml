@@ -24,57 +24,34 @@
     state: directory
 
 # TODO: Try more packages until all the comments are gone!
+- name: Define vim package names
+  set_fact:
+    packages:
+      #- name: "github.com/scrooloose/nerdtree"
+      - name: "github.com/ntpeters/vim-better-whitespace"
+      #- name: "github.com/pangloss/vim-javascript"
+      #- name: "github.com/tpope/vim-fugitive"
+      #- name: "github.com/tomlion/vim-solidity"
+      #- name: "github.com/nvie/vim-flake8"
+      #- name: "github.com/ekalinin/Dockerfile"
+      #- name: "github.com/junegunn/fzf"
+      #- name: "github.com/airblade/vim-gitgutter"
+    colour_schemes:
+      - name: "github.com/chriskempson/base16-vim"
+
 - name: Clone vim package repos
   git:
-    repo: "{{item.url}}"
-    dest: "{{playbook_dir}}/src/{{item.dest}}"
+    repo: "https://{{item.name}}.git"
+    dest: "{{playbook_dir}}/src/{{item.name}}"
     version: master
-  loop:
-    - url: "https://github.com/chriskempson/base16-vim.git"
-      dest: "github.com/chriskempson/base16-vim"
-    #- url: "https://github.com/scrooloose/nerdtree.git"
-    #  dest: "github.com/scrooloose/nerdtree"
-    - url: "https://github.com/ntpeters/vim-better-whitespace.git"
-      dest: "github.com/ntpeters/vim-better-whitespace"
-    #- url: "https://github.com/pangloss/vim-javascript.git"
-    #  dest: "github.com/pangloss/vim-javascript"
-    #- url: "https://github.com/tpope/vim-fugitive.git"
-    #  dest: "github.com/tpope/vim-fugitive"
-    #- url: "https://github.com/tomlion/vim-solidity.git"
-    #  dest: "github.com/tomlion/vim-solidity"
-    #- url: "https://github.com/nvie/vim-flake8.git"
-    #  dest: "github.com/nvie/vim-flake8"
-    #- url: "https://github.com/ekalinin/Dockerfile.git"
-    #  dest: "github.com/ekalinin/Dockerfile"
-    #- url: "https://github.com/junegunn/fzf.git"
-    #  dest: "github.com/junegunn/fzf"
-    #- url: "https://github.com/airblade/vim-gitgutter.git"
-    #  dest: "github.com/airblade/vim-gitgutter"
+  loop: "{{packages + colour_schemes}}"
 
 - name: Link vim packages
   file:
-    src: "{{playbook_dir}}/src/{{item.src}}"
-    dest: "~/.vim/pack/packages/start/{{item.dest}}"
+    src: "{{playbook_dir}}/src/{{item.name}}"
+    dest: "~/.vim/pack/packages/start/{{item.name.rsplit('/', 1)[1]}}"
     state: link
-  loop:
-    #- src: "github.com/scrooloose/nerdtree"
-    #  dest: "nerdtree"
-    - src: "github.com/ntpeters/vim-better-whitespace"
-      dest: "vim-better-whitespace"
-    #- src: "github.com/pangloss/vim-javascript"
-    #  dest: "vim-javascript"
-    #- src: "github.com/tpope/vim-fugitive"
-    #  dest: "vim-fugitive"
-    #- src: "github.com/tomlion/vim-solidity"
-    #  dest: "vim-solidity"
-    #- src: "github.com/nvie/vim-flake8"
-    #  dest: "vim-flake8"
-    #- src: "github.com/ekalinin/Dockerfile"
-    #  dest: "Dockerfile"
-    #- src: "github.com/junegunn/fzf"
-    #  dest: "vim-fzf"
-    #- src: "github.com/airblade/vim-gitgutter"
-    #  dest: "vim-gitgutter"
+  loop: "{{packages}}"
 
 - name: Link vim colors
   file:
@@ -82,5 +59,5 @@
     dest: "~/.vim/colors/{{item.dest}}"
     state: link
   loop:
-    - src: "github.com/chriskempson/base16-vim/colors/base16-tomorrow.vim"
+    - src: "{{colour_schemes[0]['name']}}/colors/base16-tomorrow.vim"
       dest: "base16-tomorrow.vim"
