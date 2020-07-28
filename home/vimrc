@@ -160,3 +160,7 @@ autocmd FileType gitcommit DiffGitCached | wincmd L | wincmd p
   " if strlen(git_settings)
   "     exe "set" git_settings
   " endif
+
+" Helpful commands
+" zg - Add word to personal dictionary (spelling)
+" ]s and [s - Move to the next and previous misspelled word

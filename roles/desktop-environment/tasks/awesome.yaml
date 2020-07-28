@@ -6,46 +6,35 @@
     - packages:
       - awesome
 
-- name: Create .config/awesome
-  file:
-    path: "~/.config/awesome"
-    state: directory
-
-# TODO: Link home/config/awesome to ~/.config/awesome, instead of linking all the contents
-
 - name: Link config for awesome
   file:
-    src: "{{playbook_dir}}/home/config/awesome/{{item.src}}"
-    dest: "~/.config/awesome/{{item.dest}}"
+    src: "{{playbook_dir}}/home/config/awesome"
+    dest: "~/.config/awesome"
     state: link
-  loop:
-    - src: "rc.lua"
-      dest: "rc.lua"
-    - src: "themes"
-      dest: "themes"
+
+- name: Define awesome package repos
+  set_fact:
+    packages:
+      - name: "github.com/NuckChorris/assault"
+        src: "/awesomewm/assault.lua"
+        dest: "assault.lua"
+      - name: "github.com/scottgreenup/lain"
+        src: ""
+        dest: "lain"
+      - name: "github.com/vicious-widgets/vicious"
+        src: ""
+        dest: "vicious"
 
 - name: Clone awesome package repos
   git:
-    repo: "{{item.url}}"
-    dest: "{{playbook_dir}}/src/{{item.dest}}"
+    repo: "https://{{item.name}}.git"
+    dest: "{{playbook_dir}}/src/{{item.name}}"
     version: master
-  loop:
-    - url: "https://github.com/NuckChorris/assault.git"
-      dest: "github.com/NuckChorris/assault"
-    - url: "https://github.com/scottgreenup/lain.git"
-      dest: "github.com/scottgreenup/lain"
-    - url: "https://github.com/vicious-widgets/vicious.git"
-      dest: "github.com/vicious-widgets/vicious"
+  loop: "{{packages}}"
 
 - name: Link repo contents for awesome
   file:
-    src: "{{playbook_dir}}/src/{{item.src}}"
+    src: "{{playbook_dir}}/src/{{item.name}}{{item.src}}"
     dest: "~/.config/awesome/{{item.dest}}"
     state: link
-  loop:
-    - src: "github.com/NuckChorris/assault/awesomewm/assault.lua"
-      dest: "assault.lua"
-    - src: "github.com/scottgreenup/lain"
-      dest: "lain"
-    - src: "github.com/vicious-widgets/vicious"
-      dest: "vicious"
+  loop: "{{packages}}"
