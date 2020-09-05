@@ -1,2 +1,6 @@
-/home/vim/pack
 src
+
+# Vim
+home/vim/pack
+home/vim/colors
+home/vim/spell/en.utf-8.add.spl

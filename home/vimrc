@@ -62,6 +62,8 @@ filetype plugin indent on " Load filetype-specific indent files
 
 " Allows vim-latex to be loaded for .plaintex files
 let g:tex_flavor='latex'
+" Disable netrw plugin/script
+let g:netrw_dirhistmax = 0
 
 " Mistyping commands
 command! WQA :wqa
