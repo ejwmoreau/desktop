@@ -120,9 +120,6 @@ nnoremap k gk
 " Shift+Tab will insert an actual tab character
 inoremap <S-Tab> <C-V><Tab>
 
-" Launch (TODO)
-"call pathogen#infect()
-
 " Auto commands
 " Set filetypes for some unusual filetype suffixes
 autocmd BufNewFile,BufRead *.ejs set filetype=html
@@ -142,6 +139,13 @@ autocmd BufNewFile,BufRead *.go setlocal noet ts=4 sw=4 sts=4
 autocmd BufNewFile,BufRead bash[_-]aliases* call dist#ft#SetFileTypeSH("bash")
 " When the filetype is a gitcommit, open up the diff as a :vs
 autocmd FileType gitcommit DiffGitCached | wincmd L | wincmd p
+
+" Vim Spelling: Sync the `.spl` file with what's in `.add`
+for d in glob('~/.vim/spell/*.add', 1, 1)
+    if filereadable(d) && (!filereadable(d . '.spl') || getftime(d) > getftime(d . '.spl'))
+        exec 'mkspell! ' . fnameescape(d)
+    endif
+endfor
 
 " Plugins to get
 " vim-fugitive

@@ -23,6 +23,11 @@
     path: "~/.vim/pack/packages/start"
     state: directory
 
+- name: Create vim colors folder
+  file:
+    path: "~/.vim/colors"
+    state: directory
+
 # TODO: Try more packages until all the comments are gone!
 - name: Define vim package names
   set_fact:
