@@ -53,6 +53,7 @@
       dest: "base16-shell"
 
 - include: awesome.yaml
+- include: flameshot.yaml
 - include: lightdm.yaml
 - include: vim.yaml
 - include: urxvt.yaml
