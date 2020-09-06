@@ -184,6 +184,10 @@ function bash_prompt_impl() {
         local gitprompt="${sep}${lb}${gitbranch}${count_staged}${count_modified}${count_untracked}${rb}"
     fi
 
+    # Set the terminal title to current working directory
+    # https://askubuntu.com/questions/745529/what-does-this-bash-escape-sequence-mean
+    echo -ne "\e]0;\w\007"
+
     echo ""
     echo -n "${lb}${last_status}${rb}"
     echo -n "${sep}"
@@ -213,8 +217,7 @@ function bash_prompt_impl() {
 function bash_prompt() {
     last_status=$?
 
-    # TODO: Check if history could be moved to after $PS1, so we don't need to capture $?
-    # If history is in $PS1, then weird things happen
+    # Note: If history is in $PS1, then weird things happen
     history -a
     history -c
     history -r

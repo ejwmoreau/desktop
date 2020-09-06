@@ -1,5 +1,10 @@
 ---
-# TODO: Install urxvt maybe?
+- name: Install Urxvt
+  become: true
+  pacman: name="{{item.packages}}" update_cache=yes state=present
+  loop:
+    - packages:
+      - rxvt-unicode
 
 - name: Create .urxvt/ext
   file:

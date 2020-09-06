@@ -26,7 +26,7 @@ set laststatus=2    " Always show the file status bar
 set spell           " Spell checker (Temp testing)
 set textwidth=100   " Autowrap at the number of chars (Temp testing)
 set colorcolumn=101 " Colour column at the number of chars (Temp testing)
-" set title           " Change terminal title (It's nice, but urxvt doesn't set a new title when exiting vim
+set title           " Change terminal title
 set visualbell      " Don't beep
 set t_vb=           " Also avoids some more beeps
 

@@ -3,6 +3,7 @@
 * Complete Ansible roles with all the current dotfiles and config in the repo
 * Add the following packages:
     * dmenu2 (AUR)
+    * perl-clipboard (AUR)
 * Split some of the packages in `common` to their own roles/tasks
 * There's some TODOs throughout the Ansible tasks
 * Add the autorandr section below to Ansible
