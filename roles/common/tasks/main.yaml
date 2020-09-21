@@ -28,8 +28,6 @@
       # TODO: Separate into other roles/tasks
       - arandr
       - autorandr
-      - networkmanager
-      - network-manager-applet
       # TODO: Are these needed?
       #- fzf
       #- picom
@@ -51,3 +49,5 @@
       - virtualenv
       - virtualenvwrapper
       - tox
+
+- include: internet.yaml

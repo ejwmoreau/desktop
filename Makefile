@@ -1,7 +1,7 @@
 .PHONY: install
 
+# TODO use vault '--ask-vault-pass'
 install:
-	# TODO use vault '--ask-vault-pass'
 	ansible-playbook --inventory '127.0.0.1,' --ask-become-pass linux.yaml
 
 test:
