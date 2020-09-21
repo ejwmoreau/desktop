@@ -7,8 +7,9 @@
       - ttf-anonymous-pro
       - ttf-dejavu
       - ttf-liberation
-      - ttf-muli
-      - ttf-symbola
+      # TODO: AUR only
+      # - ttf-muli
+      # - ttf-symbola
 
 - name: Install CLI utilities
   become: true
@@ -41,6 +42,7 @@
     - packages:
       - python
       - python2
+      - python-pip
 
 - name: Install Python packages
   pip: name="{{item.packages}}" extra_args="--user" state=present
