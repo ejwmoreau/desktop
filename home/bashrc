@@ -198,7 +198,7 @@ function bash_prompt_impl() {
     #echo -n "${lb}${login}${rb}"
 
     # Gets the groups you have activated with newgrp/sg -- Useful for docker
-    if which groups_diff 2>&1 1>/dev/null; then
+    if which groups_diff > /dev/null 2>&1; then
        if groups_diff 1>/dev/null; then
            gd=$(groups_diff | head -c -1)
            echo -n "${sep}"
