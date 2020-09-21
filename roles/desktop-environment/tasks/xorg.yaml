@@ -5,7 +5,9 @@
   loop:
     - packages:
       - xorg-server
+      - xorg-xrdb
       - xf86-video-intel
+      - xf86-input-libinput
       - mesa
 
 - name: Link touchpad config that Xorg reads
