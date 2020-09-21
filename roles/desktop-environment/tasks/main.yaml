@@ -33,6 +33,10 @@
       dest: ".Xresources"
     - src: "home/inputrc"
       dest: ".inputrc"
+    - src: "home/gitconfig"
+      dest: ".gitconfig"
+    - src: "home/gitignore"
+      dest: ".gitignore"
 
 - name: Clone terminal color repo
   git:
