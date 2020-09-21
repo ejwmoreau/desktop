@@ -42,3 +42,5 @@ locals
 email
 slack
 service
+linter
+pylint

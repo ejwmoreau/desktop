@@ -1,0 +1,14 @@
+[user]
+	name = Elie Moreau
+	email = emoreau@atlassian.com
+[push]
+	default = current
+[core]
+	editor = vim
+[color]
+	interactive = auto
+	branch = auto
+	diff = auto
+	status = auto
+[pull]
+	rebase = true

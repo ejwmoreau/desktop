@@ -10,6 +10,7 @@ set listchars=tab:>.,trail:~ " Show tabs and trailing spaces
 set list            " Show listchars characters
 set autoindent      " Keep same level of indentation when making new line
 set smartindent     " Helps with autoindent
+set nofixendofline  " Don't touch the end of files to remove trailing new lines
 
 " UI Config
 set ruler           " Shows line/column numbers in bottom right
