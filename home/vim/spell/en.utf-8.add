@@ -44,3 +44,4 @@ slack
 service
 linter
 pylint
+tmp

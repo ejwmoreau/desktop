@@ -28,6 +28,11 @@
     path: "~/.vim/colors"
     state: directory
 
+- name: Create vim tmp folder
+  file:
+    path: "~/.vim/tmp"
+    state: directory
+
 # TODO: Try more packages until all the comments are gone!
 - name: Define vim package names
   set_fact:

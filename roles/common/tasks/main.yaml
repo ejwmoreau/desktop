@@ -21,6 +21,7 @@
       - git
       - htop
       - jq
+      - keychain
       - sed
       - the_silver_searcher
       - tree

@@ -52,7 +52,7 @@ set foldmethod=indent " Fold based on indent level
 
 " Swap/Backup files
 set swapfile
-set dir=~/.tmp//    " Where swap files will be stored (// keeps the path in the filename)
+set dir=~/.vim/tmp//  " Where swap files will be stored (// keeps the path in the filename)
 
 " Other
 set hidden          " Can edit (:e) a new file without saving it first
