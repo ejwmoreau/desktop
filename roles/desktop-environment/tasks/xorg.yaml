@@ -7,3 +7,10 @@
       - xorg-server
       - xf86-video-intel
       - mesa
+
+- name: Link touchpad config that Xorg reads
+  become: true
+  file:
+    src: "{{playbook_dir}}/etc/X11/xorg.conf.d/30-touchpad.conf"
+    dest: "/etc/X11/xorg.conf.d/30-touchpad.conf"
+    state: link
