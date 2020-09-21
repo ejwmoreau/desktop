@@ -1,0 +1,9 @@
+---
+- name: Install Xorg and video drivers
+  become: true
+  pacman: name="{{item.packages}}" update_cache=yes state=present
+  loop:
+    - packages:
+      - xorg-server
+      - xf86-video-intel
+      - mesa
