@@ -1,12 +1,11 @@
 #!/bin/bash
 
-export PATH="$PATH:$HOME/bin"
 xsetroot -cursor_name left_ptr
 
-#[[ "$(which xscreensaver)" == "/usr/bin/xscreensaver" ]] && /usr/bin/xscreensaver -no-splash &
-[[ "$(which nm-applet)" == "/usr/bin/nm-applet" ]] && /usr/bin/nm-applet &
-[[ "$(which redshift-gtk)" == "/usr/bin/redshift-gtk" ]] && /usr/bin/redshift-gtk -l -33.86482:151.20773 &
-[[ -f ~/.screenlayout/main.sh ]] && ~/.screenlayout/main.sh
+#[ "$(command -v xscreensaver)" = "/usr/bin/xscreensaver" ] && /usr/bin/xscreensaver -no-splash &
+[ "$(command -v nm-applet)" = "/usr/bin/nm-applet" ] && /usr/bin/nm-applet &
+[ "$(command -v redshift-gtk)" = "/usr/bin/redshift-gtk" ] && /usr/bin/redshift-gtk -l -33.86482:151.20773 &
+[ -f ~/.screenlayout/main.sh ] && ~/.screenlayout/main.sh
 
 # TODO: Maybe change to picom, since the compton script is from the picom package
 #which compton && compton -b
