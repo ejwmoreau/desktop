@@ -50,7 +50,7 @@ shopt -s histappend
 
 export WORKON_HOME=/home/rothaq/.virtualenvs
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
-source "/usr/bin/virtualenvwrapper.sh"
+[ -f "/usr/bin/virtualenvwrapper.sh" ] && source "/usr/bin/virtualenvwrapper.sh"
 
 ##################################################
 # Bash Completion (Git, Atlas, etc)
@@ -90,7 +90,7 @@ if [[ -f $git_completion ]]; then
 fi
 
 # Add Atlas CLI completion in bash
-source <(atlas --completion-script-bash)
+[ $(command -v atlas) ] && source <(atlas --completion-script-bash)
 
 ##################################################
 # Prompt (PROMPT_COMMAND, PS1)
@@ -198,12 +198,10 @@ function bash_prompt_impl() {
     #echo -n "${lb}${login}${rb}"
 
     # Gets the groups you have activated with newgrp/sg -- Useful for docker
-    if which groups_diff > /dev/null 2>&1; then
-       if groups_diff 1>/dev/null; then
-           gd=$(groups_diff | head -c -1)
-           echo -n "${sep}"
-           echo -n "${lb}$(color 9)${gd}$(reset_color)${rb}"
-       fi
+    if command -v groups_diff > /dev/null; then
+        gd=$(groups_diff | head -c -1)
+        echo -n "${sep}"
+        echo -n "${lb}$(color 9)${gd}$(reset_color)${rb}"
     fi
 
     echo -n "${virtualenv}"
@@ -235,7 +233,7 @@ prompt_prepend() {
 prompt_prepend bash_prompt
 export PROMPT_COMMAND
 
-source "/etc/profile.d/autojump.bash"
+[ -f "/etc/profile.d/autojump.bash" ] && source "/etc/profile.d/autojump.bash"
 
 ##################################################
 # Colors (base16)
