@@ -45,3 +45,4 @@ service
 linter
 pylint
 tmp
+firefox

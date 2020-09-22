@@ -51,4 +51,5 @@
       - virtualenvwrapper
       - tox
 
+- include: browser.yaml
 - include: internet.yaml

@@ -1,0 +1,8 @@
+---
+- name: Install Web Browsers
+  become: true
+  pacman: name="{{item.packages}}" update_cache=yes state=present
+  loop:
+    - packages:
+      - chromium
+      - firefox
