@@ -12,7 +12,7 @@
 * Add repo for work-related things (including atlas)
 * Add python virtualenvwrapper setup
 * Add autojump setup
-* Add keychain setup
+* Add sound + bluetooth setup
 
 ## Autorandr
 

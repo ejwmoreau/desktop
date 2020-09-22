@@ -25,8 +25,8 @@ source ~/.bash_aliases
 ##################################################
 
 path_append() {
-    if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
-        PATH="${PATH:+"$PATH:"}$1"
+    if [[ ":$PATH:" != *":$1:"* ]]; then
+        export PATH="${PATH:+"$PATH:"}$1"
     fi
 }
 
@@ -196,13 +196,6 @@ function bash_prompt_impl() {
     # TODO display login only if different from normal
     #echo -n "${sep}"
     #echo -n "${lb}${login}${rb}"
-
-    # Gets the groups you have activated with newgrp/sg -- Useful for docker
-    if command -v groups_diff > /dev/null && groups_diff > /dev/null; then
-        gd=$(groups_diff | head -c -1)
-        echo -n "${sep}"
-        echo -n "${lb}$(color 9)${gd}$(reset_color)${rb}"
-    fi
 
     echo -n "${virtualenv}"
     echo -n "${sep}"
