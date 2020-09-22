@@ -34,7 +34,7 @@ path_append() {
 export GOPATH="$HOME/go"
 export TERM='rxvt-256color'
 export EDITOR='vim'
-path_append $HOME/node_modules/.bin:$HOME/.gem/ruby/2.5.0/bin:$GOPATH/bin:$HOME/bin
+path_append $HOME/node_modules/.bin:$HOME/.gem/ruby/2.5.0/bin:$GOPATH/bin
 
 export HISTSIZE=100000
 export HISTFILESIZE=100000

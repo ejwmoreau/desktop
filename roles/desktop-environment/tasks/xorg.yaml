@@ -5,6 +5,7 @@
   loop:
     - packages:
       - xorg-server
+      - xorg-xbacklight
       - xorg-xrdb
       - xf86-video-intel
       - xf86-input-libinput
