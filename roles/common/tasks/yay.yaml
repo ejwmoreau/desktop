@@ -1,0 +1,11 @@
+---
+- name: Install base-devel
+  become: true
+  pacman: name="{{item.packages}}" update_cache=yes state=present extra_args="--needed"
+  loop:
+    - packages:
+      - base-devel
+
+# TODO: Clone yay git repo
+# TODO: Run makepkg -si (likely need to supply password somehow, but not run with sudo)
+# TODO: Add this to main.yaml
