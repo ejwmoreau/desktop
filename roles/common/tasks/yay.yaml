@@ -6,6 +6,18 @@
     - packages:
       - base-devel
 
-# TODO: Clone yay git repo
-# TODO: Run makepkg -si (likely need to supply password somehow, but not run with sudo)
-# TODO: Add this to main.yaml
+- name: Clone yay AUR repo
+  git:
+    repo: "https://aur.archlinux.org/yay.git"
+    dest: "{{playbook_dir}}/src/yay"
+    version: master
+
+# Build package without using root, then install yay using root
+- name: Build yay
+  command:
+    cmd: "makepkg -scf --noconfirm"
+    chdir: "{{playbook_dir}}/src/yay"
+
+- name: Install yay
+  become: true
+  pacman: update_cache=yes state=present extra_args="-U {{playbook_dir}}/src/yay/yay-*.tar.gz"

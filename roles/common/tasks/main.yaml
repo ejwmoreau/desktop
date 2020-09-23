@@ -84,3 +84,4 @@
 
 - include: browser.yaml
 - include: internet.yaml
+- include: yay.yaml
