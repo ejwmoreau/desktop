@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-# ~/.bashrc
-
 ##################################################
 # Timing commands. Copy the last line and add anywhere you want timing to be measured
 ##################################################
@@ -50,8 +48,7 @@ shopt -s histappend
 
 export WORKON_HOME=/home/rothaq/.virtualenvs
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
-venvwrapper_script="/usr/bin/virtualenvwrapper.sh"
-[ -f $venvwrapper_script ] && source $venvwrapper_script
+source "/usr/bin/virtualenvwrapper.sh"
 
 ##################################################
 # Bash Completion (Git, Atlas, etc)
@@ -227,8 +224,7 @@ prompt_prepend() {
 prompt_prepend bash_prompt
 export PROMPT_COMMAND
 
-autojump_script="/etc/profile.d/autojump.bash"
-[ -f $autojump_script ] && source $autojump_script
+source "/etc/profile.d/autojump.bash"
 
 ##################################################
 # Colors (base16)

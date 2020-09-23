@@ -18,11 +18,11 @@ Some of the contents include:
 ## Installation
 
 * `sudo pacman -Sy ansible`
-* `make install`
+* `make`
 
 ## Adding Content From Other Repos
 
-Change an ansible role to include:
+Add an ansible role or tasks to include:
 * Cloning the repo
 * Linking the repo contents in the relevant destination
 

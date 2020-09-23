@@ -8,7 +8,6 @@ function ifconfig() {
     echo "use 'ip addr show' or 'ip a' for short"
 }
 
-
 # Specialized commands
 alias murder="shred -uvzn 20"
 alias fucking="sudo"
@@ -229,8 +228,7 @@ alias workoff='deactivate'
 alias mkvirtualenv2="mkvirtualenv -p /usr/bin/python2.7"
 
 # Set up nvm. --no-use speeds up the command a lot
-init_nvm="/usr/share/nvm/init-nvm.sh"
-[ -f $init_nvm ] && source $init_nvm --no-use
+source "/usr/share/nvm/init-nvm.sh" --no-use
 
 # Look at logs of all containers that listen on port 8080
 alias docker-logs-check='while ((1)); do sudo docker logs -f $(sudo docker ps | grep 8080 | cut -f1 -d" ") 2>/dev/null; sleep 1; echo No docker container; done'
@@ -243,8 +241,7 @@ alias docker="/usr/bin/sudo /usr/bin/docker"
 alias docker-compose="/usr/bin/sudo /usr/bin/docker-compose"
 
 # Arch Linux way of handling Java versions
-jre_script="/etc/profile.d/jre.sh"
-[ -f $jre_script ] && source $jre_script
+source "/etc/profile.d/jre.sh"
 
 alias untar="tar -xvzf"
 
@@ -261,8 +258,7 @@ alias test-awesome="Xephyr :5 & sleep 1 ; DISPLAY=:5 awesome"
 alias auto-powertop="sudo powertop --auto-tune"
 
 # Source additional bashrc config specific to work
-bashrc_work="~/.bashrc_work"
-[ -f $bashrc_work ] && source $bashrc_work
+source ~/.bashrc_work
 
 # Suspend Hobbiton
 # ssh hobbiton

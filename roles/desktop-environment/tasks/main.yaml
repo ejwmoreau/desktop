@@ -9,7 +9,6 @@
     src: "{{playbook_dir}}/{{item.src}}"
     dest: "~/{{item.dest}}"
     state: link
-    force: yes
   loop:
     - src: "home/autorandr"
       dest: ".autorandr"
@@ -21,7 +20,6 @@
     src: "{{playbook_dir}}/{{item.src}}"
     dest: "~/{{item.dest}}"
     state: link
-    force: yes
   loop:
     - src: "home/xprofile"
       dest: ".xprofile"
