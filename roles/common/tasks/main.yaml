@@ -4,6 +4,9 @@
   pacman: name="{{item.packages}}" update_cache=yes state=present
   loop:
     - packages:
+      - noto-fonts
+      - noto-fonts-cjk
+      - noto-fonts-emoji
       - ttf-anonymous-pro
       - ttf-dejavu
       - ttf-liberation
@@ -29,10 +32,38 @@
       # TODO: Separate into other roles/tasks
       - arandr
       - autorandr
+      - code
+      - docker
+      - docker-compose
+      - feh
+      - gnu-netcat
+      - ipcalc
+      - openldap
+      - pavucontrol
+        #- pulseaudio
+      - redshift
+      - signal-desktop
+      - traceroute
+      - vlc
+      - yubikey-manager
+      - yubikey-manager-qt
       # TODO: Are these needed?
       #- fzf
       #- picom
       #- xscreensaver
+
+# TODO: Install these via yay
+# For now, install them manually
+#- name: Install some AUR packages
+#      - autojump
+#      - dmenu2
+#      - intellij-idea-ultimate-edition
+#      - ngrok
+#      - postman-bin
+#      - perl-clipboard
+#      - slack-desktop
+#      - spotify
+#      - zoom
 
 - name: Install Python
   become: true

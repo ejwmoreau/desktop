@@ -1,15 +1,17 @@
 ---
-- name: Install Xorg and video drivers
+- name: Install Xorg, video drivers, and other utilities
   become: true
   pacman: name="{{item.packages}}" update_cache=yes state=present
   loop:
     - packages:
+      - mesa
+      - xautolock
+      - xclip
+      - xf86-video-intel
+      - xf86-input-libinput
       - xorg-server
       - xorg-xbacklight
       - xorg-xrdb
-      - xf86-video-intel
-      - xf86-input-libinput
-      - mesa
 
 - name: Link touchpad config that Xorg reads
   become: true

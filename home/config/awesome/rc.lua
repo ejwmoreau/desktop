@@ -11,7 +11,7 @@
 -- Barwinco's theme inspired by Luke Bonham - https://github.com/copycat-killer
 -- The tiling and window management comes from my old XMonad configuration
 
--- | To Do List | --
+-- | TODO List | --
 
 -- sort the taglist on alt-n
 -- scratchpad for applications
