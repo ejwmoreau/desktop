@@ -50,7 +50,8 @@ shopt -s histappend
 
 export WORKON_HOME=/home/rothaq/.virtualenvs
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
-[ -f "/usr/bin/virtualenvwrapper.sh" ] && source "/usr/bin/virtualenvwrapper.sh"
+venvwrapper_script="/usr/bin/virtualenvwrapper.sh"
+[ -f $venvwrapper_script ] && source $venvwrapper_script
 
 ##################################################
 # Bash Completion (Git, Atlas, etc)
@@ -226,7 +227,8 @@ prompt_prepend() {
 prompt_prepend bash_prompt
 export PROMPT_COMMAND
 
-[ -f "/etc/profile.d/autojump.bash" ] && source "/etc/profile.d/autojump.bash"
+autojump_script="/etc/profile.d/autojump.bash"
+[ -f $autojump_script ] && source $autojump_script
 
 ##################################################
 # Colors (base16)
