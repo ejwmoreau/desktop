@@ -33,6 +33,7 @@
       - arandr
       - autorandr
       - code
+      - dnsutils
       - docker
       - docker-compose
       - feh
