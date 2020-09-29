@@ -1,7 +1,6 @@
 #!/bin/bash
 
 export PATH=$PATH:$HOME/bin
-# TODO: Check what this line does
 xsetroot -cursor_name left_ptr
 
 #[ "$(command -v xscreensaver)" = "/usr/bin/xscreensaver" ] && /usr/bin/xscreensaver -no-splash &

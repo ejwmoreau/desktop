@@ -53,10 +53,8 @@
       - vlc
       - yubikey-manager
       - yubikey-manager-qt
-      # TODO: Are these needed?
+      # TODO: Is this needed?
       #- fzf
-      #- picom
-      #- xscreensaver
 
 # TODO: Install these via yay
 # For now, install them manually
