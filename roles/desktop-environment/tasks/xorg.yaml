@@ -14,10 +14,14 @@
       - xorg-xbacklight
       - xorg-xinput
       - xorg-xrdb
+      - xorg-xsetroot
 
-- name: Link touchpad config that Xorg reads
+- name: Copy touchpad config that Xorg reads (link doesn't work when $HOME isn't open yet)
   become: true
-  file:
-    src: "{{playbook_dir}}/etc/X11/xorg.conf.d/30-touchpad.conf"
-    dest: "/etc/X11/xorg.conf.d/30-touchpad.conf"
-    state: link
+  copy:
+    src: "{{playbook_dir}}/etc/X11/xorg.conf.d/{{item}}"
+    dest: "/etc/X11/xorg.conf.d/{{item}}"
+    force: no
+  loop:
+    - 30-touchpad.conf
+    - 30-mouse.conf
