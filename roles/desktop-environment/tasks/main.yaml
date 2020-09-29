@@ -57,6 +57,7 @@
 - include: awesome.yaml
 - include: flameshot.yaml
 - include: lightdm.yaml
+- include: power-management.yaml
 - include: vim.yaml
 - include: urxvt.yaml
 - include: xorg.yaml

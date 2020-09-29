@@ -4,6 +4,7 @@
   pacman: name="{{item.packages}}" update_cache=yes state=present
   loop:
     - packages:
+      - i3lock
       - mesa
       - xautolock
       - xclip
@@ -11,6 +12,7 @@
       - xf86-input-libinput
       - xorg-server
       - xorg-xbacklight
+      - xorg-xinput
       - xorg-xrdb
 
 - name: Link touchpad config that Xorg reads

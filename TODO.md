@@ -15,6 +15,10 @@
 * (Maybe) Add virtualbox setup for Paprika?
 * Add keyring setup, especially for VPN creds
 * Add Firefox tab groups and such
+* Add boltctl commands (boltctl list, then boltctl enroll <device-uuid>)
+  * Specifically for Dell dock + cable
+* Increase size of notifications
+* Copy /etc files, instead of linking them. Otherwise, they won't load properly because /home/rothaq isn't prepared yet
 
 ## Autorandr
 

@@ -30,8 +30,10 @@
       - tree
       - unzip
       # TODO: Separate into other roles/tasks
+      - alsa-utils
       - arandr
       - autorandr
+      - bolt
       - code
       - dnsutils
       - docker
@@ -40,8 +42,11 @@
       - gnu-netcat
       - ipcalc
       - openldap
+      - pacman-contrib
       - pavucontrol
-        #- pulseaudio
+      - pulseaudio
+      - pulseaudio-alsa
+      - pulseaudio-bluetooth
       - redshift
       - signal-desktop
       - traceroute
@@ -82,6 +87,10 @@
       - virtualenv
       - virtualenvwrapper
       - tox
+
+# TODO: Add bluetooth:
+# Packages: bluez bluez-utils
+# Start & Enable: bluetooth.service
 
 - include: browser.yaml
 - include: internet.yaml
