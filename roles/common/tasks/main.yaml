@@ -1,9 +1,9 @@
 ---
 - name: Install common fonts
   become: true
-  pacman: name="{{item.packages}}" update_cache=yes state=present
-  loop:
-    - packages:
+  pacman: name="{{packages}}" update_cache=yes
+  vars:
+    packages:
       - noto-fonts
       - noto-fonts-cjk
       - noto-fonts-emoji
@@ -16,9 +16,9 @@
 
 - name: Install CLI utilities
   become: true
-  pacman: name="{{item.packages}}" update_cache=yes state=present
-  loop:
-    - packages:
+  pacman: name="{{packages}}" update_cache=yes
+  vars:
+    packages:
       - bash
       - bash-completion
       - git
@@ -73,17 +73,17 @@
 
 - name: Install Python
   become: true
-  pacman: name="{{item.packages}}" update_cache=yes state=present
-  loop:
-    - packages:
+  pacman: name="{{packages}}" update_cache=yes
+  vars:
+    packages:
       - python
       - python2
       - python-pip
 
 - name: Install Python packages
-  pip: name="{{item.packages}}" extra_args="--user" state=present
-  loop:
-    - packages:
+  pip: name="{{packages}}" extra_args="--user"
+  vars:
+    packages:
       - virtualenv
       - virtualenvwrapper
       - tox

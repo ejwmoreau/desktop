@@ -86,7 +86,8 @@ urxvt.urgentOnBell:         false
 urxvt.visualBell:           false
 !===============================================================================
 
-Xcursor.size: 20
+! Let Window Manager decide on cursor size
+!Xcursor.size: 20
 
 urxvt.perl-ext-common:	font-size,clipboard,default,matcher
 urxvt.keysym.M-equal:	font-size:reset
@@ -100,7 +101,7 @@ urxvt.matcher.rend.0: Uline fg6
 ! mouse-right-click = 3
 urxvt.matcher.button: 3
 
-!urxvt.letterSpace:          -1
+urxvt.letterSpace:          1
 urxvt.lineSpace:            -1
 
 ! 3840x2160 @ 15.6 = 282

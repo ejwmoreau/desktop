@@ -46,3 +46,4 @@ linter
 pylint
 tmp
 firefox
+flameshot

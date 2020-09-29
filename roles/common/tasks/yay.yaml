@@ -1,9 +1,9 @@
 ---
 - name: Install base-devel
   become: true
-  pacman: name="{{item.packages}}" update_cache=yes state=present extra_args="--needed"
-  loop:
-    - packages:
+  pacman: name="{{packages}}" update_cache=yes extra_args="--needed"
+  vars:
+    packages:
       - base-devel
 
 - name: Clone yay AUR repo
@@ -17,7 +17,8 @@
   command:
     cmd: "makepkg -scf --noconfirm"
     chdir: "{{playbook_dir}}/src/yay"
+    creates: "{{playbook_dir}}/src/yay/yay-*.tar.gz"
 
 - name: Install yay
   become: true
-  pacman: update_cache=yes state=present extra_args="-U {{playbook_dir}}/src/yay/yay-*.tar.gz"
+  pacman: extra_args="-U {{playbook_dir}}/src/yay/yay-*.pkg.tar.zst --needed"

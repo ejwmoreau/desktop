@@ -1,9 +1,9 @@
 ---
 - name: Install Flameshot
   become: true
-  pacman: name="{{item.packages}}" update_cache=yes state=present
-  loop:
-    - packages:
+  pacman: name="{{packages}}" update_cache=yes
+  vars:
+    packages:
       - flameshot
 
 - name: Link config for flameshot

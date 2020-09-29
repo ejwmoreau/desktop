@@ -1,9 +1,9 @@
 ---
 - name: Install Vim
   become: true
-  pacman: name="{{item.packages}}" update_cache=yes state=present
-  loop:
-    - packages:
+  pacman: name="{{packages}}" update_cache=yes
+  vars:
+    packages:
       - vim
 
 - name: Link .vimrc
@@ -36,7 +36,7 @@
 # TODO: Try more packages until all the comments are gone!
 - name: Define vim package names
   set_fact:
-    packages:
+    vim_packages:
       #- name: "github.com/scrooloose/nerdtree"
       - name: "github.com/ntpeters/vim-better-whitespace"
       #- name: "github.com/pangloss/vim-javascript"
@@ -46,7 +46,7 @@
       #- name: "github.com/ekalinin/Dockerfile"
       #- name: "github.com/junegunn/fzf"
       #- name: "github.com/airblade/vim-gitgutter"
-    colour_schemes:
+    vim_colour_schemes:
       - name: "github.com/chriskempson/base16-vim"
         src: "colors/base16-tomorrow.vim"
 
@@ -62,11 +62,11 @@
     src: "{{playbook_dir}}/src/{{item.name}}"
     dest: "~/.vim/pack/packages/start/{{item.name.rsplit('/', 1)[1]}}"
     state: link
-  loop: "{{packages}}"
+  loop: "{{vim_packages}}"
 
 - name: Link vim colors
   file:
     src: "{{playbook_dir}}/src/{{item.name}}/{{item.src}}"
     dest: "~/.vim/colors/{{item.src.rsplit('/', 1)[1]}}"
     state: link
-  loop: "{{colour_schemes}}"
+  loop: "{{vim_colour_schemes}}"

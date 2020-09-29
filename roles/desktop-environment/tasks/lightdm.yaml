@@ -1,9 +1,9 @@
 ---
 - name: Install Lightdm
   become: true
-  pacman: name="{{item.packages}}" update_cache=yes state=present
-  loop:
-    - packages:
+  pacman: name="{{packages}}" update_cache=yes
+  vars:
+    packages:
       - lightdm
       - lightdm-gtk-greeter
 
