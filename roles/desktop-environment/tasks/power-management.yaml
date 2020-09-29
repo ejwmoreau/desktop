@@ -1,0 +1,10 @@
+---
+- name: Install power management packages
+  become: true
+  pacman: name="{{packages}}" update_cache=yes
+  vars:
+    packages:
+      - acpi
+      - acpi_call
+      - acpi_call-lts
+      - powertop
