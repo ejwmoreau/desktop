@@ -47,3 +47,6 @@ pylint
 tmp
 firefox
 flameshot
+Nvidia
+linux
+gpu

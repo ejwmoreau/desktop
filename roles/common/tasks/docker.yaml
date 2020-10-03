@@ -1,0 +1,14 @@
+---
+- name: Install Docker packages
+  become: true
+  pacman: name="{{packages}}" update_cache=yes
+  vars:
+    packages:
+      - docker
+      - docker-compose
+
+- name: Enable Docker
+  become: true
+  systemd:
+    name: docker
+    enabled: yes

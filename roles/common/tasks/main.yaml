@@ -36,17 +36,11 @@
       - bolt
       - code
       - dnsutils
-      - docker
-      - docker-compose
       - feh
       - gnu-netcat
       - ipcalc
       - openldap
       - pacman-contrib
-      - pavucontrol
-      - pulseaudio
-      - pulseaudio-alsa
-      - pulseaudio-bluetooth
       - redshift
       - signal-desktop
       - traceroute
@@ -77,19 +71,14 @@
       - python
       - python2
       - python-pip
+      - python-tox
+      - python-virtualenv
+      - python-virtualenvwrapper
 
-- name: Install Python packages
-  pip: name="{{packages}}" extra_args="--user"
-  vars:
-    packages:
-      - virtualenv
-      - virtualenvwrapper
-      - tox
-
-# TODO: Add bluetooth:
-# Packages: bluez bluez-utils
-# Start & Enable: bluetooth.service
-
+- include: bluetooth.yaml
 - include: browser.yaml
+- include: docker.yaml
+- include: gpu.yaml
 - include: internet.yaml
+- include: sound.yaml
 - include: yay.yaml

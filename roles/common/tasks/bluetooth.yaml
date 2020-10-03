@@ -1,0 +1,14 @@
+---
+- name: Install Bluetooth packages
+  become: true
+  pacman: name="{{packages}}" update_cache=yes
+  vars:
+    packages:
+      - bluez
+      - bluez-utils
+
+- name: Enable Bluetooth
+  become: true
+  systemd:
+    name: bluetooth
+    enabled: yes

@@ -6,13 +6,9 @@
 * There's some TODOs throughout the Ansible tasks
 * Add nvm & npm setup
 * Add java & jre setup
-* Add python virtualenvwrapper setup
-* Add sound + bluetooth setup
 * Add extensions for VSCode (Python, Atlassian, Yaml, Vim)
 * (Maybe) Add virtualbox setup for Paprika?
 * Add keyring setup, especially for VPN creds
 * Add Firefox tab groups and such
-* Add boltctl commands (boltctl list, then boltctl enroll <device-uuid>)
-  * Specifically for Dell dock + cable
-  * Change of mind: Just disable thunderbolt security
 * Increase size of notifications
+* Change login logos to Arch logo

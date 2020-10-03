@@ -1,0 +1,18 @@
+---
+- name: Install packages to disable Nvidia GPU
+  become: true
+  pacman: name="{{packages}}" update_cache=yes
+  vars:
+    packages:
+      - linux-lts-headers
+      - bbswitch
+
+- name: Copy modprobe config to load & configure bbswitch
+  become: true
+  copy:
+    src: "{{playbook_dir}}/etc/{{item}}"
+    dest: "/etc/{{item}}"
+    force: no
+  loop:
+    - modprobe.d/bbswitch.conf
+    - modules-load.d/bbswitch.conf

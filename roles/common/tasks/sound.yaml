@@ -1,0 +1,10 @@
+---
+- name: Install Sound packages
+  become: true
+  pacman: name="{{packages}}" update_cache=yes
+  vars:
+    packages:
+      - pavucontrol
+      - pulseaudio
+      - pulseaudio-alsa
+      - pulseaudio-bluetooth
