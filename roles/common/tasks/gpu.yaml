@@ -15,4 +15,5 @@
     force: no
   loop:
     - modprobe.d/bbswitch.conf
+    - modprobe.d/blacklisted.conf
     - modules-load.d/bbswitch.conf
