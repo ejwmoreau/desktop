@@ -11,6 +11,7 @@
       - xf86-video-intel
       - xf86-input-libinput
       - xorg-server
+      - xorg-server-xephyr
       - xorg-xbacklight
       - xorg-xinput
       - xorg-xrdb

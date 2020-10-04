@@ -109,10 +109,8 @@ programs["editor_cmd"]  = programs["terminal"] .. " -e " .. programs["editor"]
 
 local layouts = {
     awful.layout.suit.tile,
-    lain.layout.centerwork_leftright,
     awful.layout.suit.max,
-    awful.layout.suit.max.fullscreen,
-    awful.layout.suit.magnifier
+    lain.layout.centerwork_leftright,
 }
 
 -- | Tags | --
@@ -339,7 +337,7 @@ mytasklist.buttons = awful.util.table.join(
 mywibox = {}
 mytaglist = {}
 mytaglist.buttons = awful.util.table.join(
-    awful.button({ }, 1, awful.tag.viewonly),
+    awful.button({ }, 1, function(t) t:view_only() end),
     awful.button({ modkey }, 1, awful.client.movetotag),
     awful.button({ }, 3, awful.tag.viewtoggle),
     awful.button({ modkey }, 3, awful.client.toggletag),

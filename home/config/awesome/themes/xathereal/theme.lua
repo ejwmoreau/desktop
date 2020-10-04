@@ -32,9 +32,10 @@ theme.border_marked = "#91231c"
 
 -- | Menu | --
 
-theme.menu_height = 22
+theme.menu_height = 40
 theme.menu_width  = 100
 
+-- | Notification | --
 
 theme.notification_width = 400
 theme.notification_fg = "#282A2E"
@@ -51,10 +52,10 @@ theme.layout_tiletop    = theme.icons .. "/panel/layouts/tiletop.png"
 
 -- | Taglist | --
 
-theme.taglist_bg_empty    = "png:" .. theme.icons .. "/panel/taglist/empty.png"
-theme.taglist_bg_occupied = "png:" .. theme.icons .. "/panel/taglist/occupied.png"
-theme.taglist_bg_urgent   = "png:" .. theme.icons .. "/panel/taglist/urgent.png"
-theme.taglist_bg_focus    = "png:" .. theme.icons .. "/panel/taglist/focus.png"
+theme.taglist_bg_empty    = "png:" .. theme.icons .. "/panel/taglist/empty-28x40.png"
+theme.taglist_bg_occupied = "png:" .. theme.icons .. "/panel/taglist/occupied-28x40.png"
+theme.taglist_bg_urgent   = "png:" .. theme.icons .. "/panel/taglist/urgent-28x40.png"
+theme.taglist_bg_focus    = "png:" .. theme.icons .. "/panel/taglist/focus-28x40.png"
 theme.taglist_font        = "Roboto 7"
 
 -- | Tasklist | --
