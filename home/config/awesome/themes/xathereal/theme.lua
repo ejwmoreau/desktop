@@ -99,8 +99,8 @@ theme.mpd_sepl  = theme.icons .. "/panel/widgets/mpd/mpd_sepl.png"
 -- | Separators | --
 
 theme.spr    = theme.icons .. "/panel/separators/spr.png"
-theme.sprtr  = theme.icons .. "/panel/separators/sprtr.png"
-theme.spr4px = theme.icons .. "/panel/separators/spr4px.png"
+--theme.sprtr  = theme.icons .. "/panel/separators/sprtr.png"
+--theme.spr4px = theme.icons .. "/panel/separators/spr4px.png"
 theme.spr5px = theme.icons .. "/panel/separators/spr5px.png"
 
 -- | Clock / Calendar | --
@@ -116,16 +116,19 @@ theme.widget_cpu    = theme.icons .. "/panel/widgets/widget_cpu.png"
 -- | MEM | --
 
 theme.widget_mem = theme.icons .. "/panel/widgets/widget_mem.png"
+
+-- | BAT | --
+--
 theme.widget_bat = theme.icons .. "/panel/widgets/widget_bat.png"
 
 -- | FS | --
 
 theme.widget_fs     = theme.icons .. "/panel/widgets/widget_fs.png"
-theme.widget_fs_hdd = theme.icons .. "/panel/widgets/widget_fs_hdd.png"
+--theme.widget_fs_hdd = theme.icons .. "/panel/widgets/widget_fs_hdd.png"
 
 -- | Mail | --
 
-theme.widget_mail = theme.icons .. "/panel/widgets/widget_mail.png"
+--theme.widget_mail = theme.icons .. "/panel/widgets/widget_mail.png"
 
 -- | NET | --
 
@@ -134,7 +137,7 @@ theme.widget_netul = theme.icons .. "/panel/widgets/widget_netul.png"
 
 -- | Misc | --
 
-theme.menu_submenu_icon = theme.icons .. "submenu.png"
+--theme.menu_submenu_icon = theme.icons .. "submenu.png"
 
 return theme
 

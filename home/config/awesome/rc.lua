@@ -162,7 +162,6 @@ local vspace2 = '<span font="Roboto 3">  </span>'
 -- | Widgets | --
 
 spr = wibox.widget.imagebox(beautiful.spr)
-spr4px = wibox.widget.imagebox(beautiful.spr4px)
 spr5px = wibox.widget.imagebox(beautiful.spr5px)
 
 widget_display = wibox.widget.imagebox(beautiful.widget_display)
