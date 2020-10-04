@@ -246,7 +246,7 @@ fswidget:set_bgimage(beautiful.widget_display)
 
 net_widgetdl = wibox.widget.textbox()
 net_widgetul = lain.widget.net({
-    iface = "wlp2s0",
+    iface = "wlp0s20f3",
     settings = function()
         widget:set_markup(markup.font("Tamsyn 1", "  ") .. net_now.sent)
         net_widgetdl:set_markup(markup.font("Tamsyn 1", " ") .. net_now.received .. markup.font("Tamsyn 1", " "))
@@ -267,25 +267,16 @@ netwidgetul:set_bgimage(beautiful.widget_display)
 
 -- | Clock / Calendar | --
 
-mytextclock    = wibox.widget.textclock(
-    markup(
-        beautiful.clockgf,
-        space3 .. "%H:%M" .. markup.font("Tamsyn 3", " ")))
-mytextcalendar = wibox.widget.textclock(
-    markup(beautiful.clockgf, space3 .. "%a %d %b"))
+widget_clock = wibox.widget.imagebox(beautiful.widget_clock)
 
-widget_clock = wibox.widget.imagebox()
-widget_clock:set_image(beautiful.widget_clock)
-
-clockwidget = wibox.container.background()
-clockwidget:set_widget(mytextclock)
+clockwidget = wibox.container.background(
+    wibox.widget.textclock(markup(beautiful.clockgf, space3 .. "%H:%M" .. markup.font("Tamsyn 3", " ")))
+)
 clockwidget:set_bgimage(beautiful.widget_display)
 
-widget_date = wibox.widget.imagebox()
-widget_date:set_image(beautiful.widget_cal)
-
-datewidget = wibox.container.background()
-datewidget:set_widget(mytextcalendar)
+datewidget = wibox.container.background(
+    wibox.widget.textclock(markup(beautiful.clockgf, space3 .. "%a %d %b" .. markup.font("Tamsyn 3", " ")))
+)
 datewidget:set_bgimage(beautiful.widget_display)
 
 -- | Task List | --
@@ -384,6 +375,7 @@ function setup_screen(s)
     right_layout:add(widget_display_l)
     right_layout:add(cpuwidget)
     right_layout:add(widget_display_r)
+    right_layout:add(spr5px)
     right_layout:add(widget_display_l)
     right_layout:add(tmpwidget)
     right_layout:add(widget_tmp)
@@ -428,15 +420,13 @@ function setup_screen(s)
 
     right_layout:add(widget_clock)
     right_layout:add(widget_display_l)
-    right_layout:add(clockwidget)
-    right_layout:add(widget_display_r)
-    right_layout:add(widget_date)
-    right_layout:add(widget_display_l)
     right_layout:add(datewidget)
     right_layout:add(widget_display_r)
     right_layout:add(spr5px)
-
-    right_layout:add(spr)
+    right_layout:add(widget_display_l)
+    right_layout:add(clockwidget)
+    right_layout:add(widget_display_r)
+    right_layout:add(spr5px)
 
     -- Now bring it all together (with the tasklist in the middle)
     local layout = wibox.layout.align.horizontal()

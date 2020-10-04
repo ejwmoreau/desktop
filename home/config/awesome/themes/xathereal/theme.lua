@@ -81,7 +81,7 @@ theme.tasklist_maximized_vertical   = ""
 
 -- | Widget | --
 
-theme.widget_display   = theme.icons .. "/panel/widgets/display/widget_display.png"
+theme.widget_display   = theme.icons .. "/panel/widgets/display/widget_display-40.png"
 theme.widget_display_r = theme.icons .. "/panel/widgets/display/widget_display_r.png"
 theme.widget_display_c = theme.icons .. "/panel/widgets/display/widget_display_c.png"
 theme.widget_display_l = theme.icons .. "/panel/widgets/display/widget_display_l.png"
@@ -106,7 +106,7 @@ theme.spr5px = theme.icons .. "/panel/separators/spr5px.png"
 -- | Clock / Calendar | --
 
 theme.widget_clock = theme.icons .. "/panel/widgets/widget_clock.png"
-theme.widget_cal   = theme.icons .. "/panel/widgets/widget_cal.png"
+--theme.widget_cal   = theme.icons .. "/panel/widgets/widget_cal.png"
 
 -- | CPU / TMP | --
 
