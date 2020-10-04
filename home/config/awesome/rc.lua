@@ -97,15 +97,17 @@ local exec   = function (s) awful.util.spawn(s, false) end
 local modkey = "Mod4"
 
 -- This is used later as the default terminal and editor to run.
-programs = {}
-programs["audio"]       = "pavucontrol"
---programs["browser"]     = "firefox"
-programs["browser"]     = "chromium"
-programs["terminal"]    = "urxvt"
-programs["lock"]        = "i3lock -c 000000 -f"
-programs["randr"]       = "arandr"
-programs["editor"]      = os.getenv("EDITOR") or "vim"
-programs["editor_cmd"]  = programs["terminal"] .. " -e " .. programs["editor"]
+programs = {
+    ["audio"]       = "pavucontrol",
+    --["browser"]     = "firefox",
+    ["browser"]     = "chromium",
+    ["terminal"]    = "urxvt",
+    ["lock"]        = "i3lock -c 000000 -f",
+    ["randr"]       = "arandr",
+    ["editor"]      = os.getenv("EDITOR") or "vim",
+    ["screenshot"]  = "( flameshot & ) && ( sleep 0.2s && flameshot gui )"
+}
+programs["editor_cmd"] = programs["terminal"] .. " -e " .. programs["editor"]
 
 local layouts = {
     awful.layout.suit.tile,
@@ -502,24 +504,20 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "f", function () focus_on_screen(3, screen_map) end),
     awful.key({ modkey, "Shift"   }, "t", function () reset_to_primary() end),
 
-    -- Standard program
-    awful.key({ modkey,           }, "w", function ()       spawn_program(programs["browser"]) end),
+    -- Standard programs
+    awful.key({ modkey,           }, "w", function () spawn_program(programs["browser"]) end),
 
     awful.key({ modkey, "Shift"   }, "Return", function ()
         -- Make sure our X server resource database is up-to-date, that way our
         -- terminal will have the latest settings configured in ~/.Xresources
         spawn_program("xrdb ~/.Xresources")
-
         spawn_program(programs["terminal"])
     end),
 
-    awful.key({ modkey, "Shift"   }, "l", function ()       spawn_program(programs["lock"]) end),
-    awful.key({ modkey,           }, "a", function ()       spawn_program(programs["randr"]) end),
-    awful.key({ modkey,           }, "u", function ()       spawn_program(programs["audio"]) end),
-
-    awful.key({ modkey, "Mod1"     }, "4", function ()
-        awful.spawn.with_shell("sleep 0.2 && flameshot -c")
-    end),
+    awful.key({ modkey,           }, "l", function () spawn_program(programs["lock"]) end),
+    awful.key({ modkey,           }, "a", function () spawn_program(programs["randr"]) end),
+    awful.key({ modkey,           }, "u", function () spawn_program(programs["audio"]) end),
+    awful.key({                   }, "Print", function () awful.spawn.with_shell(programs["screenshot"]) end),
 
     -- Awesome Control
     awful.key({ modkey, "Control" }, "r", awesome.restart),
@@ -537,23 +535,13 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "n", awful.client.restore),
 
     -- Audio Control
-    awful.key({}, "XF86AudioRaiseVolume", function()
-        awful.util.spawn("amixer -M set Master 5%+")
-    end),
-    awful.key({}, "XF86AudioLowerVolume", function()
-        awful.util.spawn("amixer -M set Master 5%-")
-    end),
-    awful.key({}, "XF86AudioMute", function()
-        awful.util.spawn("amixer -M sset Master toggle")
-    end),
+    awful.key({                   }, "XF86AudioRaiseVolume", function() spawn_program("amixer -M set Master 5%+") end),
+    awful.key({                   }, "XF86AudioLowerVolume", function() spawn_program("amixer -M set Master 5%-") end),
+    awful.key({                   }, "XF86AudioMute",        function() spawn_program("amixer -M sset Master toggle") end),
 
     -- Brightness
-    awful.key({}, "XF86MonBrightnessUp", function()
-        awful.util.spawn("brightness -inc")
-    end),
-    awful.key({}, "XF86MonBrightnessDown", function()
-        awful.util.spawn("brightness -dec")
-    end),
+    awful.key({                   }, "XF86MonBrightnessUp",   function() spawn_program("brightness -inc") end),
+    awful.key({                   }, "XF86MonBrightnessDown", function() spawn_program("brightness -dec") end),
 
     -- DMenu2
     awful.key({ modkey }, "p", function()
@@ -570,12 +558,12 @@ globalkeys = awful.util.table.join(
 )
 
 function select_next(c)
-    local scr = c.screen
-
-    if #scr.get_clients() == 1 then
+    -- If there's no other clients to focus on
+    if #c.screen.get_clients() == 1 then
         return client.focus
     end
 
+    -- If floating, focus on the 1st index client
     if c.floating then
         awful.client.focus.byidx(1)
         if client.focus then
@@ -596,7 +584,8 @@ function select_next(c)
 
     local t = c.screen.selected_tag
 
-    -- if the index of the client is the last index of the column, go up
+    -- Focus on the client right after the current client
+    -- If the index of the client is the last index of the column, go up
     if idx["col"] == t.column_count and idx["idx"] == idx["num"] then
         awful.client.focus.byidx(-1)
         if client.focus then
@@ -633,7 +622,7 @@ screen.connect_signal("removed", function(s)
 end)
 
 clientkeys = awful.util.table.join(
-    awful.key({ modkey,           }, "f",       function (c) c.fullscreen = not c.fullscreen  end),
+    awful.key({ modkey,           }, "f",       function (c) c.fullscreen = not c.fullscreen end),
     awful.key({ modkey, "Shift"   }, "c",       function (c) kill_select(c) end),
     awful.key({ modkey,           }, "t",       awful.client.floating.toggle ),
     awful.key({ modkey,           }, "Return",  function (c) c:swap(awful.client.getmaster()) end),
@@ -687,6 +676,7 @@ clientkeys = awful.util.table.join(
         function (c)
             c.minimized = true
             c.maximized = false
+            select_next(c)
         end),
     awful.key({ modkey,           }, "m",
         function (c)
