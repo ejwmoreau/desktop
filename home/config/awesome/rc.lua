@@ -161,21 +161,14 @@ local vspace2 = '<span font="Roboto 3">  </span>'
 
 -- | Widgets | --
 
-spr = wibox.widget.imagebox()
-spr:set_image(beautiful.spr)
-spr4px = wibox.widget.imagebox()
-spr4px:set_image(beautiful.spr4px)
-spr5px = wibox.widget.imagebox()
-spr5px:set_image(beautiful.spr5px)
+spr = wibox.widget.imagebox(beautiful.spr)
+spr4px = wibox.widget.imagebox(beautiful.spr4px)
+spr5px = wibox.widget.imagebox(beautiful.spr5px)
 
-widget_display = wibox.widget.imagebox()
-widget_display:set_image(beautiful.widget_display)
-widget_display_r = wibox.widget.imagebox()
-widget_display_r:set_image(beautiful.widget_display_r)
-widget_display_l = wibox.widget.imagebox()
-widget_display_l:set_image(beautiful.widget_display_l)
-widget_display_c = wibox.widget.imagebox()
-widget_display_c:set_image(beautiful.widget_display_c)
+widget_display = wibox.widget.imagebox(beautiful.widget_display)
+widget_display_r = wibox.widget.imagebox(beautiful.widget_display_r)
+widget_display_l = wibox.widget.imagebox(beautiful.widget_display_l)
+widget_display_c = wibox.widget.imagebox(beautiful.widget_display_c)
 
 -- | CPU / TMP | --
 
@@ -185,19 +178,15 @@ cpu_widget = lain.widget.cpu({
     end
 })
 
-widget_cpu = wibox.widget.imagebox()
-widget_cpu:set_image(beautiful.widget_cpu)
-cpuwidget = wibox.container.background()
-cpuwidget:set_widget(cpu_widget.widget)
+widget_cpu = wibox.widget.imagebox(beautiful.widget_cpu)
+cpuwidget = wibox.container.background(cpu_widget.widget)
 cpuwidget:set_bgimage(beautiful.widget_display)
 
 tmp_widget = wibox.widget.textbox()
 vicious.register(tmp_widget, vicious.widgets.thermal, vspace1 .. "$1°C" .. vspace1, 9, "thermal_zone0")
 
-widget_tmp = wibox.widget.imagebox()
-widget_tmp:set_image(beautiful.widget_tmp)
-tmpwidget = wibox.container.background()
-tmpwidget:set_widget(tmp_widget)
+widget_tmp = wibox.widget.imagebox(beautiful.widget_tmp)
+tmpwidget = wibox.container.background(tmp_widget)
 tmpwidget:set_bgimage(beautiful.widget_display)
 
 -- | BAT | --
@@ -210,10 +199,8 @@ battery_widget = lain.widget.bat({
     end
 })
 
-widget_bat = wibox.widget.imagebox()
-widget_bat:set_image(beautiful.widget_bat)
-batwidget = wibox.container.background()
-batwidget:set_widget(battery_widget.widget)
+widget_bat = wibox.widget.imagebox(beautiful.widget_bat)
+batwidget = wibox.container.background(battery_widget.widget)
 batwidget:set_bgimage(beautiful.widget_display)
 
 
@@ -225,10 +212,8 @@ mem_widget = lain.widget.mem({
     end
 })
 
-widget_mem = wibox.widget.imagebox()
-widget_mem:set_image(beautiful.widget_mem)
-memwidget = wibox.container.background()
-memwidget:set_widget(mem_widget.widget)
+widget_mem = wibox.widget.imagebox(beautiful.widget_mem)
+memwidget = wibox.container.background(mem_widget.widget)
 memwidget:set_bgimage(beautiful.widget_display)
 
 -- | FS | --
@@ -236,10 +221,8 @@ memwidget:set_bgimage(beautiful.widget_display)
 fs_widget = wibox.widget.textbox()
 vicious.register(fs_widget, vicious.widgets.fs, vspace1 .. "${/ avail_gb}GB" .. vspace1, 2)
 
-widget_fs = wibox.widget.imagebox()
-widget_fs:set_image(beautiful.widget_fs)
-fswidget = wibox.container.background()
-fswidget:set_widget(fs_widget)
+widget_fs = wibox.widget.imagebox(beautiful.widget_fs)
+fswidget = wibox.container.background(fs_widget)
 fswidget:set_bgimage(beautiful.widget_display)
 
 -- | NET | --
@@ -253,16 +236,12 @@ net_widgetul = lain.widget.net({
     end
 })
 
-widget_netdl = wibox.widget.imagebox()
-widget_netdl:set_image(beautiful.widget_netdl)
-netwidgetdl = wibox.container.background()
-netwidgetdl:set_widget(net_widgetdl)
+widget_netdl = wibox.widget.imagebox(beautiful.widget_netdl)
+netwidgetdl = wibox.container.background(net_widgetdl)
 netwidgetdl:set_bgimage(beautiful.widget_display)
 
-widget_netul = wibox.widget.imagebox()
-widget_netul:set_image(beautiful.widget_netul)
-netwidgetul = wibox.container.background()
-netwidgetul:set_widget(net_widgetul.widget)
+widget_netul = wibox.widget.imagebox(beautiful.widget_netul)
+netwidgetul = wibox.container.background(net_widgetul.widget)
 netwidgetul:set_bgimage(beautiful.widget_display)
 
 -- | Clock / Calendar | --
