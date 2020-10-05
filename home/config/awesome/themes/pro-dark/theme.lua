@@ -45,7 +45,6 @@ theme.notification_min_timeout = 20
 
 -- | Layout | --
 
--- TODO add the other themes
 theme.layout_floating   = theme.icons .. "/panel/layouts/floating.png"
 theme.layout_tile       = theme.icons .. "/panel/layouts/tile.png"
 theme.layout_tileleft   = theme.icons .. "/panel/layouts/tileleft.png"

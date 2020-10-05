@@ -10,5 +10,4 @@
 * (Maybe) Add virtualbox setup for Paprika?
 * Add keyring setup, especially for VPN creds
 * Add Firefox tab groups and such
-* Increase size of notifications
 * Change login logos to Arch logo
