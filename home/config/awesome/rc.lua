@@ -882,7 +882,7 @@ awful.rules.rules = {
         -- TODO make this play nice with larger or smaller resolutions
         callback = function(c)
             client_move_on_screen(c, 100, 100)
-            client_resize(c, 1280, 720)
+            client_resize(c, 1920, 1080)
         end
     },
 
