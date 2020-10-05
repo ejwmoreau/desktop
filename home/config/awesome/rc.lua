@@ -1,6 +1,9 @@
 
-                -- [      Power Mode for Awesome 4.1-1      ] --
-                -- [          author: scottgreenup          ] --
+                -- [      Power Mode for Awesome 4.3-2      ] --
+                -- [          Author: ejwmoreau             ] --
+                -- [     http://github.com/ejwmoreau        ] --
+                -- [                   --                   ] --
+                -- [  Customisation credit to scottgreenup  ] --
                 -- [     http://github.com/scottgreenup     ] --
                 -- [                   --                   ] --
                 -- [        Theme credit to barwinco        ] --
@@ -8,16 +11,15 @@
 
 -- | Author's Commentary | --
 
--- Barwinco's theme inspired by Luke Bonham - https://github.com/copycat-killer
--- The tiling and window management comes from my old XMonad configuration
+-- Most of the config was implemented by scottgreenup
+-- Barwinco's pro-dark theme inspired by Luke Bonham - https://github.com/lcpz
+-- Tiling and window management comes from my old XMonad configuration
 
 -- | TODO List | --
 
--- sort the taglist on alt-n
--- scratchpad for applications
--- focus when app closes
--- create center-oriented layout, where master is in the center
-
+-- sort the taglist after a screen gets disconnected
+-- scratchpad for applications: https://github.com/notnew/awesome-scratch
+-- improve focus when app closes
 
 -- | Libraries | --
 
@@ -90,7 +92,7 @@ end
 
 -- Themes define colours, icons, font and wallpapers.
 theme_dir = os.getenv("HOME") .. "/.config/awesome/themes/"
-beautiful.init(theme_dir .. "xathereal/theme.lua")
+beautiful.init(theme_dir .. "pro-dark/theme.lua")
 
 local modkey = "Mod4"
 

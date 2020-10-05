@@ -1,7 +1,7 @@
 
 
 
-theme_root = os.getenv("HOME") .. "/.config/awesome/themes/xathereal/"
+theme_root = os.getenv("HOME") .. "/.config/awesome/themes/pro-dark/"
 
 theme            = {}
 theme.icons      = theme_root .. "icons/"
