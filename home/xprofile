@@ -12,5 +12,5 @@ xsetroot -cursor_name left_ptr
 #which compton && compton -b
 
 autorandr -c &
-xautolock -time 5 -locker "i3lock -c 000000 -f" -notify 20 -notifier "notify-send -u critical 'Screen will lock in 20 seconds.'" &
+screenlock &
 urxvtd -q -o -f &

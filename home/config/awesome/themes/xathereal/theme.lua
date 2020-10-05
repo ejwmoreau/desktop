@@ -37,9 +37,11 @@ theme.menu_width  = 100
 
 -- | Notification | --
 
-theme.notification_width = 400
+theme.notification_width = 800
 theme.notification_fg = "#282A2E"
 theme.notification_bg = "#C5C8C6"
+theme.notification_max_icon_size = 100
+theme.notification_min_timeout = 20
 
 -- | Layout | --
 

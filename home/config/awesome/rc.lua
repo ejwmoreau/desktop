@@ -72,15 +72,16 @@ local function debug_print(words)
     })
 end
 
+-- Customise some notification parameters
 naughty.config.notify_callback = function(args)
 
-    if args.timeout == nil or args.timeout < 20 then
-        args.timeout = 20
+    if args.timeout == nil or args.timeout < theme.notification_min_timeout then
+        args.timeout = theme.notification_min_timeout
     end
 
     if args.icon then
-        if args.icon_size == nil or args.icon_size > 50 then
-            args.icon_size = 50
+        if args.icon_size == nil or args.icon_size > theme.notification_max_icon_size then
+            args.icon_size = theme.notification_max_icon_size
         end
     end
 
@@ -90,9 +91,6 @@ end
 -- Themes define colours, icons, font and wallpapers.
 theme_dir = os.getenv("HOME") .. "/.config/awesome/themes/"
 beautiful.init(theme_dir .. "xathereal/theme.lua")
-
-local home   = os.getenv("HOME")
-local exec   = function (s) awful.util.spawn(s, false) end
 
 local modkey = "Mod4"
 
