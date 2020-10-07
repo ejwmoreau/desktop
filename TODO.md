@@ -11,3 +11,11 @@
 * Add keyring setup, especially for VPN creds
 * Add Firefox tab groups and such
 * Change login logos to Arch logo
+
+## Awesome WM
+
+* Keep the same focused window when changing layouts
+  * E.g: When changing from multi-tiled to single-tiled, then keep the same focused client
+* Improve focus when moving a client from one screen to another
+  * Default to focusing on something on the current screen, or
+  * Default to keeping focus on the client being moved (but what if the screen is not visible?)
