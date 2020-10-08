@@ -1,11 +1,12 @@
 ---
-- name: Install NetworkManager
+- name: Install NetworkManager and helpful packages
   become: true
   pacman: name="{{packages}}" update_cache=yes
   vars:
     packages:
       - networkmanager
       - network-manager-applet
+      - gnome-keyring
 
 - name: Enable NetworkManager
   become: true

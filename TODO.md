@@ -8,7 +8,6 @@
 * Add java & jre setup
 * Add extensions for VSCode (Python, Atlassian, Yaml, Vim)
 * (Maybe) Add virtualbox setup for Paprika?
-* Add keyring setup, especially for VPN creds
 * Add Firefox tab groups and such
 * Change login logos to Arch logo
 
