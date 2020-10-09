@@ -8,6 +8,6 @@
 
 - name: Link config for flameshot
   file:
-    src: "{{playbook_dir}}/home/config/Dharkael"
-    dest: "~/.config/Dharkael"
+    src: "{{playbook_dir}}/home/config/flameshot"
+    dest: "~/.config/flameshot"
     state: link

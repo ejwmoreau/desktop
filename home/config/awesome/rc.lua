@@ -113,6 +113,7 @@ local layouts = {
     awful.layout.suit.tile,
     awful.layout.suit.max,
     lain.layout.centerwork_leftright,
+    awful.layout.suit.max.fullscreen,
 }
 
 -- | Tags | --
