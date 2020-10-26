@@ -6,6 +6,7 @@
     packages:
       - lightdm
       - lightdm-gtk-greeter
+      - lightdm-gtk-greeter-settings
 
 # TODO: Decide whether I want lightdm-gtk-greeter or lightdm-webkit2-greeter
 # If webkit2, then copy lightdm.conf
