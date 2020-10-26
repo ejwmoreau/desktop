@@ -1,5 +1,5 @@
 ---
-- name: Install Lightdm
+- name: Install LightDM
   become: true
   pacman: name="{{packages}}" update_cache=yes
   vars:
@@ -8,12 +8,19 @@
       - lightdm-gtk-greeter
 
 # TODO: Decide whether I want lightdm-gtk-greeter or lightdm-webkit2-greeter
-# TODO: Copy the file, or use lineinfile task, instead of copying
-#- name: Copy /etc/lightdm/lightdm.conf
-#  become: true
-#  copy:
-#    src: "{{playbook_dir}}/etc/lightdm/lightdm.conf"
-#    dest: "/etc/lightdm/lightdm.conf"
+# If webkit2, then copy lightdm.conf
+
+- name: Copy LightDM config
+  become: true
+  copy:
+    src: "{{playbook_dir}}/etc/lightdm/lightdm-gtk-greeter.conf"
+    dest: "/etc/lightdm/lightdm-gtk-greeter.conf"
+
+- name: Copy LightDM background
+  become: true
+  copy:
+    src: "{{playbook_dir}}/etc/lightdm/Arch-logo-side-navy-background.png"
+    dest: "/etc/lightdm/lightdm-background.png"
 
 - name: Enable LightDM
   become: true
