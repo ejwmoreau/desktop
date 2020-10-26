@@ -891,7 +891,14 @@ awful.rules.rules = {
         rule_any = {
             name = { "win.*", },
         },
-        properties = {focusable = false, ontop = true}
+        properties = { focusable = false, ontop = true }
+    },
+
+    {
+        rule_any = {
+            class = { "zoom" }
+        },
+        properties = { tag = "8" }
     }
 }
 

@@ -10,6 +10,10 @@
 * (Maybe) Add virtualbox setup for Paprika?
 * Add Firefox tab groups and such
 * Change login logos to Arch logo
+* Install kernel-modules-hook from AUR
+  * 2 commands to run afterwards (prompted by yay install message):
+    * sudo systemctl daemon-reload
+    * sudo systemctl enable linux-modules-cleanup
 
 ## Awesome WM
 
