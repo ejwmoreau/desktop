@@ -80,5 +80,6 @@
 - include: docker.yaml
 - include: gpu.yaml
 - include: internet.yaml
+- include: internet_usage.yaml
 - include: sound.yaml
 - include: yay.yaml

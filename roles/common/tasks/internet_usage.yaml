@@ -1,0 +1,35 @@
+---
+- name: Create code directory
+  file:
+    path: "~/code"
+    state: directory
+
+# TODO: Figure out how to set the proper personal git username & email
+#- name: Clone get_internet_usage repo
+#  git:
+#    repo: "https://git@bitbucket-personal.org:hbotp/internet-usage.git"
+#    dest: "~/code"
+#    version: master
+
+# TODO: Figure out how to get credentials into the script
+
+- name: Link get_internet_usage script
+  become: true
+  file:
+    src: "{{playbook_dir}}/../code/internet-usage/{{item.file}}"
+    dest: "{{item.dest}}/{{item.file}}"
+    state: link
+  loop:
+    - file: "get_internet_usage"
+      dest: "/usr/local/bin"
+    - file: "get_internet_usage.service"
+      dest: "/etc/systemd/system"
+    - file: "get_internet_usage.timer"
+      dest: "/etc/systemd/system"
+
+- name: Enable get_internet_usage.timer
+  become: true
+  systemd:
+    name: get_internet_usage.timer
+    enabled: yes
+    state: started

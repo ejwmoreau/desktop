@@ -14,6 +14,7 @@
   * 2 commands to run afterwards (prompted by yay install message):
     * sudo systemctl daemon-reload
     * sudo systemctl enable linux-modules-cleanup
+* Add and use `peek` for screen recording
 
 ## Awesome WM
 
