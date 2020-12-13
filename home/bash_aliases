@@ -257,6 +257,9 @@ alias test-awesome="Xephyr :5 & sleep 1 ; DISPLAY=:5 awesome"
 # Auto-tune any "bad" settings in powertop
 alias auto-powertop="sudo powertop --auto-tune"
 
+# Easily copy a file's contents to a helpful clipboard
+alias copy-file="xclip -i -selection c"
+
 # Source additional bashrc config specific to work
 source ~/.bashrc_work
 

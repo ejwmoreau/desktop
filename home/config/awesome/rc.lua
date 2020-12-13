@@ -74,6 +74,13 @@ local function debug_print(words)
     })
 end
 
+--local key_bindings = require("key_bindings")
+--debug_print(key_bindings.test_message)
+
+local helper = require("helper")
+
+-- | Notifications | --
+
 -- Customise some notification parameters
 naughty.config.notify_callback = function(args)
 
@@ -90,10 +97,13 @@ naughty.config.notify_callback = function(args)
     return args
 end
 
+-- | Global Variables | --
+
 -- Themes define colours, icons, font and wallpapers.
 theme_dir = os.getenv("HOME") .. "/.config/awesome/themes/"
 beautiful.init(theme_dir .. "pro-dark/theme.lua")
 
+-- TODO: Move to key_bindings.lua
 local modkey = "Mod4"
 
 -- This is used later as the default terminal and editor to run.
@@ -421,27 +431,14 @@ for s = 1, screen.count() do
 end
 
 
-function move_client_to_screen(c, x, screen_map)
-    nextc = select_next(c)
-    if x <= #screen_map then
-        awful.client.movetoscreen(c, screen_map[x])
-    end
-    awful.screen.focus(nextc.screen)
-end
+-- Moved to helper.lua
+--function move_client_to_screen(c, x, screen_map)
 
+-- Moved to helper.lua
+--function focus_on_screen(x, screen_map)
 
-function focus_on_screen(x, screen_map)
-    if x <= #screen_map then
-        awful.screen.focus(screen_map[x])
-    end
-end
-
-function spawn_program(program)
-    awful.spawn(program, {
-        --tag=screen[awful.screen.focused({client=true})].selected_tag
-        tag=mouse.screen.selected_tag
-    })
-end
+-- Moved to helper.lua
+--function spawn_program(program)
 
 -- {{{ Mouse bindings
 root.buttons(awful.util.table.join(
@@ -450,36 +447,17 @@ root.buttons(awful.util.table.join(
 ))
 -- }}}
 
-function move_tag_to_screen(_tag, _screen_index)
-    _tag.selected = false
-    _tag.screen = _screen_index
-    _tag.selected = true
-end
+-- Moved to helper.lua
+--function move_tag_to_screen(_tag, _screen_index)
 
-function force_focus(_screen)
-    awful.screen.focus(_screen)
-    if #_screen.clients > 0 then
-        c = _screen.clients[1]
-        client.focus = c
-        c:raise()
-    end
-end
+-- Moved to helper.lua
+--function force_focus(_screen)
 
-function reset_to_primary()
-    for k, v in pairs(shared_tag_list) do
-        awful.tag.setproperty(v, "hide", true)
-        v.screen = 1
-        awful.tag.setproperty(v, "hide", false)
-    end
+-- Moved to helper.lua
+--function reset_to_primary()
 
-    awful.tag.viewnone(screen[1])
-    awful.tag.viewmore({shared_tag_list[1]})
-end
-
-
---+=============================================================================
---| Key Bindings
---+-----------------------------------------------------------------------------
+-- TODO: Move to key_bindings.lua
+--globalkeys = key_bindings.globalkeys
 globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "j",
         function ()
@@ -500,24 +478,24 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end),
     awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end),
 
-    awful.key({ modkey,           }, "s", function () focus_on_screen(1, screen_map) end),
-    awful.key({ modkey,           }, "d", function () focus_on_screen(2, screen_map) end),
-    awful.key({ modkey,           }, "f", function () focus_on_screen(3, screen_map) end),
-    awful.key({ modkey, "Shift"   }, "t", function () reset_to_primary() end),
+    awful.key({ modkey,           }, "s", function () helper.focus_on_screen(1, screen_map) end),
+    awful.key({ modkey,           }, "d", function () helper.focus_on_screen(2, screen_map) end),
+    awful.key({ modkey,           }, "f", function () helper.focus_on_screen(3, screen_map) end),
+    awful.key({ modkey, "Shift"   }, "t", function () helper.reset_to_primary() end),
 
     -- Standard programs
-    awful.key({ modkey,           }, "w", function () spawn_program(programs["browser"]) end),
+    awful.key({ modkey,           }, "w", function () helper.spawn_program(programs["browser"]) end),
 
     awful.key({ modkey, "Shift"   }, "Return", function ()
         -- Make sure our X server resource database is up-to-date, that way our
         -- terminal will have the latest settings configured in ~/.Xresources
-        spawn_program("xrdb ~/.Xresources")
-        spawn_program(programs["terminal"])
+        helper.spawn_program("xrdb ~/.Xresources")
+        helper.spawn_program(programs["terminal"])
     end),
 
-    awful.key({ modkey,           }, "l", function () spawn_program(programs["lock"]) end),
-    awful.key({ modkey,           }, "a", function () spawn_program(programs["randr"]) end),
-    awful.key({ modkey,           }, "u", function () spawn_program(programs["audio"]) end),
+    awful.key({ modkey,           }, "l", function () helper.spawn_program(programs["lock"]) end),
+    awful.key({ modkey,           }, "a", function () helper.spawn_program(programs["randr"]) end),
+    awful.key({ modkey,           }, "u", function () helper.spawn_program(programs["audio"]) end),
     awful.key({                   }, "Print", function () awful.spawn.with_shell(programs["screenshot"]) end),
 
     -- Awesome Control
@@ -536,13 +514,13 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "n", awful.client.restore),
 
     -- Audio Control
-    awful.key({                   }, "XF86AudioRaiseVolume", function() spawn_program("amixer -M set Master 5%+") end),
-    awful.key({                   }, "XF86AudioLowerVolume", function() spawn_program("amixer -M set Master 5%-") end),
-    awful.key({                   }, "XF86AudioMute",        function() spawn_program("amixer -M sset Master toggle") end),
+    awful.key({                   }, "XF86AudioRaiseVolume", function() helper.spawn_program("amixer -M set Master 5%+") end),
+    awful.key({                   }, "XF86AudioLowerVolume", function() helper.spawn_program("amixer -M set Master 5%-") end),
+    awful.key({                   }, "XF86AudioMute",        function() helper.spawn_program("amixer -M sset Master toggle") end),
 
     -- Brightness
-    awful.key({                   }, "XF86MonBrightnessUp",   function() spawn_program("brightness -inc") end),
-    awful.key({                   }, "XF86MonBrightnessDown", function() spawn_program("brightness -dec") end),
+    awful.key({                   }, "XF86MonBrightnessUp",   function() helper.spawn_program("brightness -inc") end),
+    awful.key({                   }, "XF86MonBrightnessDown", function() helper.spawn_program("brightness -dec") end),
 
     -- DMenu2
     awful.key({ modkey }, "p", function()
@@ -558,54 +536,11 @@ globalkeys = awful.util.table.join(
     end)
 )
 
-function select_next(c)
-    -- If there's no other clients to focus on
-    if #c.screen.get_clients() == 1 then
-        return client.focus
-    end
+-- Moved to helper.lua
+--function select_next(c)
 
-    -- If floating, focus on the 1st index client
-    if c.floating then
-        awful.client.focus.byidx(1)
-        if client.focus then
-            client.focus:raise()
-        end
-        return client.focus
-    end
-
-    idx = awful.client.idx(c)
-
-    if idx == nil then
-        awful.client.focus.byidx(1)
-        if client.focus then
-            client.focus:raise()
-        end
-        return client.focus
-    end
-
-    local t = c.screen.selected_tag
-
-    -- Focus on the client right after the current client
-    -- If the index of the client is the last index of the column, go up
-    if idx["col"] == t.column_count and idx["idx"] == idx["num"] then
-        awful.client.focus.byidx(-1)
-        if client.focus then
-            client.focus:raise()
-        end
-    else
-        awful.client.focus.byidx(1)
-        if client.focus then
-            client.focus:raise()
-        end
-    end
-
-    return client.focus
-end
-
-function kill_select(c)
-    select_next(c)
-    c:kill()
-end
+-- Moved to helper.lua
+--function kill_select(c)
 
 client.connect_signal("focus", function(c)
     -- do nothing
@@ -624,7 +559,7 @@ end)
 
 clientkeys = awful.util.table.join(
     awful.key({ modkey,           }, "f",       function (c) c.fullscreen = not c.fullscreen end),
-    awful.key({ modkey, "Shift"   }, "c",       function (c) kill_select(c) end),
+    awful.key({ modkey, "Shift"   }, "c",       function (c) helper.kill_select(c) end),
     awful.key({ modkey,           }, "t",       awful.client.floating.toggle ),
     awful.key({ modkey,           }, "Return",  function (c) c:swap(awful.client.getmaster()) end),
 
@@ -669,15 +604,15 @@ clientkeys = awful.util.table.join(
             string.format("dockable = %s\n", tostring(c.dockable))
         )
     end),
-    awful.key({ modkey, "Shift"   }, "s",       function (c) move_client_to_screen(c, 1, screen_map) end),
-    awful.key({ modkey, "Shift"   }, "d",       function (c) move_client_to_screen(c, 2, screen_map) end),
-    awful.key({ modkey, "Shift"   }, "f",       function (c) move_client_to_screen(c, 3, screen_map) end),
+    awful.key({ modkey, "Shift"   }, "s",       function (c) helper.move_client_to_screen(c, 1, screen_map) end),
+    awful.key({ modkey, "Shift"   }, "d",       function (c) helper.move_client_to_screen(c, 2, screen_map) end),
+    awful.key({ modkey, "Shift"   }, "f",       function (c) helper.move_client_to_screen(c, 3, screen_map) end),
     awful.key({ modkey,           }, "y",       function (c) c.ontop = not c.ontop end),
     awful.key({ modkey,           }, "n",
         function (c)
             c.minimized = true
             c.maximized = false
-            select_next(c)
+            helper.select_next(c)
         end),
     awful.key({ modkey,           }, "m",
         function (c)
@@ -705,7 +640,7 @@ for i = 1, 9 do
             elseif not new_tag.selected and (new_tag.screen.index == target_scr.index) then
                 awful.tag.viewnone(target_scr)
                 awful.tag.viewmore({new_tag})
-                force_focus(target_scr)
+                helper.force_focus(target_scr)
 
             elseif not new_tag.selected and (new_tag.screen.index ~= target_scr.index) then
                 other_scr = new_tag.screen
@@ -713,29 +648,29 @@ for i = 1, 9 do
 
                 -- TODO can other_tag be nil?
 
-                move_tag_to_screen(new_tag, target_scr.index)
+                helper.move_tag_to_screen(new_tag, target_scr.index)
                 awful.tag.viewnone(target_scr)
                 awful.tag.viewnone(other_scr)
                 awful.tag.viewmore({new_tag, other_tag})
-                force_focus(target_scr)
+                helper.force_focus(target_scr)
 
             elseif new_tag.selected and (new_tag.screen.index ~= target_scr.index) then
 
                 other_scr = new_tag.screen
                 curr_tag = target_scr.selected_tag
 
-                move_tag_to_screen(new_tag, target_scr.index)
+                helper.move_tag_to_screen(new_tag, target_scr.index)
                 awful.tag.viewnone(target_scr)
 
                 -- move focused screen tag to other screen
                 if curr_tag then
-                    move_tag_to_screen(curr_tag, other_scr.index)
+                    helper.move_tag_to_screen(curr_tag, other_scr.index)
                     awful.tag.viewnone(other_scr)
                     awful.tag.viewmore({curr_tag})
                 end
 
                 awful.tag.viewmore({new_tag})
-                force_focus(target_scr)
+                helper.force_focus(target_scr)
             end
 
             -- Sort the tag lists
@@ -789,7 +724,7 @@ screen.connect_signal("added", function()
     -- Find a tag that isn't currently selected, and move it to the new screen
     for _, t in pairs(root.tags()) do
         if not t.selected then
-            move_tag_to_screen(t, new_screen.index)
+            helper.move_tag_to_screen(t, new_screen.index)
             return
         end
     end
@@ -803,11 +738,11 @@ tag.connect_signal("request::screen", function(t)
         if s ~= t.screen then
             current_tags = s.selected_tags
 
-            move_tag_to_screen(t, s.index)
+            helper.move_tag_to_screen(t, s.index)
 
             awful.tag.viewnone(s)
             awful.tag.viewmore(current_tags, s)
-            force_focus(s)
+            helper.force_focus(s)
 
             return
         end
@@ -825,25 +760,14 @@ clientbuttons = awful.util.table.join(
 
 root.keys(globalkeys)
 
+-- Moved to helper.lua
+--function client_resize(c, w, h)
 
--- moveresize is relative to the current geometry, there was no alternative...
-function client_resize(c, w, h)
-    awful.client.moveresize(0, 0, w - c.width, h - c.height, c)
-end
+-- Moved to helper.lua
+--function client_move(c, x, y)
 
-
--- moveresize is relative to the current geometry, there was no alternative...
-function client_move(c, x, y)
-    awful.client.moveresize(x - c.x, y - c.y, 0, 0, c)
-end
-
-
--- moveresize is relative to the current geometry, there was no alternative...
-function client_move_on_screen(c, x, y)
-    g = awful.screen.focused({client=true}).geometry
-    awful.client.moveresize(g.x + (x - c.x), g.y + (y - c.y), 0, 0, c)
-end
-
+-- Moved to helper.lua
+--function client_move_on_screen(c, x, y)
 
 -- Rules to apply to new clients (through the "manage" signal).
 awful.rules.rules = {
@@ -882,8 +806,8 @@ awful.rules.rules = {
 
         -- TODO make this play nice with larger or smaller resolutions
         callback = function(c)
-            client_move_on_screen(c, 100, 100)
-            client_resize(c, 1920, 1080)
+            helper.client_move_on_screen(c, 100, 100)
+            helper.client_resize(c, 1920, 1080)
         end
     },
 
