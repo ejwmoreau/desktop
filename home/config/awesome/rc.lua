@@ -430,31 +430,12 @@ for s = 1, screen.count() do
     setup_screen(s)
 end
 
-
--- Moved to helper.lua
---function move_client_to_screen(c, x, screen_map)
-
--- Moved to helper.lua
---function focus_on_screen(x, screen_map)
-
--- Moved to helper.lua
---function spawn_program(program)
-
 -- {{{ Mouse bindings
 root.buttons(awful.util.table.join(
     awful.button({ }, 4, awful.tag.viewnext),
     awful.button({ }, 5, awful.tag.viewprev)
 ))
 -- }}}
-
--- Moved to helper.lua
---function move_tag_to_screen(_tag, _screen_index)
-
--- Moved to helper.lua
---function force_focus(_screen)
-
--- Moved to helper.lua
---function reset_to_primary()
 
 -- TODO: Move to key_bindings.lua
 --globalkeys = key_bindings.globalkeys
@@ -535,12 +516,6 @@ globalkeys = awful.util.table.join(
         awful.util.spawn(command)
     end)
 )
-
--- Moved to helper.lua
---function select_next(c)
-
--- Moved to helper.lua
---function kill_select(c)
 
 client.connect_signal("focus", function(c)
     -- do nothing
@@ -759,15 +734,6 @@ clientbuttons = awful.util.table.join(
     awful.button({ modkey }, 3, awful.mouse.client.resize))
 
 root.keys(globalkeys)
-
--- Moved to helper.lua
---function client_resize(c, w, h)
-
--- Moved to helper.lua
---function client_move(c, x, y)
-
--- Moved to helper.lua
---function client_move_on_screen(c, x, y)
 
 -- Rules to apply to new clients (through the "manage" signal).
 awful.rules.rules = {
