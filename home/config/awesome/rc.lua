@@ -35,6 +35,12 @@ local vicious = require("vicious")      -- system widgets
 
 awful.rules = require("awful.rules")
 
+-- | Personal Libraries | --
+
+local helper = require("helper")
+local signal = require("signal")
+--local key_bindings = require("key_bindings")
+
 -- | Error handling | --
 
 if awesome.startup_errors then
@@ -73,11 +79,6 @@ local function debug_print(words)
         width = 400
     })
 end
-
---local key_bindings = require("key_bindings")
---debug_print(key_bindings.test_message)
-
-local helper = require("helper")
 
 -- | Notifications | --
 
@@ -327,6 +328,28 @@ mytaglist.buttons = awful.util.table.join(
     awful.button({ }, 5, function(t) awful.tag.viewprev(awful.tag.getscreen(t)) end)
 )
 
+-- TODO: Move this to signal.lua when setup_screen() moves to screen.lua
+-- On new screen added: The first unused tag will be moved to the new screen
+screen.connect_signal("added", function()
+    -- Find the new screen that doesn't have a tag yet
+    local new_screen = nil
+    for s in screen do
+        if next(s.tags) == nil then
+            new_screen = s
+            break
+        end
+    end
+
+    setup_screen(new_screen)
+
+    -- Find a tag that isn't currently selected, and move it to the new screen
+    for _, t in pairs(root.tags()) do
+        if not t.selected then
+            helper.move_tag_to_screen(t, new_screen.index)
+            return
+        end
+    end
+end)
 
 -- Setup wibox, layout, wallpaper, etc for a particular screen
 function setup_screen(s)
@@ -517,21 +540,6 @@ globalkeys = awful.util.table.join(
     end)
 )
 
-client.connect_signal("focus", function(c)
-    -- do nothing
-end)
-
-client.connect_signal("unmanage", function(c)
-    if #c.screen.clients > 0 then
-        client.focus = c.screen.clients[1]
-    end
-end)
-
-screen.connect_signal("removed", function(s)
-    -- TODO move those tags to another screen
-    -- TODO keep tags sorted
-end)
-
 clientkeys = awful.util.table.join(
     awful.key({ modkey,           }, "f",       function (c) c.fullscreen = not c.fullscreen end),
     awful.key({ modkey, "Shift"   }, "c",       function (c) helper.kill_select(c) end),
@@ -682,49 +690,6 @@ for i = 1, 9 do
     end))
 end
 
-
--- On new screen added: The first unused tag will be moved to the new screen
-screen.connect_signal("added", function()
-    -- Find the new screen that doesn't have a tag yet
-    local new_screen = nil
-    for s in screen do
-        if next(s.tags) == nil then
-            new_screen = s
-            break
-        end
-    end
-
-    setup_screen(new_screen)
-
-    -- Find a tag that isn't currently selected, and move it to the new screen
-    for _, t in pairs(root.tags()) do
-        if not t.selected then
-            helper.move_tag_to_screen(t, new_screen.index)
-            return
-        end
-    end
-end);
-
-
--- On screen removed: Tags on the removed screen will be moved to
--- another similar screen, while keeping the same tag focused on that screen
-tag.connect_signal("request::screen", function(t)
-    for s in screen do
-        if s ~= t.screen then
-            current_tags = s.selected_tags
-
-            helper.move_tag_to_screen(t, s.index)
-
-            awful.tag.viewnone(s)
-            awful.tag.viewmore(current_tags, s)
-            helper.force_focus(s)
-
-            return
-        end
-    end
-end);
-
-
 clientbuttons = awful.util.table.join(
     awful.button({ }, 1, function (c)
         client.focus = c;
@@ -791,30 +756,3 @@ awful.rules.rules = {
         properties = { tag = "8" }
     }
 }
-
--- {{{ Signals
--- Signal function to execute when a new client appears.
-client.connect_signal("manage", function (c, startup)
-    -- Enable sloppy focus
-    c:connect_signal("mouse::enter", function(c)
-        if awful.layout.get(c.screen) ~= awful.layout.suit.magnifier
-            and awful.client.focus.filter(c) then
-            client.focus = c
-        end
-    end)
-
-    if not startup then
-        -- Set the windows at the slave,
-        -- i.e. put it at the end of others instead of setting it master.
-        -- awful.client.setslave(c)
-
-        -- Put windows in a smart way, only if they does not set an initial position.
-        if not c.size_hints.user_position and not c.size_hints.program_position then
-            awful.placement.no_overlap(c)
-            awful.placement.no_offscreen(c)
-        end
-    end
-end)
-
-client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
-client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
