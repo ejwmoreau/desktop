@@ -4,9 +4,8 @@ local helper = require("helper")
 
 local signal = {}
 
-client.connect_signal("focus", function(c)
-    -- do nothing
-end)
+client.connect_signal("focus",   function(c) c.border_color = beautiful.border_focus  end)
+client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 
 client.connect_signal("unmanage", function(c)
     if #c.screen.clients > 0 then
@@ -18,9 +17,6 @@ screen.connect_signal("removed", function(s)
     -- TODO move those tags to another screen
     -- TODO keep tags sorted
 end)
-
-client.connect_signal("focus",   function(c) c.border_color = beautiful.border_focus  end)
-client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 
 -- When a new client appears
 client.connect_signal("manage", function (c, startup)
