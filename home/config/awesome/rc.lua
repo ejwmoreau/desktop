@@ -234,9 +234,7 @@ end)
 -- Setup wibox, layout, wallpaper, etc for a particular screen
 function setup_screen(s)
 
-    if beautiful.wallpaper then
-        gears.wallpaper.maximized(beautiful.wallpaper, s)
-    end
+    helper.set_wallpaper(s)
 
     mytaglist[s] = awful.widget.taglist(
         s, awful.widget.taglist.filter.all, mytaglist.buttons)

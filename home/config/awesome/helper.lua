@@ -1,4 +1,6 @@
 local awful = require("awful")
+local beautiful = require("beautiful")
+local gears = require("gears")
 
 local helper = {}
 
@@ -113,6 +115,12 @@ end
 function helper.client_move_on_screen(c, x, y)
     g = awful.screen.focused({client=true}).geometry
     awful.client.moveresize(g.x + (x - c.x), g.y + (y - c.y), 0, 0, c)
+end
+
+function helper.set_wallpaper(s)
+    if beautiful.wallpaper then
+        gears.wallpaper.maximized(beautiful.wallpaper, s)
+    end
 end
 
 return helper

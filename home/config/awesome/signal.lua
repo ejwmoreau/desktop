@@ -6,6 +6,8 @@ local helper = require("helper")
 
 local signal = {}
 
+-- | Client Signals | --
+
 client.connect_signal("focus",   function(c) c.border_color = beautiful.border_focus  end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 
@@ -13,11 +15,6 @@ client.connect_signal("unmanage", function(c)
     if #c.screen.clients > 0 then
         client.focus = c.screen.clients[1]
     end
-end)
-
-screen.connect_signal("removed", function(s)
-    -- TODO move those tags to another screen
-    -- TODO keep tags sorted
 end)
 
 -- When a new client appears
@@ -42,6 +39,17 @@ client.connect_signal("manage", function (c, startup)
         end
     end
 end)
+
+-- | Screen Signals | --
+
+screen.connect_signal("removed", function(s)
+    -- TODO move those tags to another screen
+    -- TODO keep tags sorted
+end)
+
+screen.connect_signal("property::geometry", helper.set_wallpaper)
+
+-- | Tag Signals | --
 
 -- On screen removed: Tags on the removed screen will be moved to another similar screen,
 -- while keeping the same tag focused on that screen
