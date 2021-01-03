@@ -28,7 +28,6 @@ local awful = require("awful")
 local assault = require("assault")      -- battery widget
 local beautiful = require("beautiful")  -- theme management
 local common = require("awful.widget.common")
-local lain = require("lain")            -- layouts, widgets, and utilities
 local naughty = require("naughty")      -- notification library
 local wibox = require("wibox")          -- widget and layout library
 local vicious = require("vicious")      -- system widgets
@@ -112,20 +111,12 @@ programs = {
     ["lock"]        = "i3lock -c 000000 -f",
     ["randr"]       = "arandr",
     ["editor"]      = os.getenv("EDITOR") or "vim",
-    ["screenshot"]  = "( flameshot & ) && ( sleep 0.2s && flameshot gui )"
-}
-programs["editor_cmd"] = programs["terminal"] .. " -e " .. programs["editor"]
-
-local layouts = {
-    awful.layout.suit.tile,
-    awful.layout.suit.max,
-    lain.layout.centerwork_leftright,
-    awful.layout.suit.max.fullscreen,
+    ["screenshot"]  = "( flameshot & ) && ( sleep 0.2s && flameshot gui -p ~/shots )"
 }
 
 -- | Tags | --
 
-awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, 9 }, 1, layouts[1])
+awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, 9 }, 1, key_bindings.layouts[1])
 shared_tag_list = screen[1].tags
 
 -- Ensure every screen has a tag, and a tag that is activated

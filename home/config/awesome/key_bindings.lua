@@ -1,10 +1,18 @@
 local awful = require("awful")
 local helper = require("helper")
+local lain = require("lain")
 
 local key_bindings = {}
 
 local modkey = "Mod4"
 key_bindings.modkey = modkey
+
+key_bindings.layouts = {
+    awful.layout.suit.tile,
+    awful.layout.suit.max,
+    lain.layout.centerwork_leftright,
+    awful.layout.suit.max.fullscreen,
+}
 
 key_bindings.globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "j", function ()
@@ -55,8 +63,8 @@ key_bindings.globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, ".", function () awful.tag.incnmaster(-1) end),
     awful.key({ modkey, "Control" }, "h", function () awful.tag.incncol( 1) end),
     awful.key({ modkey, "Control" }, "l", function () awful.tag.incncol(-1) end),
-    awful.key({ modkey,           }, "space", function () awful.layout.inc(layouts, 1) end),
-    awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(layouts, -1) end),
+    awful.key({ modkey,           }, "space", function () awful.layout.inc(key_bindings.layouts, 1) end),
+    awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(key_bindings.layouts, -1) end),
     awful.key({ modkey, "Control" }, "n", awful.client.restore),
 
     -- Audio Control
