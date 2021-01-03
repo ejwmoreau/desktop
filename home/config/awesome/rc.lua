@@ -36,6 +36,7 @@ local vicious = require("vicious")      -- system widgets
 awful.rules = require("awful.rules")
 
 -- TODO: Maybe move this into a theme.lua or something?
+-- Needs to load before `top_bar`
 -- Themes define colours, icons, font and wallpapers.
 theme_dir = os.getenv("HOME") .. "/.config/awesome/themes/"
 beautiful.init(theme_dir .. "pro-dark/theme.lua")
@@ -43,12 +44,13 @@ beautiful.init(theme_dir .. "pro-dark/theme.lua")
 -- | Personal Libraries | --
 
 local helper = require("helper")
+local key_bindings = require("key_bindings")
 local signal = require("signal")
 local top_bar = require("top_bar")
---local key_bindings = require("key_bindings")
 
 -- | Error handling | --
 
+-- Errors with starting up
 if awesome.startup_errors then
     naughty.notify({
         preset = naughty.config.presets.critical,
@@ -57,21 +59,14 @@ if awesome.startup_errors then
     })
 end
 
--- Handle runtime errors after startup
-do
-    local in_error = false
-    awesome.connect_signal("debug::error", function (err)
-        -- Make sure we don't go into an endless error loop
-        if in_error then return end
-        in_error = true
-
-        naughty.notify({
-            preset = naughty.config.presets.critical,
-            title = "AwesomeWM: Runtime error after startup",
-            text = err })
-        in_error = false
-    end)
-end
+-- Errors after startup
+awesome.connect_signal("debug::error", function (err)
+    naughty.notify({
+        preset = naughty.config.presets.critical,
+        title = "AwesomeWM: Runtime error after startup",
+        text = err
+    })
+end)
 
 --------------------------------------------------------------------------------
 -- Just a quick print function that relies on naughty notification boxes. E.g.:
@@ -106,8 +101,7 @@ end
 
 -- | Global Variables | --
 
--- TODO: Move to key_bindings.lua
-local modkey = "Mod4"
+local modkey = key_bindings.modkey
 
 -- This is used later as the default terminal and editor to run.
 programs = {
@@ -355,85 +349,7 @@ root.buttons(awful.util.table.join(
 ))
 -- }}}
 
--- TODO: Move to key_bindings.lua
---globalkeys = key_bindings.globalkeys
-globalkeys = awful.util.table.join(
-    awful.key({ modkey,           }, "j",
-        function ()
-            awful.client.focus.byidx( 1)
-            if client.focus then
-                client.focus:raise()
-            end
-        end),
-    awful.key({ modkey,           }, "k",
-        function ()
-            awful.client.focus.byidx(-1)
-            if client.focus then
-                client.focus:raise()
-            end
-        end),
-
-    -- Layout manipulation
-    awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end),
-    awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end),
-
-    awful.key({ modkey,           }, "s", function () helper.focus_on_screen(1, screen_map) end),
-    awful.key({ modkey,           }, "d", function () helper.focus_on_screen(2, screen_map) end),
-    awful.key({ modkey,           }, "f", function () helper.focus_on_screen(3, screen_map) end),
-    awful.key({ modkey, "Shift"   }, "t", function () helper.reset_to_primary() end),
-
-    -- Standard programs
-    awful.key({ modkey,           }, "w", function () helper.spawn_program(programs["browser"]) end),
-
-    awful.key({ modkey, "Shift"   }, "Return", function ()
-        -- Make sure our X server resource database is up-to-date, that way our
-        -- terminal will have the latest settings configured in ~/.Xresources
-        helper.spawn_program("xrdb ~/.Xresources")
-        helper.spawn_program(programs["terminal"])
-    end),
-
-    awful.key({ modkey,           }, "l", function () helper.spawn_program(programs["lock"]) end),
-    awful.key({ modkey,           }, "a", function () helper.spawn_program(programs["randr"]) end),
-    awful.key({ modkey,           }, "u", function () helper.spawn_program(programs["audio"]) end),
-    awful.key({                   }, "Print", function () awful.spawn.with_shell(programs["screenshot"]) end),
-
-    -- Awesome Control
-    awful.key({ modkey, "Control" }, "r", awesome.restart),
-    awful.key({ modkey, "Shift"   }, "q", awesome.quit),
-
-    -- Window Control
-    awful.key({ modkey,           }, "l", function () awful.tag.incmwfact( 0.03) end),
-    awful.key({ modkey,           }, "h", function () awful.tag.incmwfact(-0.03) end),
-    awful.key({ modkey,           }, ",", function () awful.tag.incnmaster( 1) end),
-    awful.key({ modkey,           }, ".", function () awful.tag.incnmaster(-1) end),
-    awful.key({ modkey, "Control" }, "h", function () awful.tag.incncol( 1) end),
-    awful.key({ modkey, "Control" }, "l", function () awful.tag.incncol(-1) end),
-    awful.key({ modkey,           }, "space", function () awful.layout.inc(layouts, 1) end),
-    awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(layouts, -1) end),
-    awful.key({ modkey, "Control" }, "n", awful.client.restore),
-
-    -- Audio Control
-    awful.key({                   }, "XF86AudioRaiseVolume", function() helper.spawn_program("amixer -M set Master 5%+") end),
-    awful.key({                   }, "XF86AudioLowerVolume", function() helper.spawn_program("amixer -M set Master 5%-") end),
-    awful.key({                   }, "XF86AudioMute",        function() helper.spawn_program("amixer -M sset Master toggle") end),
-
-    -- Brightness
-    awful.key({                   }, "XF86MonBrightnessUp",   function() helper.spawn_program("brightness -inc") end),
-    awful.key({                   }, "XF86MonBrightnessDown", function() helper.spawn_program("brightness -dec") end),
-
-    -- DMenu2
-    awful.key({ modkey }, "p", function()
-        scr = awful.screen.focused({client=true})
-
-        local scrgeom = screen[scr].workarea
-        local command = "dmenu_custom"
-        command = command .. " " .. tostring(scrgeom.x)
-        command = command .. " " .. tostring(scrgeom.y)
-        command = command .. " " .. tostring(scrgeom.width)
-        command = command .. " " .. tostring(scrgeom.height)
-        awful.util.spawn(command)
-    end)
-)
+globalkeys = key_bindings.globalkeys
 
 clientkeys = awful.util.table.join(
     awful.key({ modkey,           }, "f",       function (c) c.fullscreen = not c.fullscreen end),
