@@ -166,92 +166,6 @@ for i = 2, screen.count() do
     end
 end
 
-
--- | Markup | --
-
-local markup = lain.util.markup
-local space3 = markup.font("Roboto 3", " ")
-local vspace1 = '<span font="Roboto 3"> </span>'
-
--- | Widgets | --
-
-spr = wibox.widget.imagebox(beautiful.spr)
-spr5px = wibox.widget.imagebox(beautiful.spr5px)
-
-widget_display = wibox.widget.imagebox(beautiful.widget_display)
-widget_display_r = wibox.widget.imagebox(beautiful.widget_display_r)
-widget_display_l = wibox.widget.imagebox(beautiful.widget_display_l)
-widget_display_c = wibox.widget.imagebox(beautiful.widget_display_c)
-
--- | BAT | --
-
-
-battery_widget = lain.widget.bat({
-    timeout = 60,
-    settings = function()
-        widget:set_markup(space3 .. bat_now.perc .. "%" .. markup.font("Tamsyn 4", " "))
-    end
-})
-
-widget_bat = wibox.widget.imagebox(beautiful.widget_bat)
-batwidget = wibox.container.background(battery_widget.widget)
-batwidget:set_bgimage(beautiful.widget_display)
-
-
--- | MEM | --
-
-mem_widget = lain.widget.mem({
-    settings = function()
-        widget:set_markup(space3 .. mem_now.perc .. "%" .. markup.font("Tamsyn 4", " "))
-    end
-})
-
-widget_mem = wibox.widget.imagebox(beautiful.widget_mem)
-memwidget = wibox.container.background(mem_widget.widget)
-memwidget:set_bgimage(beautiful.widget_display)
-
--- | FS | --
-
-fs_widget = wibox.widget.textbox()
-vicious.register(fs_widget, vicious.widgets.fs, vspace1 .. "${/ avail_gb}GB" .. vspace1, 2)
-
-widget_fs = wibox.widget.imagebox(beautiful.widget_fs)
-fswidget = wibox.container.background(fs_widget)
-fswidget:set_bgimage(beautiful.widget_display)
-
--- | NET | --
-
-net_widgetdl = wibox.widget.textbox()
-net_widgetul = lain.widget.net({
-    iface = "wlp0s20f3",
-    settings = function()
-        widget:set_markup(markup.font("Tamsyn 1", "  ") .. net_now.sent)
-        net_widgetdl:set_markup(markup.font("Tamsyn 1", " ") .. net_now.received .. markup.font("Tamsyn 1", " "))
-    end
-})
-
-widget_netdl = wibox.widget.imagebox(beautiful.widget_netdl)
-netwidgetdl = wibox.container.background(net_widgetdl)
-netwidgetdl:set_bgimage(beautiful.widget_display)
-
-widget_netul = wibox.widget.imagebox(beautiful.widget_netul)
-netwidgetul = wibox.container.background(net_widgetul.widget)
-netwidgetul:set_bgimage(beautiful.widget_display)
-
--- | Clock / Calendar | --
-
-widget_clock = wibox.widget.imagebox(beautiful.widget_clock)
-
-clockwidget = wibox.container.background(
-    wibox.widget.textclock(markup(beautiful.clockgf, space3 .. "%H:%M" .. markup.font("Tamsyn 3", " ")))
-)
-clockwidget:set_bgimage(beautiful.widget_display)
-
-datewidget = wibox.container.background(
-    wibox.widget.textclock(markup(beautiful.clockgf, space3 .. "%a %d %b" .. markup.font("Tamsyn 3", " ")))
-)
-datewidget:set_bgimage(beautiful.widget_display)
-
 -- | Task List | --
 
 mytasklist = {}
@@ -351,73 +265,73 @@ function setup_screen(s)
 
     -- Widgets that are aligned to the left
     local left_layout = wibox.layout.fixed.horizontal()
-    left_layout:add(spr5px)
+    left_layout:add(top_bar.spr5px)
     left_layout:add(mytaglist[s])
-    left_layout:add(spr5px)
+    left_layout:add(top_bar.spr5px)
 
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
     if s == 1 then
-        right_layout:add(spr)
-        right_layout:add(spr5px)
+        right_layout:add(top_bar.spr)
+        right_layout:add(top_bar.spr5px)
         right_layout:add(wibox.widget.systray())
-        right_layout:add(spr5px)
+        right_layout:add(top_bar.spr5px)
     end
 
-    right_layout:add(spr)
+    right_layout:add(top_bar.spr)
 
     right_layout:add(top_bar.widget_cpu)
-    right_layout:add(widget_display_l)
+    right_layout:add(top_bar.widget_display_l)
     right_layout:add(top_bar.cpuwidget)
-    right_layout:add(widget_display_c)
+    right_layout:add(top_bar.widget_display_c)
     right_layout:add(top_bar.tmpwidget)
     right_layout:add(top_bar.widget_tmp)
-    right_layout:add(widget_display_r)
-    right_layout:add(spr5px)
+    right_layout:add(top_bar.widget_display_r)
+    right_layout:add(top_bar.spr5px)
 
-    right_layout:add(spr)
+    right_layout:add(top_bar.spr)
 
-    right_layout:add(widget_mem)
-    right_layout:add(widget_display_l)
-    right_layout:add(memwidget)
-    right_layout:add(widget_display_r)
-    right_layout:add(spr5px)
+    right_layout:add(top_bar.widget_mem)
+    right_layout:add(top_bar.widget_display_l)
+    right_layout:add(top_bar.memwidget)
+    right_layout:add(top_bar.widget_display_r)
+    right_layout:add(top_bar.spr5px)
 
-    right_layout:add(spr)
+    right_layout:add(top_bar.spr)
 
-    right_layout:add(widget_bat)
-    right_layout:add(widget_display_l)
-    right_layout:add(batwidget)
-    right_layout:add(widget_display_r)
-    right_layout:add(spr5px)
+    right_layout:add(top_bar.widget_bat)
+    right_layout:add(top_bar.widget_display_l)
+    right_layout:add(top_bar.batwidget)
+    right_layout:add(top_bar.widget_display_r)
+    right_layout:add(top_bar.spr5px)
 
-    right_layout:add(spr)
+    right_layout:add(top_bar.spr)
 
-    right_layout:add(widget_fs)
-    right_layout:add(widget_display_l)
-    right_layout:add(fswidget)
-    right_layout:add(widget_display_r)
-    right_layout:add(spr5px)
+    right_layout:add(top_bar.widget_fs)
+    right_layout:add(top_bar.widget_display_l)
+    right_layout:add(top_bar.fswidget)
+    right_layout:add(top_bar.widget_display_r)
+    right_layout:add(top_bar.spr5px)
 
-    right_layout:add(spr)
+    right_layout:add(top_bar.spr)
 
-    right_layout:add(widget_netdl)
-    right_layout:add(widget_display_l)
-    right_layout:add(netwidgetdl)
-    right_layout:add(widget_display_c)
-    right_layout:add(netwidgetul)
-    right_layout:add(widget_display_r)
-    right_layout:add(widget_netul)
+    right_layout:add(top_bar.widget_netdl)
+    right_layout:add(top_bar.widget_display_l)
+    right_layout:add(top_bar.netwidgetdl)
+    right_layout:add(top_bar.widget_display_c)
+    right_layout:add(top_bar.netwidgetul)
+    right_layout:add(top_bar.widget_display_r)
+    right_layout:add(top_bar.widget_netul)
 
-    right_layout:add(spr)
+    right_layout:add(top_bar.spr)
 
-    right_layout:add(widget_clock)
-    right_layout:add(widget_display_l)
-    right_layout:add(datewidget)
-    right_layout:add(widget_display_c)
-    right_layout:add(clockwidget)
-    right_layout:add(widget_display_r)
-    right_layout:add(spr5px)
+    right_layout:add(top_bar.widget_clock)
+    right_layout:add(top_bar.widget_display_l)
+    right_layout:add(top_bar.datewidget)
+    right_layout:add(top_bar.widget_display_c)
+    right_layout:add(top_bar.clockwidget)
+    right_layout:add(top_bar.widget_display_r)
+    right_layout:add(top_bar.spr5px)
 
     -- Now bring it all together (with the tasklist in the middle)
     local layout = wibox.layout.align.horizontal()
