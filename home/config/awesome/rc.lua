@@ -35,10 +35,16 @@ local vicious = require("vicious")      -- system widgets
 
 awful.rules = require("awful.rules")
 
+-- TODO: Maybe move this into a theme.lua or something?
+-- Themes define colours, icons, font and wallpapers.
+theme_dir = os.getenv("HOME") .. "/.config/awesome/themes/"
+beautiful.init(theme_dir .. "pro-dark/theme.lua")
+
 -- | Personal Libraries | --
 
 local helper = require("helper")
 local signal = require("signal")
+local top_bar = require("top_bar")
 --local key_bindings = require("key_bindings")
 
 -- | Error handling | --
@@ -99,10 +105,6 @@ naughty.config.notify_callback = function(args)
 end
 
 -- | Global Variables | --
-
--- Themes define colours, icons, font and wallpapers.
-theme_dir = os.getenv("HOME") .. "/.config/awesome/themes/"
-beautiful.init(theme_dir .. "pro-dark/theme.lua")
 
 -- TODO: Move to key_bindings.lua
 local modkey = "Mod4"
@@ -169,9 +171,7 @@ end
 
 local markup = lain.util.markup
 local space3 = markup.font("Roboto 3", " ")
-local space4 = markup.font("Roboto 4", " ")
 local vspace1 = '<span font="Roboto 3"> </span>'
-local vspace2 = '<span font="Roboto 3">  </span>'
 
 -- | Widgets | --
 
@@ -182,25 +182,6 @@ widget_display = wibox.widget.imagebox(beautiful.widget_display)
 widget_display_r = wibox.widget.imagebox(beautiful.widget_display_r)
 widget_display_l = wibox.widget.imagebox(beautiful.widget_display_l)
 widget_display_c = wibox.widget.imagebox(beautiful.widget_display_c)
-
--- | CPU / TMP | --
-
-cpu_widget = lain.widget.cpu({
-    settings = function()
-        widget:set_markup(space3 .. cpu_now.usage .. "%" .. markup.font("Tamsyn 4", " "))
-    end
-})
-
-widget_cpu = wibox.widget.imagebox(beautiful.widget_cpu)
-cpuwidget = wibox.container.background(cpu_widget.widget)
-cpuwidget:set_bgimage(beautiful.widget_display)
-
-tmp_widget = wibox.widget.textbox()
-vicious.register(tmp_widget, vicious.widgets.thermal, vspace1 .. "$1°C" .. vspace1, 9, "thermal_zone0")
-
-widget_tmp = wibox.widget.imagebox(beautiful.widget_tmp)
-tmpwidget = wibox.container.background(tmp_widget)
-tmpwidget:set_bgimage(beautiful.widget_display)
 
 -- | BAT | --
 
@@ -385,12 +366,12 @@ function setup_screen(s)
 
     right_layout:add(spr)
 
-    right_layout:add(widget_cpu)
+    right_layout:add(top_bar.widget_cpu)
     right_layout:add(widget_display_l)
-    right_layout:add(cpuwidget)
+    right_layout:add(top_bar.cpuwidget)
     right_layout:add(widget_display_c)
-    right_layout:add(tmpwidget)
-    right_layout:add(widget_tmp)
+    right_layout:add(top_bar.tmpwidget)
+    right_layout:add(top_bar.widget_tmp)
     right_layout:add(widget_display_r)
     right_layout:add(spr5px)
 

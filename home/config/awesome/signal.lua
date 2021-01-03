@@ -2,6 +2,8 @@ local awful = require("awful")
 local beautiful = require("beautiful")
 local helper = require("helper")
 
+-- | Contains all the `connect_signal()` functions | --
+
 local signal = {}
 
 client.connect_signal("focus",   function(c) c.border_color = beautiful.border_focus  end)
