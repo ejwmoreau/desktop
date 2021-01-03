@@ -418,77 +418,56 @@ clientkeys = awful.util.table.join(
 for i = 1, 9 do
     globalkeys = awful.util.table.join(globalkeys,
     -- View tag only.
-    awful.key({ modkey }, "#" .. i + 9,
-        function ()
+    awful.key({ modkey }, "#" .. i + 9, function ()
 
-            -- I want to bring new_tag to focus on target_scr
-            local new_tag = shared_tag_list[i]
-            local target_scr = awful.screen.focused()
+        -- I want to bring new_tag to focus on target_scr
+        local new_tag = shared_tag_list[i]
+        local target_scr = awful.screen.focused()
 
-            if new_tag.selected and (new_tag.screen.index == target_scr.index) then
-                return
+        if new_tag.selected and (new_tag.screen.index == target_scr.index) then
+            return
 
-            elseif not new_tag.selected and (new_tag.screen.index == target_scr.index) then
-                awful.tag.viewnone(target_scr)
-                awful.tag.viewmore({new_tag})
-                helper.force_focus(target_scr)
+        elseif not new_tag.selected and (new_tag.screen.index == target_scr.index) then
+            awful.tag.viewnone(target_scr)
+            awful.tag.viewmore({new_tag})
+            helper.force_focus(target_scr)
 
-            elseif not new_tag.selected and (new_tag.screen.index ~= target_scr.index) then
-                other_scr = new_tag.screen
-                other_tag = other_scr.selected_tag
+        elseif not new_tag.selected and (new_tag.screen.index ~= target_scr.index) then
+            other_scr = new_tag.screen
+            other_tag = other_scr.selected_tag
 
-                -- TODO can other_tag be nil?
+            -- TODO can other_tag be nil?
 
-                helper.move_tag_to_screen(new_tag, target_scr.index)
-                awful.tag.viewnone(target_scr)
+            helper.move_tag_to_screen(new_tag, target_scr.index)
+            awful.tag.viewnone(target_scr)
+            awful.tag.viewnone(other_scr)
+            awful.tag.viewmore({new_tag, other_tag})
+            helper.force_focus(target_scr)
+
+        elseif new_tag.selected and (new_tag.screen.index ~= target_scr.index) then
+
+            other_scr = new_tag.screen
+            curr_tag = target_scr.selected_tag
+
+            helper.move_tag_to_screen(new_tag, target_scr.index)
+            awful.tag.viewnone(target_scr)
+
+            -- move focused screen tag to other screen
+            if curr_tag then
+                helper.move_tag_to_screen(curr_tag, other_scr.index)
                 awful.tag.viewnone(other_scr)
-                awful.tag.viewmore({new_tag, other_tag})
-                helper.force_focus(target_scr)
-
-            elseif new_tag.selected and (new_tag.screen.index ~= target_scr.index) then
-
-                other_scr = new_tag.screen
-                curr_tag = target_scr.selected_tag
-
-                helper.move_tag_to_screen(new_tag, target_scr.index)
-                awful.tag.viewnone(target_scr)
-
-                -- move focused screen tag to other screen
-                if curr_tag then
-                    helper.move_tag_to_screen(curr_tag, other_scr.index)
-                    awful.tag.viewnone(other_scr)
-                    awful.tag.viewmore({curr_tag})
-                end
-
-                awful.tag.viewmore({new_tag})
-                helper.force_focus(target_scr)
+                awful.tag.viewmore({curr_tag})
             end
 
-            -- Sort the tag lists
-            -- Very naive solution, that requires minimal understanding of LUA
-            -- to code... lol
-            message = ""
+            awful.tag.viewmore({new_tag})
+            helper.force_focus(target_scr)
+        end
 
-            -- For sorting, we need a counter array. The index of a tag
-            -- determines where it is in the tag list. But the index can't be
-            -- any number, it has to be between 1..len(tags on screen); so we
-            -- are going to go through each tag and keep track of the index per
-            -- screen
-            counters = {}
-            for s in screen do
-                counters[s.index] = 0
-            end
-            for i = 1, 9 do
-                local _tag = shared_tag_list[i]
-                counters[_tag.screen.index] = counters[_tag.screen.index] + 1
-                _tag.index = counters[_tag.screen.index]
-            end
-
-        end),
+        helper.sort_tags()
+    end),
 
     -- Move client to tag.
-    awful.key({ modkey, "Shift" }, "#" .. i + 9,
-    function ()
+    awful.key({ modkey, "Shift" }, "#" .. i + 9, function ()
         if client.focus then
             local tag = shared_tag_list[i]
             if tag then
@@ -499,12 +478,10 @@ for i = 1, 9 do
 end
 
 clientbuttons = awful.util.table.join(
-    awful.button({ }, 1, function (c)
-        client.focus = c;
-        --c:raise()
-    end),
+    awful.button({        }, 1, function (c) client.focus = c end),
     awful.button({ modkey }, 1, awful.mouse.client.move),
-    awful.button({ modkey }, 3, awful.mouse.client.resize))
+    awful.button({ modkey }, 3, awful.mouse.client.resize)
+)
 
 root.keys(globalkeys)
 

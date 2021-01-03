@@ -81,6 +81,25 @@ function helper.move_tag_to_screen(_tag, _screen_index)
     _tag.selected = true
 end
 
+function helper.sort_tags()
+    -- Sort the tag lists
+    -- Very naive solution, with minimal understanding of Lua to code... lol
+
+    -- For sorting, we need a counter array. The index of a tag determines where it is in
+    -- the tag list. But the index can't be any number, it has to be between
+    -- 1..len(tags on screen); so we are going to go through each tag and keep track of
+    -- the index per screen
+    local counters = {}
+    for s in screen do
+        counters[s.index] = 0
+    end
+    for i = 1, 9 do
+        local _tag = shared_tag_list[i]
+        counters[_tag.screen.index] = counters[_tag.screen.index] + 1
+        _tag.index = counters[_tag.screen.index]
+    end
+end
+
 function helper.force_focus(_screen)
     awful.screen.focus(_screen)
     if #_screen.clients > 0 then
