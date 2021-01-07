@@ -538,6 +538,6 @@ awful.rules.rules = {
         rule_any = {
             class = { "zoom" }
         },
-        properties = { tag = "8" }
+        properties = { tag = "8", above = false }
     }
 }
