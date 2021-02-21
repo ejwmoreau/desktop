@@ -15,6 +15,8 @@
     * sudo systemctl daemon-reload
     * sudo systemctl enable linux-modules-cleanup
 * Add and use `peek` for screen recording
+* Use this for lightdm greeter
+  * https://github.com/NoiSek/Aether
 
 ## Awesome WM
 
