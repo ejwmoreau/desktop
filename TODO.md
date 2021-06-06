@@ -17,6 +17,20 @@
 * Add and use `peek` for screen recording
 * Use this for lightdm greeter
   * https://github.com/NoiSek/Aether
+* Remove `enable` for `docker.service`, and instead run this: `systemctl enable --now docker.socket`
+  * This will only start docker when it's actually needed, instead of starting on boot
+* Add the config changes at the end of `/etc/pulse/default.pa`
+  * https://wiki.archlinux.org/index.php/PulseAudio/Troubleshooting#Enable_Echo/Noise-Cancellation
+* Add setup for swap (for hibernation to work)
+  * Using a swapfile within the encrypted volume
+  * https://wiki.archlinux.org/title/Swap#Swap_file
+  * Also set swapiness to 10 (low-ish number) so it'll avoid using swap normally
+  * No need to encrypt the swap itself
+* Add setup for hibernation
+  * Kernel parameters, then re-gen grub config
+  * Configure the initramfs hooks, then mkinitcpio
+* Change suspend and hibernate to "hybrid-sleep", so it'll be able to resume even if the laptop died
+  * Changes are appended to /etc/systemd/sleep.conf
 
 ## Awesome WM
 

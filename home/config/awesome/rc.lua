@@ -17,7 +17,6 @@
 
 -- | TODO List | --
 
--- sort the taglist after a screen gets disconnected
 -- scratchpad for applications: https://github.com/notnew/awesome-scratch
 -- improve focus when app closes
 
@@ -109,7 +108,7 @@ programs = {
     --["browser"]     = "firefox",
     ["browser"]     = "chromium",
     ["terminal"]    = "urxvt",
-    ["lock"]        = "i3lock -c 000000 -f",
+    ["lock"]        = "i3lock --color 000000 --show-failed-attempts",
     ["randr"]       = "arandr",
     ["editor"]      = os.getenv("EDITOR") or "vim",
     ["screenshot"]  = "( flameshot & ) && ( sleep 0.2s && flameshot gui -p ~/shots )"
