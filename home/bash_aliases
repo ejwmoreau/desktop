@@ -243,7 +243,7 @@ alias docker-compose="/usr/bin/sudo /usr/bin/docker-compose"
 # Arch Linux way of handling Java versions
 source "/etc/profile.d/jre.sh"
 
-alias untar="tar -xvzf"
+alias untar="tar xf"
 
 # Mount and set permissions properly (files: rw- r-- r--, dir: rwxr-xr-x)
 alias m="sudo mount -o uid=$USER,fmask=0133,dmask=0022"

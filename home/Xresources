@@ -95,7 +95,7 @@ urxvt.keysym.M-minus:	font-size:decsave
 urxvt.keysym.M-plus:	font-size:incsave
 
 !urxvt.url-launcher:   /usr/bin/firefox
-urxvt.url-launcher:   /usr/bin/chromium
+urxvt.url-launcher:   /usr/bin/google-chrome-stable
 urxvt.matcher.rend.0: Uline fg6
 
 ! mouse-right-click = 3

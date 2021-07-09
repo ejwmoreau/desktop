@@ -29,8 +29,19 @@
 * Add setup for hibernation
   * Kernel parameters, then re-gen grub config
   * Configure the initramfs hooks, then mkinitcpio
-* Change suspend and hibernate to "hybrid-sleep", so it'll be able to resume even if the laptop died
-  * Changes are appended to /etc/systemd/sleep.conf
+* Change laptop lid close to use hybrid-sleep, so it'll be able to resume even if the laptop dies
+  * Changes are appended to /etc/systemd/logind.conf
+* Replace `chromium` installation with `google-chrome-stable`
+  * Requires using AUR instead of just pacman
+* Turn on TRIM for SSD
+  * Enable trim timer `systemctl enable fstrim.timer`
+  * Add `:allow-discards` and `rd.luks.options=discard`: https://wiki.archlinux.org/title/Dm-crypt/Specialties#Discard/TRIM_support_for_solid_state_drives_(SSD)
+* Some `INTEL_GPU_*` settings in `/etc/tlp.conf`
+  * Maybe also other settings in that file
+  * Not sure where the magic numbers come from, but try search in #linux for them
+* Install and use `https://aur.archlinux.org/packages/bluetooth-headset-battery-level-git`
+  * To get Bluetooth headset battery levels. The script might need to run twice
+  * `bluetooth-headset-battery-level CC:98:8B:B7:2A:0E`
 
 ## Awesome WM
 
@@ -39,3 +50,17 @@
 * Improve focus when moving a client from one screen to another
   * Default to focusing on something on the current screen, or
   * Default to keeping focus on the client being moved (but what if the screen is not visible?)
+
+## Experiments
+
+* Using `DRI 2` for Intel Graphics driver:
+  * https://unix.stackexchange.com/questions/524205/help-chromium-display-frozen-but-the-app-keeps-working
+  * Trying to stop the occasional freezing with Chrome/Slack/Obsidian
+  * Added `/etc/X11/xorg.conf.d/20-intel.conf`
+  * If it doesn't work, then maybe try using `AccelMethod UXA`: https://bugs.chromium.org/p/chromium/issues/detail?id=370022#c83
+  * Result: `DRI 2` made Spotify not update it's UI much, so the overall result was worse
+* Using `mem_sleep_default=deep` in kernel parameters:
+  * Trying to see if it improves sleep: https://hello.atlassian.net/wiki/spaces/Linux/pages/1177109787/Getting+the+laptop+to+really+suspend
+  * Result: It seems like deep sleep doesn't work well for my laptop, so it's probably better to revert
+* Disabling power management via TLP for the Dell dock:
+  * Created this file: /etc/tlp.d/01-tb16.conf
