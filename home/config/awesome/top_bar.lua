@@ -56,6 +56,17 @@ top_bar.widget_bat = wibox.widget.imagebox(beautiful.widget_bat)
 top_bar.batwidget = wibox.container.background(battery_widget.widget)
 top_bar.batwidget:set_bgimage(beautiful.widget_display)
 
+-- | Bluetooth Battery | --
+
+local bluetooth_battery_widget = awful.widget.watch("bluetooth_battery", 60,
+    function(widget, stdout)
+        widget:set_markup(space3 .. tonumber(stdout) .. "%" .. markup.font("Tamsyn 4", " "))
+    end
+)
+
+top_bar.bluetooth_batwidget = wibox.container.background(bluetooth_battery_widget)
+top_bar.bluetooth_batwidget:set_bgimage(beautiful.widget_display)
+
 -- | Memory | --
 
 local mem_widget = lain.widget.mem({

@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# Script to rebind devices connected via USB-A ports to the Dell TB16 Dock
+
 # 0b:00.0 USB controller [0c03]: ASMedia Technology Inc. ASM1042A USB 3.0 Host Controller [1b21:1142]
 SERIAL=$(lspci -Dd "1b21:1142" | awk '{ print $1 }')
 DRIVER="/sys/bus/pci/drivers/xhci_hcd"

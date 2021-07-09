@@ -292,6 +292,7 @@ function setup_screen(s)
     right_layout:add(top_bar.widget_bat)
     right_layout:add(top_bar.widget_display_l)
     right_layout:add(top_bar.batwidget)
+    right_layout:add(top_bar.bluetooth_batwidget)
     right_layout:add(top_bar.widget_display_r)
     right_layout:add(top_bar.spr5px)
 

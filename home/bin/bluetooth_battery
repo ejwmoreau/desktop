@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Script to get the current battery level of my Sony WH-1000XM3 Bluetooth Headset
+
+# Run the command a few times, to make sure we get a battery level
+# https://github.com/TheWeirdDev/Bluetooth_Headset_Battery_Level/issues/43
+
+for i in {1..3}; do
+    output=$(bluetooth-headset-battery-level CC:98:8B:B7:2A:0E)
+
+    if [[ "$output" =~ "Battery level for" ]]; then
+        echo $output | awk '{ print $6 }' | cut -d'%' -f1
+        exit
+    fi
+done
+
+echo "--"
