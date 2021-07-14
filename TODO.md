@@ -42,6 +42,10 @@
 * Install and use `https://aur.archlinux.org/packages/bluetooth-headset-battery-level-git`
   * To get Bluetooth headset battery levels. The script might need to run twice
   * `bluetooth-headset-battery-level CC:98:8B:B7:2A:0E`
+* Edit `/etc/pacman.conf` to uncomment `#Color` and add `ILoveCandy` under it
+  * Color is much better, and `ILoveCandy` makes the progress bars into pacman eating circles
+* Consider getting `rebind_dock_usb` to run after logging back in via i3lock
+  * If there's some symptom that I can check for, that would help too
 
 ## Awesome WM
 

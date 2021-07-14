@@ -58,14 +58,25 @@ top_bar.batwidget:set_bgimage(beautiful.widget_display)
 
 -- | Bluetooth Battery | --
 
-local bluetooth_battery_widget = awful.widget.watch("bluetooth_battery", 60,
+local headset_battery_widget = awful.widget.watch("bluetooth_battery headset", 60,
     function(widget, stdout)
-        widget:set_markup(space3 .. tonumber(stdout) .. "%" .. markup.font("Tamsyn 4", " "))
+        stdout = stdout:gsub('%W', '')
+        widget:set_markup(space3 .. stdout .. "%" .. markup.font("Tamsyn 4", " "))
     end
 )
 
-top_bar.bluetooth_batwidget = wibox.container.background(bluetooth_battery_widget)
-top_bar.bluetooth_batwidget:set_bgimage(beautiful.widget_display)
+top_bar.headset_batwidget = wibox.container.background(headset_battery_widget)
+top_bar.headset_batwidget:set_bgimage(beautiful.widget_display)
+
+local keyboard_battery_widget = awful.widget.watch("bluetooth_battery keyboard", 60,
+    function(widget, stdout)
+        stdout = stdout:gsub('%W', '')
+        widget:set_markup(space3 .. stdout .. "%" .. markup.font("Tamsyn 4", " "))
+    end
+)
+
+top_bar.keyboard_batwidget = wibox.container.background(keyboard_battery_widget)
+top_bar.keyboard_batwidget:set_bgimage(beautiful.widget_display)
 
 -- | Memory | --
 

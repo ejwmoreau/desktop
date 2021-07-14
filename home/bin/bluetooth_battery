@@ -1,17 +1,37 @@
 #!/bin/bash
 
-# Script to get the current battery level of my Sony WH-1000XM3 Bluetooth Headset
+# Script to get the current battery level of various bluetooth devices I have
 
-# Run the command a few times, to make sure we get a battery level
-# https://github.com/TheWeirdDev/Bluetooth_Headset_Battery_Level/issues/43
+# Sony WH-1000XM3 Headset
+headset() {
+    # Run the command a few times, to make sure we get a battery level
+    # https://github.com/TheWeirdDev/Bluetooth_Headset_Battery_Level/issues/43
 
-for i in {1..3}; do
-    output=$(bluetooth-headset-battery-level CC:98:8B:B7:2A:0E)
+    for i in {1..2}; do
+        # TODO: Use `upower -d` to get battery info for keyboard
+        output=$(timeout 3s bluetooth-headset-battery-level CC:98:8B:B7:2A:0E)
 
-    if [[ "$output" =~ "Battery level for" ]]; then
-        echo $output | awk '{ print $6 }' | cut -d'%' -f1
-        exit
+        if [[ "$output" =~ "Battery level for" ]]; then
+            echo $output | awk '{ print $6 }' | cut -d'%' -f1
+            exit
+        fi
+    done
+
+    echo "--"
+}
+
+# Keychron K2 keyboard
+keyboard() {
+    output=$(upower -i /org/freedesktop/UPower/devices/keyboard_hid_dco2co26oecob1oe0_battery | grep percentage)
+    if [[ "$output" =~ "percentage" ]]; then
+        echo $output | awk '{ print $2 }' | cut -d'%' -f1
+    else
+        echo "--"
     fi
-done
+}
 
-echo "--"
+case $1 in
+    "headset")  headset;;
+    "keyboard") keyboard;;
+    *) echo "No device specified. Pick one of 'headset, keyboard'";;
+esac
