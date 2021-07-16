@@ -23,7 +23,7 @@ headset() {
 # Keychron K2 keyboard
 keyboard() {
     output=$(upower -i /org/freedesktop/UPower/devices/keyboard_hid_dco2co26oecob1oe0_battery | grep percentage)
-    if [[ "$output" =~ "percentage" ]]; then
+    if [[ "$output" =~ "percentage" && ! "$output" =~ "should be ignored" ]]; then
         echo $output | awk '{ print $2 }' | cut -d'%' -f1
     else
         echo "--"
