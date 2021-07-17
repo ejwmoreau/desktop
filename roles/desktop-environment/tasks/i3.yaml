@@ -1,0 +1,14 @@
+---
+- name: Install i3
+  become: true
+  pacman: name="{{packages}}" update_cache=yes
+  vars:
+    packages:
+      - i3-gaps
+      - i3status
+
+- name: Link config for i3
+  file:
+    src: "{{playbook_dir}}/home/config/i3"
+    dest: "~/.config/i3"
+    state: link
