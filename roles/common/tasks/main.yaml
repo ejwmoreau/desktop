@@ -33,9 +33,8 @@
       - alsa-utils
       - arandr
       - autorandr
-      - bolt
       - code
-      - dnsutils
+      - bind
       - feh
       - gnu-netcat
       - ipcalc

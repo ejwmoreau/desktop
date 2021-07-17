@@ -4,12 +4,11 @@
     path: "~/code"
     state: directory
 
-# TODO: Figure out how to set the proper personal git username & email
-#- name: Clone get_internet_usage repo
-#  git:
-#    repo: "https://git@bitbucket-personal.org:hbotp/internet-usage.git"
-#    dest: "~/code"
-#    version: master
+- name: Clone internet_usage repo
+  git:
+    repo: "git@bitbucket-personal.org:hbotp/internet-usage.git"
+    dest: "~/code"
+    version: master
 
 # TODO: Figure out how to get credentials into the script
 
@@ -27,9 +26,11 @@
     - file: "get_internet_usage.timer"
       dest: "/etc/systemd/system"
 
-- name: Enable get_internet_usage.timer
-  become: true
-  systemd:
-    name: get_internet_usage.timer
-    enabled: yes
-    state: started
+# TODO: Figure out why this is broken
+#- name: Enable get_internet_usage.timer
+#  become: true
+#  systemd:
+#    name: get_internet_usage.timer
+#    enabled: yes
+#    state: started
+#    daemon_reload: yes

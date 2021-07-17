@@ -5,7 +5,7 @@
   vars:
     packages:
       - linux-lts-headers
-      - bbswitch
+      - bbswitch-dkms
 
 - name: Copy modprobe config to load & configure bbswitch
   become: true
