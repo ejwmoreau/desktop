@@ -251,8 +251,9 @@ alias m="sudo mount -o uid=$USER,fmask=0133,dmask=0022"
 # Rick Roll
 alias rick-roll="curl -s -L http://bit.ly/10hA8iC | bash"
 
-# Starts awesome in a nested X server
-alias test-awesome="Xephyr :5 & sleep 1 ; DISPLAY=:5 awesome"
+# Starts awesome/i3 in a nested X server
+alias test-awesome="Xephyr -resizeable :5 & sleep 1; DISPLAY=:5 awesome"
+alias test-i3="Xephyr -resizeable :5 & sleep 1; DISPLAY=:5 i3"
 
 # Auto-tune any "bad" settings in powertop
 alias auto-powertop="sudo powertop --auto-tune"
