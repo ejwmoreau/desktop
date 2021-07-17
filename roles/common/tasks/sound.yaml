@@ -5,6 +5,7 @@
   vars:
     packages:
       - pavucontrol
-      - pulseaudio
+      - pipewire
+      - pipewire-alsa
+      - pipewire-pulse
       - pulseaudio-alsa
-      - pulseaudio-bluetooth

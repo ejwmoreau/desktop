@@ -4,5 +4,7 @@
   pacman: name="{{packages}}" update_cache=yes
   vars:
     packages:
-      - chromium
       - firefox
+
+# TODO: Install via yay
+# - google-chrome

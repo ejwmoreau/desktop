@@ -17,8 +17,6 @@
 * Add and use `peek` for screen recording
 * Use this for lightdm greeter
   * https://github.com/NoiSek/Aether
-* Remove `enable` for `docker.service`, and instead run this: `systemctl enable --now docker.socket`
-  * This will only start docker when it's actually needed, instead of starting on boot
 * Add the config changes at the end of `/etc/pulse/default.pa`
   * https://wiki.archlinux.org/index.php/PulseAudio/Troubleshooting#Enable_Echo/Noise-Cancellation
 * Add setup for swap (for hibernation to work)
@@ -31,8 +29,6 @@
   * Configure the initramfs hooks, then mkinitcpio
 * Change laptop lid close to use hybrid-sleep, so it'll be able to resume even if the laptop dies
   * Changes are appended to /etc/systemd/logind.conf
-* Replace `chromium` installation with `google-chrome-stable`
-  * Requires using AUR instead of just pacman
 * Turn on TRIM for SSD
   * Enable trim timer `systemctl enable fstrim.timer`
   * Add `:allow-discards` and `rd.luks.options=discard`: https://wiki.archlinux.org/title/Dm-crypt/Specialties#Discard/TRIM_support_for_solid_state_drives_(SSD)
@@ -68,3 +64,4 @@
   * Result: It seems like deep sleep doesn't work well for my laptop, so it's probably better to revert
 * Disabling power management via TLP for the Dell dock:
   * Created this file: /etc/tlp.d/01-tb16.conf
+  * Result: It might help a bit, but it doesn't force the kernel to disable power management for the dock

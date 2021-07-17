@@ -7,8 +7,9 @@
       - docker
       - docker-compose
 
+# Enabling the socket allows systemd to delay starting docker until it's needed
 - name: Enable Docker
   become: true
   systemd:
-    name: docker
+    name: docker.socket
     enabled: yes

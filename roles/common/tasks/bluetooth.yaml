@@ -7,6 +7,9 @@
       - bluez
       - bluez-utils
 
+# TODO: Install via yay
+# - bluetooth-headset-battery-level-git
+
 - name: Enable Bluetooth
   become: true
   systemd:
