@@ -1,24 +1,22 @@
 #!/usr/bin/env python
 
 import re
-import subprocess as sp
+import subprocess
 import sys
 
 geo = {}
 
 if len(sys.argv) < 2:
-    cp = sp.run(['xrandr'], stdout=sp.PIPE)
-    lines = cp.stdout.decode('ascii').split('\n')
-    resreg = re.compile('\d+x\d+')
+    cp = subprocess.run(['xrandr'], stdout=subprocess.PIPE).stdout
+    lines = cp.decode('ascii').split('\n')
+    regex = re.compile('\d+x\d+')
     for line in lines:
-        if 'DVI-I-1 connected' in line:
-            m = resreg.search(line)
-            res = line[m.span()[0]:m.span()[1]]
-            res = res.strip().split('x')
+        if 'eDP1 connected' in line or 'default connected' in line:
+            res = regex.search(line).group(0).strip().split('x')
             w = int(res[0])
             h = int(res[1])
 
-            dw = int(w * 0.3)
+            dw = int(w * 0.2)
             dx = int((w - dw) / 2)
             dy = 200
 
@@ -47,7 +45,7 @@ css['original'] = ['#1B1D1E', '#80D4FF', '#333333', '#FFFFFF']
 css['bright'] = ['#373B41', '#DE935F', '#81A2BE', '#000000']
 css['test'] = ['#FF0000', '#00FF00', '#0000FF', '#FFFFFF']
 theme = 'original'
-sp.call([
+subprocess.call([
     'dmenu_run',
     '-l', '8',
     '-nb', css[theme][0],
