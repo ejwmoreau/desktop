@@ -4,11 +4,12 @@
     path: "~/code"
     state: directory
 
-- name: Clone internet_usage repo
-  git:
-    repo: "git@bitbucket-personal.org:hbotp/internet-usage.git"
-    dest: "~/code"
-    version: master
+# TODO: Figure out what to do when there's local modifications to the script (e.g: credentials)
+#- name: Clone internet_usage repo
+#  git:
+#    repo: "git@bitbucket-personal.org:hbotp/internet-usage.git"
+#    dest: "~/code/internet-usage"
+#    version: master
 
 # TODO: Figure out how to get credentials into the script
 

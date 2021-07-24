@@ -22,7 +22,7 @@
 * Add setup for swap (for hibernation to work)
   * Using a swapfile within the encrypted volume
   * https://wiki.archlinux.org/title/Swap#Swap_file
-  * Also set swapiness to 10 (low-ish number) so it'll avoid using swap normally
+  * Also set swapiness to 1 (very low number) so it'll avoid using swap normally
   * No need to encrypt the swap itself
 * Add setup for hibernation
   * Kernel parameters, then re-gen grub config
@@ -42,6 +42,7 @@
   * Color is much better, and `ILoveCandy` makes the progress bars into pacman eating circles
 * Consider getting `rebind_dock_usb` to run after logging back in via i3lock
   * If there's some symptom that I can check for, that would help too
+* Add udev rules to Ansible setup (under etc/udev)
 
 ## Awesome WM
 
