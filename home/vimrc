@@ -15,7 +15,7 @@ set nofixendofline  " Don't touch the end of files to remove trailing new lines
 " UI Config
 set ruler           " Shows line/column numbers in bottom right
 set number          " Show line numbers
-set relativenumber  " Shows relative distance between lines (Temp testing)
+set relativenumber  " Shows relative distance between lines
 set wildmenu        " Visual autocomplete for command menu
 set lazyredraw      " Redraw screen only when need to
 set showmatch       " Highlighting matching [{()}]
@@ -24,9 +24,8 @@ set nowrap          " Don't wrap lines
 set linebreak       " Wrap lines based on word, not letter
 set virtualedit=all " Allow cursor to go where there is no character
 set laststatus=2    " Always show the file status bar
-set spell           " Spell checker (Temp testing)
-set textwidth=100   " Autowrap at the number of chars (Temp testing)
-set colorcolumn=101 " Colour column at the number of chars (Temp testing)
+set spell           " Spell checker
+set colorcolumn=101 " Colour column at the number of chars (textwidth setting is too annoying though)
 set title           " Change terminal title
 set visualbell      " Don't beep
 set t_vb=           " Also avoids some more beeps

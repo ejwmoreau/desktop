@@ -43,6 +43,15 @@
 * Consider getting `rebind_dock_usb` to run after logging back in via i3lock
   * If there's some symptom that I can check for, that would help too
 * Add udev rules to Ansible setup (under etc/udev)
+  * E.g: `/etc/udev/rules.d/99-logitech-webcam-default-zoom.rules`
+* Add `reflector`
+  * Including config changes to `/etc/xdg/reflector/reflector.conf`
+  * Including the pacman hook from https://wiki.archlinux.org/title/Reflector
+* Add `nautilus`
+  * Also run this command to set it as default: `xdg-mime default org.gnome.Nautilus.desktop inode/directory`
+* Add the `scaleFactor=1` config change for Zoom (In `~/.config`)
+* Add `noisetorch` for some noise cancellation on any audio inputs (e.g: mic)
+  * Need to prompt the user to load it via the UI. Maybe this needs to be done after every reboot as well?
 
 ## Awesome WM
 
