@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# Script to turn on/off bluetooth & auto-connect to trusted devices
+
+on() {
+    bluetoothctl power on
+
+    devices=$(bluetoothctl devices | awk '{print $2}')
+    for device in $devices; do
+        bluetoothctl connect $device
+    done
+
+    # Drop into the CLI, in case we need to run more connect commands
+    bluetoothctl
+}
+
+off() {
+    bluetoothctl power off
+}
+
+case $1 in
+    "on")  on;;
+    "off") off;;
+    *) echo "No option specified. Pick one of 'on, off'";;
+esac
