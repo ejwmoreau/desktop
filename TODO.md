@@ -52,6 +52,7 @@
 * Add the `scaleFactor=1` config change for Zoom (In `~/.config`)
 * Add `noisetorch` for some noise cancellation on any audio inputs (e.g: mic)
   * Need to prompt the user to load it via the UI. Maybe this needs to be done after every reboot as well?
+  * Need to test if a low threshold works or not. The audio seemed to sometimes cut out my voice
 
 ## Awesome WM
 

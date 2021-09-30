@@ -64,6 +64,12 @@ key_bindings.globalkeys = awful.util.table.join(
     awful.key({                   }, "XF86AudioLowerVolume", function() helper.spawn_program("amixer -M set Master 5%-") end),
     awful.key({                   }, "XF86AudioMute",        function() helper.spawn_program("amixer -M sset Master toggle") end),
 
+    -- Music Control
+    awful.key({                   }, "XF86AudioPlay",  function() helper.spawn_program("playerctl play-pause") end),
+    awful.key({                   }, "XF86AudioPause", function() helper.spawn_program("playerctl play-pause") end),
+    awful.key({                   }, "XF86AudioNext",  function() helper.spawn_program("playerctl next") end),
+    awful.key({                   }, "XF86AudioPrev",  function() helper.spawn_program("playerctl previous") end),
+
     -- Brightness
     awful.key({                   }, "XF86MonBrightnessUp",   function() helper.spawn_program("brightness -inc") end),
     awful.key({                   }, "XF86MonBrightnessDown", function() helper.spawn_program("brightness -dec") end),
