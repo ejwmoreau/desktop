@@ -27,8 +27,7 @@
 * Add setup for hibernation
   * Kernel parameters, then re-gen grub config
   * Configure the initramfs hooks, then mkinitcpio
-* Change laptop lid close to use hybrid-sleep, so it'll be able to resume even if the laptop dies
-  * Changes are appended to /etc/systemd/logind.conf
+* Add changes to `/etc/systemd/logind.conf`, for the laptop lid close actions
 * Turn on TRIM for SSD
   * Enable trim timer `systemctl enable fstrim.timer`
   * Add `:allow-discards` and `rd.luks.options=discard`: https://wiki.archlinux.org/title/Dm-crypt/Specialties#Discard/TRIM_support_for_solid_state_drives_(SSD)
