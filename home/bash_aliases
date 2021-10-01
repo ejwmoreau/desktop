@@ -261,6 +261,9 @@ alias auto-powertop="sudo powertop --auto-tune"
 # Easily copy a file's contents to a helpful clipboard
 alias copy-file="xclip -i -selection c"
 
+# Send input audio to output audio, so I can test if I sound okay
+alias loopback-mic="echo -n 'Press Enter to stop' && pactl load-module module-loopback > /dev/null && read && pactl unload-module module-loopback"
+
 # Source additional bashrc config specific to work
 source ~/.bashrc_work
 

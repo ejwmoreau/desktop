@@ -53,6 +53,8 @@
 * Add `noisetorch` for some noise cancellation on any audio inputs (e.g: mic)
   * Need to prompt the user to load it via the UI. Maybe this needs to be done after every reboot as well?
   * Need to test if a low threshold works or not. The audio seemed to sometimes cut out my voice
+* Add `/etc/grub.d/40_custom` to have shutdown & reboot options in Grub
+* Add `~/.dmrc` to save any Desktop Manager setup (e.g: picking which Window Manager to use)
 
 ## Awesome WM
 

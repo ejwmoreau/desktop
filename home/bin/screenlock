@@ -2,4 +2,4 @@
 
 LOCK_COMMAND="i3lock --color 000000 --show-failed-attempts"
 NOTIFY_COMMAND="notify-send -u critical -t 20000 'Screen will lock in 20 seconds.'"
-xautolock -time 5 -locker "$LOCK_COMMAND" -notify 20 -notifier "$NOTIFY_COMMAND"
+xautolock -time 5 -locker "$LOCK_COMMAND" -notify 20 -notifier "$NOTIFY_COMMAND" -detectsleep
