@@ -54,6 +54,7 @@
   * Need to test if a low threshold works or not. The audio seemed to sometimes cut out my voice
 * Add `/etc/grub.d/40_custom` to have shutdown & reboot options in Grub
 * Add `~/.dmrc` to save any Desktop Manager setup (e.g: picking which Window Manager to use)
+* Mention somewhere to change UEFI settings for battery usage to "Primarily AC", so it can improve battery health
 
 ## Awesome WM
 
