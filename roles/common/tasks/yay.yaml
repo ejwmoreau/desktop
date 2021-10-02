@@ -22,3 +22,20 @@
 - name: Install yay
   become: true
   pacman: extra_args="-U {{playbook_dir}}/src/yay/yay-*.pkg.tar.zst --needed"
+
+- name: Clone yay ansible module repo
+  git:
+    repo: "https://github.com/mnussbaum/ansible-yay.git"
+    dest: "{{playbook_dir}}/src/github.com/mnussbaum/ansible-yay"
+    version: master
+
+- name: Create library directory for ansible
+  file:
+    path: "{{playbook_dir}}/library"
+    state: directory
+
+- name: Link yay ansible module
+  file:
+    src: "{{playbook_dir}}/src/github.com/mnussbaum/ansible-yay/yay"
+    dest: "{{playbook_dir}}/library/yay"
+    state: link
