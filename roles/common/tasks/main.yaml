@@ -1,9 +1,4 @@
 ---
-- name: Update Pacman cache
-  become: true
-  pacman:
-    update_cache: yes
-
 - name: Install common fonts
   become: true
   pacman:
@@ -83,4 +78,3 @@
 - include: internet.yaml
 - include: internet_usage.yaml
 - include: sound.yaml
-- include: yay.yaml

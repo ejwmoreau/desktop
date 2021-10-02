@@ -1,4 +1,11 @@
 ---
+# Pacman Things
+- name: Update Pacman cache
+  become: true
+  pacman:
+    update_cache: yes
+
+# Yay Things
 - name: Install base-devel
   become: true
   pacman:

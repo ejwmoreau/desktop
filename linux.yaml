@@ -3,5 +3,6 @@
   connection: local
 
   roles:
+    - package-manager
     - common
     - desktop-environment
