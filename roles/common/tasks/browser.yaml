@@ -5,5 +5,7 @@
     name:
       - firefox
 
-# TODO: Install via yay
-# - google-chrome
+- name: Install Web Browsers - yay
+  yay:
+    name:
+      - google-chrome

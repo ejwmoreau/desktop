@@ -9,9 +9,12 @@
       - ttf-anonymous-pro
       - ttf-dejavu
       - ttf-liberation
-      # TODO: AUR only
-      # - ttf-muli
-      # - ttf-symbola
+
+# TODO: Uncomment if there's some missing Unicode symbols, like emojis
+#- name: Install common fonts - yay
+#  yay:
+#    name:
+#      - ttf-symbola
 
 - name: Install CLI utilities
   become: true
@@ -47,18 +50,18 @@
       # TODO: Is this needed?
       #- fzf
 
-# TODO: Install these via yay
-# For now, install them manually
-#- name: Install some AUR packages
-#      - autojump
-#      - dmenu2
-#      - intellij-idea-ultimate-edition
-#      - ngrok
-#      - postman-bin
-#      - perl-clipboard
-#      - slack-desktop
-#      - spotify
-#      - zoom
+- name: Install some AUR packages - yay
+  yay:
+    name:
+      - autojump
+      - dmenu2
+      - intellij-idea-ultimate-edition
+      - ngrok
+      - postman-bin
+      - perl-clipboard
+      - slack-desktop
+      - spotify
+      - zoom
 
 - name: Install Python
   become: true
@@ -77,4 +80,5 @@
 - include: gpu.yaml
 - include: internet.yaml
 - include: internet_usage.yaml
+- include: kernel-modules-hook.yaml
 - include: sound.yaml

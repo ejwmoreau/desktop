@@ -1,0 +1,14 @@
+---
+- name: Install kernel-modules-hook
+  become: true
+  pacman:
+    name:
+      - kernel-modules-hook
+  register: kernel-modules-hook-installation
+
+- name: Post-install commands for kernel-modules-hook
+  when: kernel-modules-hook-installation is changed
+  systemd:
+    name: linux-modules-cleanup
+    enabled: yes
+    daemon_reload: yes

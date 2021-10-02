@@ -6,8 +6,10 @@
       - bluez
       - bluez-utils
 
-# TODO: Install via yay
-# - bluetooth-headset-battery-level-git
+- name: Install Bluetooth packages - yay
+  yay:
+    name:
+      - bluetooth-headset-battery-level-git
 
 - name: Enable Bluetooth
   become: true
