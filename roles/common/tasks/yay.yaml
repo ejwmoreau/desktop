@@ -1,9 +1,9 @@
 ---
 - name: Install base-devel
   become: true
-  pacman: name="{{packages}}" update_cache=yes extra_args="--needed"
-  vars:
-    packages:
+  pacman:
+    extra_args: "--needed"
+    name:
       - base-devel
 
 - name: Clone yay AUR repo

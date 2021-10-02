@@ -1,9 +1,8 @@
 ---
 - name: Install Urxvt
   become: true
-  pacman: name="{{packages}}" update_cache=yes
-  vars:
-    packages:
+  pacman:
+    name:
       - rxvt-unicode
 
 - name: Create .urxvt/ext

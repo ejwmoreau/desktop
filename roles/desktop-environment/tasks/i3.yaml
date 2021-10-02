@@ -1,9 +1,8 @@
 ---
 - name: Install i3
   become: true
-  pacman: name="{{packages}}" update_cache=yes
-  vars:
-    packages:
+  pacman:
+    name:
       - i3-gaps
       - i3status
 

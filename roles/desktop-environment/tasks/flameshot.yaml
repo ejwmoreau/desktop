@@ -1,9 +1,8 @@
 ---
 - name: Install Flameshot
   become: true
-  pacman: name="{{packages}}" update_cache=yes
-  vars:
-    packages:
+  pacman:
+    name:
       - flameshot
 
 - name: Link config for flameshot

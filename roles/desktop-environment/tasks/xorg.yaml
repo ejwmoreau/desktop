@@ -1,9 +1,8 @@
 ---
 - name: Install Xorg, video drivers, and other utilities
   become: true
-  pacman: name="{{packages}}" update_cache=yes
-  vars:
-    packages:
+  pacman:
+    name:
       - i3lock
       - mesa
       - xautolock

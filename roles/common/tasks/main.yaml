@@ -1,9 +1,13 @@
 ---
+- name: Update Pacman cache
+  become: true
+  pacman:
+    update_cache: yes
+
 - name: Install common fonts
   become: true
-  pacman: name="{{packages}}" update_cache=yes
-  vars:
-    packages:
+  pacman:
+    name:
       - noto-fonts
       - noto-fonts-cjk
       - noto-fonts-emoji
@@ -16,9 +20,8 @@
 
 - name: Install CLI utilities
   become: true
-  pacman: name="{{packages}}" update_cache=yes
-  vars:
-    packages:
+  pacman:
+    name:
       - bash
       - bash-completion
       - git
@@ -64,9 +67,8 @@
 
 - name: Install Python
   become: true
-  pacman: name="{{packages}}" update_cache=yes
-  vars:
-    packages:
+  pacman:
+    name:
       - python
       - python2
       - python-pip
