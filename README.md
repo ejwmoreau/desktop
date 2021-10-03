@@ -10,23 +10,23 @@ Some of the contents include:
 
 * Terminal Coloring
 * Xresources
-* lightdm
-* bashrc
-* vim
-* awesome wm
+* LightDM
+* Bash
+* Vim
+* Awesome WM
 
 ## Installation
 
-* `sudo pacman -Sy ansible`
-* `make`
+1. `./bin/setup.sh`
+2. `make`
 
-## Adding Content From Other Repos
+## How To Add Content From Other Repos
 
 Add an ansible role or tasks to include:
 * Cloning the repo
 * Linking the repo contents in the relevant destination
 
-# Implicit Contributors
+## Implicit Contributors
 
 * Created most of the dotfile + config content
   * [Scott Greenup](https://github.com/scottgreenup/desktop)
