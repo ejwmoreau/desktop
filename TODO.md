@@ -10,6 +10,7 @@
   * https://github.com/NoiSek/Aether
 * Figure out if I need the config changes at the end of `/etc/pulse/default.pa.pacsave`
   * https://wiki.archlinux.org/index.php/PulseAudio/Troubleshooting#Enable_Echo/Noise-Cancellation
+* Contribute the change to `base16-vim` repo, or at least keep a forked repo with the change
 
 ## Adding to Ansible
 
