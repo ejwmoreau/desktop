@@ -3,6 +3,7 @@
 * Complete Ansible roles with all the current dotfiles and config in the repo
 * Split some of the packages in `common` to their own roles/tasks
 * There's some TODOs throughout the Ansible tasks
+* Consider converting some manual steps (`debug` tasks) into Ansible tasks
 * Add nvm & npm setup
 * Add java & jre setup
 * Add extensions for VSCode (Python, Atlassian, Yaml, Vim)
@@ -23,9 +24,6 @@
   * Kernel parameters, then re-gen grub config
   * Configure the initramfs hooks, then mkinitcpio
 * Add changes to `/etc/systemd/logind.conf`, for the laptop lid close actions
-* Turn on TRIM for SSD
-  * Enable trim timer `systemctl enable fstrim.timer`
-  * Add `:allow-discards` and `rd.luks.options=discard`: https://wiki.archlinux.org/title/Dm-crypt/Specialties#Discard/TRIM_support_for_solid_state_drives_(SSD)
 * Some `INTEL_GPU_*` settings in `/etc/tlp.conf`
   * Maybe also other settings in that file
   * Not sure where the magic numbers come from, but try search in #linux for them
@@ -47,6 +45,7 @@
 * Add `/etc/grub.d/40_custom` to have shutdown & reboot options in Grub
 * Add `~/.dmrc` to save any Desktop Manager setup (e.g: picking which Window Manager to use)
 * Mention somewhere to change UEFI settings for battery usage to "Primarily AC", so it can improve battery health
+* Add flatpak and all the packages I have
 
 ## Awesome WM
 
