@@ -31,8 +31,6 @@
   * Color is much better, and `ILoveCandy` makes the progress bars into pacman eating circles
 * Consider getting `rebind_dock_usb` to run after logging back in via i3lock
   * If there's some symptom that I can check for, that would help too
-* Add udev rules to Ansible setup (under etc/udev)
-  * E.g: `/etc/udev/rules.d/99-logitech-webcam-default-zoom.rules`
 * Add `reflector`
   * Including config changes to `/etc/xdg/reflector/reflector.conf`
   * Including the pacman hook from https://wiki.archlinux.org/title/Reflector

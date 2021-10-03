@@ -83,3 +83,4 @@
 - include: kernel-modules-hook.yaml
 - include: sound.yaml
 - include: ssd.yaml
+- include: udev.yaml

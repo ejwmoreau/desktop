@@ -16,7 +16,7 @@
       - xorg-xrdb
       - xorg-xsetroot
 
-- name: Copy touchpad config that Xorg reads (link doesn't work when $HOME isn't open yet)
+- name: Copy touchpad config that Xorg reads (symlink doesn't work when $HOME isn't open yet)
   become: true
   copy:
     src: "{{playbook_dir}}/etc/X11/xorg.conf.d/{{item}}"

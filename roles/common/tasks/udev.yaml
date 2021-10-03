@@ -1,0 +1,9 @@
+---
+- name: Copy udev rules
+  become: true
+  copy:
+    src: "{{playbook_dir}}/etc/udev/rules.d/{{item}}"
+    dest: "/etc/udev/rules.d/{{item}}"
+    force: no
+  loop:
+    - 99-logitech-webcam-default-zoom.rules

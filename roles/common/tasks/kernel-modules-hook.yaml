@@ -4,10 +4,10 @@
   pacman:
     name:
       - kernel-modules-hook
-  register: kernel-modules-hook-installation
+  register: kernel_modules_hook_installation
 
 - name: Post-install commands for kernel-modules-hook
-  when: kernel-modules-hook-installation is changed
+  when: kernel_modules_hook_installation is changed
   systemd:
     name: linux-modules-cleanup
     enabled: yes
