@@ -1,6 +1,0 @@
-#!/bin/bash
-
-# when compton is giving you a hard day
-
-killall compton
-compton -b --config ~/.config/compton.conf

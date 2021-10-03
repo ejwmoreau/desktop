@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# TODO: Repurpose this script. It tries to provide a way to easily open any file in vim, without
+# needing to open a terminal yourself
+
+# Afterwards, see if `dmenu_theme` can be merged into `dmenu_custom`
+
 findresult=`find ~/ | sed 's/ /\\ /g' | dmenu_theme bright`
 
 if [[ -n "$findresult" ]]

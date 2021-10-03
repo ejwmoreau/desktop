@@ -1,6 +1,7 @@
 #!/bin/python2
 
 # Just like a traceroute but does a geoiplookup on each node inbetween.
+# Requires both traceroute and geoiplookup
 
 from subprocess import Popen
 from subprocess import PIPE
