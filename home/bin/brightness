@@ -6,7 +6,7 @@
 
 # The first and last values are used to make sure the range checking works
 values=(-1 0 1 10 20 30 40 50 60 70 80 90 100 101)
-curr_value=$(printf "%.0f" "$(xbacklight)")
+curr_value=$(printf "%.0f" "$(light)")
 
 for i in "${!values[@]}"; do
     prev_value="${values[($i-1) % ${#values[@]}]}"
@@ -19,7 +19,7 @@ for i in "${!values[@]}"; do
         elif [[ $1 == "-dec" ]]; then
             new_value=$prev_value
         fi
-        xbacklight -set $new_value
+        light -S $new_value
         break
     fi
 done

@@ -1,0 +1,10 @@
+---
+- name: Install light
+  become: true
+  pacman:
+    name:
+      - light
+
+- name: Append manual step - Add user to video group
+  set_fact:
+    manual_steps: "{{ manual_steps + [ 'Light - Add $USER to the video group, then restart' ] }}"

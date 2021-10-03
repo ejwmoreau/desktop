@@ -55,3 +55,5 @@ lightdm
 lifecycle
 systemd
 ansible
+bluetooth
+yubikey

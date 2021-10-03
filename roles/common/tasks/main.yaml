@@ -74,6 +74,7 @@
       - python-virtualenv
       - python-virtualenvwrapper
 
+- include: backlight.yaml
 - include: bluetooth.yaml
 - include: browser.yaml
 - include: docker.yaml
