@@ -23,5 +23,6 @@
     dest: "/etc/X11/xorg.conf.d/{{item}}"
     force: no
   loop:
+    - 20-intel.conf
     - 30-touchpad.conf
     - 30-mouse.conf
