@@ -44,6 +44,8 @@
   loop:
     - url: "https://github.com/chriskempson/base16-shell.git"
       dest: "github.com/chriskempson/base16-shell"
+  register: git_result
+  changed_when: "git_result.after|default('after') != git_result.before|default('before')"
 
 - name: Link terminal color package
   file:

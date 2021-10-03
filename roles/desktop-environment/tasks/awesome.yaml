@@ -30,6 +30,8 @@
     dest: "{{playbook_dir}}/src/{{item.name}}"
     version: master
   loop: "{{awesome_packages}}"
+  register: git_result
+  changed_when: "git_result.after|default('after') != git_result.before|default('before')"
 
 - name: Link repo contents for awesome
   file:
