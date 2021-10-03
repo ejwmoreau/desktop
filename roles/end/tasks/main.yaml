@@ -1,0 +1,3 @@
+---
+- debug:
+    var: manual_steps

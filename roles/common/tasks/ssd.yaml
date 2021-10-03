@@ -5,7 +5,6 @@
     name: fstrim.timer
     enabled: yes
 
-- debug:
-    msg:
-      - "Manual step:"
-      - "SSD Trim - Add `:allow-discards` and `rd.luks.options=discard` to Grub config: https://wiki.archlinux.org/title/Dm-crypt/Specialties#Discard/TRIM_support_for_solid_state_drives_(SSD)"
+- name: Append manual step - SSD Trim in Grub
+  set_fact:
+    manual_steps: "{{ manual_steps + [ 'SSD Trim - Add `:allow-discards` and `rd.luks.options=discard` to Grub: https://wiki.archlinux.org/title/Dm-crypt/Specialties#Discard/TRIM_support_for_solid_state_drives_(SSD)' ] }}"

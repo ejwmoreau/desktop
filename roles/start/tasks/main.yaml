@@ -1,0 +1,4 @@
+---
+- name: Initialise list of manual steps
+  set_fact:
+    manual_steps: []
