@@ -27,7 +27,7 @@
 * Add setup for hibernation
   * Kernel parameters, then re-gen grub config
   * Configure the initramfs hooks, then mkinitcpio
-* Add changes to `/etc/systemd/logind.conf`, for the laptop lid close actions
+* Add changes to `/etc/systemd/logind.conf` & `/etc/systemd/sleep.conf`, for the laptop lid close actions
 * Add the `INTEL_GPU_*` settings in `/etc/tlp.conf`
   * Maybe also other settings in that file
   * Not sure where the magic numbers come from, but try search in #linux for them

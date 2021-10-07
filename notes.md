@@ -1,3 +1,27 @@
+# Ongoing Experiments
+
+Using systemd-homed
+
+* When I got a new laptop, I started out with using systemd-homed to manage my user
+  * There were a lot of nice things about it, and overall I really liked how clean the `homectl` command is
+* However, there are a few problems that I have with it:
+
+  1. Entering a failed password causes it to attempt unlocking about 5~6 times, which means a long wait time
+    * I raised a bug here, although I'm not 100% sure it's a bug with homed: https://github.com/systemd/systemd/issues/19067
+
+  2. It doesn't seem like `accountservice` recognises homed users, so using any `lightdm-webkit2-greeter`-based display manager is not possible
+    * Possibly being tracked here: https://gitlab.freedesktop.org/accountsservice/accountsservice/-/issues/89
+
+  3. Adding a user to a group requires specifying all the user's existing groups in the command
+    * Via `homectl update ... --member-of=...`
+
+  4. Using homed makes any auto-login option unavailable, because a password is needed to decrypt the home directory
+    * I don't actually mind this, since I've never used auto-login. However, it's worth noting for myself in the future
+
+* All this being said, so far I'm sticking with homed, partially because it'll probably be a pain & risky to migrate away.
+  Nothing so far is painful enough to move away from homed, although I might not use it on a fresh install until some of the pain points are fixed
+
+
 # Past Experiments
 
 Stopping the window freezes (Chrome/Slack/Obsidian/Firefox)

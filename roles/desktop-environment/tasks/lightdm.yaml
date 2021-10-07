@@ -7,9 +7,6 @@
       - lightdm-gtk-greeter
       - lightdm-gtk-greeter-settings
 
-# TODO: Decide whether I want lightdm-gtk-greeter or lightdm-webkit2-greeter
-# If webkit2, then copy lightdm.conf
-
 - name: Copy LightDM config
   become: true
   copy:
@@ -19,7 +16,7 @@
 - name: Copy LightDM background
   become: true
   copy:
-    src: "{{playbook_dir}}/etc/lightdm/Arch-logo-side-navy-background.png"
+    src: "{{playbook_dir}}/etc/lightdm/Arch-logo-neon-japanese-background.png"
     dest: "/etc/lightdm/lightdm-background.png"
 
 - name: Enable LightDM
