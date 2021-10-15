@@ -11,6 +11,10 @@
 * Figure out if I need the config changes at the end of `/etc/pulse/default.pa.pacsave`
   * https://wiki.archlinux.org/index.php/PulseAudio/Troubleshooting#Enable_Echo/Noise-Cancellation
 * Contribute the change to `base16-vim` repo, or at least keep a forked repo with the change
+* Volume indicator when muting/changing volume, so it's clear what volume it's currently on
+  * Ideally, this would be handled by some sort of tool/service, instead of writing my own thing
+* See if there's some config in `/etc/systemd/logind.conf` that allows for suspending + hibernating after a long idle time (1+ hours)
+  * Is this more useful than configuring it in `xidlehook`? Probably so then it triggers when manual locking too
 
 ## Adding to Ansible
 
@@ -46,6 +50,7 @@
 * Add `~/.dmrc` to save any Desktop Manager setup (e.g: picking which Window Manager to use)
 * Add a mention somewhere to change UEFI settings for battery usage to "Primarily AC", so it can improve battery health
 * Add flatpak and all the packages I have
+* Add some minimal config for root (e.g: vimrc & bashrc) so then some root commands or ttys are nicer
 
 ## Awesome WM
 
