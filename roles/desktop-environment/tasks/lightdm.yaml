@@ -6,6 +6,7 @@
       - lightdm
       - lightdm-gtk-greeter
       - lightdm-gtk-greeter-settings
+      - light-locker
 
 - name: Copy LightDM config
   become: true

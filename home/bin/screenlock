@@ -1,5 +1,18 @@
 #!/usr/bin/env bash
 
-LOCK_COMMAND="i3lock --color 000000 --show-failed-attempts"
 NOTIFY_COMMAND="notify-send -u critical -t 20000 'Screen will lock in 20 seconds.'"
-xautolock -time 5 -locker "$LOCK_COMMAND" -notify 20 -notifier "$NOTIFY_COMMAND" -detectsleep
+NOTIFY_CANCELLER="" # TODO: Figure out how to cancel/remove a notification
+
+LOCK_COMMAND="light-locker-command -l"
+
+SLEEP_COMMAND="systemctl suspend-then-hibernate"
+
+# Locking-related operations:
+# * If anything is fullscreen, prevent locking
+# * After 5 mins, notify
+# * After another 10 seconds, lock
+# * After another 1 hour, sleep
+xidlehook --not-when-fullscreen --detect-sleep \
+  --timer 300  "$NOTIFY_COMMAND" "$NOTIFY_CANCELLER" \
+  --timer 20   "$LOCK_COMMAND" "" \
+  --timer 3600 "$SLEEP_COMMAND" ""

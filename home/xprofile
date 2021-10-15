@@ -4,16 +4,17 @@ export PATH=$PATH:$HOME/bin
 xsetroot -cursor_name left_ptr
 
 # Set key repeat offset & rate to be quicker
+# TODO: Need to run this whenever a new keyboard connects I think
 xset r rate 200 25
 
 #[ "$(command -v xscreensaver)" = "/usr/bin/xscreensaver" ] && /usr/bin/xscreensaver -no-splash &
 [ "$(command -v nm-applet)" = "/usr/bin/nm-applet" ] && /usr/bin/nm-applet &
 [ "$(command -v redshift-gtk)" = "/usr/bin/redshift-gtk" ] && /usr/bin/redshift-gtk -l -33.86482:151.20773 &
-[ -f ~/.screenlayout/main.sh ] && ~/.screenlayout/main.sh
 
 # TODO: Maybe change to picom, since the compton script is from the picom package
 #which compton && compton -b
 
 autorandr -c &
+light-locker &
 screenlock &
 urxvtd -q -o -f &

@@ -3,9 +3,7 @@
   become: true
   pacman:
     name:
-      - i3lock
       - mesa
-      - xautolock
       - xclip
       # - xf86-video-intel # Removing because it might be causing window freezes: https://github.com/awesomeWM/awesome/issues/3241
       - xf86-input-libinput
@@ -14,6 +12,12 @@
       - xorg-xinput
       - xorg-xrdb
       - xorg-xsetroot
+
+- name: Install xidlehook
+  become: true
+  yay:
+    name:
+      - xidlehook
 
 - name: Copy touchpad config that Xorg reads (symlink doesn't work when $HOME isn't open yet)
   become: true
