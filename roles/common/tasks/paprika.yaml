@@ -1,0 +1,26 @@
+---
+- name: Append manual step - How to install Paprika
+  set_fact:
+    manual_steps: "{{ manual_steps + [ 'Paprika - Read the comments in paprika.yaml to install Paprika' ] }}"
+
+# 1. Install Wine
+#     * `pacman -S wine wine-gecko wine-mono winetricks`
+#     * Not sure if all packages are 100% needed
+# 2. Download the Paprika .msi installer
+# 3. Set Wine to Windows 7 & update DPI
+#     * `winecfg` then pick Windows 7 + update DPI to 192 (or something reasonable)
+# 4. Install some fonts & .NET libraries
+#     * `winetricks allfonts`
+#     * `winetricks fontsmooth-rgb`
+#     * `winetricks dotnet472` - This one will take a while (10-20 mins?)
+# 5. Tell Wine to install Paprika
+#     * `wine start Downloads/PaprikaSetup.msi`
+# 6. Start Paprika
+#     * `wine "C:/Program Files/Paprika Recipe Manager 3/Paprika.exe"`
+# 7. Activate License, Login, and Sync Recipes
+#
+# Installing Paprika should work without much problem, but running it might not work
+# If there's errors, then try follow some of these steps:
+# * Check if I missed instructions from here: https://felix11h.github.io/blog/install-paprika-wine
+# * Wine might not pick up `wine-mono`, so you might need to install the .msi files directly:
+#   * Like mentioned here: https://forum.winehq.org/viewtopic.php?t=35207

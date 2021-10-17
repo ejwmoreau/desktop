@@ -82,6 +82,7 @@
 - include: internet.yaml
 - include: internet_usage.yaml
 - include: kernel-modules-hook.yaml
+- include: paprika.yaml
 - include: sound.yaml
 - include: ssd.yaml
 - include: udev.yaml

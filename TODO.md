@@ -2,7 +2,6 @@
 
 * Finish going through Scott's vimrc for anything I want to keep
 * Add extensions for VSCode (Python, Atlassian, Yaml, Vim)
-* (Maybe) Add virtualbox setup for Paprika?
 * Add Firefox tab groups and such
 * Change login logos to Arch logo
 * Add and use `peek` for screen recording
