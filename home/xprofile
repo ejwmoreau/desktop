@@ -7,7 +7,6 @@ xsetroot -cursor_name left_ptr
 # TODO: Need to run this whenever a new keyboard connects I think
 xset r rate 300 30
 
-#[ "$(command -v xscreensaver)" = "/usr/bin/xscreensaver" ] && /usr/bin/xscreensaver -no-splash &
 [ "$(command -v nm-applet)" = "/usr/bin/nm-applet" ] && /usr/bin/nm-applet &
 [ "$(command -v redshift-gtk)" = "/usr/bin/redshift-gtk" ] && /usr/bin/redshift-gtk -l -33.86482:151.20773 &
 
