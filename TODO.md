@@ -13,7 +13,8 @@
 * Volume indicator when muting/changing volume, so it's clear what volume it's currently on
   * Ideally, this would be handled by some sort of tool/service, instead of writing my own thing
 * See if there's some config in `/etc/systemd/logind.conf` that allows for suspending + hibernating after a long idle time (1+ hours)
-  * Is this more useful than configuring it in `xidlehook`? Probably so then it triggers when manual locking too
+  * Is this more useful than configuring it in `xidlehook`? Probably, so then it triggers when manual locking too
+* Move to another notification system, so then I can dismiss notifications with particular IDs
 
 ## Adding to Ansible
 

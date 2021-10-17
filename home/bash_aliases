@@ -233,9 +233,6 @@ source "/usr/share/nvm/init-nvm.sh" --no-use
 # Look at logs of all containers that listen on port 8080
 alias docker-logs-check='while ((1)); do sudo docker logs -f $(sudo docker ps | grep 8080 | cut -f1 -d" ") 2>/dev/null; sleep 1; echo No docker container; done'
 
-# Redirect screenshots to ~/shots
-alias flameshot="flameshot gui -p ~/shots"
-
 # Docker requires sudo access
 alias docker="/usr/bin/sudo /usr/bin/docker"
 alias docker-compose="/usr/bin/sudo /usr/bin/docker-compose"
