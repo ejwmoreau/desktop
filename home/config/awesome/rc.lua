@@ -111,7 +111,7 @@ programs = {
     ["lock"]        = "light-locker-command -l",
     ["randr"]       = "arandr",
     ["editor"]      = os.getenv("EDITOR") or "vim",
-    ["screenshot"]  = "( flameshot & ) && ( sleep 0.2s && flameshot gui -p ~/shots )"
+    ["screenshot"]  = "( flameshot & ) && ( sleep 0.2s && flameshot gui )"
 }
 
 layouts = {
