@@ -10,8 +10,8 @@
     dest: "~/{{item.dest}}"
     state: link
   loop:
-    - src: "home/autorandr"
-      dest: ".autorandr"
+    - src: "home/config/autorandr"
+      dest: ".config/autorandr"
     - src: "home/bin"
       dest: "bin"
 
