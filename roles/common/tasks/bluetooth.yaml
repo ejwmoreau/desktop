@@ -16,3 +16,7 @@
   systemd:
     name: bluetooth
     enabled: yes
+
+- name: Append manual step - Check Bluetooth module is loaded
+  set_fact:
+    manual_steps: "{{ manual_steps + [ 'Bluetooth - Check that the `btusb` module is loaded. If not, load it' ] }}"

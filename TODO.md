@@ -32,8 +32,7 @@
   * Kernel parameters, then re-gen grub config
   * Configure the initramfs hooks, then mkinitcpio
 * Add changes to `/etc/systemd/logind.conf` & `/etc/systemd/sleep.conf`, for the laptop lid close actions
-* Add the `INTEL_GPU_*` settings in `/etc/tlp.conf`
-  * Maybe also other settings in that file
+* Add the `INTEL_GPU_*` and other custom settings in `/etc/tlp.conf`
   * Not sure where the magic numbers come from, but try search in #linux for them
 * Add edits to `/etc/pacman.conf` to uncomment `#Color` and add `ILoveCandy` under it
   * Color is much better, and `ILoveCandy` makes the progress bars into pacman eating circles
@@ -51,6 +50,7 @@
 * Add a mention somewhere to change UEFI settings for battery usage to "Primarily AC", so it can improve battery health
 * Add flatpak and all the packages I have
 * Add some minimal config for root (e.g: vimrc & bashrc) so then some root commands or ttys are nicer
+* If I like it, add `blueman` to the bluetooth stuff, so I have a decent UI to manage bluetooth connections, instead of CLI
 
 ## Awesome WM
 
