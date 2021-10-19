@@ -7,3 +7,12 @@
       - acpi_call
       - acpi_call-lts
       - powertop
+      - tlp
+
+# TODO: Save the /etc/tlp.conf file
+
+- name: Enable TLP
+  become: true
+  systemd:
+    name: tlp
+    enabled: yes
