@@ -7,13 +7,6 @@ xsetroot -cursor_name left_ptr
 # TODO: Need to run this whenever a new keyboard connects I think
 xset r rate 300 30
 
-[ "$(command -v nm-applet)" = "/usr/bin/nm-applet" ] && /usr/bin/nm-applet &
-[ "$(command -v redshift-gtk)" = "/usr/bin/redshift-gtk" ] && /usr/bin/redshift-gtk -l -33.86482:151.20773 &
-
-# TODO: Maybe change to picom, since the compton script is from the picom package
-#which compton && compton -b
-
-autorandr -c &
-light-locker &
+redshift-gtk -l -33.86482:151.20773 &
 screenlock &
 urxvtd -q -o -f &
