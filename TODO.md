@@ -32,8 +32,6 @@
   * Kernel parameters, then re-gen grub config
   * Configure the initramfs hooks, then mkinitcpio
 * Add changes to `/etc/systemd/logind.conf` & `/etc/systemd/sleep.conf`, for the laptop lid close actions
-* Add the `INTEL_GPU_*` and other custom settings in `/etc/tlp.conf`
-  * Not sure where the magic numbers come from, but try search in #linux for them
 * Add edits to `/etc/pacman.conf` to uncomment `#Color` and add `ILoveCandy` under it
   * Color is much better, and `ILoveCandy` makes the progress bars into pacman eating circles
 * Add `reflector`

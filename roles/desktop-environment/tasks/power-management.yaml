@@ -9,7 +9,16 @@
       - powertop
       - tlp
 
-# TODO: Save the /etc/tlp.conf file
+- name: Copy TLP config
+  become: true
+  copy:
+    src: "{{playbook_dir}}/etc/tlp.conf"
+    dest: "/etc/tlp.conf"
+    force: no
+
+- name: Append manual step - Configure TLP config
+  set_fact:
+    manual_steps: "{{ manual_steps + [ 'TLP - Double check all the TLP config is set to the right values for a new installation' ] }}"
 
 - name: Enable TLP
   become: true
