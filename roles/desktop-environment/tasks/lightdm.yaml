@@ -20,6 +20,12 @@
     src: "{{playbook_dir}}/etc/lightdm/Arch-logo-neon-japanese-background.png"
     dest: "/etc/lightdm/lightdm-background.png"
 
+- name: Link Desktop Manager config
+  file:
+    src: "{{playbook_dir}}/home/dmrc"
+    dest: "~/.dmrc"
+    state: link
+
 - name: Enable LightDM
   become: true
   systemd:
