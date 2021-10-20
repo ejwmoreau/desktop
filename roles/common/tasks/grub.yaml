@@ -1,0 +1,9 @@
+---
+- name: Copy Grub custom config
+  become: true
+  copy:
+    src: "{{playbook_dir}}/etc/{{item}}"
+    dest: "/etc/{{item}}"
+    force: no
+  loop:
+    - grub.d/40_custom

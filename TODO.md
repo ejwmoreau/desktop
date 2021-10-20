@@ -45,12 +45,13 @@
 * Add `noisetorch` for some noise cancellation on any audio inputs (e.g: mic)
   * Need to prompt the user to load it via the UI. Maybe this needs to be done after every reboot as well?
   * Need to test if a low threshold works or not. The audio seemed to sometimes cut out my voice
-* Add `/etc/grub.d/40_custom` to have shutdown & reboot options in Grub
 * Add `~/.dmrc` to save any Desktop Manager setup (e.g: picking which Window Manager to use)
 * Add a mention somewhere to change UEFI settings for battery usage to "Primarily AC", so it can improve battery health
 * Add flatpak and all the packages I have
 * Add some minimal config for root (e.g: vimrc & bashrc) so then some root commands or ttys are nicer
 * If I like it, add `blueman` to the bluetooth stuff, so I have a decent UI to manage bluetooth connections, instead of CLI
+* Change nm-applet's autostart file to use `Exec=env GDK_SCALE=1 nm-applet` for HiDPI
+* Add some checks before running some time-consuming tasks, in case some time can be saved when running `make`
 
 ## Awesome WM
 

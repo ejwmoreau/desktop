@@ -79,6 +79,7 @@
 - include: browser.yaml
 - include: docker.yaml
 - include: gpu.yaml
+- include: grub.yaml
 - include: internet.yaml
 - include: internet_usage.yaml
 - include: kernel-modules-hook.yaml
