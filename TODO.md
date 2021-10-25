@@ -48,6 +48,8 @@
 * If I like it, add `blueman` to the bluetooth stuff, so I have a decent UI to manage bluetooth connections, instead of CLI
 * Change nm-applet's autostart file to use `Exec=env GDK_SCALE=1 nm-applet` for HiDPI
 * Add some checks before running some time-consuming tasks, in case some time can be saved when running `make`
+  * E.g: Check the repo exists before cloning it. Or maybe check that the last "updated" date was recent?
+  * Merge PRs to yay & pacman modules to speed them up
 
 ## Awesome WM
 
