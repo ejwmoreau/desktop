@@ -1,0 +1,12 @@
+---
+- name: Install Redshift
+  become: true
+  pacman:
+    name:
+      - redshift
+
+- name: Link config for Redshift
+  file:
+    src: "{{playbook_dir}}/home/config/redshift"
+    dest: "~/.config/redshift"
+    state: link

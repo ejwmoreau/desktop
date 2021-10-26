@@ -41,7 +41,6 @@
       - ipcalc
       - openldap
       - pacman-contrib
-      - redshift
       - signal-desktop
       - traceroute
       - vlc

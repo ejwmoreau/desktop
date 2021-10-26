@@ -61,6 +61,7 @@
 - include: i3.yaml
 - include: lightdm.yaml
 - include: power-management.yaml
+- include: redshift.yaml
 - include: vim.yaml
 - include: urxvt.yaml
 - include: xorg.yaml
