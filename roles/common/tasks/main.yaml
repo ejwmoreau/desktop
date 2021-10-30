@@ -37,6 +37,7 @@
       - code
       - bind
       - feh
+      - gping
       - gnu-netcat
       - ipcalc
       - openldap

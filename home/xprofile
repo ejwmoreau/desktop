@@ -9,8 +9,8 @@ xset r rate 300 30
 
 # Start tray programs
 nm-applet &
-redshift-gtk -l -33.86482:151.20773 &
 blueman-applet &
+#redshift-gtk -l -33.86482:151.20773 &
 
 # Start lock-related programs
 light-locker &
