@@ -2,3 +2,25 @@
 - name: Initialise list of manual steps
   set_fact:
     manual_steps: []
+
+# Saving some time by only updating git repos if it's been a while
+
+- name: Get current day
+  shell: "expr $(date +%s) / 86400"
+  changed_when: false
+  register: today
+
+- name: Get date of previous git repo pull
+  shell: "cat timestamp.txt || echo 0"
+  changed_when: false
+  register: previous_git_pull
+
+- name: Determine if git repos should get updated
+  set_fact:
+    perform_git_update: "{{ ((today.stdout | int) - (previous_git_pull.stdout | int)) > 30 }}"
+
+# TODO: Remove later
+- debug:
+    var: perform_git_update
+
+# TODO: In other tasks: Use the variable

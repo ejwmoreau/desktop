@@ -1,3 +1,7 @@
 ---
+- name: Record that git pull was done
+  shell: "echo {{ today.stdout }} > timestamp.txt"
+  when: perform_git_update
+
 - debug:
     var: manual_steps
