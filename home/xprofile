@@ -13,7 +13,7 @@ blueman-applet &
 #redshift-gtk -l -33.86482:151.20773 &
 
 # Start lock-related programs
-light-locker &
+light-locker --lock-after-screensaver=60 --no-lock-on-lid &
 screenlock &
 
 # Start other programs
