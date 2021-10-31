@@ -16,5 +16,5 @@ SLEEP_COMMAND="systemctl suspend-then-hibernate"
 # * After another 1 hour, sleep
 xidlehook --not-when-fullscreen --detect-sleep \
   --timer 600  "$NOTIFY_COMMAND" "$NOTIFY_CANCELLER" \
-  --timer 20   "$LOCK_COMMAND" "" \
+  --timer 20   "$NOTIFY_CANCELLER; $LOCK_COMMAND" "" \
   --timer 3600 "$SLEEP_COMMAND" ""
