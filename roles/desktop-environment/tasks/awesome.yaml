@@ -17,7 +17,7 @@
       - name: "github.com/NuckChorris/assault"
         src: "/awesomewm/assault.lua"
         dest: "assault.lua"
-      - name: "github.com/scottgreenup/lain"
+      - name: "github.com/lcpz/lain"
         src: ""
         dest: "lain"
       - name: "github.com/vicious-widgets/vicious"

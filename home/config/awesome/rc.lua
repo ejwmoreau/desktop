@@ -117,7 +117,7 @@ programs = {
 layouts = {
     awful.layout.suit.tile,
     awful.layout.suit.max,
-    lain.layout.centerwork_leftright,
+    lain.layout.centerwork,
     awful.layout.suit.max.fullscreen,
 }
 
