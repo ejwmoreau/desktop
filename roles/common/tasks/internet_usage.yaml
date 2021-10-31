@@ -6,6 +6,7 @@
 
 # TODO: Figure out what to do when there's local modifications to the script (e.g: credentials)
 #- name: Clone internet_usage repo
+#  when: perform_git_update
 #  git:
 #    repo: "git@bitbucket-personal.org:hbotp/internet-usage.git"
 #    dest: "~/code/internet-usage"

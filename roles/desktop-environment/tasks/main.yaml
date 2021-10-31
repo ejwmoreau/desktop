@@ -37,6 +37,7 @@
       dest: ".gitignore"
 
 - name: Clone terminal color repo
+  when: perform_git_update
   git:
     repo: "{{item.url}}"
     dest: "{{playbook_dir}}/src/{{item.dest}}"

@@ -18,9 +18,3 @@
 - name: Determine if git repos should get updated
   set_fact:
     perform_git_update: "{{ ((today.stdout | int) - (previous_git_pull.stdout | int)) > 30 }}"
-
-# TODO: Remove later
-- debug:
-    var: perform_git_update
-
-# TODO: In other tasks: Use the variable

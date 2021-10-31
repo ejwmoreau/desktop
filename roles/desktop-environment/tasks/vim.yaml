@@ -50,6 +50,7 @@
         src: "colors/base16-tomorrow.vim"
 
 - name: Clone vim package repos
+  when: perform_git_update
   git:
     repo: "https://{{item.name}}.git"
     dest: "{{playbook_dir}}/src/{{item.name}}"

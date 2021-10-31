@@ -11,6 +11,7 @@
     state: directory
 
 - name: Clone urxvt extension repos
+  when: perform_git_update
   git:
     repo: "{{item.url}}"
     dest: "{{playbook_dir}}/src/{{item.dest}}"
