@@ -83,14 +83,16 @@ function gta() {
     # Create a new git worktree for the current repo
     if [ $# -eq 0 ]; then echo "Please supply the branch name"; fi
     repo_name=$(basename -s .git `git config --get remote.origin.url`)
-    git worktree add -b $1 ../$repo_name-$1 master
+    default_branch_name=$(basename `git symbolic-ref refs/remotes/origin/HEAD`)
+    git worktree add -b $1 ../$repo_name-$1 $default_branch_name
     cd ../$repo_name-$1
 }
 
 function gur() {
-    # Rebase off master. Handles if there's any changes to stash
+    # Rebase off the default branch. Handles if there's any changes to stash
     change=$(git stash | grep "No local changes to save")
-    kc && /usr/bin/git pull --rebase origin master
+    default_branch_name=$(basename `git symbolic-ref refs/remotes/origin/HEAD`)
+    kc && /usr/bin/git pull --rebase origin $default_branch_name
     if [[ ! $change ]]; then git stash apply; fi
 }
 

@@ -11,7 +11,7 @@ if len(sys.argv) < 2:
     lines = cp.decode('ascii').split('\n')
     regex = re.compile('\d+x\d+')
     for line in lines:
-        if 'eDP1 connected' in line or 'default connected' in line:
+        if 'eDP-1 connected' in line or 'default connected' in line:
             res = regex.search(line).group(0).strip().split('x')
             w = int(res[0])
             h = int(res[1])
