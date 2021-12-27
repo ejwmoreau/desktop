@@ -74,16 +74,16 @@
       - python-virtualenv
       - python-virtualenvwrapper
 
-- include: backlight.yaml
-- include: bluetooth.yaml
-- include: browser.yaml
-- include: docker.yaml
-- include: gpu.yaml
-- include: grub.yaml
-- include: internet.yaml
-- include: internet_usage.yaml
-- include: kernel-modules-hook.yaml
-- include: paprika.yaml
-- include: sound.yaml
-- include: ssd.yaml
-- include: udev.yaml
+- import_tasks: backlight.yaml
+- import_tasks: bluetooth.yaml
+- import_tasks: browser.yaml
+- import_tasks: docker.yaml
+- import_tasks: gpu.yaml
+- import_tasks: grub.yaml
+- import_tasks: internet.yaml
+- import_tasks: internet_usage.yaml
+- import_tasks: kernel-modules-hook.yaml
+- import_tasks: paprika.yaml
+- import_tasks: sound.yaml
+- import_tasks: ssd.yaml
+- import_tasks: udev.yaml

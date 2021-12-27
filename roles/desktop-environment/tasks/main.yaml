@@ -57,12 +57,12 @@
     - src: "github.com/chriskempson/base16-shell"
       dest: "base16-shell"
 
-- include: awesome.yaml
-- include: flameshot.yaml
-- include: i3.yaml
-- include: lightdm.yaml
-- include: power-management.yaml
-- include: redshift.yaml
-- include: vim.yaml
-- include: urxvt.yaml
-- include: xorg.yaml
+- import_tasks: awesome.yaml
+- import_tasks: flameshot.yaml
+- import_tasks: i3.yaml
+- import_tasks: lightdm.yaml
+- import_tasks: power-management.yaml
+- import_tasks: redshift.yaml
+- import_tasks: vim.yaml
+- import_tasks: urxvt.yaml
+- import_tasks: xorg.yaml
