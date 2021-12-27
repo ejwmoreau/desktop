@@ -90,6 +90,9 @@ fi
 # Add Atlas CLI completion in bash
 [ $(command -v atlas) ] && source <(atlas --completion-script-bash)
 
+# Add Google Cloud completion in bash
+[ $(command -v gcloud) ] && source /etc/bash_completion.d/google-cloud-sdk
+
 ##################################################
 # Prompt (PROMPT_COMMAND, PS1)
 ##################################################

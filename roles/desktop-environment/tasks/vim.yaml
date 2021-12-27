@@ -45,6 +45,8 @@
       #- name: "github.com/ekalinin/Dockerfile"
       #- name: "github.com/junegunn/fzf"
       #- name: "github.com/airblade/vim-gitgutter"
+        # Better Terraform syntax highlighting, and some auto `terraform fmt` features
+      - name: "github.com/hashivim/vim-terraform"
     vim_colour_schemes:
       - name: "github.com/chriskempson/base16-vim"
         src: "colors/base16-tomorrow.vim"
