@@ -64,6 +64,9 @@ filetype plugin indent on " Load filetype-specific indent files
 let g:tex_flavor='latex'
 " Disable netrw plugin/script
 let g:netrw_dirhistmax = 0
+" Auto-format Terraform files (Testing - It's a bit slow, but helpful so far)
+let g:terraform_fmt_on_save=1
+let g:terraform_align=1
 
 " Mistyping commands
 command! WQA :wqa
