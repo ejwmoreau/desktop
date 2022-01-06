@@ -494,7 +494,6 @@ awful.rules.rules = {
         properties = {
             border_width = beautiful.border_width,
             border_color = beautiful.border_normal,
-            focus = awful.client.focus.filter,
             size_hints_honor = false,
             raise = true,
             keys = clientkeys,
@@ -503,21 +502,25 @@ awful.rules.rules = {
     },
 
     {
+        rule = { },
+        except_any = {
+            class = { "zoom" }
+        },
+        properties = {
+            focus = awful.client.focus.filter
+        }
+    },
+
+    {
         rule_any = {
-            class = {
-                "gimp",
-                "Keepassx2", "keepassx2",
-            }
+            class = { "gimp", "Keepassx2", "keepassx2" }
         },
         properties = { floating = true }
     },
 
     {
         rule_any = {
-            class = {
-                "Arandr", "arandr",
-                "Pavucontrol", "pavucontrol"
-            }
+            class = { "Arandr", "arandr", "Pavucontrol", "pavucontrol" }
         },
         properties = { floating = true },
 
@@ -529,16 +532,32 @@ awful.rules.rules = {
     },
 
     {
+        -- Make sure all Zoom windows are on Tag 8 and don't steal focus
         rule_any = {
-            name = { "win.*", },
+            class = { "zoom" }, name = { "zoom" }, instance = { "zoom" }
         },
-        properties = { focusable = false, ontop = true }
+        properties = { tag = shared_tag_list[8] , switchtotag = true, above = false }
     },
 
     {
+        -- Minimise the "Home" and "Loading" Zoom windows (They don't show the meeting details)
         rule_any = {
-            class = { "zoom" }
+            name = { "Zoom - Licensed Account", "Zoom Cloud Meetings" }
         },
-        properties = { tag = "8", above = false }
+        properties = { minimized = true },
+        callback = function(c) debug_print('Triggered for the default Zoom window') end
+    },
+
+    {
+        -- Makes all the "notification" windows floating, so they don't take the whole screen
+        -- The meeting window and "home" window have different client names
+        rule = {
+            name = "zoom"
+        },
+        except_any = {
+            name = { "Zoom - Licensed Account" }
+        },
+        properties = { floating = true },
+        callback = function(c) debug_print('Triggered for the floating Zoom window') end
     }
 }
