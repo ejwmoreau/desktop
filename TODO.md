@@ -46,6 +46,9 @@
 * Add flatpak and all the packages I have
 * Add some minimal config for root (e.g: vimrc & bashrc) so then some root commands or ttys are nicer
 * Change nm-applet's autostart file to use `Exec=env GDK_SCALE=1 nm-applet` for HiDPI
+* Add enabling of `paccache.timer`
+  * Paccache removes old packages from the pacman cache directory. By default the last three versions of a package are kept.
+  * Runs every week
 
 ## Awesome WM
 

@@ -1,1 +1,14 @@
-SUBSYSTEM=="video4linux", KERNEL=="video[0-9]*", ATTRS{name}=="Logitech Webcam C930e", ATTR{index}=="0", RUN+="/usr/bin/v4l2-ctl -d $devnode --set-ctrl=zoom_absolute=160"
+# Logitech Webcam C930e
+# This doesn't work for some reason, and I can't figure out why :(
+#SUBSYSTEM=="video4linux", KERNEL=="video?", ATTR{index}=="0", ATTRS{product}=="Logitech Webcam C930e", RUN+="/usr/bin/v4l2-ctl -d $devnode --set-ctrl=zoom_absolute=160 --set-ctrl sharpness=150 --set-ctrl tilt_absolute=-3600"
+KERNEL=="video4", RUN+="/usr/bin/v4l2-ctl -d $devnode --set-ctrl=zoom_absolute=160 --set-ctrl sharpness=150 --set-ctrl tilt_absolute=-3600"
+
+# Some helpful commands:
+# udevadm info --attribute-walk --name=/dev/video4 | less
+# - See the attributes of the camera device, and it's parent devices
+# udevadm monitor -u -s video4linux
+# - Watch which udev actions happen for which devices (doesn't mention which rules are triggered)
+# iudevadm control --log-priority=debug
+# - Tell udev to print debug logs. Watch them with journalctl -f
+# v4l2-ctl --list-devices
+# - See the video devices
