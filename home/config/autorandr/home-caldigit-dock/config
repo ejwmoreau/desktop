@@ -5,12 +5,16 @@ off
 output DP-3
 off
 output DP-1-1
+off
+output DP-1-2
+off
+output DP-2-1
 crtc 1
 mode 1920x1080
 pos 0x0
 rate 60.00
 transform 2.000000,0.000000,0.000000,0.000000,2.000000,0.000000,0.000000,0.000000,1.000000
-output DP-1-2
+output DP-2-2
 crtc 2
 mode 1920x1080
 pos 3840x0
