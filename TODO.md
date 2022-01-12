@@ -15,6 +15,12 @@
 * See if there's some config in `/etc/systemd/logind.conf` that allows for suspending + hibernating after a long idle time (1+ hours)
   * Is this more useful than configuring it in `xidlehook`? Probably, so then it triggers when manual locking too
 * Move to another notification system, so then I can dismiss notifications with particular IDs
+  * Also to be able to pause notifications when I'm in a meeting or something
+* Write a short doc about `systemd-analyse`, like the commands here: https://www.techrepublic.com/article/how-to-analyze-systemd-boot-performance/
+  * `systemd-analyse`, `systemd-analyse blame`, `systemd-analyse critical-chain`
+* Figure out if there's a faster alternative to LightDM. If not, then it might be something I just need to accept
+* Figure out why the keyboard doesn't seem to be fully connected/working at the start of resuming from hibernation (& suspension sometimes)
+  * It eventually works, but it would be nice to have a proper signal of when it's not ready for me to type, instead of me trying to type for 5~10 seconds
 
 ## Adding to Ansible
 

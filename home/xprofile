@@ -8,7 +8,7 @@ xsetroot -cursor_name left_ptr
 xset r rate 300 30
 
 # Start tray programs
-GDK_SCALE=1 nm-applet &
+killall nm-applet; GDK_SCALE=1 nm-applet &
 blueman-applet &
 redshift-gtk -l -33.86482:151.20773 &
 
