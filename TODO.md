@@ -7,8 +7,6 @@
 * Add and use `peek` for screen recording
 * Use this for lightdm greeter
   * https://github.com/NoiSek/Aether
-* Figure out if I need the config changes at the end of `/etc/pulse/default.pa.pacsave`
-  * https://wiki.archlinux.org/index.php/PulseAudio/Troubleshooting#Enable_Echo/Noise-Cancellation
 * Contribute the change to `base16-vim` repo, or at least keep a forked repo with the change
 * Volume indicator when muting/changing volume, so it's clear what volume it's currently on
   * Ideally, this would be handled by some sort of tool/service, instead of writing my own thing
@@ -21,6 +19,8 @@
 * Figure out if there's a faster alternative to LightDM. If not, then it might be something I just need to accept
 * Figure out why the keyboard doesn't seem to be fully connected/working at the start of resuming from hibernation (& suspension sometimes)
   * It eventually works, but it would be nice to have a proper signal of when it's not ready for me to type, instead of me trying to type for 5~10 seconds
+* Write a script to easily turn on/off the GPU, so I can use it when needed
+  * See if there's a way to avoid rebooting. Otherwise it might not be possible
 
 ## Adding to Ansible
 
