@@ -60,9 +60,9 @@ key_bindings.globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "n", awful.client.restore),
 
     -- Audio Control
-    awful.key({                   }, "XF86AudioRaiseVolume", function() helper.spawn_program("amixer -M set Master 5%+") end),
-    awful.key({                   }, "XF86AudioLowerVolume", function() helper.spawn_program("amixer -M set Master 5%-") end),
-    awful.key({                   }, "XF86AudioMute",        function() helper.spawn_program("amixer -M sset Master toggle") end),
+    awful.key({                   }, "XF86AudioRaiseVolume", function() helper.spawn_program("pamixer -i 5") end),
+    awful.key({                   }, "XF86AudioLowerVolume", function() helper.spawn_program("pamixer -d 5") end),
+    awful.key({                   }, "XF86AudioMute",        function() helper.spawn_program("pamixer -t") end),
 
     -- Music Control
     awful.key({                   }, "XF86AudioPlay",  function() helper.spawn_program("playerctl play-pause") end),

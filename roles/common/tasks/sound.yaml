@@ -3,9 +3,9 @@
   become: true
   pacman:
     name:
+      - pamixer
       - pavucontrol
       - pipewire
       - pipewire-alsa
       - pipewire-pulse
       - playerctl
-      - pulseaudio-alsa
