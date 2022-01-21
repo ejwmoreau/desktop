@@ -8,14 +8,14 @@ xsetroot -cursor_name left_ptr
 xset r rate 300 30
 
 # Start tray programs
-killall nm-applet; GDK_SCALE=1 nm-applet &
 blueman-applet &
+GDK_SCALE=1 nm-applet &
 redshift-gtk -l -33.86482:151.20773 &
 
 # Start lock-related programs
-light-locker --lock-after-screensaver=60 --no-lock-on-lid &
+light-locker --lock-after-screensaver 60 --no-lock-on-lid &
 screenlock &
 
 # Start other programs
-autorandr -c &
-urxvtd -q -o -f &
+autorandr --change
+urxvtd --quiet --opendisplay --fork &

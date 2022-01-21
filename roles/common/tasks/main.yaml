@@ -31,7 +31,6 @@
       - tree
       - unzip
       # TODO: Separate into other roles/tasks
-      - alsa-utils
       - arandr
       - autorandr
       - code
