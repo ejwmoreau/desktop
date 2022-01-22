@@ -39,8 +39,6 @@
   * Kernel parameters, then re-gen grub config
   * Configure the initramfs hooks, then mkinitcpio
 * Add changes to `/etc/systemd/logind.conf` & `/etc/systemd/sleep.conf`, for the laptop lid close actions
-* Add edits to `/etc/pacman.conf` to uncomment `#Color` and add `ILoveCandy` under it
-  * Color is much better, and `ILoveCandy` makes the progress bars into pacman eating circles
 * Add `reflector`
   * Including config changes to `/etc/xdg/reflector/reflector.conf`
   * Including the pacman hook from https://wiki.archlinux.org/title/Reflector

@@ -12,6 +12,20 @@
     name: paccache.timer
     enabled: yes
 
+# Improve Pacman Settings
+# - ILoveCandy gives the Pacman-like progress bars
+- name: Update pacman.conf
+  become: true
+  lineinfile:
+    path: "/etc/pacman.conf"
+    regex: "{{item.regex}}"
+    line: "{{item.result}}"
+  loop:
+    - regex: "#Color"
+      result: "Color\nILoveCandy"
+    - regex: "#ParallelDownloads = 5"
+      result: "ParallelDownloads = 5"
+
 # Yay Things
 - name: Install base-devel
   become: true
