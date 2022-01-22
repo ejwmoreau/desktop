@@ -39,9 +39,6 @@
   * Kernel parameters, then re-gen grub config
   * Configure the initramfs hooks, then mkinitcpio
 * Add changes to `/etc/systemd/logind.conf` & `/etc/systemd/sleep.conf`, for the laptop lid close actions
-* Add `reflector`
-  * Including config changes to `/etc/xdg/reflector/reflector.conf`
-  * Including the pacman hook from https://wiki.archlinux.org/title/Reflector
 * Add `nautilus`
   * Also run this command to set it as default: `xdg-mime default org.gnome.Nautilus.desktop inode/directory`
 * Add `noisetorch` for some noise cancellation on any audio inputs (e.g: mic)

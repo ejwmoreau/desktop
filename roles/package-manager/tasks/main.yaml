@@ -13,18 +13,41 @@
     enabled: yes
 
 # Improve Pacman Settings
-# - ILoveCandy gives the Pacman-like progress bars
-- name: Update pacman.conf
+- name: Update pacman.conf (Part 1)
   become: true
   lineinfile:
     path: "/etc/pacman.conf"
-    regex: "{{item.regex}}"
+    search_string: "{{item.regex}}"
     line: "{{item.result}}"
   loop:
     - regex: "#Color"
-      result: "Color\nILoveCandy"
+      result: "Color"
     - regex: "#ParallelDownloads = 5"
       result: "ParallelDownloads = 5"
+
+# ILoveCandy gives the Pacman-like progress bars
+- name: Update pacman.conf (Part 2)
+  become: true
+  lineinfile:
+    path: "/etc/pacman.conf"
+    insertafter: "Color"
+    line: "ILoveCandy"
+
+- name: Install reflector
+  become: true
+  pacman:
+    name:
+      - reflector
+
+- name: Copy reflector config & pacman hook
+  become: true
+  copy:
+    src: "{{playbook_dir}}/etc/{{item}}"
+    dest: "/etc/{{item}}"
+    force: no
+  loop:
+    - xdg/reflector/reflector.conf
+    - pacman.d/hooks/mirrorupgrade.hook
 
 # Yay Things
 - name: Install base-devel
