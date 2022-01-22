@@ -21,7 +21,6 @@ Using systemd-homed
 * All this being said, so far I'm sticking with homed, partially because it'll probably be a pain & risky to migrate away.
   Nothing so far is painful enough to move away from homed, although I might not use it on a fresh install until some of the pain points are fixed
 
-
 # Past Experiments
 
 Stopping the window freezes (Chrome/Slack/Obsidian/Firefox)
@@ -34,7 +33,8 @@ Stopping the window freezes (Chrome/Slack/Obsidian/Firefox)
   * Result: `DRI 2` made Spotify not update it's UI much, so the overall result was worse
 * Removing the `xf86-video-intel` package, as it's know to cause some freezes
   * https://github.com/awesomeWM/awesome/issues/3241
-  * Result: WIP, but I haven't had a freeze yet!
+  * It has stopped the freezes, which is awesome! There's some minor annoyances, but it's pretty decent so far
+  * Result: Probably keep for now
 
 Reducing battery usage during sleep
 
@@ -50,3 +50,8 @@ Stop devices from disconnecting via Dell Dock
   * Created this file: /etc/tlp.d/01-tb16.conf
   * Result: It might help a bit, but it doesn't force the kernel to disable power management for the dock
 * Ended up stopping to use the Dell dock, and instead using a Caldigit dock
+
+Autorandr
+
+* Tried to see if I can avoid the double trigger when plugging in the dock (1 udev trigger per monitor)
+* Result: Whatever the default setup is via `pacman` is the best for me. Don't try the `launcher` option. Live with the double trigger

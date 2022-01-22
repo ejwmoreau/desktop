@@ -10,18 +10,17 @@ function ifconfig() {
 
 # Specialized commands
 alias murder="shred -uvzn 20"
-alias fucking="sudo"
-alias please='sudo'
+alias please="sudo !!"
 
 # Common code commands
-alias vim='vim -O'
-alias ..='cd ..'
-alias ...='cd ../..'
+alias vim="vim -O"
+alias ..="cd .."
+alias ...="cd ../.."
 alias ag="ag --color -H --width 200 --skip-vcs-ignores"
 alias tree="tree -C"
 
-alias py2='python2'
-alias py3='python3'
+alias py2="python2"
+alias py3="python3"
 
 # Columns!
 alias C1="awk '{print \$1}'"
@@ -35,40 +34,40 @@ alias C8="awk '{print \$8}'"
 alias sum="awk '{sum+=\$1} END {print sum}'"
 
 # Common command line commands
-alias c='clear'
+alias c="clear"
 alias cls="clear && ls -l"
 alias clt="clear && tree"
 alias less="less -r"
-alias ls='ls --color=auto'
-alias l='ls -ohL --group-directories-first'
-alias lt='ls -lhtc'
-alias la='ls -lha --group-directories-first'
-alias ll='ls -l --group-directories-first'
-alias rm='rm -i'
-alias cp='cp -i'
-alias grep='grep -i --color'
+alias ls="ls --color=auto"
+alias l="ls -ohL --group-directories-first"
+alias lt="ls -lhtc"
+alias la="ls -lha --group-directories-first"
+alias ll="ls -l --group-directories-first"
+alias rm="rm -i"
+alias cp="cp -i"
+alias grep="grep -i --color"
 
 # Keychain commands
 id_rsas=$(ls --ignore="*.pub" -w 1 ~/.ssh/ | grep "^id_" | tr '\n' ' ')
 alias kc="eval \`keychain --eval --agents ssh --timeout 480 --quiet $id_rsas\`"
 
 # Aliases for Git
-alias g='/usr/bin/git status'
-alias gu='kc && /usr/bin/git pull'
-alias gp='kc && /usr/bin/git push'
-alias ga='/usr/bin/git add'
-alias gd='/usr/bin/git diff'
-alias gda='/usr/bin/git diff -U99999'
-alias gs='/usr/bin/git stash'
-alias gb='/usr/bin/git branch'
-alias gba='/usr/bin/git branch -a'
-alias gc='/usr/bin/git commit'
-alias gca='/usr/bin/git commit -a'
-alias gcl='kc && /usr/bin/git clone'
-alias gco='/usr/bin/git checkout'
+alias g="/usr/bin/git status"
+alias gu="kc && /usr/bin/git pull"
+alias gp="kc && /usr/bin/git push"
+alias ga="/usr/bin/git add"
+alias gd="/usr/bin/git diff"
+alias gda="/usr/bin/git diff -U99999"
+alias gs="/usr/bin/git stash"
+alias gb="/usr/bin/git branch"
+alias gba="/usr/bin/git branch -a"
+alias gc="/usr/bin/git commit"
+alias gca="/usr/bin/git commit -a"
+alias gcl="kc && /usr/bin/git clone"
+alias gco="/usr/bin/git checkout"
 alias gm="/usr/bin/git merge --no-ff"
 alias gff="/usr/bin/git merge --ff-only"
-alias gt='/usr/bin/git worktree'
+alias gt="/usr/bin/git worktree"
 
 # https://git-scm.com/docs/pretty-formats
 #GIT_LOG_FORMAT='%Cred%h%Creset -%C(yellow)%-d%C(reset) %s %C(green)[%cr]%C(reset) %C(bold blue)%an <%ae>%C(reset) %C(cyan)%G?%C(reset)'
@@ -161,20 +160,20 @@ gitcopush() {
 }
 
 # Docker
-alias d="/usr/bin/sudo /usr/bin/docker"
-alias dn="/usr/bin/sudo /usr/bin/docker network"
-alias de="/usr/bin/sudo /usr/bin/docker exec"
-alias dc="/usr/bin/sudo /usr/bin/docker container"
-alias dca="/usr/bin/sudo /usr/bin/docker container attach"
-alias dps="/usr/bin/sudo /usr/bin/docker container ls --format \"table {{.Names}} \t {{.Image}} \t {{.RunningFor}} \t {{.Status}} \t {{.Ports}}\" "
+alias d="/usr/bin/docker"
+alias dn="/usr/bin/docker network"
+alias de="/usr/bin/docker exec"
+alias dc="/usr/bin/docker container"
+alias dca="/usr/bin/docker container attach"
+alias dps="/usr/bin/docker container ls --format \"table {{.Names}} \t {{.Image}} \t {{.RunningFor}} \t {{.Status}} \t {{.Ports}}\" "
 
 function dsh () {
-    /usr/bin/sudo /usr/bin/docker exec -it $1 /bin/sh
+    /usr/bin/docker exec -it $1 /bin/sh
 }
 
 # Docker Compose
-alias dk="/usr/bin/sudo /usr/bin/docker-compose"
-alias dkps="/usr/bin/sudo /usr/bin/docker-compose ps"
+alias dk="/usr/bin/docker-compose"
+alias dkps="/usr/bin/docker-compose ps"
 
 # Kubernetes
 function kubectl() {
@@ -233,11 +232,11 @@ alias mkvirtualenv2="mkvirtualenv -p /usr/bin/python2.7"
 source "/usr/share/nvm/init-nvm.sh" --no-use
 
 # Look at logs of all containers that listen on port 8080
-alias docker-logs-check='while ((1)); do sudo docker logs -f $(sudo docker ps | grep 8080 | cut -f1 -d" ") 2>/dev/null; sleep 1; echo No docker container; done'
+alias docker-logs-check='while ((1)); do docker logs -f $(docker ps | grep 8080 | cut -f1 -d" ") 2>/dev/null; sleep 1; echo No docker container; done'
 
-# Docker requires sudo access
-alias docker="/usr/bin/sudo /usr/bin/docker"
-alias docker-compose="/usr/bin/sudo /usr/bin/docker-compose"
+# Docker requires sudo access (Temporarily disabling this)
+alias docker="/usr/bin/docker"
+alias docker-compose="/usr/bin/docker-compose"
 
 # Arch Linux way of handling Java versions
 source "/etc/profile.d/jre.sh"
