@@ -21,6 +21,7 @@
   * It eventually works, but it would be nice to have a proper signal of when it's not ready for me to type, instead of me trying to type for 5~10 seconds
 * Write a script to easily turn on/off the GPU, so I can use it when needed
   * See if there's a way to avoid rebooting. Otherwise it might not be possible
+* Consider switching to zsh + powerlevel10k, since it looks pretty good
 
 ## Adding to Ansible
 
@@ -51,10 +52,6 @@
 * Add a mention somewhere to change UEFI settings for battery usage to "Primarily AC", so it can improve battery health
 * Add flatpak and all the packages I have
 * Add some minimal config for root (e.g: vimrc & bashrc) so then some root commands or ttys are nicer
-* Change nm-applet's autostart file to use `Exec=env GDK_SCALE=1 nm-applet` for HiDPI
-* Add enabling of `paccache.timer`
-  * Paccache removes old packages from the pacman cache directory. By default the last three versions of a package are kept.
-  * Runs every week
 
 ## Awesome WM
 

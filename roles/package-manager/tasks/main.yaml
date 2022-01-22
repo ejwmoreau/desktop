@@ -5,6 +5,13 @@
   pacman:
     update_cache: yes
 
+# Paccache helps to keep only the last 3 versions of packages
+- name: Enable paccache timer
+  become: true
+  systemd:
+    name: paccache.timer
+    enabled: yes
+
 # Yay Things
 - name: Install base-devel
   become: true
