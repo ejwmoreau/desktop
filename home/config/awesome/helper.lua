@@ -109,17 +109,6 @@ function helper.force_focus(_screen)
     end
 end
 
-function helper.reset_to_primary()
-    for k, v in pairs(shared_tag_list) do
-        awful.tag.setproperty(v, "hide", true)
-        v.screen = 1
-        awful.tag.setproperty(v, "hide", false)
-    end
-
-    awful.tag.viewnone(screen[1])
-    awful.tag.viewmore({shared_tag_list[1]})
-end
-
 -- moveresize is relative to the current geometry, there was no alternative...
 function helper.client_resize(c, w, h)
     awful.client.moveresize(0, 0, w - c.width, h - c.height, c)

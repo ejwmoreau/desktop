@@ -24,10 +24,9 @@ key_bindings.globalkeys = awful.util.table.join(
     awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end),
     awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end),
 
-    awful.key({ modkey,           }, "s", function () helper.focus_on_screen(1, screen_map) end),
-    awful.key({ modkey,           }, "d", function () helper.focus_on_screen(2, screen_map) end),
-    awful.key({ modkey,           }, "f", function () helper.focus_on_screen(3, screen_map) end),
-    awful.key({ modkey, "Shift"   }, "t", function () helper.reset_to_primary() end),
+    awful.key({ modkey,           }, "a", function () helper.focus_on_screen(1, screen_map) end),
+    awful.key({ modkey,           }, "s", function () helper.focus_on_screen(2, screen_map) end),
+    awful.key({ modkey,           }, "d", function () helper.focus_on_screen(3, screen_map) end),
 
     -- Standard programs
     awful.key({ modkey,           }, "w", function () helper.spawn_program(programs["browser"]) end),
@@ -40,7 +39,7 @@ key_bindings.globalkeys = awful.util.table.join(
     end),
 
     awful.key({ modkey,           }, "l", function () helper.spawn_program(programs["lock"]) end),
-    awful.key({ modkey,           }, "a", function () helper.spawn_program(programs["randr"]) end),
+    awful.key({ modkey,           }, "r", function () helper.spawn_program(programs["randr"]) end),
     awful.key({ modkey,           }, "u", function () helper.spawn_program(programs["audio"]) end),
     awful.key({                   }, "Print", function () awful.spawn.with_shell(programs["screenshot"]) end),
 
@@ -49,8 +48,8 @@ key_bindings.globalkeys = awful.util.table.join(
     awful.key({ modkey, "Shift"   }, "q", awesome.quit),
 
     -- Window Control
-    awful.key({ modkey,           }, "l", function () awful.tag.incmwfact( 0.03) end),
-    awful.key({ modkey,           }, "h", function () awful.tag.incmwfact(-0.03) end),
+    awful.key({ modkey, "Shift"   }, "l", function () awful.tag.incmwfact( 0.03) end),
+    awful.key({ modkey, "Shift"   }, "h", function () awful.tag.incmwfact(-0.03) end),
     awful.key({ modkey,           }, ",", function () awful.tag.incnmaster( 1) end),
     awful.key({ modkey,           }, ".", function () awful.tag.incnmaster(-1) end),
     awful.key({ modkey, "Control" }, "h", function () awful.tag.incncol( 1) end),
