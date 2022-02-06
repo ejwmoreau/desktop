@@ -82,7 +82,7 @@ function gta() {
     # Create a new git worktree for the current repo
     if [ $# -eq 0 ]; then echo "Please supply the branch name"; fi
     repo_name=$(basename -s .git `git config --get remote.origin.url`)
-    default_branch_name=$(basename `git symbolic-ref refs/remotes/origin/HEAD`)
+    default_branch_name=$(get_or_set_default_branch_ref)
     git worktree add -b $1 ../$repo_name-$1 $default_branch_name
     cd ../$repo_name-$1
 }
@@ -90,9 +90,20 @@ function gta() {
 function gur() {
     # Rebase off the default branch. Handles if there's any changes to stash
     change=$(git stash | grep "No local changes to save")
-    default_branch_name=$(basename `git symbolic-ref refs/remotes/origin/HEAD`)
+    default_branch_name=$(get_or_set_default_branch_ref)
     kc && /usr/bin/git pull --rebase origin $default_branch_name
     if [[ ! $change ]]; then git stash apply; fi
+}
+
+function get_or_set_default_branch_ref() {
+    # Get the default branch via the origin's HEAD ref. If it doesn't exist locally, then query and set it
+    default_branch_name=$(basename `git symbolic-ref refs/remotes/origin/HEAD 2> /dev/null` 2> /dev/null)
+    if [[ $? -ne 0 ]]; then
+        # To easily figure out the default branch in the future, set the "origin/HEAD" ref
+        default_branch_name=$(git remote show origin | awk '/HEAD branch/ {print $NF}')
+        git symbolic-ref refs/remotes/origin/HEAD refs/remotes/origin/$default_branch_name
+    fi
+    echo $default_branch_name
 }
 
 function gc_scott() {
