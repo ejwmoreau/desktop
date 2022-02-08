@@ -48,6 +48,26 @@
 * Add flatpak and all the packages I have
 * Add some minimal config for root (e.g: vimrc & bashrc) so then some root commands or ttys are nicer
 
+## Moving from Awesome WM to i3
+
+* Things to migrate:
+  * Status bar (wibox -> i3status)
+    * Bluetooth battery levels (keyboard + headset)
+  * Systray
+  * Keybindings:
+    * Regular program triggers
+    * Window/Client manipulation
+    * Workspace manipulation
+  * Start-up programs/commands (From ~/.xprofile)
+  * Window/Client border & looks
+  * Auto-sizing / floating mode for some programs (Zoom, arandr, pavucontrol, etc)
+  * Wallpaper (maybe pick a random one from a folder? instead of always the atlassian one)
+  * Notification customisation
+  * Debug print to get all the properties of a window/client (if possible)
+* Make sure it works as intended for a multi-display setup
+  * How do workspaces get moved over there?
+* Make sure to trigger Xresources at the start somehow
+
 ## Awesome WM
 
 * Keep the same focused window when changing layouts
