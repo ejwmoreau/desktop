@@ -8,6 +8,9 @@
 
 - name: Link config for i3
   file:
-    src: "{{playbook_dir}}/home/config/i3"
-    dest: "~/.config/i3"
+    src: "{{playbook_dir}}/home/config/{{item}}"
+    dest: "~/.config/{{item}}"
     state: link
+  loop:
+    - "i3"
+    - "i3status"

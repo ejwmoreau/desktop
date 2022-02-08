@@ -544,8 +544,8 @@ awful.rules.rules = {
         rule_any = {
             name = { "Zoom - Licensed Account", "Zoom Cloud Meetings" }
         },
-        properties = { minimized = true },
-        callback = function(c) debug_print('Triggered for the default Zoom window') end
+        properties = { minimized = true }
+        --callback = function(c) debug_print('Triggered for the default Zoom window') end
     },
 
     {
@@ -557,7 +557,7 @@ awful.rules.rules = {
         except_any = {
             name = { "Zoom - Licensed Account" }
         },
-        properties = { floating = true },
-        callback = function(c) debug_print('Triggered for the floating Zoom window') end
+        properties = { floating = true }
+        --callback = function(c) debug_print('Triggered for the floating Zoom window') end
     }
 }
