@@ -24,6 +24,7 @@ key_bindings.globalkeys = awful.util.table.join(
     awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end),
     awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end),
 
+    -- TODO: Migrate to i3. Not sure if there's an i3 equivalent
     awful.key({ modkey,           }, "a", function () helper.focus_on_screen(1, screen_map) end),
     awful.key({ modkey,           }, "s", function () helper.focus_on_screen(2, screen_map) end),
     awful.key({ modkey,           }, "d", function () helper.focus_on_screen(3, screen_map) end),
@@ -45,7 +46,7 @@ key_bindings.globalkeys = awful.util.table.join(
 
     -- Awesome Control
     awful.key({ modkey, "Control" }, "r", awesome.restart),
-    awful.key({ modkey, "Shift"   }, "q", awesome.quit),
+    --awful.key({ modkey, "Shift"   }, "q", awesome.quit),
 
     -- Window Control
     awful.key({ modkey, "Shift"   }, "l", function () awful.tag.incmwfact( 0.03) end),

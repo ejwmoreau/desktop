@@ -58,7 +58,7 @@ battery all {
 
 read_file bluetooth {
   format = "%content"
-  path = "/home/emoreau/.config/bluetooth_battery_levels"
+  path = "~/.config/bluetooth_battery_levels"
 }
 
 time {

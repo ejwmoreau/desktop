@@ -102,15 +102,13 @@ end
 
 local modkey = key_bindings.modkey
 
--- This is used later as the default terminal and editor to run.
+-- This is used later as the default programs to run.
 programs = {
     ["audio"]       = "pavucontrol",
-    --["browser"]     = "firefox",
     ["browser"]     = "google-chrome-stable",
     ["terminal"]    = "urxvt",
     ["lock"]        = "light-locker-command -l",
     ["randr"]       = "arandr",
-    ["editor"]      = os.getenv("EDITOR") or "vim",
     ["screenshot"]  = "( flameshot & ) && ( sleep 0.2s && flameshot gui )"
 }
 
@@ -355,8 +353,7 @@ clientkeys = awful.util.table.join(
     awful.key({ modkey,           }, "t",       awful.client.floating.toggle ),
     awful.key({ modkey,           }, "Return",  function (c) c:swap(awful.client.getmaster()) end),
 
-    -- This is useful if for debugging, when you want to know what Awesome is
-    -- doing with a window.
+    -- This is useful for debugging, when you want to know what Awesome is doing with a window
     awful.key({ modkey, "Control" }, "s",       function (c)
 
         -- WTF IS THIS STUPID MAXAMIZED BULLSHIT
