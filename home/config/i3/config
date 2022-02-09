@@ -11,15 +11,13 @@
 
 set $mod Mod4
 
-# TODO: Start
-# Font for window titles. Will also be used by the bar unless a different font
-# is used in the bar {} block below.
+# Font used for window titles & status bar
 font pango:Roboto 8
 
-# This font is widely installed, provides lots of unicode glyphs, right-to-left
-# text rendering and scalability on retina/hidpi displays (thanks to pango).
-#font pango:DejaVu Sans Mono 8
+# Wallpaper
+exec --no-startup-id feh --bg-scale ~/.config/i3/wallpaper.png
 
+# TODO: Start
 # Use pactl to adjust volume in PulseAudio (TODO: Change to pamixer)
 set $refresh_i3status killall -SIGUSR1 i3status
 #bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
@@ -28,46 +26,76 @@ set $refresh_i3status killall -SIGUSR1 i3status
 #bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 # TODO: End
 
-# ----- Start Programs ----- #
+# TODO: Configure nagbar to be easier to read (test with a conflicting key binding)
 
-# Tray programs
-#exec --no-startup-id GDK_SCALE=1 nm-applet &
+# ----- Program Behaviour ----- #
 
-# Lock-related programs
-#exec --no-startup-id light-locker --lock-after-screensaver 60 --no-lock-on-lid &
-#exec --no-startup-id screenlock &
+# Keep Zoom on Workspace 8 and stop it from taking focus
+for_window [class="zoom"] move to workspace 8
+no_focus [class="zoom"]
+# Hide the "Home" and "Loading" Zoom windows, since they get in the way
+for_window [title="(Zoom - Licensed Account|Zoom Cloud Meetings)"] minimise
+# Make the "notification" windows float, so they don't take the whole screen
+for_window [title="zoom"] minimise
 
-# Other programs
-#exec --no-startup-id autorandr --change
-#exec --no-startup-id urxvtd --quiet --opendisplay --fork &
+# TODO: Give these a reasonable width & height
+for_window [class="Arandr"] floating enable
+for_window [class="Pavucontrol"] floating enable
 
-# ----- Key Bindings ----- #
-
-# Use Mouse+$mod to drag floating windows
-floating_modifier $mod
+# ----- Program Key Bindings ----- #
 
 # Start a terminal with latest ~/.Xresources settings
 bindsym $mod+Return exec xrdb ~/.Xresources && urxvt
-
-# Kill focused window
-# TODO: Check if this new shortcut is too annoying. It does conflict with reload though
-bindsym $mod+Shift+q kill
 
 # Start program launcher
 bindsym $mod+p exec --no-startup-id dmenu_custom
 
 # TODO: Check out other dmenu replacements
+# TODO: Also look for a way to restrict which programs show in dmenu, and renaming some
 # A more modern dmenu replacement is rofi:
 # bindcode $mod+40 exec "rofi -modi drun,run -show drun"
 # There also is i3-dmenu-desktop which only displays applications shipping a
 # .desktop file. It is a wrapper around dmenu, so you need that installed.
 # bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
 
+# TODO: Consider changing the shortcut for Chrome
+bindsym $mod+w exec --no-startup-id google-chrome-stable
+bindsym $mod+u exec --no-startup-id pavucontrol
+bindsym $mod+l exec --no-startup-id light-locker-command -l
+bindsym $mod+r exec --no-startup-id arandr
+bindsym Print  exec --no-startup-id ( flameshot & ) && ( sleep 0.2s && flameshot gui )
+
+# Audio Control
+bindsym XF86AudioRaiseVolume exec --no-startup-id pamixer -i 5
+bindsym XF86AudioLowerVolume exec --no-startup-id pamixer -d 5
+bindsym XF86AudioMute        exec --no-startup-id pamixer -t
+
+# Music Control
+bindsym XF86AudioPlay  exec --no-startup-id playerctl play-pause
+bindsym XF86AudioPause exec --no-startup-id playerctl play-pause
+bindsym XF86AudioNext  exec --no-startup-id playerctl next
+bindsym XF86AudioPrev  exec --no-startup-id playerctl previous
+
+# Brightness
+bindsym XF86MonBrightnessUp   exec --no-startup-id brightness -inc
+bindsym XF86MonBrightnessDown exec --no-startup-id brightness -dec
+
+# ----- Window Key Bindings ----- #
+
+# Use Mouse+$mod to drag floating windows
+floating_modifier $mod
+
+# TODO: Use $mod+t to toggle floating mode on/off
+
+# Kill focused window
+# TODO: Check if this new shortcut is too annoying. It does conflict with reload though
+bindsym $mod+Shift+q kill
+
 # Change focus
 bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
-bindsym $mod+l focus right
+#bindsym $mod+l focus right # TODO: Conflicts with the lock command
 
 # Move focused window
 bindsym $mod+Shift+h move left
@@ -79,6 +107,11 @@ bindsym $mod+Shift+l move right
 #bindsym $mod+h split h
 #bindsym $mod+v split v
 
+# Get the properties of a window, to help with debugging
+bindsym $mod+n exec --no-startup-id notify-send "$(~/bin/i3_get_window_props)"
+
+# ----- Layout Key Bindings ----- #
+
 # TODO: Try the ideas in this Reddit thread:
 # https://www.reddit.com/r/i3wm/comments/b7d3i5/is_it_possible_to_switch_between_multiple/
 # * Using stacked mode almost exclusively, and then use mod+j/k to change up/down
@@ -88,9 +121,10 @@ bindsym $mod+Shift+l move right
 # Enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
+# TODO: Consider changing to use $mod+space if it's possible to shift between different layouts
 # Change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
+#bindsym $mod+w layout tabbed # TODO: Conflicts with the Chrome command
 bindsym $mod+e layout toggle split
 
 # Toggle tiling / floating
@@ -104,6 +138,8 @@ bindsym $mod+space focus mode_toggle
 
 # Focus the child container
 #bindsym $mod+d focus child
+
+# ----- Workspace Key Bindings ----- #
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
@@ -139,12 +175,24 @@ bindsym $mod+Shift+7 move container to workspace number $ws7
 bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 
+# TODO: Add keybindings for moving windows to particular displays/outputs/screens
+# Something like $mod+Shift+a, $mod+Shift+s, etc
+
+# TODO: Check if I can minimise windows at all
+
+# ----- i3 Control Key Bindings ----- #
+
 # Reload the configuration file
 bindsym $mod+Shift+c reload
+
 # Restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
+
+# TODO: Decide if I actually want this or not
 # Exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
+# ----- Resize Mode Key Bindings ----- #
 
 # Resize window (you can also use the mouse for that)
 mode "resize" {
@@ -171,7 +219,9 @@ mode "resize" {
   bindsym $mod+r mode "default"
 }
 
-bindsym $mod+r mode "resize"
+# bindsym $mod+r mode "resize" # TODO: Conflicts with the arandr command
+
+# ----- Bar Config ----- #
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
@@ -179,7 +229,6 @@ bar {
   status_command i3status
   position top
   #tray_output primary # TODO: This can be uncommented when actually using i3
-  font pango:Roboto 8
 
   colors {
     background #343434

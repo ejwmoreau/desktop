@@ -22,6 +22,7 @@
 * Write a script to easily turn on/off the GPU, so I can use it when needed
   * See if there's a way to avoid rebooting. Otherwise it might not be possible
 * Consider switching to zsh + powerlevel10k, since it looks pretty good
+* Improve wallpaper by picking a random one from a folder or something. Maybe change on schedule?
 
 ## Adding to Ansible
 
@@ -55,18 +56,18 @@
     * Done: Bluetooth battery levels (keyboard + headset)
   * Done: Systray
   * Keybindings:
-    * Regular program triggers
+    * Done: Regular program triggers
     * Window/Client manipulation
     * Workspace manipulation
-  * Start-up programs/commands (From ~/.xprofile)
   * Window/Client border & looks
-  * Auto-sizing / floating mode for some programs (Zoom, arandr, pavucontrol, etc)
-  * Wallpaper (maybe pick a random one from a folder? instead of always the atlassian one)
+  * Done: Auto-sizing / floating mode for some programs (Zoom, arandr, pavucontrol, etc)
+  * Done: Wallpaper
   * Notification customisation
-  * Debug print to get all the properties of a window/client (if possible)
+  * Done: Debug print to get all the properties of a window/client (if possible)
 * Make sure it works as intended for a multi-display setup
   * How do workspaces get moved over there?
 * Make sure to trigger Xresources at the start somehow
+  * Answer: It should get triggered by LightDM on login
 
 ## Awesome WM
 
