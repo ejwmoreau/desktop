@@ -12,7 +12,7 @@ headset() {
         output=$(timeout 3s bluetooth-headset-battery-level CC:98:8B:B7:2A:0E)
 
         if [[ "$output" =~ "Battery level for" ]]; then
-            echo $output | awk '{ print $6 }' | cut -d'%' -f1
+            echo $output | awk '{ print $6 }' | cat <(echo -n "🎧 ") -
             exit
         fi
     done
@@ -24,7 +24,7 @@ headset() {
 keyboard() {
     output=$(upower -i /org/freedesktop/UPower/devices/keyboard_hid_dco2co26oecob1oe0_battery | grep percentage)
     if [[ "$output" =~ "percentage" && ! "$output" =~ "should be ignored" ]]; then
-        echo $output | awk '{ print $2 }' | cut -d'%' -f1
+        echo $output | awk '{ print $2 }' | cat <(echo -n "⌨️ ") -
     else
         echo "--"
     fi
@@ -33,5 +33,6 @@ keyboard() {
 case $1 in
     "headset")  headset;;
     "keyboard") keyboard;;
-    *) echo "No device specified. Pick one of 'headset, keyboard'";;
+    "all") headset; keyboard;;
+    *) echo "No device specified. Pick one of 'headset, keyboard, all'";;
 esac

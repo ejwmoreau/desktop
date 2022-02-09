@@ -51,9 +51,9 @@
 ## Moving from Awesome WM to i3
 
 * Things to migrate:
-  * Status bar (wibox -> i3status)
-    * Bluetooth battery levels (keyboard + headset)
-  * Systray
+  * Done: Status bar (wibox -> i3status)
+    * Done: Bluetooth battery levels (keyboard + headset)
+  * Done: Systray
   * Keybindings:
     * Regular program triggers
     * Window/Client manipulation

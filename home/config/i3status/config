@@ -9,7 +9,7 @@ general {
   # Tweak the colors to be easier on the eyes
   # "Default" color is in the i3 config (bar section)
   colors = true
-  color_good = "#BAFFC9"
+  color_good = "#CCCCBB" # Was green (#BAFFC9), but read_file uses color_good all the time
   color_degraded = "#FFDFBA"
   color_bad = "#FFB3BA"
 }
@@ -18,6 +18,7 @@ order += "cpu_usage"
 order += "memory"
 order += "disk /"
 order += "battery all"
+order += "read_file bluetooth"
 order += "time"
 order += "tztime local"
 
@@ -53,6 +54,11 @@ battery all {
   status_bat = ↘️
   status_unk = ?
   status_full = 🟢
+}
+
+read_file bluetooth {
+  format = "%content"
+  path = "/home/emoreau/.config/bluetooth_battery_levels"
 }
 
 time {

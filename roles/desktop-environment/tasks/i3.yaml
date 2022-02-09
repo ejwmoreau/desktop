@@ -14,3 +14,21 @@
   loop:
     - "i3"
     - "i3status"
+
+- name: Link bluetooth_battery timer for i3status
+  become: true
+  file:
+    src: "{{playbook_dir}}/etc/systemd/system/{{item}}"
+    dest: "/etc/systemd/system/{{item}}"
+    state: link
+  loop:
+    - "bluetooth_battery.service"
+    - "bluetooth_battery.timer"
+
+- name: Enable bluetooth_battery.timer
+  become: true
+  systemd:
+    name: bluetooth_battery.timer
+    enabled: yes
+    state: started
+    daemon_reload: yes

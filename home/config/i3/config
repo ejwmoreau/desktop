@@ -182,6 +182,8 @@ bar {
   font pango:Roboto 8
 
   colors {
+    background #343434
     statusline #CCCCBB
+    separator #262626
   }
 }

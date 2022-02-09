@@ -16,7 +16,7 @@
 
 # TODO: Figure out how to get credentials into the script
 
-- name: Link get_internet_usage script
+- name: Link get_internet_usage script & timer
   become: true
   file:
     src: "{{playbook_dir}}/../code/internet-usage/{{item.file}}"
@@ -30,11 +30,10 @@
     - file: "get_internet_usage.timer"
       dest: "/etc/systemd/system"
 
-# TODO: Figure out why this is broken
-#- name: Enable get_internet_usage.timer
-#  become: true
-#  systemd:
-#    name: get_internet_usage.timer
-#    enabled: yes
-#    state: started
-#    daemon_reload: yes
+- name: Enable get_internet_usage.timer
+  become: true
+  systemd:
+    name: get_internet_usage.timer
+    enabled: yes
+    state: started
+    daemon_reload: yes

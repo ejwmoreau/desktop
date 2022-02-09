@@ -1,0 +1,8 @@
+[Install]
+WantedBy=timers.target
+
+[Unit]
+Description=Run bluetooth_battery.service every 1 min
+
+[Timer]
+OnCalendar=*:0/1
