@@ -51,23 +51,23 @@
 
 ## Moving from Awesome WM to i3
 
-* Things to migrate:
-  * Done: Status bar (wibox -> i3status)
-    * Done: Bluetooth battery levels (keyboard + headset)
-  * Done: Systray
-  * Keybindings:
-    * Done: Regular program triggers
-    * Window/Client manipulation
-    * Workspace manipulation
+* Things still to migrate/improve:
   * Window/Client border & looks
-  * Done: Auto-sizing / floating mode for some programs (Zoom, arandr, pavucontrol, etc)
-  * Done: Wallpaper
-  * Notification customisation
-  * Done: Debug print to get all the properties of a window/client (if possible)
+  * Notification customisation (not sure how to do this)
 * Make sure it works as intended for a multi-display setup
-  * How do workspaces get moved over there?
-* Make sure to trigger Xresources at the start somehow
-  * Answer: It should get triggered by LightDM on login
+  * How to workspaces get moved over there?
+
+## i3
+
+* Various TODOs in the i3 config
+* Maybe use scratchpad as a way to "minimise" some windows
+  * https://i3wm.org/docs/userguide.html#scratchpad
+  * https://www.reddit.com/r/i3wm/comments/9zpumb/any_way_to_hide_a_window/
+* Try the `[workspace=x]` criteria idea, to move a workspace to the current output:
+  * https://www.reddit.com/r/i3wm/comments/56ayg3/i3msg_moving_a_specific_workspace_to_another/
+* Fix general `notify-send` notifications
+* Polish & Practice using window keybindings
+* Polish & Practice using workspace keybindings
 
 ## Awesome WM
 

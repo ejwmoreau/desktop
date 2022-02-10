@@ -30,15 +30,18 @@ set $refresh_i3status killall -SIGUSR1 i3status
 
 # ----- Program Behaviour ----- #
 
+# TODO: Document each Zoom window scenario (class, instance, title, etc) so then it's easier to figure out what the rules should be
+# TODO: Somehow float the share screen dialog
+
 # Keep Zoom on Workspace 8 and stop it from taking focus
 for_window [class="zoom"] move to workspace 8
 no_focus [class="zoom"]
-# Hide the "Home" and "Loading" Zoom windows, since they get in the way
-for_window [title="(Zoom - Licensed Account|Zoom Cloud Meetings)"] minimise
-# Make the "notification" windows float, so they don't take the whole screen
-for_window [title="zoom"] minimise
+# TODO: Hide the "Home" and "Loading" Zoom windows, since they get in the way
+#for_window [title="(Zoom - Licensed Account|Zoom Cloud Meetings)"] minimise
+# TODO: Make the "notification" windows float, so they don't take the whole screen
+#for_window [title="zoom"] minimise
 
-# TODO: Give these a reasonable width & height
+# TODO: Give arandr a reasonable width & height
 for_window [class="Arandr"] floating enable
 for_window [class="Pavucontrol"] floating enable
 
@@ -85,32 +88,40 @@ bindsym XF86MonBrightnessDown exec --no-startup-id brightness -dec
 # Use Mouse+$mod to drag floating windows
 floating_modifier $mod
 
-# TODO: Use $mod+t to toggle floating mode on/off
-
 # Kill focused window
-# TODO: Check if this new shortcut is too annoying. It does conflict with reload though
+# TODO: Check if this new shortcut is too annoying. The old one does conflict with reload though
 bindsym $mod+Shift+q kill
 
 # Change focus
-bindsym $mod+h focus left
-bindsym $mod+j focus down
-bindsym $mod+k focus up
+#bindsym $mod+h focus left
+#bindsym $mod+j focus down
+#bindsym $mod+k focus up
 #bindsym $mod+l focus right # TODO: Conflicts with the lock command
+bindsym $mod+j focus right
+bindsym $mod+k focus left
 
 # Move focused window
-bindsym $mod+Shift+h move left
-bindsym $mod+Shift+j move down
-bindsym $mod+Shift+k move up
-bindsym $mod+Shift+l move right
-
-# Split in horizontal or vertical orientation
-#bindsym $mod+h split h
-#bindsym $mod+v split v
+#bindsym $mod+Shift+h move left
+#bindsym $mod+Shift+j move down
+#bindsym $mod+Shift+k move up
+#bindsym $mod+Shift+l move right
+bindsym $mod+Shift+j move right
+bindsym $mod+Shift+k move left
 
 # Get the properties of a window, to help with debugging
 bindsym $mod+n exec --no-startup-id notify-send "$(~/bin/i3_get_window_props)"
 
 # ----- Layout Key Bindings ----- #
+
+# Setting default workspace layout
+workspace_layout tabbed
+
+# Toggle between different workspace layouts
+bindsym $mod+x layout toggle tabbed splith splitv
+# TODO: Consider removing `splitv`, since I'm missing the up/down keybindings
+
+# Toggle fullscreen mode for the focused window
+bindsym $mod+f fullscreen toggle
 
 # TODO: Try the ideas in this Reddit thread:
 # https://www.reddit.com/r/i3wm/comments/b7d3i5/is_it_possible_to_switch_between_multiple/
@@ -118,26 +129,20 @@ bindsym $mod+n exec --no-startup-id notify-send "$(~/bin/i3_get_window_props)"
 # * Using tabbed  mode almost exclusively, and then use mod+h/l to change left/right
 # * Set key bindings for "exit fullscreen, change directionally, enter fullscreen"
 
-# Enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen toggle
-
-# TODO: Consider changing to use $mod+space if it's possible to shift between different layouts
-# Change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-#bindsym $mod+w layout tabbed # TODO: Conflicts with the Chrome command
-bindsym $mod+e layout toggle split
-
+# TODO: Start
+# TODO: Do I want to use $mod+t to toggle floating instead?
 # Toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
 
 # Change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
 
-# Focus the parent container
+# Focus the parent window
 #bindsym $mod+a focus parent
 
-# Focus the child container
+# Focus the child window
 #bindsym $mod+d focus child
+# TODO: End
 
 # ----- Workspace Key Bindings ----- #
 
@@ -163,17 +168,18 @@ bindsym $mod+6 workspace number $ws6
 bindsym $mod+7 workspace number $ws7
 bindsym $mod+8 workspace number $ws8
 bindsym $mod+9 workspace number $ws9
+bindsym $mod+z [workspace=$ws1] move workspace to output current
 
-# Move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace number $ws1
-bindsym $mod+Shift+2 move container to workspace number $ws2
-bindsym $mod+Shift+3 move container to workspace number $ws3
-bindsym $mod+Shift+4 move container to workspace number $ws4
-bindsym $mod+Shift+5 move container to workspace number $ws5
-bindsym $mod+Shift+6 move container to workspace number $ws6
-bindsym $mod+Shift+7 move container to workspace number $ws7
-bindsym $mod+Shift+8 move container to workspace number $ws8
-bindsym $mod+Shift+9 move container to workspace number $ws9
+# Move focused window to workspace
+bindsym $mod+Shift+1 move window to workspace number $ws1
+bindsym $mod+Shift+2 move window to workspace number $ws2
+bindsym $mod+Shift+3 move window to workspace number $ws3
+bindsym $mod+Shift+4 move window to workspace number $ws4
+bindsym $mod+Shift+5 move window to workspace number $ws5
+bindsym $mod+Shift+6 move window to workspace number $ws6
+bindsym $mod+Shift+7 move window to workspace number $ws7
+bindsym $mod+Shift+8 move window to workspace number $ws8
+bindsym $mod+Shift+9 move window to workspace number $ws9
 
 # TODO: Add keybindings for moving windows to particular displays/outputs/screens
 # Something like $mod+Shift+a, $mod+Shift+s, etc
@@ -223,12 +229,11 @@ mode "resize" {
 
 # ----- Bar Config ----- #
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
+# Start i3bar to display a workspace bar, systray, and i3status info
 bar {
   status_command i3status
   position top
-  #tray_output primary # TODO: This can be uncommented when actually using i3
+  tray_output primary
 
   colors {
     background #343434

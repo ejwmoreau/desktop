@@ -17,7 +17,7 @@ headset() {
         fi
     done
 
-    echo "--"
+    echo "🎧 --"
 }
 
 # Keychron K2 keyboard
@@ -26,7 +26,7 @@ keyboard() {
     if [[ "$output" =~ "percentage" && ! "$output" =~ "should be ignored" ]]; then
         echo $output | awk '{ print $2 }' | cat <(echo -n "⌨️ ") -
     else
-        echo "--"
+        echo "⌨️ --"
     fi
 }
 
