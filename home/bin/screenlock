@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
 TOGGLE_REDSHIFT="pkill -USR1 '^redshift$'"
-COMMON_COMMAND='xrandr | grep " connected" | cut -d" " -f1 | xargs -I % xrandr --output % --brightness'
-NOTIFY_COMMAND="$TOGGLE_REDSHIFT; $COMMON_COMMAND .5"
-NOTIFY_CANCELLER="$TOGGLE_REDSHIFT; $COMMON_COMMAND 1"
+CHANGE_BRIGHTNESS='xrandr | grep " connected" | cut -d" " -f1 | xargs -I % xrandr --output % --brightness'
+NOTIFY_COMMAND="$TOGGLE_REDSHIFT; $CHANGE_BRIGHTNESS .5"
+NOTIFY_CANCELLER="$TOGGLE_REDSHIFT; $CHANGE_BRIGHTNESS 1"
 
 LOCK_COMMAND="light-locker-command -l"
 

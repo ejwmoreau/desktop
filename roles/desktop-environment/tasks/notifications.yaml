@@ -1,0 +1,14 @@
+---
+- name: Install dunst
+  become: true
+  pacman:
+    name:
+      - dunst
+
+- name: Link config for dunst
+  file:
+    src: "{{playbook_dir}}/home/config/{{item}}"
+    dest: "~/.config/{{item}}"
+    state: link
+  loop:
+    - "dunst"

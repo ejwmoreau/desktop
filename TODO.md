@@ -49,14 +49,6 @@
 * Add flatpak and all the packages I have
 * Add some minimal config for root (e.g: vimrc & bashrc) so then some root commands or ttys are nicer
 
-## Moving from Awesome WM to i3
-
-* Things still to migrate/improve:
-  * Window/Client border & looks
-  * Notification customisation (not sure how to do this)
-* Make sure it works as intended for a multi-display setup
-  * How to workspaces get moved over there?
-
 ## i3
 
 * Various TODOs in the i3 config
@@ -65,9 +57,13 @@
   * https://www.reddit.com/r/i3wm/comments/9zpumb/any_way_to_hide_a_window/
 * Try the `[workspace=x]` criteria idea, to move a workspace to the current output:
   * https://www.reddit.com/r/i3wm/comments/56ayg3/i3msg_moving_a_specific_workspace_to_another/
-* Fix general `notify-send` notifications
+* Improve `dunst` notification looks
 * Polish & Practice using window keybindings
 * Polish & Practice using workspace keybindings
+* Maybe use more existing `base16` themes in various places (i3, i3status, IntelliJ, etc)
+* Add the sound module to i3status
+* Window/Client border & looks
+* Moving workspaces to the current output
 
 ## Awesome WM
 
