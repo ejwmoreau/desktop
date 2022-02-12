@@ -1,13 +1,13 @@
 
                 -- [      Power Mode for Awesome 4.3-2      ] --
                 -- [          Author: ejwmoreau             ] --
-                -- [     http://github.com/ejwmoreau        ] --
+                -- [     https://github.com/ejwmoreau       ] --
                 -- [                   --                   ] --
                 -- [  Customisation credit to scottgreenup  ] --
-                -- [     http://github.com/scottgreenup     ] --
+                -- [     https://github.com/scottgreenup    ] --
                 -- [                   --                   ] --
                 -- [        Theme credit to barwinco        ] --
-                -- [    http://github.com/barwinco/pro      ] --
+                -- [    https://github.com/barwinco/pro     ] --
 
 -- | Author's Commentary | --
 
