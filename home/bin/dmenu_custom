@@ -6,8 +6,11 @@ import sys
 
 geo = {}
 
+# TODO: Simplify this script a bit to remove the flows I don't need anymore
+
 if len(sys.argv) < 2:
-    cp = subprocess.run(['xrandr'], stdout=subprocess.PIPE).stdout
+    # Using --current allows xrandr to return 1~2 seconds quicker in multi-monitor + HiDPI situations
+    cp = subprocess.run(['xrandr', '--current'], stdout=subprocess.PIPE).stdout
     lines = cp.decode('ascii').split('\n')
     regex = re.compile('\d+x\d+')
     for line in lines:

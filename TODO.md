@@ -48,6 +48,7 @@
 * Add a mention somewhere to change UEFI settings for battery usage to "Primarily AC", so it can improve battery health
 * Add flatpak and all the packages I have
 * Add some minimal config for root (e.g: vimrc & bashrc) so then some root commands or ttys are nicer
+* Add notification when changing screen brightness
 
 ## i3
 
@@ -72,3 +73,16 @@
 * Improve focus when moving a client from one screen to another
   * Default to focusing on something on the current screen, or
   * Default to keeping focus on the client being moved (but what if the screen is not visible?)
+
+# After Feb 2022: Removing AwesomeWM
+
+* Delete the ansible roles & tasks
+* Delete the cloned repos
+* Delete any symlinks for config files/folders
+* Delete the config files in `home/config`
+  * After double checking if there's any setup I want to move to i3
+* Delete the `awesome.desktop` file
+* Delete the entries in `.gitignore`
+* Delete relevant bash alias(es)
+* Clean up mentions in `TODO`, `README`, and `notes` files, and any other file
+* Uninstall awesome and any packages required by it
