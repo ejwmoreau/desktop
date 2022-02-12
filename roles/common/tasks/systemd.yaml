@@ -1,0 +1,18 @@
+---
+- name: Make some systemd config directories
+  file:
+    path: "/etc/systemd/{{item}}"
+    state: directory
+  loop:
+    - "logind.conf.d"
+    - "sleep.conf.d"
+
+- name: Link some systemd config files
+  become: true
+  file:
+    src: "{{playbook_dir}}/etc/systemd/{{item}}"
+    dest: "/etc/systemd/{{item}}"
+    state: link
+  loop:
+    - "logind.conf.d/logind.conf"
+    - "sleep.conf.d/sleep.conf"

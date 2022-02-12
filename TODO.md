@@ -2,6 +2,7 @@
 
 * Finish going through Scott's vimrc for anything I want to keep
 * Add extensions for VSCode (Python, Atlassian, Yaml, Vim)
+* Add extensions for IntelliJ (Even just a manual list of them)
 * Add Firefox tab groups and such
 * Change login logos to Arch logo
 * Add and use `peek` for screen recording
@@ -39,7 +40,6 @@
 * Add setup for hibernation
   * Kernel parameters, then re-gen grub config
   * Configure the initramfs hooks, then mkinitcpio
-* Add changes to `/etc/systemd/logind.conf` & `/etc/systemd/sleep.conf`, for the laptop lid close actions
 * Add `nautilus`
   * Also run this command to set it as default: `xdg-mime default org.gnome.Nautilus.desktop inode/directory`
 * Add `noisetorch` for some noise cancellation on any audio inputs (e.g: mic)

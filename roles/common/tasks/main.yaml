@@ -85,4 +85,5 @@
 - import_tasks: paprika.yaml
 - import_tasks: sound.yaml
 - import_tasks: ssd.yaml
+- import_tasks: systemd.yaml
 - import_tasks: udev.yaml
