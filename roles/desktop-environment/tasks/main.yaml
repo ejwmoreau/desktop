@@ -23,6 +23,8 @@
   loop:
     - src: "home/xprofile"
       dest: ".xprofile"
+    - src: "home/xsession"
+      dest: ".xsession"
     - src: "home/bashrc"
       dest: ".bashrc"
     - src: "home/bash_aliases"

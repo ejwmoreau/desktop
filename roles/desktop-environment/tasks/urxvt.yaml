@@ -4,6 +4,7 @@
   pacman:
     name:
       - rxvt-unicode
+      - urxvt-perls # Needed for urxvt to find the 'clipboard' perl extension
 
 - name: Create .urxvt/ext
   file:
