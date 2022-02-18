@@ -6,4 +6,4 @@
     dest: "/etc/udev/rules.d/{{item}}"
     force: no
   loop:
-    - 99-logitech-webcam-default-zoom.rules
+    - "99-logitech-webcam-default-zoom.rules"

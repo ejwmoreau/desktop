@@ -16,19 +16,25 @@
 
 # TODO: Figure out how to get credentials into the script
 
-- name: Link get_internet_usage script & timer
+- name: Link get_internet_usage script
   become: true
   file:
-    src: "{{playbook_dir}}/../code/internet-usage/{{item.file}}"
-    dest: "{{item.dest}}/{{item.file}}"
+    src: "{{playbook_dir}}/../code/internet-usage/{{item}}"
+    dest: "/usr/local/bin/{{item}}"
     state: link
   loop:
-    - file: "get_internet_usage"
-      dest: "/usr/local/bin"
-    - file: "get_internet_usage.service"
-      dest: "/etc/systemd/system"
-    - file: "get_internet_usage.timer"
-      dest: "/etc/systemd/system"
+    - "get_internet_usage"
+
+# Systemd needs the files to be accessible from outside any home directories
+- name: Copy get_internet_usage service and timer
+  become: true
+  copy:
+    src: "{{playbook_dir}}/../code/internet-usage/{{item}}"
+    dest: "/etc/systemd/system/{{item}}"
+    force: no
+  loop:
+    - "get_internet_usage.service"
+    - "get_internet_usage.timer"
 
 - name: Enable get_internet_usage.timer
   become: true

@@ -15,12 +15,13 @@
     - "i3"
     - "i3status"
 
-- name: Link bluetooth_battery timer for i3status
+# Systemd needs the files to be accessible from outside any home directories
+- name: Copy bluetooth_battery service and timer for i3status
   become: true
-  file:
+  copy:
     src: "{{playbook_dir}}/etc/systemd/system/{{item}}"
     dest: "/etc/systemd/system/{{item}}"
-    state: link
+    force: no
   loop:
     - "bluetooth_battery.service"
     - "bluetooth_battery.timer"

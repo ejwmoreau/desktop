@@ -27,8 +27,8 @@ exec --no-startup-id feh --bg-scale ~/.config/i3/wallpaper.png
 for_window [class="zoom"] move to workspace 8
 no_focus [class="zoom"]
 # Make "notification" windows float, while keeping other windows tiled
-for_window [title="(zoom|Zoom)"] floating enable
-for_window [title="Zoom Meeting"] floating disable
+for_window [title="^(zoom|Zoom)$"] floating enable
+for_window [title="^Zoom Meeting$"] floating disable
 # TODO: Hide the "Home" and "Loading" Zoom windows, since they get in the way
 #for_window [title="(Zoom - Licensed Account|Zoom Cloud Meetings)"] minimise
 

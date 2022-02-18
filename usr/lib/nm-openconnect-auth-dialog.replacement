@@ -1,0 +1,24 @@
+#!/usr/bin/python
+
+import subprocess
+import sys
+
+stdin = sys.stdin.read()
+
+BUFFER_SIZE=1024
+QUIT_MARKER = 'QUIT\n'
+remainder = (len(stdin) - len(QUIT_MARKER)) % BUFFER_SIZE
+
+if remainder != 0:
+    # need to pad it
+    stdin = stdin[:-len(QUIT_MARKER)] + 'x' * (BUFFER_SIZE - remainder)   + QUIT_MARKER
+
+proc = subprocess.Popen(
+    ["/usr/lib/nm-openconnect-auth-dialog.real", *sys.argv[1:]],
+    stdin=subprocess.PIPE,
+    stdout=sys.stdout,
+    stderr=sys.stderr,
+)
+proc.communicate(input=stdin.encode())
+
+sys.exit(proc.returncode)

@@ -49,6 +49,8 @@
 * Add flatpak and all the packages I have
 * Add some minimal config for root (e.g: vimrc & bashrc) so then some root commands or ttys are nicer
 * Add notification when changing screen brightness
+* Add the NetworkManager slowness workaround setup
+  * `run sudo mv /usr/lib/nm-openconnect-auth-dialog{,.real} then put this in /usr/lib/nm-openconnect-auth-dialog and chmod +x it`
 
 ## i3
 
