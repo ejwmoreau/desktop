@@ -88,3 +88,8 @@
 * Delete relevant bash alias(es)
 * Clean up mentions in `TODO`, `README`, and `notes` files, and any other file
 * Uninstall awesome and any packages required by it
+
+# After Feb 2022: Re-enabling xf86-video-intel
+
+* Re-enable `xf86-video-intel` in Ansible
+* Test for 1~2 weeks to see how it goes

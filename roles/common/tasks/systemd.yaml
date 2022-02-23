@@ -7,12 +7,13 @@
     - "logind.conf.d"
     - "sleep.conf.d"
 
-- name: Link some systemd config files
+# Copy instead of link, because systemd needs to see them before the user logs in
+- name: Copy some systemd config files
   become: true
-  file:
+  copy:
     src: "{{playbook_dir}}/etc/systemd/{{item}}"
     dest: "/etc/systemd/{{item}}"
-    state: link
+    force: no
   loop:
     - "logind.conf.d/logind.conf"
     - "sleep.conf.d/sleep.conf"

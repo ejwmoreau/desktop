@@ -83,7 +83,7 @@ bindsym XF86MonBrightnessDown exec --no-startup-id brightness -dec
 
 # ----- Window Key Bindings ----- #
 
-# Use Mouse+$mod to drag floating windows
+# Use Mouse+$mod to drag & resize floating windows
 floating_modifier $mod
 
 # Kill focused window
