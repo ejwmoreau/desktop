@@ -3,5 +3,4 @@ Description=Run the bluetooth_battery script to populate battery info for i3
 
 [Service]
 Type=oneshot
-# TODO: Include headset battery when it's more stable and doesn't freeze
-ExecStart=/usr/bin/sh -c '/home/emoreau/bin/bluetooth_battery keyboard > /home/emoreau/.config/bluetooth_battery_levels'
+ExecStart=/usr/bin/sh -c '/home/emoreau/bin/bluetooth_battery all > /home/emoreau/.config/bluetooth_battery_levels'

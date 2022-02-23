@@ -7,16 +7,20 @@
       - bluez
       - bluez-utils
 
-- name: Install Bluetooth packages - yay
-  yay:
-    name:
-      - bluetooth-headset-battery-level-git
+# Enabling experimental mode so the battery level can be shown for the XM3 headset
+- name: Update bluetooth service to enable experimental mode
+  become: true
+  lineinfile:
+    path: "/lib/systemd/system/bluetooth.service"
+    search_string: "ExecStart=/usr/lib/bluetooth/bluetoothd"
+    line: "ExecStart=/usr/lib/bluetooth/bluetoothd --experimental"
 
 - name: Enable Bluetooth
   become: true
   systemd:
     name: bluetooth
     enabled: yes
+    daemon_reload: yes
 
 - name: Append manual step - Check Bluetooth module is loaded
   set_fact:

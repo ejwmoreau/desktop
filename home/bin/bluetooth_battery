@@ -3,36 +3,47 @@
 # Script to get the current battery level of various bluetooth devices I have
 
 # Sony WH-1000XM3 Headset
-headset() {
-    # Run the command a few times, to make sure we get a battery level
-    # https://github.com/TheWeirdDev/Bluetooth_Headset_Battery_Level/issues/43
-
-    for i in {1..2}; do
-        # TODO: Use `upower -d` to get battery info for keyboard
-        output=$(timeout 3s bluetooth-headset-battery-level CC:98:8B:B7:2A:0E)
-
-        if [[ "$output" =~ "Battery level for" ]]; then
-            echo $output | awk '{ print $6 }' | cat <(echo -n "🎧 ") -
-            exit
-        fi
-    done
-
-    echo "🎧 --"
-}
+headset_emoji="🎧"
+headset_device="/org/freedesktop/UPower/devices/headset_dev_CC_98_8B_B7_2A_0E"
 
 # Keychron K2 keyboard
-keyboard() {
-    output=$(upower -i /org/freedesktop/UPower/devices/keyboard_hid_dco2co26oecob1oe0_battery | grep percentage)
+keyboard_emoji="⌨️"
+keyboard_device="/org/freedesktop/UPower/devices/keyboard_hid_dco2co26oecob1oe0_battery"
+
+# Colour the percentage if battery is getting low
+colour_percentage() {
+    percentage=$1
+    # TODO: Pick the relevant colour for the percentage number
+    echo $percentage
+}
+
+# Use upower to query for the device's battery percentage
+query_upower() {
+    device=$1
+    output=$(upower -i $device | grep percentage)
     if [[ "$output" =~ "percentage" && ! "$output" =~ "should be ignored" ]]; then
-        echo $output | awk '{ print $2 }' | cat <(echo -n "⌨️ ") -
+        echo $output | awk '{ print $2 }'
     else
-        echo "⌨️ --"
+        echo "--"
     fi
 }
 
+battery_level() {
+    emoji=$1
+    device=$2
+
+    raw_percentage=$(query_upower $device)
+    colourful_percentage=$(colour_percentage $raw_percentage)
+    echo "$emoji $colourful_percentage"
+}
+
+# TODO: Improve the "all" command, so there's less duplication here
 case $1 in
-    "headset")  headset;;
-    "keyboard") keyboard;;
-    "all") headset; keyboard;;
+    "headset")  battery_level $headset_emoji  $headset_device;;
+    "keyboard") battery_level $keyboard_emoji $keyboard_device;;
+    "all")
+        battery_level $headset_emoji  $headset_device; echo " "
+        battery_level $keyboard_emoji $keyboard_device
+        ;;
     *) echo "No device specified. Pick one of 'headset, keyboard, all'";;
 esac
