@@ -4,6 +4,7 @@
   pacman:
     name:
       - flameshot
+      - zbar # Used for parsing QR codes in screenshots
 
 - name: Link config for flameshot
   file:

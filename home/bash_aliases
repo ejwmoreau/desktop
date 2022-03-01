@@ -268,7 +268,10 @@ alias test-i3="Xephyr -resizeable :5 & sleep 1; DISPLAY=:5 i3"
 alias auto-powertop="sudo powertop --auto-tune"
 
 # Easily copy a file's contents to a helpful clipboard
-alias copy-file="xclip -i -selection c"
+alias copy-file="xclip -in -selection clipboard"
+
+# Take a screenshot and parse the QR code from it
+alias qr-scan="flameshot gui --raw | zbarimg - | sed 's/^QR-Code://g' | xclip -selection clipboard 2>/dev/null"
 
 # Send input audio to output audio, so I can test if I sound okay
 alias loopback-mic="echo -n 'Press Enter to stop' && pactl load-module module-loopback > /dev/null && read && pactl unload-module module-loopback"
