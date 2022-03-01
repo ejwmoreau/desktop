@@ -50,8 +50,8 @@ battery all {
   threshold_type = percentage
 
   # Display symbols for charging vs on battery
-  status_chr = ↗️
-  status_bat = ↘️
+  status_chr = ▲
+  status_bat = ▼
   status_unk = ?
   status_full = 🟢
 }
@@ -62,7 +62,7 @@ read_file bluetooth {
 }
 
 time {
-  format = "%a %d %b"
+  format = "%a %-d %b"
 }
 
 tztime local {
