@@ -34,7 +34,7 @@ Stopping the window freezes (Chrome/Slack/Obsidian/Firefox)
 * Removing the `xf86-video-intel` package, as it's know to cause some freezes
   * https://github.com/awesomeWM/awesome/issues/3241
   * It has stopped the freezes, which is awesome! There's some minor annoyances, but it's pretty decent so far
-  * Result: Probably keep for now
+  * Result: Probably keep it removed for now, but try with it on again when using i3
 
 Reducing battery usage during sleep
 

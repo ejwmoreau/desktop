@@ -59,7 +59,6 @@
     - src: "github.com/chriskempson/base16-shell"
       dest: "base16-shell"
 
-- import_tasks: awesome.yaml
 - import_tasks: flameshot.yaml
 - import_tasks: i3.yaml
 - import_tasks: lightdm.yaml

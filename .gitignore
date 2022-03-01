@@ -2,11 +2,6 @@
 src
 library
 
-# Awesome
-home/config/awesome/assault.lua
-home/config/awesome/lain
-home/config/awesome/vicious
-
 # Vim
 home/vim/tmp
 home/vim/pack

@@ -8,12 +8,12 @@ It comes with a number of Ansible roles that setup my dotfiles and config.
 
 Some of the contents include:
 
-* Terminal Coloring
-* Xresources
-* LightDM
 * Bash
+* i3
+* LightDM
+* Terminal Coloring
 * Vim
-* Awesome WM
+* Xresources
 
 ## Installation
 
@@ -22,7 +22,7 @@ Some of the contents include:
 
 ## How To Add Content From Other Repos
 
-Add an ansible role or tasks to include:
+Add an Ansible role or tasks to include:
 * Cloning the repo
 * Linking the repo contents in the relevant destination
 

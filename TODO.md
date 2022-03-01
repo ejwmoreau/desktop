@@ -76,27 +76,7 @@
 * Add the sound module to i3status
 * Window/Client border & looks
 * Moving workspaces to the current output
-
-## Awesome WM
-
-* Keep the same focused window when changing layouts
-  * E.g: When changing from multi-tiled to single-tiled, then keep the same focused client
-* Improve focus when moving a client from one screen to another
-  * Default to focusing on something on the current screen, or
-  * Default to keeping focus on the client being moved (but what if the screen is not visible?)
-
-# After Feb 2022: Removing AwesomeWM
-
-* Delete the ansible roles & tasks
-* Delete the cloned repos
-* Delete any symlinks for config files/folders
-* Delete the config files in `home/config`
-  * After double checking if there's any setup I want to move to i3
-* Delete the `awesome.desktop` file
-* Delete the entries in `.gitignore`
-* Delete relevant bash alias(es)
-* Clean up mentions in `TODO`, `README`, and `notes` files, and any other file
-* Uninstall awesome and any packages required by it
+* Finish moving things from the `TODO-move-from-awesome-to-i3.md` file to i3
 
 # After Feb 2022: Re-enabling xf86-video-intel
 
