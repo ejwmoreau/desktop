@@ -66,5 +66,6 @@ time {
 }
 
 tztime local {
-  format = "%H:%M"
+  # Extra space at the end to have a bit more space before the edge of the screen
+  format = "%H:%M "
 }
