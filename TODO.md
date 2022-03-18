@@ -77,6 +77,8 @@
 * Window/Client border & looks
 * Moving workspaces to the current output
 * Finish moving things from the `TODO-move-from-awesome-to-i3.md` file to i3
+* Obsidian is missing it's title bar for some reason :/
+  * It has a titlebar when in tabbed mode, but not vertical or horizontal
 
 # After Feb 2022: Re-enabling xf86-video-intel
 

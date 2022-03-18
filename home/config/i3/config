@@ -12,18 +12,26 @@ font pango:Roboto 8
 # Wallpaper
 exec --no-startup-id feh --bg-scale ~/.config/i3/wallpaper.png
 
+# Hide edge borders when only 1 window is being displayed
+hide_edge_borders smart
+
+# TODO: Improvements to status & title bars:
+# * Title bar: Maybe make the text/height a bit bigger, to match the status bar
+# * All: Potentially match the colours a bit more, especially background colours
+#        Be careful not to make inactive windows too prominent
+
 # TODO: Maybe configure nagbar to have timestamps? Or jump to the end of the log file?
 
 # ----- Program Behaviour ----- #
 
 # Zoom window properties:
-# "Home" window:             [class="zoom" id=... instance="zoom" title="Zoom - Licensed Account"]
-# "Meeting" window:          [class="zoom" id=... instance="zoom" title="Zoom Meeting"]
-# "Starting zoom" window:    [class="zoom" id=... instance="zoom" title="Zoom Cloud Meetings"]
-# "Loading meeting" window:  [class="zoom" id=... instance="zoom" title="Zoom"]
-# "Stop recording?" window:  [class="zoom" id=... instance="zoom" title="Zoom"]
-# "You're the host" window:  [class="zoom" id=... instance="zoom" title="zoom"]
-# "Recording coming" window: [class="zoom" id=... instance="zoom" title="zoom"]
+# "Home" window:             [class="zoom" instance="zoom" title="Zoom - Licensed Account"]
+# "Meeting" window:          [class="zoom" instance="zoom" title="Zoom Meeting"]
+# "Starting zoom" window:    [class="zoom" instance="zoom" title="Zoom Cloud Meetings"]
+# "Loading meeting" window:  [class="zoom" instance="zoom" title="Zoom"]
+# "Stop recording?" window:  [class="zoom" instance="zoom" title="Zoom"]
+# "You're the host" window:  [class="zoom" instance="zoom" title="zoom"]
+# "Recording coming" window: [class="zoom" instance="zoom" title="zoom"]
 
 # Stop Zoom from taking focus, and move to Workspace 8
 no_focus [class="zoom"]
