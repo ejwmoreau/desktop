@@ -1,6 +1,6 @@
 !===============================================================================
 ! Base16 Tomorrow Scheme from Chris Kempson (http://chriskempson.com)
-!-------------------------------------------------------------------------------
+!===============================================================================
 #define base00 #1d1f21
 #define base01 #282a2e
 #define base02 #373b41
@@ -18,31 +18,50 @@
 #define base0E #b294bb
 #define base0F #a3685a
 
-*.foreground:	#c5c8c6
-*.background:	#1d1f21
-*.cursorColor:	#c5c8c6
-*.color0:	#1d1f21
-*.color1:	#cc6666
-*.color2:	#b5bd68
-*.color3:	#f0c674
-*.color4:	#81a2be
-*.color5:	#b294bb
-*.color6:	#8abeb7
-*.color7:	#c5c8c6
-*.color8:	#969896
-*.color9:	#cc6666
-*.color10:	#b5bd68
-*.color11:	#f0c674
-*.color12:	#81a2be
-*.color13:	#b294bb
-*.color14:	#8abeb7
-*.color15:	#ffffff
-*.color16:	#de935f
-*.color17:	#a3685a
-*.color18:	#282a2e
-*.color19:	#373b41
-*.color20:	#b4b7b4
-*.color21:	#e0e0e0
+*.foreground:   base05
+*.background:   base00
+*.cursorColor:  base05
+
+*color0:  base00
+*color1:  base08
+*color2:  base0B
+*color3:  base0A
+*color4:  base0D
+*color5:  base0E
+*color6:  base0C
+*color7:  base05
+*color8:  base03
+
+! TODO: See why there's a difference, and pick one of them
+! Note: `ls` looks like trash after changing to the new colours
+! Note: These shouldn't affect vim, as that sets it's own colours
+! It's just for terminal colours I think
+
+! New colours
+!*color9:  base09
+!*color10: base01
+!*color11: base02
+!*color12: base04
+!*color13: base06
+!*color14: base0F
+
+! Old colours
+*color9:  base08
+*color10: base0B
+*color11: base0A
+*color12: base0D
+*color13: base0E
+*color14: base0C
+
+*color15: base07
+
+! TODO: Old colours that are probably not needed anymore. Leaving until end of April 2022
+!*.color16:  #de935f
+!*.color17:  #a3685a
+!*.color18:  #282a2e
+!*.color19:  #373b41
+!*.color20:  #b4b7b4
+!*.color21:  #e0e0e0
 
 !===============================================================================
 ! XFT
