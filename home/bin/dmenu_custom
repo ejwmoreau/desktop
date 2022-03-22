@@ -7,48 +7,54 @@ import sys
 # Script to run dmenu with a particular theme + screen position
 
 def define_geo(screen_width, screen_height):
-    # TODO: Simplify this function. It doesn't seem to use screen_height. Also decide on what dimensions I want dmenu to have
-    dw = int(screen_width * 0.2)
-    dx = int((screen_width - dw) / 2)
-    dy = 200 # TODO: Unused variable
+    w = int(screen_width * 0.2)
+    x = int((screen_width - w) / 2)
+    y = int(screen_height * 0.2)
 
     return {
-        'x': str(dx),
-        'y': '200',
-        'w': str(dw),
-        'h': '5',
+        'x': str(x),
+        'y': str(y),
+        'w': str(w),
     }
 
+def get_theme():
+    # TODO: Maybe get the colors from ~/.Xresources
+    theme = sys.argv[1] if len(sys.argv) > 1 else 'original'
+    css = {
+        'original': ['#1B1D1E', '#80D4FF', '#333333', '#FFFFFF'],
+        'bright':   ['#373B41', '#DE935F', '#81A2BE', '#000000'],
+        'test':     ['#FF0000', '#00FF00', '#0000FF', '#FFFFFF'],
+    }
+
+    return css[theme]
+
 # Using --current allows xrandr to return 1~2 seconds quicker in multi-monitor + HiDPI situations
-lines = subprocess.run(['xrandr', '--current'], stdout=subprocess.PIPE).stdout.decode('ascii').split('\n')
+xrandr_output = subprocess.run(['xrandr', '--current'], capture_output=True).stdout
+connected_lines = subprocess.run(['grep', ' connected'], input=xrandr_output, capture_output=True).stdout.decode().split('\n')
 regex = re.compile('\d+x\d+')
-for line in lines:
-    # TODO: First, apply to the "primary" screen, then apply to the "eDP-1" screen, then apply to any screen available
+for line in connected_lines:
+    # TODO: Ideally, use the width & height of the output dmenu will be on, instead of the laptop one
     if 'eDP-1 connected' in line or 'default connected' in line:
         res = regex.search(line).group(0).strip().split('x')
         geo = define_geo(int(res[0]), int(res[1]))
+        break
 
-theme = sys.argv[1] if len(sys.argv) > 1 else 'original'
-
-css = {
-    'original': ['#1B1D1E', '#80D4FF', '#333333', '#FFFFFF'],
-    'bright':   ['#373B41', '#DE935F', '#81A2BE', '#000000'],
-    'test':     ['#FF0000', '#00FF00', '#0000FF', '#FFFFFF']
-}
+# Reuse the font from ~/.Xresources
+font = subprocess.run(['xrdb', '-get', 'URxvt.font'], capture_output=True).stdout.decode().strip().removeprefix('xft:')
+theme = get_theme()
 
 subprocess.run([
     'dmenu_run',
-    '-l', '8',  # Number of lines to display
-    '-nb', css[theme][0], # Normal background color
-    '-nf', css[theme][1], # Normal foreground color
-    '-sb', css[theme][2], # Selected background color
-    '-sf', css[theme][3], # Selected foreground color
-    '-p', "",   # Prompt to be displayed on the left
-    '-f',
-    '-i',       # Case insensitive matching
-    '-fn', 'Anonymous Pro:size=11', # TODO: Match the size that is in ~/.Xresources
-    '-h', geo['h'],
-    '-w', geo['w'],
+    '-l', '8',       # Number of lines to display
+    '-fn', font,     # Font & size from ~/.Xresources
+    '-nb', theme[0], # Normal background color
+    '-nf', theme[1], # Normal foreground color
+    '-sb', theme[2], # Selected background color
+    '-sf', theme[3], # Selected foreground color
+    '-p', '',        # Prompt to be displayed on the left
+    '-f',            # Something to allow typing earlier
+    '-i',            # Case insensitive matching
     '-x', geo['x'],
     '-y', geo['y'],
+    '-w', geo['w'],
 ])
