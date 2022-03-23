@@ -44,6 +44,7 @@ for_window [title="^(Zoom - Licensed Account|Zoom Cloud Meetings)$"] move scratc
 
 for_window [class="Arandr"] floating enable
 for_window [class="Pavucontrol"] floating enable
+# TODO: Consider setting a min and/or max width & height of arandr & pavucontrol
 
 # ----- Program Key Bindings ----- #
 
@@ -115,7 +116,12 @@ bindsym $mod+k focus left
 #bindsym $mod+Shift+l move right
 bindsym $mod+Shift+j move right
 bindsym $mod+Shift+k move left
+# TODO: Fix Mod+Shift+j/k movement of windows when in tabbed mode
+# From Awesome WM:
+# awful.key({ modkey, "Shift" }, "j", function () awful.client.swap.byidx( 1) end),
+# awful.key({ modkey, "Shift" }, "k", function () awful.client.swap.byidx(-1) end),
 
+# TODO: Fix the bug with this one
 # Get the properties of a window, to help with debugging
 bindsym $mod+n exec --no-startup-id notify-send "$(~/bin/i3_get_window_props)"
 
@@ -181,6 +187,12 @@ bindsym $mod+Shift+9 move window to workspace number $ws9
 
 # TODO: Add keybindings for moving windows to particular displays/outputs/screens
 # Something like $mod+Shift+a, $mod+Shift+s, etc
+
+# TODO: Add keybindings for moving focus to a particular output. Not sure if possible in i3
+# From Awesome WM:
+# awful.key({ modkey,           }, "a", function () helper.focus_on_screen(1, screen_map) end),
+# awful.key({ modkey,           }, "s", function () helper.focus_on_screen(2, screen_map) end),
+# awful.key({ modkey,           }, "d", function () helper.focus_on_screen(3, screen_map) end),
 
 # TODO: Consider adding a shortcut to send to "scratchpad" so I can forget about it
 # Since there's no "minimise" ability in i3
