@@ -33,7 +33,6 @@
   * Don't dismiss all notifications when dismissing one of them
   * Improve how visible calendar notifications are, so I don't miss meetings
   * Sometimes calendar notifications don't happen?
-* Import ~/.ideavimrc, so the settings for IdeaVim plugin in IntelliJ are kept
 
 ## Adding to Ansible
 

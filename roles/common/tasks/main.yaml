@@ -54,7 +54,6 @@
     name:
       - autojump
       - dmenu2
-      - intellij-idea-ultimate-edition
       - ngrok
       - postman-bin
       - perl-clipboard
@@ -79,6 +78,7 @@
 - import_tasks: docker.yaml
 - import_tasks: gpu.yaml
 - import_tasks: grub.yaml
+- import_tasks: ide.yaml
 - import_tasks: internet.yaml
 - import_tasks: internet_usage.yaml
 - import_tasks: kernel-modules-hook.yaml

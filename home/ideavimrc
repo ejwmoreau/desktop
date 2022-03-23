@@ -1,0 +1,2 @@
+# Vim's yank command (y) should also copy to clipboard
+set clipboard+=unnamed
