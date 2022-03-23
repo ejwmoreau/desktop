@@ -1,6 +1,8 @@
 !===============================================================================
-! Base16 Tomorrow Scheme from Chris Kempson (http://chriskempson.com)
+! Color settings
 !===============================================================================
+
+! Base16 Tomorrow Scheme from Chris Kempson (http://chriskempson.com)
 #define base00 #1d1f21
 #define base01 #282a2e
 #define base02 #373b41
@@ -22,6 +24,7 @@
 *.background:   base00
 *.cursorColor:  base05
 
+# Colours choices are from https://github.com/chriskempson/base16-shell
 *color0:  base00
 *color1:  base08
 *color2:  base0B
@@ -31,104 +34,72 @@
 *color6:  base0C
 *color7:  base05
 *color8:  base03
-
-! TODO: See why there's a difference, and pick one of them
-! Note: `ls` looks like trash after changing to the new colours
-! Note: These shouldn't affect vim, as that sets it's own colours
-! It's just for terminal colours I think
-
-! New colours
-!*color9:  base09
-!*color10: base01
-!*color11: base02
-!*color12: base04
-!*color13: base06
-!*color14: base0F
-
-! Old colours
 *color9:  base08
 *color10: base0B
 *color11: base0A
 *color12: base0D
 *color13: base0E
 *color14: base0C
-
 *color15: base07
-
-! TODO: Old colours that are probably not needed anymore. Leaving until end of April 2022
-!*.color16:  #de935f
-!*.color17:  #a3685a
-!*.color18:  #282a2e
-!*.color19:  #373b41
-!*.color20:  #b4b7b4
-!*.color21:  #e0e0e0
+*color16: base09
+*color17: base0F
+*color18: base01
+*color19: base02
+*color20: base04
+*color21: base06
 
 !===============================================================================
-! XFT
+! XFT settings
 !===============================================================================
-Xft.antialias:              true
-Xft.autohint:               false
-Xft.dpi:                    192
-Xft.hinting:                true
-Xft.hintstyle:              hintslight
-Xft.rgba:                   rgb
-!===============================================================================
+
+Xft.antialias:  true
+Xft.autohint:   false
+Xft.dpi:        192
+Xft.hinting:    true
+Xft.hintstyle:  hintslight
+Xft.rgba:       rgb
 
 !===============================================================================
 ! URXVT settings
 !===============================================================================
-urxvt.background:           [100]#1D1F21
-urxvt.blurRadius:           0
-urxvt.borderless:           true
-urxvt.buffered:             true
-urxvt.cursorBlink:          true
-urxvt.depth:                32
-urxvt.externalBorder:       0
-urxvt.internalBorder:       1
-urxvt.fading:               false
-urxvt.fadeColor:            #1D1F21
-urxvt.iso14755:             false
-urxvt.iso14755_52:          false
-urxvt.jumpScroll:           false
-!urxvt.modifier:             super
-urxvt.pointerBlank:         true
-urxvt.saveLines:            65535
-urxvt.scrollBar:            false
-urxvt.scrollBar_right:      true
-urxvt.scrollBar_floating:   true
-urxvt.scrollstyle:          plain
-urxvt.shading:              100
-urxvt.thickness:            3
-!urxvt.tintcolor:            #FFFFFF
-urxvt.transparent:          false
-urxvt.urgentOnBell:         false
-urxvt.visualBell:           false
-!===============================================================================
 
-! Let Window Manager decide on cursor size
-!Xcursor.size: 20
+urxvt.background:         [100]#1D1F21
+urxvt.blurRadius:         0
+urxvt.borderless:         true
+urxvt.buffered:           true
+urxvt.cursorBlink:        true
+urxvt.depth:              32
+urxvt.externalBorder:     0
+urxvt.internalBorder:     1
+urxvt.fading:             false
+urxvt.fadeColor:          #1D1F21
+urxvt.iso14755:           false
+urxvt.iso14755_52:        false
+urxvt.jumpScroll:         false
+urxvt.pointerBlank:       true
+urxvt.saveLines:          65535
+urxvt.scrollBar:          false
+urxvt.scrollBar_right:    true
+urxvt.scrollBar_floating: true
+urxvt.scrollstyle:        plain
+urxvt.shading:            100
+urxvt.thickness:          3
+urxvt.transparent:        false
+urxvt.urgentOnBell:       false
+urxvt.visualBell:         false
 
-urxvt.perl-ext-common:	font-size,clipboard,default,matcher
-urxvt.keysym.M-equal:	font-size:reset
-urxvt.keysym.M-minus:	font-size:decsave
-urxvt.keysym.M-plus:	font-size:incsave
+urxvt.perl-ext-common:  font-size,clipboard,default,matcher
+urxvt.keysym.M-equal:   font-size:reset
+urxvt.keysym.M-minus:   font-size:decsave
+urxvt.keysym.M-plus:    font-size:incsave
 
-!urxvt.url-launcher:   /usr/bin/firefox
 urxvt.url-launcher:   /usr/bin/google-chrome-stable
 urxvt.matcher.rend.0: Uline fg6
 
-! mouse-right-click = 3
+! 3 is the mouse's right click button
 urxvt.matcher.button: 3
 
-urxvt.letterSpace:          1
-urxvt.lineSpace:            -1
+urxvt.letterSpace:  1
+urxvt.lineSpace:    -1
 
-! 3840x2160 @ 15.6 = 282
-! 2560x1440 @ 15.6 = 188
-! 3840x2160 @ 27   = 163
-! 3440x1440 @ 34   = 109
-
-! Some other fonts:
-! Fantasque Sans Mono:style=light, Roboto Mono:style=light
-! M+ 1mn:style=thin, M+ 1mn:style=normal
-URxvt.font:	xft:Anonymous Pro:style=regular:dpi=192:size=14
+urxvt.font: xft:Anonymous Pro:style=regular:dpi=192:size=14
