@@ -40,7 +40,7 @@ for line in connected_lines:
         break
 
 # Reuse the font from ~/.Xresources
-font = subprocess.run(['xrdb', '-get', 'URxvt.font'], capture_output=True).stdout.decode().strip().removeprefix('xft:')
+font = subprocess.run(['xrdb', '-get', 'urxvt.font'], capture_output=True).stdout.decode().strip().removeprefix('xft:')
 theme = get_theme()
 
 subprocess.run([

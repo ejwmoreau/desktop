@@ -33,6 +33,7 @@
   * Don't dismiss all notifications when dismissing one of them
   * Improve how visible calendar notifications are, so I don't miss meetings
   * Sometimes calendar notifications don't happen?
+* Figure out why "up arrow" goes down instead in dmenu
 
 ## Adding to Ansible
 
