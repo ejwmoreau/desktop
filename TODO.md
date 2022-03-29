@@ -34,6 +34,7 @@
   * Improve how visible calendar notifications are, so I don't miss meetings
   * Sometimes calendar notifications don't happen?
 * Figure out why "up arrow" goes down instead in dmenu
+* Retrigger setting the wallpaper whenever autorandr changes the screen layout
 
 ## Adding to Ansible
 
