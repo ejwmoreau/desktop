@@ -3,7 +3,7 @@
 # Script to set volume & send a notification about the current volume status
 
 # Send a "progress bar" notification with the current volume
-notify() {
+notify_volume() {
   volume=$(pamixer --get-volume)
   is_muted=$(pamixer --get-mute)
 
@@ -15,9 +15,22 @@ notify() {
   fi
 }
 
+# Send a "progress bar" notification with the current mic status
+notify_mic() {
+  is_muted=$(pamixer --get-mute --default-source)
+
+  flags="--timeout 2000 -h string:x-dunst-stack-tag:mic"
+  if [[ $is_muted == "true" ]]; then
+    dunstify $flags "🎙️ Muted"
+  else
+    dunstify $flags "🎙️ Unmuted"
+  fi
+}
+
 case $1 in
-  "up")   pamixer -i 5 && notify;;
-  "down") pamixer -d 5 && notify;;
-  "mute") pamixer -t && notify;;
+  "up")          pamixer -i 5 && notify_volume;;
+  "down")        pamixer -d 5 && notify_volume;;
+  "toggle-mute") pamixer -t && notify_volume;;
+  "toggle-mic")  pamixer -t --default-source && notify_mic;;
   *) echo "Unknown command: $1. See ~/bin/volume for usage";;
 esac

@@ -33,6 +33,8 @@ hide_edge_borders smart
 # "You're the host" window:  [class="zoom" instance="zoom" title="zoom"]
 # "Recording coming" window: [class="zoom" instance="zoom" title="zoom"]
 
+# TODO: Treat the "Zoom Room" windows as regular "Meeting" windows
+
 # Stop Zoom from taking focus, and move to Workspace 8
 no_focus [class="zoom"]
 for_window [class="zoom"] move to workspace 8
@@ -72,10 +74,10 @@ bindsym Print  exec --no-startup-id ( flameshot & ) && ( sleep 0.2s && flameshot
 # Audio Control
 bindsym XF86AudioRaiseVolume exec --no-startup-id volume up
 bindsym XF86AudioLowerVolume exec --no-startup-id volume down
-bindsym XF86AudioMute        exec --no-startup-id volume mute
+bindsym XF86AudioMute        exec --no-startup-id volume toggle-mute
 
 # TODO: Decide if I want to set a mute shortcut in i3. It might be useful
-#bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
+#bindsym XF86AudioMicMute exec --no-startup-id volume toggle-mic
 
 # Music Control
 bindsym XF86AudioPlay  exec --no-startup-id playerctl play-pause
