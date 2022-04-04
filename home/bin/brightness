@@ -4,6 +4,14 @@
 # Specifically, I want to be able to reach the lowest possible brightness,
 # while still increasing and decreasing in increments of 10 (ish)
 
+# Send a "progress bar" notification with the current brightness
+notify() {
+  brightness=$(printf "%.0f" "$(light)")
+
+  flags="--timeout 2000 -h int:value:$brightness -h string:x-dunst-stack-tag:brightness"
+  dunstify $flags "🔆 $brightness %"
+}
+
 # The first and last values are used to make sure the range checking works
 values=(-1 0 1 10 20 30 40 50 60 70 80 90 100 101)
 curr_value=$(printf "%.0f" "$(light)")
@@ -13,13 +21,11 @@ for i in "${!values[@]}"; do
     next_value="${values[($i+1) % ${#values[@]}]}"
 
     if (( prev_value < curr_value )) && (( curr_value < next_value )); then
-        new_value=$curr_value
-        if [[ $1 == "-inc" ]]; then
-            new_value=$next_value
-        elif [[ $1 == "-dec" ]]; then
-            new_value=$prev_value
-        fi
-        light -S $new_value
+        case $1 in
+          "up")   light -S $next_value && notify;;
+          "down") light -S $prev_value && notify;;
+          *) echo "Unknown command: $1. See ~/bin/brightness for usage";;
+        esac
         break
     fi
 done

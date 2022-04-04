@@ -58,7 +58,7 @@ bindsym $mod+p exec --no-startup-id dmenu_custom
 # TODO: Also look for a way to restrict which programs show in dmenu, and renaming some
 # A more modern dmenu replacement is rofi:
 # bindcode $mod+40 exec "rofi -modi drun,run -show drun"
-# There also is i3-dmenu-desktop which only displays applications shipping a
+# There is also i3-dmenu-desktop which only displays applications shipping a
 # .desktop file. It is a wrapper around dmenu, so you need that installed.
 # bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
 
@@ -70,17 +70,12 @@ bindsym $mod+r exec --no-startup-id arandr
 bindsym Print  exec --no-startup-id ( flameshot & ) && ( sleep 0.2s && flameshot gui )
 
 # Audio Control
-bindsym XF86AudioRaiseVolume exec --no-startup-id pamixer -i 5
-bindsym XF86AudioLowerVolume exec --no-startup-id pamixer -d 5
-bindsym XF86AudioMute        exec --no-startup-id pamixer -t
+bindsym XF86AudioRaiseVolume exec --no-startup-id volume up
+bindsym XF86AudioLowerVolume exec --no-startup-id volume down
+bindsym XF86AudioMute        exec --no-startup-id volume mute
 
-# TODO: Decide if I want this, after I add volume to i3status
-# Use pactl to adjust volume in PulseAudio (TODO: Change to pamixer)
-#set $refresh_i3status killall -SIGUSR1 i3status
-#bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
-#bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
-#bindsym XF86AudioMute        exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
-#bindsym XF86AudioMicMute     exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+# TODO: Decide if I want to set a mute shortcut in i3. It might be useful
+#bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
 # Music Control
 bindsym XF86AudioPlay  exec --no-startup-id playerctl play-pause
@@ -89,8 +84,8 @@ bindsym XF86AudioNext  exec --no-startup-id playerctl next
 bindsym XF86AudioPrev  exec --no-startup-id playerctl previous
 
 # Brightness
-bindsym XF86MonBrightnessUp   exec --no-startup-id brightness -inc
-bindsym XF86MonBrightnessDown exec --no-startup-id brightness -dec
+bindsym XF86MonBrightnessUp   exec --no-startup-id brightness up
+bindsym XF86MonBrightnessDown exec --no-startup-id brightness down
 
 # ----- Window Key Bindings ----- #
 

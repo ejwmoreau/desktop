@@ -1,15 +1,31 @@
-# Notifications config from Awesome WM. Probably not what I want, but it might help
-# theme.notification_width = 800
-# theme.notification_fg = "#282A2E" (near black)
-# theme.notification_bg = "#C5C8C6" (light grey)
-# theme.notification_max_icon_size = 100
-# theme.notification_min_timeout = 20
+# Config for Dunst notifications
 
 [global]
-follow = mouse
+    # Notifications should follow the monitor that the mouse is on
+    follow = mouse
 
-frame_color = "#4d4d4c"
-separator_color = "#4d4d4c"
+    ##### Progress bar #####
+
+    # Triggered via `dunstify -h int:value:12`
+    # Currently used for volume & brightness notifications
+    progress_bar = true
+
+    # Height of the progress bar, including the border frame
+    progress_bar_height = 5
+
+    # Border frame of the progress bar
+    progress_bar_frame_width = 0
+
+    # TODO: Continue through /etc/dunst/dunstrc from Line 64
+
+    ##### Colours #####
+
+    frame_color = "#4d4d4c"
+    separator_color = frame
+
+    ##### Text #####
+
+    font = Roboto 10
 
 [base16_low]
     msg_urgency = low
@@ -25,3 +41,10 @@ separator_color = "#4d4d4c"
     msg_urgency = critical
     background = "#c82829"
     foreground = "#282a2e"
+
+# TODO: Notifications config from Awesome WM. Probably not what I want, but it might help
+# theme.notification_width = 800
+# theme.notification_fg = "#282A2E" (near black)
+# theme.notification_bg = "#C5C8C6" (light grey)
+# theme.notification_max_icon_size = 100
+# theme.notification_min_timeout = 20

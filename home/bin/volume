@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Script to set volume & send a notification about the current volume status
+
+# Send a "progress bar" notification with the current volume
+notify() {
+  volume=$(pamixer --get-volume)
+  is_muted=$(pamixer --get-mute)
+
+  flags="--timeout 2000 -h int:value:$volume -h string:x-dunst-stack-tag:volume"
+  if [[ $is_muted == "true" ]]; then
+    dunstify $flags "🔇 muted"
+  else
+    dunstify $flags "🔊 $volume %"
+  fi
+}
+
+case $1 in
+  "up")   pamixer -i 5 && notify;;
+  "down") pamixer -d 5 && notify;;
+  "mute") pamixer -t && notify;;
+  *) echo "Unknown command: $1. See ~/bin/volume for usage";;
+esac
