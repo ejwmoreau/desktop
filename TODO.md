@@ -32,6 +32,9 @@
   * Sometimes calendar notifications don't happen?
 * Figure out why "up arrow" goes down instead in dmenu
 * Retrigger setting the wallpaper whenever autorandr changes the screen layout
+* Update bluetooth_battery to pick the right colours for when a device's battery is low, using Xresources colours
+* Add notification icons for the volume & brightness & battery notifications
+* Improve `check_battery` script, and run it on a systemd timer
 
 ## Adding to Ansible
 

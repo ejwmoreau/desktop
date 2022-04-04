@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Script to check the current batter level and notify if it's getting low
+
+battery_device="/org/freedesktop/UPower/devices/battery_BAT0"
+output=$(upower -i $battery_device | grep percentage)
+
+if [[ "$output" =~ "percentage" && ! "$output" =~ "should be ignored" ]]; then
+  percentage=$(echo $output | awk '{ print $2 }' | cut -d% -f1)
+  if [[ $percentage -le 15 ]]; then # TODO: Maybe add check for discharging
+    dunstify "WIP: Battery is at $percentage %"
+  fi
+fi
