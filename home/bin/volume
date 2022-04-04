@@ -9,7 +9,7 @@ notify() {
 
   flags="--timeout 2000 -h int:value:$volume -h string:x-dunst-stack-tag:volume"
   if [[ $is_muted == "true" ]]; then
-    dunstify $flags "🔇 muted"
+    dunstify $flags "🔇 Muted"
   else
     dunstify $flags "🔊 $volume %"
   fi
