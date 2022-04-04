@@ -5,7 +5,6 @@
     name:
       - mesa
       - xclip
-      # - xf86-video-intel # Removing because it might be causing window freezes: https://github.com/awesomeWM/awesome/issues/3241
       - xf86-input-libinput
       - xorg-server
       - xorg-server-xephyr
