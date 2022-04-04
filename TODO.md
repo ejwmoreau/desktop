@@ -9,8 +9,6 @@
 * Use this for lightdm greeter
   * https://github.com/NoiSek/Aether
 * Contribute the change to `base16-vim` repo, or at least keep a forked repo with the change
-* Volume indicator when muting/changing volume, so it's clear what volume it's currently on
-  * Ideally, this would be handled by some sort of tool/service, instead of writing my own thing
 * See if there's some config in `/etc/systemd/logind.conf` that allows for suspending + hibernating after a long idle time (1+ hours)
   * Is this more useful than configuring it in `xidlehook`? Probably, so then it triggers when manual locking too
 * Move to another notification system, so then I can dismiss notifications with particular IDs
@@ -29,7 +27,6 @@
 * Improve dunst notifications
   * Improve their look, maybe even on a per app basis (Spotify, Slack, Google Calendar, etc)
   * Add notification when battery is below 15%
-  * Add sound notification that auto-updates when volume is being changed
   * Don't dismiss all notifications when dismissing one of them
   * Improve how visible calendar notifications are, so I don't miss meetings
   * Sometimes calendar notifications don't happen?
@@ -75,7 +72,6 @@
 * Polish & Practice using window keybindings
 * Polish & Practice using workspace keybindings
 * Maybe use more existing `base16` themes in various places (i3, i3status, IntelliJ, etc)
-* Add the sound module to i3status
 * Window/Client border & looks
 * Moving workspaces to the current output
 * Obsidian is missing it's title bar for some reason :/

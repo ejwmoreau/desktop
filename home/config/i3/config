@@ -120,7 +120,7 @@ bindsym $mod+Shift+k move left
 
 # TODO: Fix the bug with this one
 # Get the properties of a window, to help with debugging
-bindsym $mod+n exec --no-startup-id notify-send "$(~/bin/i3_get_window_props)"
+bindsym $mod+n exec --no-startup-id i3_get_window_props notify
 
 # ----- Layout Key Bindings ----- #
 

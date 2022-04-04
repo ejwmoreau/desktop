@@ -42,6 +42,8 @@
     background = "#c82829"
     foreground = "#282a2e"
 
+# TODO: Probably stop summary from being bold
+
 # TODO: Notifications config from Awesome WM. Probably not what I want, but it might help
 # theme.notification_width = 800
 # theme.notification_fg = "#282A2E" (near black)
