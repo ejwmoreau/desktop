@@ -34,6 +34,7 @@ hide_edge_borders smart
 # "Recording coming" window: [class="zoom" instance="zoom" title="zoom"]
 
 # TODO: Treat the "Zoom Room" windows as regular "Meeting" windows
+# TODO: Treat the "Zoom Webinar" window as a regular "Meeting" window
 
 # Stop Zoom from taking focus, and move to Workspace 8
 no_focus [class="zoom"]
@@ -46,7 +47,8 @@ for_window [title="^(Zoom - Licensed Account|Zoom Cloud Meetings)$"] move scratc
 
 for_window [class="Arandr"] floating enable
 for_window [class="Pavucontrol"] floating enable
-# TODO: Consider setting a min and/or max width & height of arandr & pavucontrol
+for_window [class="Blueman-manager"] floating enable
+# TODO: Consider setting a min and/or max width & height of arandr & pavucontrol & blueman-manager
 
 # ----- Program Key Bindings ----- #
 

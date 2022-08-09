@@ -3,5 +3,5 @@
 # Script to reload touchpad drivers, in case they didn't
 # resume properly from suspend/hibernate
 
-sudo rmmod i2c_hid i2c_hid_acpi
-sudo modprobe i2c_hid i2c_hid_acpi
+sudo rmmod i2c_hid_acpi i2c_hid
+sudo modprobe i2c_hid_acpi i2c_hid

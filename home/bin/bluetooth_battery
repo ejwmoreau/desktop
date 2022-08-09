@@ -8,7 +8,7 @@ headset_device="/org/freedesktop/UPower/devices/headset_dev_CC_98_8B_B7_2A_0E"
 
 # Keychron K2 keyboard
 keyboard_emoji="⌨️"
-keyboard_device="/org/freedesktop/UPower/devices/keyboard_hid_dco2co26oecob1oe0_battery"
+keyboard_device="/org/freedesktop/UPower/devices/battery_hid_dco2co26oecob1oe0_battery"
 
 # Colour the percentage if battery is getting low
 colour_percentage() {
