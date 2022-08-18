@@ -35,6 +35,12 @@
 * Update bluetooth_battery to pick the right colours for when a device's battery is low, using Xresources colours
 * Add notification icons for the volume & brightness & battery notifications
 * Improve `check_battery` script, and run it on a systemd timer
+* Tweaking icon theme used by GTK and other applications
+  * Installed `papirus-icon-theme` for a decent icon theme
+  * Tweaked `~/.config/gtk-3.0/settings.ini` to change the icon theme, but not sure what effect it had
+  * Installed `lxappearance-gtk3` to try and set the default icon theme, but couldn't figure out how to use it
+    * Might uninstall this one later
+  * `xournalpp` isn't complaining anymore, so at the very least the `papirus` icons are being used as a backup
 
 ## Adding to Ansible
 

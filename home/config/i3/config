@@ -15,6 +15,10 @@ exec --no-startup-id feh --bg-scale ~/.config/i3/wallpaper.png
 # Hide edge borders when only 1 window is being displayed
 hide_edge_borders smart
 
+# Set max size for floating windows
+# Avoid setting minimum, because there's a bunch of floating dialogs/windows that are better when really small
+floating_maximum_size 1920 x 1200
+
 # TODO: Improvements to status & title bars:
 # * Title bar: Maybe make the text/height a bit bigger, to match the status bar
 # * All: Potentially match the colours a bit more, especially background colours
@@ -25,15 +29,16 @@ hide_edge_borders smart
 # ----- Program Behaviour ----- #
 
 # Zoom window properties:
-# "Home" window:             [class="zoom" instance="zoom" title="Zoom - Licensed Account"]
-# "Meeting" window:          [class="zoom" instance="zoom" title="Zoom Meeting"]
-# "Starting zoom" window:    [class="zoom" instance="zoom" title="Zoom Cloud Meetings"]
-# "Loading meeting" window:  [class="zoom" instance="zoom" title="Zoom"]
-# "Stop recording?" window:  [class="zoom" instance="zoom" title="Zoom"]
-# "You're the host" window:  [class="zoom" instance="zoom" title="zoom"]
-# "Recording coming" window: [class="zoom" instance="zoom" title="zoom"]
+# "Home" window:               [class="zoom" instance="zoom" title="Zoom - Licensed Account"]
+# "Meeting" window:            [class="zoom" instance="zoom" title="Zoom Meeting"]
+# "Starting zoom" window:      [class="zoom" instance="zoom" title="Zoom Cloud Meetings"]
+# "Breakout Room" window:      [class="zoom" instance="zoom" title="{Name} Zoom Meeting"]
+# "Breakout Room List" window: [class="zoom" instance="zoom" title="Breakout Rooms - {Status}"]
+# "Loading meeting" window:    [class="zoom" instance="zoom" title="Zoom"]
+# "Stop recording?" window:    [class="zoom" instance="zoom" title="Zoom"]
+# "You're the host" window:    [class="zoom" instance="zoom" title="zoom"]
+# "Recording coming" window:   [class="zoom" instance="zoom" title="zoom"]
 
-# TODO: Treat the "Zoom Room" windows as regular "Meeting" windows
 # TODO: Treat the "Zoom Webinar" window as a regular "Meeting" window
 
 # Stop Zoom from taking focus, and move to Workspace 8
@@ -44,11 +49,14 @@ for_window [title="^(zoom|Zoom)$"] floating enable
 for_window [title="^(Zoom Meeting|Zoom - Licensed Account)$"] floating disable
 # Hide the "Home" and "Loading meeting" Zoom windows, because they get in the way
 for_window [title="^(Zoom - Licensed Account|Zoom Cloud Meetings)$"] move scratchpad
+# Make "Breakout Rooms" list dialog float, while keeping the actual breakout room windows tiled
+for_window [title="^Breakout Rooms"] floating enable
+for_window [title=".* Zoom Meeting$"] floating disable
 
-for_window [class="Arandr"] floating enable
-for_window [class="Pavucontrol"] floating enable
-for_window [class="Blueman-manager"] floating enable
-# TODO: Consider setting a min and/or max width & height of arandr & pavucontrol & blueman-manager
+# Certain windows/programs that are nice when floating & centered
+for_window [class="Arandr"] floating enable, move position center
+for_window [class="Pavucontrol"] floating enable, move position center
+for_window [class="Blueman-manager"] floating enable, move position center
 
 # ----- Program Key Bindings ----- #
 
