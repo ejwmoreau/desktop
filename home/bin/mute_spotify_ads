@@ -72,7 +72,7 @@ while [ 1 ]; do
         # Debug (uncomment if you need to debug the script)
         #XPROP_TRACKDATA="$(echo "$XPROPOUTPUT" | cut -d \" -f 2 )"
         #echo "XPROP: \"$XPROP_TRACKDATA\""
-        echo "DBUS: \"$DBUS_TRACKDATA\""
+        #echo "DBUS: \"$DBUS_TRACKDATA\""
         #echo "Debug: AD_MUTED = $AD_MUTED, AD_DETECTED = $AD_DETECTED"
 
         if [[ "$AD_DETECTED" = "0" ]] && [[ "$AD_MUTED" = "1" ]]; then
