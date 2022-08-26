@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# Update the wallpaper after autorandr finishes updating the displays
+feh --bg-scale ~/.config/i3/wallpaper.png
