@@ -15,4 +15,8 @@ screenlock &
 autorandr --change
 urxvtd --quiet --opendisplay --fork &
 
+# Start some custom scripts for comfort
+/home/emoreau/bin/unlock-event-script &
+/home/emoreau/bin/mute-spotify-ads &
+
 # X-specific setup/config are in ~/.xprofile

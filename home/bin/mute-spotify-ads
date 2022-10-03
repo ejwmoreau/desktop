@@ -1,13 +1,14 @@
 #!/bin/bash
-# Based on https://gist.github.com/pcworld/3198763
-# Mute spotify when it starts advertisement
-# Run like this
-# nohup bash ~/bin/spotify/mute.sh  > /tmp/spotify_mute.log &
-# Link: https://gist.github.com/pcworld/3198763/af2a4981c6f26075c0a16a261f5294f2cf5e5da5#gistcomment-3384837
+
+# Script to listen for Spotify music playing, and mute Spotify if it's playing an ad
+# Run like this: `nohup bash ~/bin/mute-spotify-ads  > /tmp/mute-spotify-ads.log &`
+
+# Source: https://gist.github.com/pcworld/3198763/af2a4981c6f26075c0a16a261f5294f2cf5e5da5#gistcomment-3384837
 
 # TODO: Add `xdotool` package to ansible, as this script needs it
 
-# TODO: Run this script on laptop boot/startup
+PROGNAME=$(basename "$0")
+LOGFILE=/tmp/$PROGNAME.log
 
 # Settings
 PAUSE_BEFORE_CONSTANT_LOOP=0.2
@@ -17,8 +18,6 @@ PAUSE_NOT_ACTIVE=5
 # VAR
 AD_MUTED=0
 AD_DETECTED=0
-
-# FCT
 
 get_pactl_nr() {
     pactl list | grep -E '(^Sink Input)|(media.name = \"Spotify\"$)' | cut -d \# -f2 \
@@ -36,9 +35,10 @@ unmute_player() {
 }
 
 log() {
-    local line=${1}
-    echo \[$( date "+%H:%M:%S" )\] $line
+    echo "$(date +'%F %T.%3N') [$$]" "$@"
 }
+
+exec &>>"$LOGFILE"
 
 # Unmute just in case this script crashed the previous time
 unmute_player

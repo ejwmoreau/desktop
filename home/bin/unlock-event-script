@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# Script to listen for events when light-locker unlocks the X session, so we can run autorandr
+
+# If we try to do it by triggering a `display-setup-script` or `greeter-setup-script` in lightdm's config,
+# then the X session hasn't actually been unlocked yet by light-locker.
+# So we need to listen to unlock events via dbus to actually trigger it after the X session is unlocked
+
+# Source: https://unix.stackexchange.com/questions/203339/light-locker-run-script-on-screen-lock-unlock
+
+BUS_NAME=org.freedesktop.login1
+UNLOCK=": $BUS_NAME.Session.Unlock ()"
+GDBUS_MONITOR="gdbus monitor --system --dest $BUS_NAME"
+PROGNAME=$(basename "$0")
+LOGFILE=/tmp/$PROGNAME.log
+
+log() {
+    echo "$(date +'%F %T.%3N') [$$]" "$@"
+}
+
+unlock_action() {
+    log $(autorandr --change)
+}
+
+run_daemon() {
+    exec &>>"$LOGFILE"
+
+    local signal
+    while read -r signal; do
+        log "$signal"
+        if [[ "$signal" == *"$UNLOCK" ]]; then
+            unlock_action
+        fi
+    done < <(eval "exec $GDBUS_MONITOR")
+}
+
+run_daemon
