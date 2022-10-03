@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Script to check the current batter level and notify if it's getting low
+# Script to check the current battery level and notify if it's getting low
 
 battery_device="/org/freedesktop/UPower/devices/battery_BAT0"
 output=$(upower -i $battery_device | grep percentage)

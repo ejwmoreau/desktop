@@ -146,10 +146,10 @@ function bash_prompt_impl() {
         local gitbranch
         if [[ "${rev}" == "HEAD" ]]; then
             # "* (HEAD detached at origin/master)"
-            gitbranch=$(git branch | egrep "^\*" | tail -c +4 | head -c -2)
+            gitbranch=$(git branch | grep -E "^\*" | tail -c +4 | head -c -2)
         else
             # "* master"
-            gitbranch=$(git branch | egrep "^\*" | tail -c +3)
+            gitbranch=$(git branch | grep -E "^\*" | tail -c +3)
         fi
 
         local status="$(git status -s)"
