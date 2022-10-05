@@ -4,6 +4,10 @@ output DP-3
 off
 output DP-2-1
 off
+output DP-2-1-1
+off
+output DP-2-1-2
+off
 output DP-2-2
 off
 output DP-2
@@ -20,7 +24,7 @@ x-prop-non_desktop 0
 output eDP-1
 crtc 0
 mode 3840x2400
-pos 909x3240
+pos 905x3240
 primary
 rate 59.99
 x-prop-broadcast_rgb Automatic
