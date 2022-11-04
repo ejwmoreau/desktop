@@ -21,6 +21,11 @@ Using systemd-homed
 * All this being said, so far I'm sticking with homed, partially because it'll probably be a pain & risky to migrate away.
   Nothing so far is painful enough to move away from homed, although I might not use it on a fresh install until some of the pain points are fixed
 
+* Tweaked /etc/mkinitcpio.conf hooks to use the systemd hooks, instead of the udev/busybox ones:
+  * https://wiki.archlinux.org/title/mkinitcpio#Common_hooks
+  * Apparently it should result in a faster boot time. Compare with ~/desktop/systemd-analyse-output-udev.txt if it works
+  * Partial result: This change didn't seem to work at all :( It might be a good idea to move away from Grub and simplify the boot process first, before changing the hooks
+
 # Past Experiments
 
 Stopping the window freezes (Chrome/Slack/Obsidian/Firefox)
