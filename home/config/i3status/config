@@ -12,6 +12,7 @@ general {
   color_good = "#CCCCBB" # Was green (#BAFFC9), but read_file uses color_good all the time
   color_degraded = "#FFDFBA"
   color_bad = "#FFB3BA"
+  markup = "pango" # For colouring status text from a file
 }
 
 order += "cpu_usage"
@@ -45,8 +46,8 @@ battery all {
   # Don't use the "design capacity", but instead the "last full capacity"
   last_full_capacity = true
 
-  # Display in red when below 20% battery
-  low_threshold = 20
+  # Display in red when below 21% battery
+  low_threshold = 21
   threshold_type = percentage
 
   # Display symbols for charging vs on battery

@@ -3,18 +3,24 @@
 # Script to get the current battery level of various bluetooth devices I have
 
 # Sony WH-1000XM3 Headset
-headset_emoji="🎧"
-headset_device="/org/freedesktop/UPower/devices/headset_dev_CC_98_8B_B7_2A_0E"
+HEADSET_EMOJI="🎧"
+HEADSET_DEVICE="/org/freedesktop/UPower/devices/headset_dev_CC_98_8B_B7_2A_0E"
 
 # Keychron K2 keyboard
-keyboard_emoji="⌨️"
-keyboard_device="/org/freedesktop/UPower/devices/battery_hid_dco2co26oecob1oe0_battery"
+KEYBOARD_EMOJI="⌨️"
+KEYBOARD_DEVICE="/org/freedesktop/UPower/devices/battery_hid_dco2co26oecob1oe0_battery"
+
+# TODO: Pull the colour from ~/.Xresources somehow
+# Red colour hex value is from i3status config
+RED="#FFB3BA"
 
 # Colour the percentage if battery is getting low
 colour_percentage() {
     percentage=$1
-    # TODO: Pick the relevant colour for the percentage number
-    echo $percentage
+    if [[ $(echo $percentage | tr -d %) -le 20 ]]; then
+        percentage="<span color='${RED}'>${percentage}</span>"
+    fi
+    echo -e $percentage
 }
 
 # Use upower to query for the device's battery percentage
@@ -37,13 +43,12 @@ battery_level() {
     echo "$emoji $colourful_percentage"
 }
 
-# TODO: Improve the "all" command, so there's less duplication here
 case $1 in
-    "headset")  battery_level $headset_emoji  $headset_device;;
-    "keyboard") battery_level $keyboard_emoji $keyboard_device;;
+    "headset")  battery_level $HEADSET_EMOJI  $HEADSET_DEVICE;;
+    "keyboard") battery_level $KEYBOARD_EMOJI $KEYBOARD_DEVICE;;
     "all")
-        battery_level $headset_emoji  $headset_device; echo " "
-        battery_level $keyboard_emoji $keyboard_device
+        battery_level $HEADSET_EMOJI  $HEADSET_DEVICE; echo " "
+        battery_level $KEYBOARD_EMOJI $KEYBOARD_DEVICE
         ;;
     *) echo "No device specified. Pick one of 'headset, keyboard, all'";;
 esac

@@ -11,6 +11,11 @@ redshift-gtk -l -33.86482:151.20773 &
 light-locker --lock-after-screensaver 60 --no-lock-on-lid &
 screenlock &
 
+# Setup some xrandr settings for the 24" monitor at home
+# TODO: Not sure if this will work if the monitor is not plugged in, on first login
+xrandr --newmode "1920x1080_30.00"   79.75  1920 1976 2168 2416  1080 1083 1088 1102 -hsync +vsync
+xrandr --addmode DP-2-1-1 1920x1080_30.00
+
 # Start other programs
 autorandr --change
 urxvtd --quiet --opendisplay --fork &

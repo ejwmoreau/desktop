@@ -31,7 +31,7 @@
   * Improve how visible calendar notifications are, so I don't miss meetings
   * Sometimes calendar notifications don't happen?
 * Figure out why "up arrow" goes down instead in dmenu
-* Update bluetooth_battery to pick the right colours for when a device's battery is low, using Xresources colours
+* Update bluetooth_battery to pick the red colour from Xresources colours
 * Add notification icons for the volume & brightness & battery notifications
 * Improve `check_battery` script, and run it on a systemd timer
 * Tweaking icon theme used by GTK and other applications
@@ -40,7 +40,6 @@
   * Installed `lxappearance-gtk3` to try and set the default icon theme, but couldn't figure out how to use it
     * Might uninstall this one later
   * `xournalpp` isn't complaining anymore, so at the very least the `papirus` icons are being used as a backup
-* Somehow tell autorandr to not worry about exact monitor IDs, to avoid having so many work desk profiles
 
 ## Adding to Ansible
 

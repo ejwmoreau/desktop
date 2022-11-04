@@ -19,7 +19,7 @@ log() {
 }
 
 unlock_action() {
-    log $(autorandr --change)
+    (sleep 5; log $(autorandr --change)) &
 }
 
 run_daemon() {
