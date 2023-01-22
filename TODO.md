@@ -40,6 +40,7 @@
   * Installed `lxappearance-gtk3` to try and set the default icon theme, but couldn't figure out how to use it
     * Might uninstall this one later
   * `xournalpp` isn't complaining anymore, so at the very least the `papirus` icons are being used as a backup
+* Switch to `systemd-boot` or something simpler than GRUB
 
 ## Adding to Ansible
 

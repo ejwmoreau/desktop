@@ -1,2 +1,5 @@
-# Vim's yank command (y) should also copy to clipboard
+# Yank command (y) should also copy to clipboard
 set clipboard+=unnamed
+
+# Searching should ignore case
+set ignorecase

@@ -17,7 +17,7 @@ RED="#FFB3BA"
 # Colour the percentage if battery is getting low
 colour_percentage() {
     percentage=$1
-    if [[ $(echo $percentage | tr -d %) -le 20 ]]; then
+    if [[ $percentage != "--" ]] && (( $(echo $percentage | tr -d %) < 20 )); then
         percentage="<span color='${RED}'>${percentage}</span>"
     fi
     echo -e $percentage

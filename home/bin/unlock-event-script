@@ -19,7 +19,7 @@ log() {
 }
 
 unlock_action() {
-    (sleep 5; log $(autorandr --change)) &
+    (sleep 5; log $(xrandr --addmode DP-2-1-1 1920x1080_30.00 && autorandr --change)) &
 }
 
 run_daemon() {

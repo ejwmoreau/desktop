@@ -46,8 +46,8 @@ battery all {
   # Don't use the "design capacity", but instead the "last full capacity"
   last_full_capacity = true
 
-  # Display in red when below 21% battery
-  low_threshold = 21
+  # Display in red when on or below 20% battery
+  low_threshold = 20
   threshold_type = percentage
 
   # Display symbols for charging vs on battery

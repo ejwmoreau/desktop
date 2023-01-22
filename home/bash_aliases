@@ -177,6 +177,8 @@ alias de="/usr/bin/docker exec"
 alias dc="/usr/bin/docker container"
 alias dca="/usr/bin/docker container attach"
 alias dps="/usr/bin/docker container ls --format \"table {{.Names}} \t {{.Image}} \t {{.RunningFor}} \t {{.Status}} \t {{.Ports}}\" "
+# Stops all running containers
+alias dsa='/usr/bin/docker stop $(/usr/bin/docker ps -q)'
 
 function dsh () {
     /usr/bin/docker exec -it $1 /bin/sh

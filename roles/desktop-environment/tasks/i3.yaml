@@ -3,7 +3,7 @@
   become: true
   pacman:
     name:
-      - i3-gaps
+      - i3-wm
       - i3status
 
 - name: Link config for i3
