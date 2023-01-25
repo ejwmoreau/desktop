@@ -22,15 +22,12 @@
   * See if there's a way to avoid rebooting. Otherwise it might not be possible
 * Consider switching to zsh + powerlevel10k, since it looks pretty good
 * Improve wallpaper by picking a random one from a folder or something. Maybe change on schedule?
-* Add Bash aliases to dmenu list. Maybe just a subset of them?
-* Clean up the list of programs/scripts in dmenu. Not sure if it should be an include list, or exclude list
 * Improve dunst notifications
   * Improve their look, maybe even on a per app basis (Spotify, Slack, Google Calendar, etc)
   * Add notification when battery is below 15%
   * Don't dismiss all notifications when dismissing one of them
   * Improve how visible calendar notifications are, so I don't miss meetings
   * Sometimes calendar notifications don't happen?
-* Figure out why "up arrow" goes down instead in dmenu
 * Update bluetooth_battery to pick the red colour from Xresources colours
 * Add notification icons for the volume & brightness & battery notifications
 * Improve `check_battery` script, and run it on a systemd timer
@@ -41,6 +38,12 @@
     * Might uninstall this one later
   * `xournalpp` isn't complaining anymore, so at the very least the `papirus` icons are being used as a backup
 * Switch to `systemd-boot` or something simpler than GRUB
+* Improve colour scheme of rofi. It looks decent atm, but a bit of colour would be nice
+  * Maybe some blue? Or maybe go for a Nord theme?
+  * Also, the alternating colour for each line is a bit distracting
+* Consider adding `run` and/or `ssh` modes for rofi
+  * Should they be altogether in a combined mode? Or a different shortcut?
+* Remove dmenu & any customisations I added for it (script, etc)
 
 ## Adding to Ansible
 

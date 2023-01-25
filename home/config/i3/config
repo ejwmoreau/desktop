@@ -64,15 +64,8 @@ for_window [class="Blueman-manager"] floating enable, move position center
 bindsym $mod+Return exec xrdb ~/.Xresources && urxvt
 
 # Start program launcher
-bindsym $mod+p exec --no-startup-id dmenu_custom
-
-# TODO: Check out other dmenu replacements
-# TODO: Also look for a way to restrict which programs show in dmenu, and renaming some
-# A more modern dmenu replacement is rofi:
-# bindcode $mod+40 exec "rofi -modi drun,run -show drun"
-# There is also i3-dmenu-desktop which only displays applications shipping a
-# .desktop file. It is a wrapper around dmenu, so you need that installed.
-# bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
+bindsym $mod+Shift+p exec --no-startup-id dmenu_custom
+bindsym $mod+p exec --no-startup-id rofi -show drun
 
 # TODO: Consider changing the shortcut for Chrome
 bindsym $mod+w exec --no-startup-id google-chrome-stable

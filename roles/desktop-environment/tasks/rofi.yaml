@@ -1,0 +1,14 @@
+---
+- name: Install rofi
+  become: true
+  pacman:
+    name:
+      - rofi
+
+- name: Link config for rofi
+  file:
+    src: "{{playbook_dir}}/home/config/{{item}}"
+    dest: "~/.config/{{item}}"
+    state: link
+  loop:
+    - "rofi"

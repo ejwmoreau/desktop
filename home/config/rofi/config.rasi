@@ -1,0 +1,7 @@
+configuration {
+  modes: [window, drun, run, ssh];
+  font: "Anonymous Pro 14";         // Match urxvt.font in ~/.Xresources
+  dpi: 192;                         // Match Xft.dpi in ~/.Xresources
+}
+
+@theme "theme-config"
