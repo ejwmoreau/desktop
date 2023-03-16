@@ -1,9 +1,13 @@
 ---
-- name: Install NetworkManager and helpful packages
+- name: Install NetworkManager (iwd version)
+  yay:
+    name:
+      - networkmanager-iwd
+
+- name: Install other NetworkManager related packages
   become: true
   pacman:
     name:
-      - networkmanager
       - network-manager-applet
       - gnome-keyring
 

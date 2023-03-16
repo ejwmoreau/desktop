@@ -6,7 +6,7 @@
       - linux-lts-headers
       - bbswitch-dkms
 
-- name: Copy modprobe config to load & configure bbswitch
+- name: Copy modprobe config to load & configure bbswitch (Turn off Nvidia GPU)
   become: true
   copy:
     src: "{{playbook_dir}}/etc/{{item}}"
@@ -16,3 +16,15 @@
     - modprobe.d/bbswitch.conf
     - modprobe.d/blacklisted.conf
     - modules-load.d/bbswitch.conf
+  when: not enable_gpu
+
+- name: Remove modprobe config to load & configure bbswitch (Turn on Nvidia GPU)
+  become: true
+  file:
+    path: "/etc/{{item}}"
+    state: absent
+  loop:
+    - modprobe.d/bbswitch.conf
+    - modprobe.d/blacklisted.conf
+    - modules-load.d/bbswitch.conf
+  when: enable_gpu

@@ -1,6 +1,8 @@
 ---
 - hosts: localhost
   gather_facts: no
+  vars:
+    enable_gpu: true
   roles:
     - start
     - package-manager
