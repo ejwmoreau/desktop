@@ -1,0 +1,25 @@
+/*
+ * Base16 Tomorrow Night Colors for Rofi
+ *
+ * Authors
+ *   Scheme: Chris Kempson (http://chriskempson.com)
+ *   Template: Jordi Pakey-Rodriguez (https://github.com/0xdec), Andrea Scarpino (https://github.com/ilpianista)
+ *
+ * Source: https://github.com/tinted-theming/base16-rofi/blob/master/themes/base16-tomorrow-night.rasi
+ */
+
+* {
+    //background:     #1E2127; // dark grey
+    //background-alt: #282B31; // dark grey (slightly lighter)
+    //foreground:     #FFFFFF; // white
+    //selected:       #61AFEF; // blue-ish
+    //active:         #98C379; // green-ish
+    //urgent:         #E06C75; // red-ish
+
+    background:     #1D1F21; // dark grey
+    background-alt: #282A2E; // dark grey (slightly lighter)
+    foreground:     #FFFFFF; // white
+    selected:       #81A2BE; // blue-ish
+    active:         #B5BD68; // green-ish
+    urgent:         #CC6666; // red-ish
+}
