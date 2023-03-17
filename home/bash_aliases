@@ -8,6 +8,9 @@ function ifconfig() {
     echo "use 'ip addr show' or 'ip a' for short"
 }
 
+# Provide a better name
+alias manual=man
+
 # Specialized commands
 alias murder="shred -uvzn 20"
 alias please="sudo !!"
@@ -241,18 +244,13 @@ alias rebuild_ctags="cd ~/code/; ctags -R --python-kinds=-i"
 alias workoff='deactivate'
 alias mkvirtualenv2="mkvirtualenv -p /usr/bin/python2.7"
 
-# Set up nvm. --no-use speeds up the command a lot
-source "/usr/share/nvm/init-nvm.sh" --no-use
-
 # Look at logs of all containers that listen on port 8080
 alias docker-logs-check='while ((1)); do docker logs -f $(docker ps | grep 8080 | cut -f1 -d" ") 2>/dev/null; sleep 1; echo No docker container; done'
 
 # Docker requires sudo access (Temporarily removing the sudo requirement part)
 alias docker="/usr/bin/docker"
 
-# Arch Linux way of handling Java versions
-source "/etc/profile.d/jre.sh"
-
+# Avoid remembering the untar flags
 alias untar="tar xf"
 
 # Mount and set permissions properly (files: rw- r-- r--, dir: rwxr-xr-x)
@@ -278,9 +276,6 @@ alias loopback-mic="echo -n 'Press Enter to stop' && pactl load-module module-lo
 
 # Reload dunst for updated config to take effect
 alias reload-dunst="killall dunst; notify-send 'Dunst is reloaded'"
-
-# Source additional bashrc config specific to work
-source ~/.bashrc_work
 
 # Suspend Hobbiton
 # ssh hobbiton

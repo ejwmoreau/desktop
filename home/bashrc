@@ -1,17 +1,15 @@
 #!/usr/bin/env bash
 
 ##################################################
-# Timing commands. Copy the last line and add anywhere you want timing to be measured
+# Timing commands. Use the function anywhere you want timing to be measured
 ##################################################
-#curr_time() {
-#    CURR_TIME=$(date +"%s%N" | cut -b1-13)
-#}
-#
-#curr_time; BASHRC_TIME=$CURR_TIME
-#curr_time; echo "A: $(($CURR_TIME-$BASHRC_TIME))"
-
-# Need to be PC
-alias person=man
+BASHRC_START_TIME=$(date +"%s%N" | cut -b1-13)
+curr_time() {
+    current_time=$(date +"%s%N" | cut -b1-13)
+    # $BASH_LINENO is the line number the function was called from
+    echo "Line $BASH_LINENO: $(($current_time-$BASHRC_START_TIME)) ms"
+}
+#curr_time
 
 path_append() {
     if [[ ":$PATH:" != *":$1:"* ]]; then
@@ -19,9 +17,19 @@ path_append() {
     fi
 }
 
+# File containing most bash aliases & functions
 source ~/.bash_aliases
 
-# If not running interactively, don't do anything
+# File containing work-specific bashrc config
+source ~/.bashrc_work
+
+# Set up java, autojump, and other programs in /etc/profile.d/*.sh
+source "/etc/profile"
+
+# Set up nvm. --no-use speeds up the command a lot
+source "/usr/share/nvm/init-nvm.sh" --no-use
+
+# If not running interactively, don't do anything else
 [[ $- != *i* ]] && return
 
 ##################################################
@@ -51,7 +59,7 @@ export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
 source "/usr/bin/virtualenvwrapper_lazy.sh"
 
 ##################################################
-# Bash Completion (Git, Atlas, etc)
+# Bash Completion (Git, GCloud, etc)
 ##################################################
 
 # Bash completion (including a bunch of cli tools like git, autorandr, etc)
@@ -86,9 +94,6 @@ if [[ -f $git_completion ]]; then
     __git_complete gll _git_log
     __git_complete gta _git_worktree
 fi
-
-# Add Atlas CLI completion in bash
-[ $(command -v atlas) ] && source <(atlas --completion-script-bash)
 
 # Add Google Cloud completion in bash
 [ $(command -v gcloud) ] && source /etc/bash_completion.d/google-cloud-sdk
@@ -223,11 +228,10 @@ prompt_prepend() {
     fi
 }
 
-# Append to PROMPT_COMMAND because of autojump: https://github.com/wting/autojump
+# Instead of setting/overriding PROMPT_COMMAND, prepend to it so autojump continues working:
+# https://github.com/wting/autojump
 prompt_prepend bash_prompt
 export PROMPT_COMMAND
-
-source "/etc/profile.d/autojump.bash"
 
 ##################################################
 # Colors (base16)
