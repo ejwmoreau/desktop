@@ -12,11 +12,12 @@
       - xorg-xrdb
       - xorg-xsetroot
 
-- name: Install xidlehook
+- name: Install xidlehook & xautocfg
   become: true
   yay:
     name:
       - xidlehook
+      - xautocfg
 
 - name: Copy touchpad config that Xorg reads (symlink doesn't work when $HOME isn't open yet)
   become: true
@@ -27,3 +28,11 @@
   loop:
     - 30-touchpad.conf
     - 30-mouse.conf
+
+- name: Copy xautocfg config file (for keyboard settings)
+  file:
+    src: "{{playbook_dir}}/home/config/{{item}}"
+    dest: "~/.config/{{item}}"
+    state: link
+  loop:
+    - "xautocfg.cfg"
