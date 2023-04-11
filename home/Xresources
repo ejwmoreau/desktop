@@ -4,6 +4,8 @@
 
 ! Base16 Tomorrow Night Scheme from Chris Kempson
 ! https://github.com/chriskempson/tomorrow-theme/blob/master/Images/Tomorrow-Night-Palette.png
+
+! Scale from near-black to white
 #define base00 #1d1f21
 #define base01 #282a2e
 #define base02 #373b41
@@ -12,8 +14,11 @@
 #define base05 #c5c8c6
 #define base06 #e0e0e0
 #define base07 #ffffff
+! Red
 #define base08 #cc6666
+! Orange
 #define base09 #de935f
+! Yellow
 #define base0A #f0c674
 ! Green
 #define base0B #b5bd68
@@ -23,7 +28,7 @@
 #define base0D #81a2be
 ! Purple
 #define base0E #b294bb
-! Brown-ish
+! Brown
 #define base0F #a3685a
 
 *.foreground:   base05

@@ -9,17 +9,13 @@
  */
 
 * {
-    //background:     #1E2127; // dark grey
-    //background-alt: #282B31; // dark grey (slightly lighter)
-    //foreground:     #FFFFFF; // white
-    //selected:       #61AFEF; // blue-ish
-    //active:         #98C379; // green-ish
-    //urgent:         #E06C75; // red-ish
+    // Colours match the values in ~/.Xresources
+    background:     #1D1F21; // base00 - dark grey
+    background-alt: #282A2E; // base01 - dark grey (slightly lighter)
+    foreground:     #E0E0E0; // base06 - light grey
 
-    background:     #1D1F21; // dark grey
-    background-alt: #282A2E; // dark grey (slightly lighter)
-    foreground:     #FFFFFF; // white
-    selected:       #81A2BE; // blue-ish
-    active:         #B5BD68; // green-ish
-    urgent:         #CC6666; // red-ish
+    // Practically unused colours
+    selected:       #81A2BE; // base0D - blue-ish
+    active:         #B5BD68; // base0B - green-ish
+    urgent:         #CC6666; // base08 - red-ish
 }

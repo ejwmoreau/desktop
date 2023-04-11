@@ -1,3 +1,7 @@
+/* ----- Imports ----- */
+@import "colour-config"
+@import "style-config"
+
 /* ----- Configuration ----- */
 configuration {
   modes: [window, drun, run, ssh];
@@ -7,14 +11,8 @@ configuration {
   // Icons
   show-icons:          true;
   icon-theme:          "Papirus";
-  display-drun:        "🔎";       // TODO: Change to a simpler icon
+  display-drun:        "🔎";       // TODO: Do I want a different icon?
   drun-display-format: "{name}";
 }
 
-/* ----- Imports ----- */
-@import "colour-config"
-@import "style-config"
-
-// TODO: Make the height of the input bar the same each element in the list
-  // Is the emoji making it bigger than the elements?
-// TODO: Also the same icon size
+// TODO: Remove the shortcut (Super+Num) rofi has that opens the Nth program in the list
