@@ -61,13 +61,13 @@ for_window [class="Blueman-manager"] floating enable, move position center
 # ----- Program Key Bindings ----- #
 
 # Start a terminal with latest ~/.Xresources settings
-bindsym $mod+Return exec xrdb ~/.Xresources && urxvt
+bindsym $mod+Shift+Return exec xrdb ~/.Xresources && urxvt
 
 # Start program launcher
-bindsym $mod+Shift+p exec --no-startup-id dmenu_custom
 bindsym $mod+p exec --no-startup-id rofi -show drun
 
 # TODO: Consider changing the shortcut for Chrome
+# Or maybe even removing it and just using the program launcher
 bindsym $mod+w exec --no-startup-id google-chrome-stable
 bindsym $mod+u exec --no-startup-id pavucontrol
 bindsym $mod+l exec --no-startup-id light-locker-command -l

@@ -53,8 +53,6 @@
   yay:
     name:
       - autojump
-      - dmenu2
-      - ngrok
       - postman-bin
       - perl-clipboard
       - slack-desktop

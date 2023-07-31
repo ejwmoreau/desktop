@@ -16,3 +16,9 @@ configuration {
 }
 
 // TODO: Remove the shortcut (Super+Num) rofi has that opens the Nth program in the list
+
+// TODO: Get a compositor, so rofi can use the proper background when rounding corners
+// It's a bit slower to start because it takes a screenshot and then pops up
+
+// TODO: Consider other rofi moves, in case they would be useful
+// E.g: Running a script, or connecting via ssh

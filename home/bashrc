@@ -38,7 +38,6 @@ source "/usr/share/nvm/init-nvm.sh" --no-use
 
 # Environment variables
 export GOPATH="$HOME/go"
-export TERM='rxvt-256color'
 export EDITOR='vim'
 path_append $HOME/node_modules/.bin:$HOME/.gem/ruby/2.5.0/bin:$GOPATH/bin
 

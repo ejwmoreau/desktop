@@ -43,7 +43,6 @@
   * Also, the alternating colour for each line is a bit distracting
 * Consider adding `run` and/or `ssh` modes for rofi
   * Should they be altogether in a combined mode? Or a different shortcut?
-* Remove dmenu & any customisations I added for it (script, etc)
 
 ## Adding to Ansible
 

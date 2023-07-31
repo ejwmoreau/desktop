@@ -4,6 +4,7 @@
  */
 
 /* ----- Main Window ----- */
+
 window {
     transparency:     "screenshot"; // 'real' only works with a compositor
     location:         center;
@@ -24,6 +25,7 @@ window {
 }
 
 /* ----- Main Box ----- */
+
 mainbox {
     enabled:          true;
     spacing:          0px; // Spacing between input box & program list
@@ -37,6 +39,7 @@ mainbox {
 }
 
 /* ----- Inputbar ----- */
+
 inputbar {
     enabled:          true;
     spacing:          20px; // Spacing between input box's icon & text
@@ -55,6 +58,7 @@ prompt {
     background-color: inherit;
     text-color:       inherit;
 }
+
 textbox-prompt-colon {
     enabled:           true;
     expand:            false;
@@ -62,6 +66,7 @@ textbox-prompt-colon {
     background-color:  inherit;
     text-color:        inherit;
 }
+
 entry {
     enabled:           true;
     background-color:  inherit;
@@ -72,6 +77,7 @@ entry {
 }
 
 /* ----- Listview ----- */
+
 listview {
     enabled:          true;
     columns:          1;
@@ -102,6 +108,7 @@ scrollbar {
 }
 
 /* ----- Elements ----- */
+
 element {
     enabled:          true;
     spacing:          20px; // Spacing between the program's icon & name
@@ -114,24 +121,29 @@ element {
     text-color:       @foreground;
     cursor:           pointer;
 }
+
 element normal.normal {
     background-color: @background;
     text-color:       @foreground;
 }
+
 element alternate.normal {
     background-color: @background;
     text-color:       @foreground;
 }
+
 element selected.normal {
     background-color: @background-alt;
     text-color:       @foreground;
 }
+
 element-icon {
     background-color: transparent;
     text-color:       inherit;
     size:             40px; // Size of each program's icons
     cursor:           inherit;
 }
+
 element-text {
     background-color: transparent;
     text-color:       inherit;
@@ -142,6 +154,7 @@ element-text {
 }
 
 /* ----- Message ----- */
+
 error-message {
     padding:          15px;
     border:           2px solid;
@@ -150,6 +163,7 @@ error-message {
     background-color: @background;
     text-color:       @foreground;
 }
+
 textbox {
     background-color: @background;
     text-color:       @foreground;
