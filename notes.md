@@ -64,3 +64,10 @@ Autorandr
 
 * Tried to see if I can avoid the double trigger when plugging in the dock (1 udev trigger per monitor)
 * Result: Whatever the default setup is via `pacman` is the best for me. Don't try the `launcher` option. Live with the double trigger
+
+Nebulae & /etc/passwd
+
+* Nebulae doesn't seem to need the /etc/passwd entry anymore, so I'm just leaving the line here in case it breaks later:
+  * `emoreau:x:60038:60038::/home/emoreau:/bin/bash`
+  * Result: While Nebulae commands do work now, they also result in a `?` folder being created to store the Nebulae config in
+  * So I've re-added the /etc/passwd entry to avoid that
