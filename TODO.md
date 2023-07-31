@@ -70,6 +70,11 @@
 * Add notification when changing screen brightness
 * Add the NetworkManager slowness workaround setup
   * `run sudo mv /usr/lib/nm-openconnect-auth-dialog{,.real} then put this in /usr/lib/nm-openconnect-auth-dialog and chmod +x it`
+* VSCode settings & preferences. Notable files:
+  * `~/.config/Code/User/settings.json`
+  * `~/.config/Code/User/globalStorage/storage.json` (although it also contains some highly variable config. E.g: open windows, etc)
+* Replace `urxvt` sections with `kitty`
+  * Q: Do I still need perl-clipboard if `urxvt` is gone?
 
 ## i3
 

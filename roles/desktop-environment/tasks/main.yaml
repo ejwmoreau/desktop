@@ -61,11 +61,12 @@
 
 - import_tasks: flameshot.yaml
 - import_tasks: i3.yaml
+- import_tasks: kitty.yaml
 - import_tasks: lightdm.yaml
 - import_tasks: notifications.yaml
 - import_tasks: power-management.yaml
 - import_tasks: redshift.yaml
 - import_tasks: rofi.yaml
-- import_tasks: vim.yaml
 - import_tasks: urxvt.yaml
+- import_tasks: vim.yaml
 - import_tasks: xorg.yaml

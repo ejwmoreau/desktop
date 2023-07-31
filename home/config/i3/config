@@ -63,6 +63,9 @@ for_window [class="Blueman-manager"] floating enable, move position center
 # Start a terminal with latest ~/.Xresources settings
 bindsym $mod+Shift+Return exec xrdb ~/.Xresources && urxvt
 
+# Start a terminal
+bindsym $mod+Return exec kitty
+
 # Start program launcher
 bindsym $mod+p exec --no-startup-id rofi -show drun
 
