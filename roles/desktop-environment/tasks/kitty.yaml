@@ -1,4 +1,4 @@
---
+---
 - name: Install Kitty
   become: true
   pacman:
