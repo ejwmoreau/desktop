@@ -29,29 +29,30 @@ floating_maximum_size 1920 x 1200
 # ----- Program Behaviour ----- #
 
 # Zoom window properties:
-# "Home" window:               [class="zoom" instance="zoom" title="Zoom - Licensed Account"]
-# "Meeting" window:            [class="zoom" instance="zoom" title="Zoom Meeting"]
-# "Starting zoom" window:      [class="zoom" instance="zoom" title="Zoom Cloud Meetings"]
-# "Breakout Room" window:      [class="zoom" instance="zoom" title="{Name} Zoom Meeting"]
-# "Breakout Room List" window: [class="zoom" instance="zoom" title="Breakout Rooms - {Status}"]
-# "Loading meeting" window:    [class="zoom" instance="zoom" title="Zoom"]
-# "Stop recording?" window:    [class="zoom" instance="zoom" title="Zoom"]
-# "You're the host" window:    [class="zoom" instance="zoom" title="zoom"]
-# "Recording coming" window:   [class="zoom" instance="zoom" title="zoom"]
+# "Home" window:                [class="zoom" instance="zoom" title="Zoom - Licensed Account"]
+# "Meeting" window:             [class="zoom" instance="zoom" title="Zoom Meeting"]
+# "Starting zoom" window:       [class="zoom" instance="zoom" title="Zoom Cloud Meetings"]
+# "Breakout Room" window:       [class="zoom" instance="zoom" title="{Name} Zoom Meeting"]
+# "Breakout Room List" window:  [class="zoom" instance="zoom" title="Breakout Rooms - {Status}"]
+# "Loading meeting" window:     [class="zoom" instance="zoom" title="Zoom"]
+# "Stop recording?" window:     [class="zoom" instance="zoom" title="Zoom"]
+# "You're the host" window:     [class="zoom" instance="zoom" title="zoom"]
+# "Recording coming" window:    [class="zoom" instance="zoom" title="zoom"]
+# "Meeting feedback?" window:   [class="zoom" instance="..."  title="zoom"] (Disable in Zoom settings)
 
 # TODO: Treat the "Zoom Webinar" window as a regular "Meeting" window
 
 # Stop Zoom from taking focus, and move to Workspace 8
-no_focus [class="zoom"]
-for_window [class="zoom"] move to workspace 8
+no_focus [class="(zoom|Zoom)"]
+for_window [class="(zoom|Zoom)"] move to workspace 8
 # Make "notification"-like windows float, while keeping other windows tiled
 for_window [title="^(zoom|Zoom)$"] floating enable
 for_window [title="^(Zoom Meeting|Zoom - Licensed Account)$"] floating disable
-# Hide the "Home" and "Loading meeting" Zoom windows, because they get in the way
-for_window [title="^(Zoom - Licensed Account|Zoom Cloud Meetings)$"] move scratchpad
 # Make "Breakout Rooms" list dialog float, while keeping the actual breakout room windows tiled
 for_window [title="^Breakout Rooms"] floating enable
 for_window [title=".* Zoom Meeting$"] floating disable
+# Hide the "Home" and "Loading meeting" Zoom windows, because they get in the way
+for_window [title="^(Zoom - Licensed Account|Zoom Cloud Meetings)$"] move scratchpad
 
 # Certain windows/programs that are nice when floating & centered
 for_window [class="Arandr"] floating enable, move position center
