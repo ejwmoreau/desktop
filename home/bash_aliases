@@ -59,8 +59,8 @@ alias g="/usr/bin/git status"
 alias gu="kc && /usr/bin/git pull"
 alias gp="kc && /usr/bin/git push"
 alias ga="/usr/bin/git add"
-alias gd="/usr/bin/git diff"
-alias gda="/usr/bin/git diff -U99999"
+alias gd="/usr/bin/git diff --color-words"
+alias gda="/usr/bin/git diff --color-words -U99999"
 alias gs="/usr/bin/git stash"
 alias gb="/usr/bin/git branch"
 alias gba="/usr/bin/git branch -a"
@@ -236,8 +236,6 @@ function va() {
     return 1
 }
 
-alias rebuild_ctags="cd ~/code/; ctags -R --python-kinds=-i"
-
 # Custom from Elie
 
 # Python virtualenv
@@ -276,6 +274,9 @@ alias loopback-mic="echo -n 'Press Enter to stop' && pactl load-module module-lo
 
 # Reload dunst for updated config to take effect
 alias reload-dunst="killall dunst; notify-send 'Dunst is reloaded'"
+
+# Run a diff using kitty terminal's built-in diff kitten
+alias diff-kitty="kitty +kitten diff"
 
 # Suspend Hobbiton
 # ssh hobbiton

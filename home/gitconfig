@@ -5,6 +5,7 @@
 	default = current
 [core]
 	editor = vim
+	pager = perl /usr/share/git/diff-highlight/diff-highlight | less
 [color]
 	interactive = auto
 	branch = auto
@@ -25,3 +26,5 @@
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
+[interactive]
+	difffilter = perl /usr/share/git/diff-highlight/diff-highlight
