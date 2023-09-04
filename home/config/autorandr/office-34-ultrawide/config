@@ -1,17 +1,22 @@
-output DP-1
+output DP-2
 off
 output DP-3
 off
 output DP-2-1
 off
+output DP-2-1-1
+off
+output DP-2-1-2
+off
 output DP-2-2
 off
-output DP-2
+output DP-1
 crtc 1
-mode 3840x2160
+filter bilinear
+mode 3440x1440
 pos 0x0
-rate 60.00
-transform 1.500000,0.000000,0.000000,0.000000,1.500000,0.000000,0.000000,0.000000,1.000000
+rate 59.97
+transform 2.000000,0.000000,0.000000,0.000000,2.000000,0.000000,0.000000,0.000000,1.000000
 x-prop-audio auto
 x-prop-broadcast_rgb Automatic
 x-prop-colorspace Default
@@ -20,7 +25,7 @@ x-prop-non_desktop 0
 output eDP-1
 crtc 0
 mode 3840x2400
-pos 910x3240
+pos 1520x2880
 primary
 rate 59.99
 x-prop-broadcast_rgb Automatic
