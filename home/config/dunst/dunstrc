@@ -42,6 +42,11 @@
     background = "#c82829"
     foreground = "#282a2e"
 
+# TODO: Script needs to be finished before enabling this
+#[calendar]
+#    appname = Google Chrome
+#    script = ~/bin/prettify_calendar_notifications
+
 # TODO: Probably stop summary from being bold
 
 # TODO: Notifications config from Awesome WM. Probably not what I want, but it might help

@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# DUNST_APP_NAME=Google Chrome
+# DUNST_URLS=[calendar.google.com] https://calendar.google.com/
+# DUNST_ICON_PATH=/tmp/.com.google.Chrome.oKzwHl
+# DUNST_TIMESTAMP=1393796723
+# DUNST_PROGRESS=-1
+# DUNST_URGENCY=NORMAL
+# DUNST_TIMEOUT=0
+# DUNST_CATEGORY=
+# DUNST_BODY=<a href="https://calendar.google.com/">calendar.google.com</a>
+# DUNST_STACK_TAG=
+# DUNST_ID=3
+# DUNST_DESKTOP_ENTRY=google-chrome
+# DUNST_SUMMARY=Stop working!
+
+# TODO: Figure out if I can change the notification action to the Zoom link, if available
+
+if [[ "$DUNST_URLS" == *"calendar.google.com"* ]]; then
+  echo "Found a calendar notification:"
+  env | grep DUNST
+fi
