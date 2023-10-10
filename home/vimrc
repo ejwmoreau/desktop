@@ -34,7 +34,7 @@ set t_vb=           " Also avoids some more beeps
 syntax enable       " Enable syntax processing/highlighting
 set background=dark " Tells vim that background colour is dark
 let base16colorspace=256 " Number of colours to use
-colorscheme base16-tomorrow " Use a sensible colorscheme
+colorscheme base16-tomorrow-night " Use a sensible colorscheme
 
 " Searching
 set incsearch       " Search as characters are entered

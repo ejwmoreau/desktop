@@ -1,0 +1,24 @@
+#!/usr/bin/env zsh
+
+set -m
+
+##################################################
+# Zsh Plugins (base16 for colors)
+##################################################
+
+export ZPLUG_HOME=$HOMEBREW_PREFIX/opt/zplug
+source $ZPLUG_HOME/init.zsh
+
+# Before `zplug load`
+zplug chriskempson/base16-shell, from:github
+
+zplug load
+
+# Sfter `zplug load`
+base16_tomorrow-night
+
+# Use GNU versions of binaries (e.g: `ls`)
+export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:${PATH}"
+export MANPATH="/opt/homebrew/opt/coreutils/libexec/gnuman:${MANPATH}"
+
+source ~/.zsh_aliases

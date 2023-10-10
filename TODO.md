@@ -93,3 +93,9 @@
 * Obsidian is missing it's title bar for some reason :/
   * It has a titlebar when in tabbed mode, but not vertical or horizontal
 * Continue on `bin/calendar_status` & `bin/prettify_calendar_notifications` for future Linux setup
+
+## zsh
+
+* Convert bashrc to zshrc (as best as I can)
+* Use oh-my-zsh
+* Use powerlevel10k

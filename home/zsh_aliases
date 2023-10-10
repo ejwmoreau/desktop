@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/bin/zsh
 
-alias src="source ~/.bashrc"
+alias src="source ~/.zshrc"
 
 # Behaviour correction
 function ifconfig() {
@@ -70,7 +70,6 @@ alias gff="/usr/bin/git merge --ff-only"
 alias gt="/usr/bin/git worktree"
 
 # https://git-scm.com/docs/pretty-formats
-#GIT_LOG_FORMAT='%Cred%h%Creset -%C(yellow)%-d%C(reset) %s %C(green)[%cr]%C(reset) %C(bold blue)%an <%ae>%C(reset) %C(cyan)%G?%C(reset)'
 GIT_LOG_FORMAT='%Cred%h%Creset -%C(yellow)%-d%C(reset) %s %C(green)(%cr)%C(reset) %C(bold blue)%an%C(reset)'
 GIT_LOG_FORMAT_SIMPLE='%Cred%h%Creset - %s %C(green)(%cr)%C(reset) %C(bold blue)%an%C(reset)'
 alias gl="/usr/bin/git log --date-order --graph --pretty=format:'${GIT_LOG_FORMAT}' --abbrev-commit --date=relative"
@@ -104,22 +103,6 @@ function get_or_set_default_branch_ref() {
         git symbolic-ref refs/remotes/origin/HEAD refs/remotes/origin/$default_branch_name
     fi
     echo $default_branch_name
-}
-
-gitcopush() {
-    # TODO: Extract useful parts
-    set -eu
-
-    GIT_DESCRIPTION=$*
-    TICKET_NUM="${1^^}"
-
-    BRANCH_NAME="${GIT_DESCRIPTION//[ \.]/_}"
-    git checkout -b "$BRANCH_NAME"
-    git commit --patch --interactive -m "$GIT_DESCRIPTION"
-    git push 2>&1 | tee "/tmp/$BRANCH_NAME"
-
-    google-chrome $(grep -A1 "Create pull request for" "/tmp/$BRANCH_NAME" | perl -nle 'print $1 if m#(https://(stash.atlassian.com|bitbucket.org)\S+)#')
-    set +eu
 }
 
 # Docker
@@ -158,11 +141,8 @@ function va() {
     return 1
 }
 
-# Custom from Elie
-
 # Python virtualenv
 alias workoff='deactivate'
-alias mkvirtualenv2="mkvirtualenv -p /usr/bin/python2.7"
 
 # Look at logs of all containers that listen on port 8080
 alias docker-logs-check='while ((1)); do docker logs -f $(docker ps | grep 8080 | cut -f1 -d" ") 2>/dev/null; sleep 1; echo No docker container; done'
