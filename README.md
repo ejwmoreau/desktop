@@ -2,23 +2,25 @@
 
 ## Overview
 
-These are my dotfiles that I am using on a daily basis.
+This repo contains a bunch of dotfiles & settings:
 
-It comes with a number of Ansible roles that setup my dotfiles and config.
+* I use them on a daily basis
+* They are organised into a number of Ansible roles for easy setup
+* They contain variants for both MacOS & Linux
 
 Some of the contents include:
 
-* Bash
-* i3
-* LightDM
-* Terminal Coloring
-* Vim
-* Xresources
+* Package Managers (pacman, homebrew)
+* Desktop Environments (i3, amethyst)
+* Applications (kitty, intellij)
+* Input / Output Devices (sound, bluetooth)
+* Scripts (bin)
 
 ## Installation
 
-1. `./bin/setup.sh`
-2. `make`
+1. Install Ansible: `./bin/setup.sh`
+2. Install Ansible modules: `make setup`
+3. Install everything else: `make`
 
 ## How To Add Content From Other Repos
 
