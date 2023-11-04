@@ -43,6 +43,11 @@
   * Also, the alternating colour for each line is a bit distracting
 * Consider adding `run` and/or `ssh` modes for rofi
   * Should they be altogether in a combined mode? Or a different shortcut?
+* Add the `/etc/sudoers.d/openconnect` file to ansible
+* Create a `brew` upgrade script that runs a few different "upgrade" commands
+  * `brew update`
+  * `brew upgrade`
+  * `brew upgrade --cask --greedy` (to upgrade all the casks, including ones that don't have a "version")
 
 ## Adding to Ansible
 
@@ -97,5 +102,4 @@
 ## zsh
 
 * Convert bashrc to zshrc (as best as I can)
-* Use oh-my-zsh
-* Use powerlevel10k
+* See if I need to use oh-my-zsh. What benefits do I get?
