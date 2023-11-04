@@ -11,6 +11,11 @@
       - '!min'
       - 'os_family'
 
+- name: Set some short helpful OS facts
+  set_fact:
+    mac_os: "{{ ansible_facts['os_family'] == 'Darwin' }}"
+    linux: "{{ ansible_facts['os_family'] == 'Linux' }}"
+
 # Saving some time by only updating git repos if it's been a while
 
 - name: Get current day

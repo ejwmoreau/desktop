@@ -1,0 +1,39 @@
+---
+- import_tasks: git.yaml
+- import_tasks: kitty.yaml
+- import_tasks: vim.yaml
+- import_tasks: zsh.yaml
+
+# TODO: Move these tasks into an appropriate role
+# old-common
+# └── tasks
+#     ├── backlight.yaml
+#     ├── bluetooth.yaml
+#     ├── browser.yaml
+#     ├── docker.yaml
+#     ├── gpu.yaml
+#     ├── grub.yaml
+#     ├── ide.yaml
+#     ├── internet.yaml
+#     ├── internet_usage.yaml
+#     ├── kernel-modules-hook.yaml
+#     ├── main.yaml
+#     ├── paprika.yaml
+#     ├── sound.yaml
+#     ├── ssd.yaml
+#     ├── systemd.yaml
+#     └── udev.yaml
+# old-desktop-environment
+# └── tasks
+#     ├── flameshot.yaml
+#     ├── i3.yaml
+#     ├── kitty.yaml
+#     ├── lightdm.yaml
+#     ├── main.yaml
+#     ├── notifications.yaml
+#     ├── power-management.yaml
+#     ├── redshift.yaml
+#     ├── rofi.yaml
+#     ├── urxvt.yaml
+#     ├── vim.yaml
+#     └── xorg.yaml

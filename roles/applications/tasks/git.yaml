@@ -1,0 +1,11 @@
+---
+- name: Link git config files
+  file:
+    src: "{{playbook_dir}}/{{item.src}}"
+    dest: "~/{{item.dest}}"
+    state: link
+  loop:
+    - src: "home/gitconfig"
+      dest: ".gitconfig"
+    - src: "home/gitignore"
+      dest: ".gitignore"

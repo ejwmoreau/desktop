@@ -1,0 +1,20 @@
+---
+- name: Install Kitty
+  homebrew_cask:
+    name: kitty
+    state: present
+  when: mac_os
+
+- name: Install Kitty
+  become: true
+  pacman:
+    name: kitty
+  when: linux
+
+- name: Link config for kitty
+  file:
+    src: "{{playbook_dir}}/home/config/{{item}}"
+    dest: "~/.config/{{item}}"
+    state: link
+  loop:
+    - "kitty"

@@ -1,0 +1,2 @@
+---
+- import_tasks: yay-ansible.yaml

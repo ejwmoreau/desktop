@@ -2,11 +2,11 @@
 - hosts: localhost
   gather_facts: no
   vars:
-    enable_gpu: true
+    linux_enable_gpu: true
   roles:
     - start
     - package-manager
-    #- mac-minimal
+    - applications
     #- common
     #- desktop-environment
     - end

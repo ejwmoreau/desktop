@@ -103,3 +103,5 @@
 
 * Convert bashrc to zshrc (as best as I can)
 * See if I need to use oh-my-zsh. What benefits do I get?
+* Change from zplug to another zsh plugin manager that is maintained
+  * https://wiki.archlinux.org/title/zsh#Plugin_managers

@@ -1,0 +1,35 @@
+---
+- name: Install zsh & zplug
+  homebrew:
+    name:
+      - zsh
+      - zplug
+  when: mac_os
+
+- name: Install zsh
+  become: true
+  pacman:
+    name:
+      - zsh
+  when: linux
+
+- name: Install zplug
+  yay:
+    name:
+      - zplug
+  when: linux
+
+- name: Link config for zsh
+  file:
+    src: "{{playbook_dir}}/{{item.src}}"
+    dest: "~/{{item.dest}}"
+    state: link
+  loop:
+    - src: "home/zshrc"
+      dest: ".zshrc"
+    - src: "home/zsh_aliases"
+      dest: ".zsh_aliases"
+    - src: "home/p10k.zsh"
+      dest: ".p10k.zsh"
+
+# TODO: Run zplug install

@@ -16,7 +16,7 @@
     - modprobe.d/bbswitch.conf
     - modprobe.d/blacklisted.conf
     - modules-load.d/bbswitch.conf
-  when: not enable_gpu
+  when: not linux_enable_gpu
 
 - name: Remove modprobe config to load & configure bbswitch (Turn on Nvidia GPU)
   become: true
@@ -27,4 +27,4 @@
     - modprobe.d/bbswitch.conf
     - modprobe.d/blacklisted.conf
     - modules-load.d/bbswitch.conf
-  when: enable_gpu
+  when: linux_enable_gpu

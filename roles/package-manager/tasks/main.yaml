@@ -1,9 +1,7 @@
 ---
 - include_tasks: brew.yaml
-  when: ansible_facts['os_family'] == 'Darwin'
-
+  when: mac_os
 - include_tasks: pacman.yaml
-  when: ansible_facts['os_family'] == 'Linux'
-
+  when: linux
 - include_tasks: yay.yaml
-  when: ansible_facts['os_family'] == 'Linux'
+  when: linux
