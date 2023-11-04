@@ -1,10 +1,10 @@
 .PHONY: check install
 
 install:
-	ansible-playbook --diff linux.yaml
+	ansible-playbook --diff laptop.yaml
 
 check:
-	ansible-playbook --diff linux.yaml --check
+	ansible-playbook --diff laptop.yaml --check
 
 test:
 	docker build . -t desktop-archlinux

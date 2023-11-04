@@ -6,6 +6,7 @@
   roles:
     - start
     - package-manager
-    - common
-    - desktop-environment
+    #- mac-minimal
+    #- common
+    #- desktop-environment
     - end

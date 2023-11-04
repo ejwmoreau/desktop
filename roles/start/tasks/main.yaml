@@ -3,6 +3,14 @@
   set_fact:
     manual_steps: []
 
+# !all & !min will skip gathering all the other facts, to make it faster
+- name: Gather OS facts
+  ansible.builtin.setup:
+    gather_subset:
+      - '!all'
+      - '!min'
+      - 'os_family'
+
 # Saving some time by only updating git repos if it's been a while
 
 - name: Get current day
