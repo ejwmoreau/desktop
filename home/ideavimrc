@@ -1,5 +1,5 @@
-# Yank command (y) should also copy to clipboard
-set clipboard+=unnamed
-
-# Searching should ignore case
-set ignorecase
+" Various vimrc settings for Vim mode in IntelliJ / IDEA
+set clipboard+=unnamed " Yank command (y) should also copy to clipboard
+set visualbell         " Don't beep
+set t_vb=              " Also avoids some more beeps
+set ignorecase         " Searching should ignore case

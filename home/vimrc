@@ -54,8 +54,9 @@ set swapfile
 set dir=~/.vim/tmp//  " Where swap files will be stored (// keeps the path in the filename)
 
 " Other
-set hidden          " Can edit (:e) a new file without saving it first
-set undolevels=5000 " More undos
+set hidden             " Can edit (:e) a new file without saving it first
+set undolevels=5000    " More undos
+set clipboard+=unnamed " Yank command (y) should also copy to clipboard
 
 " Filetype specific
 filetype plugin indent on " Load filetype-specific indent files
