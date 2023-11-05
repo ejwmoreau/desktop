@@ -1,0 +1,6 @@
+---
+# TODO: See if there's a way to merge this with laptop.yaml
+- hosts: localhost
+  gather_facts: no
+  roles:
+    - setup
