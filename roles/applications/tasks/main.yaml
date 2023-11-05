@@ -1,5 +1,6 @@
 ---
 - import_tasks: git.yaml
+- import_tasks: ide.yaml
 - import_tasks: kitty.yaml
 - import_tasks: vim.yaml
 - import_tasks: zsh.yaml
@@ -13,7 +14,6 @@
 #     ├── docker.yaml
 #     ├── gpu.yaml
 #     ├── grub.yaml
-#     ├── ide.yaml
 #     ├── internet.yaml
 #     ├── internet_usage.yaml
 #     ├── kernel-modules-hook.yaml
@@ -27,7 +27,6 @@
 # └── tasks
 #     ├── flameshot.yaml
 #     ├── i3.yaml
-#     ├── kitty.yaml
 #     ├── lightdm.yaml
 #     ├── main.yaml
 #     ├── notifications.yaml
@@ -35,5 +34,4 @@
 #     ├── redshift.yaml
 #     ├── rofi.yaml
 #     ├── urxvt.yaml
-#     ├── vim.yaml
 #     └── xorg.yaml

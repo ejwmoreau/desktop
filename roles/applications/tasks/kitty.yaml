@@ -1,14 +1,16 @@
 ---
 - name: Install Kitty
   homebrew_cask:
-    name: kitty
+    name:
+      - kitty
     state: present
   when: mac_os
 
 - name: Install Kitty
   become: true
   pacman:
-    name: kitty
+    name:
+      - kitty
   when: linux
 
 - name: Link config for kitty

@@ -1,13 +1,15 @@
 ---
 - name: Install Vim
   homebrew:
-    name: vim
+    name:
+      - vim
   when: mac_os
 
 - name: Install Vim
   become: true
   pacman:
-    name: vim
+    name:
+      - vim
   when: linux
 
 - name: Link .vimrc

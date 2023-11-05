@@ -1,8 +1,15 @@
 ---
 - name: Install IntelliJ
+  homebrew-cask:
+    name:
+      - intellij-idea
+  when: mac_os
+
+- name: Install IntelliJ
   yay:
     name:
       - intellij-idea-ultimate-edition
+  when: linux
 
 - name: Link config for IdeaVim plugin
   file:
