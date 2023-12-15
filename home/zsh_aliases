@@ -183,6 +183,9 @@ alias diff-kitty="kitty +kitten diff"
 # I like using `python` without needing to specify the version
 alias python="python3"
 
+# Easy access to MacOS' built-in pdf combining tool
+alias pdfunite-macos="/System/Library/Automator/Combine\ PDF\ Pages.action/Contents/MacOS/join"
+
 # Suspend Hobbiton
 # ssh hobbiton
 # echo 'pm-suspend' | sudo at now + 1 minutes; exit
