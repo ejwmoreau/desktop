@@ -1,6 +1,6 @@
 ---
 - name: Install IntelliJ
-  homebrew-cask:
+  homebrew_cask:
     name:
       - intellij-idea
   when: mac_os

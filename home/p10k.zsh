@@ -390,10 +390,10 @@
 
     if [[ -n $VCS_STATUS_LOCAL_BRANCH ]]; then
       local branch=${(V)VCS_STATUS_LOCAL_BRANCH}
-      # If local branch name is at most 32 characters long, show it in full.
-      # Otherwise show the first 12 … the last 12.
+      # If local branch name is at most 100 characters long, show it in full.
+      # Otherwise show the first 40 … the last 40.
       # Tip: To always show local branch name in full without truncation, delete the next line.
-      (( $#branch > 32 )) && branch[13,-13]="…"  # <-- this line
+      (( $#branch > 100 )) && branch[40,-40]="…"  # <-- this line
       res+="${clean}${(g::)POWERLEVEL9K_VCS_BRANCH_ICON}${branch//\%/%%}"
     fi
 
@@ -403,10 +403,10 @@
           && -z $VCS_STATUS_LOCAL_BRANCH  # <-- this line
         ]]; then
       local tag=${(V)VCS_STATUS_TAG}
-      # If tag name is at most 32 characters long, show it in full.
-      # Otherwise show the first 12 … the last 12.
+      # If tag name is at most 100 characters long, show it in full.
+      # Otherwise show the first 40 … the last 40.
       # Tip: To always show tag name in full without truncation, delete the next line.
-      (( $#tag > 32 )) && tag[13,-13]="…"  # <-- this line
+      (( $#tag > 100 )) && tag[40,-40]="…"  # <-- this line
       res+="${meta}#${clean}${tag//\%/%%}"
     fi
 
