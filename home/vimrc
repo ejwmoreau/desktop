@@ -54,9 +54,10 @@ set swapfile
 set dir=~/.vim/tmp//  " Where swap files will be stored (// keeps the path in the filename)
 
 " Other
-set hidden             " Can edit (:e) a new file without saving it first
-set undolevels=5000    " More undos
+set hidden            " Can edit (:e) a new file without saving it first
+set undolevels=5000   " More undos
 set clipboard+=unnamed " Yank command (y) should also copy to clipboard
+set backspace=indent,eol,start " Backspace should always allow to remove preceding characters
 
 " Filetype specific
 filetype plugin indent on " Load filetype-specific indent files
@@ -105,10 +106,12 @@ nnoremap k gk
   " nnoremap <leader>u :GundoToogle<CR>
 " Edit vimrc/bashrc/etc and load vimrc bindings
 nnoremap <leader>ev :vsp ~/.vimrc<CR>
-nnoremap <leader>ebr :vsp ~/.bashrc<CR>
-nnoremap <leader>ebrw :vsp ~/.bashrc_work<CR>
-nnoremap <leader>eba :vsp ~/.bash_aliases<CR>
+nnoremap <leader>ezr :vsp ~/.zshrc<CR>
+nnoremap <leader>ezrw :vsp ~/.zshrc_work<CR>
+nnoremap <leader>eza :vsp ~/.zsh_aliases<CR>
 nnoremap <leader>sv :source ~/.vimrc<CR>
+" Format file content with jq
+nnoremap <leader>jq :%!jq .<CR>
 " Save session (with current windows)
 nnoremap <leader>s :mksession<CR>
 " Open ag.vim (TODO)
