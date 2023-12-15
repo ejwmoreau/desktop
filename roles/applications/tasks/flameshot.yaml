@@ -1,0 +1,27 @@
+---
+- name: Install Flameshot
+  homebrew_cask:
+    name:
+      - flameshot
+  when: mac_os
+
+- name: Install Flameshot
+  become: true
+  pacman:
+    name:
+      - flameshot
+      - zbar # Used for parsing QR codes in screenshots
+  when: linux
+
+- name: Link config for flameshot
+  file:
+    src: "{{playbook_dir}}/home/config/flameshot"
+    dest: "~/.config/flameshot"
+    state: link
+
+- name: Correct the path to screenshots folder
+  lineinfile:
+    path: "{{playbook_dir}}/home/config/flameshot/flameshot.ini"
+    regexp: "savePath=.*"
+    line: "savePath=/home/emoreau/shots"
+  when: linux

@@ -1,10 +1,17 @@
 ---
+- name: Install Docker Desktop
+  homebrew_cask:
+    name:
+      - docker
+  when: mac_os
+
 - name: Install Docker packages
   become: true
   pacman:
     name:
       - docker
       - docker-compose
+  when: linux
 
 # Enabling the socket allows systemd to delay starting docker until it's needed
 - name: Enable Docker
@@ -12,3 +19,4 @@
   systemd:
     name: docker.socket
     enabled: yes
+  when: linux

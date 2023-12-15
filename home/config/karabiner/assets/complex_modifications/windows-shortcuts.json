@@ -1,0 +1,62 @@
+{
+  "title": "Remap Paste Shortcut",
+  "rules": [
+    {
+      "description": "Remap Ctrl+V to Cmd+V",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "v",
+            "modifiers": {
+              "mandatory": [
+                "control"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "v",
+              "modifiers": [
+                "command"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "Remap Ctrl+V to Cmd+V for Slack and Chrome (Debug)",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "v",
+            "modifiers": {
+              "mandatory": [
+                "control"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "v",
+              "modifiers": [
+                "command"
+              ]
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.tinyspeck\\.slackmacgap",
+                "^com\\.google\\.Chrome"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -7,3 +7,4 @@
     force: no
   loop:
     - grub.d/40_custom
+  when: linux

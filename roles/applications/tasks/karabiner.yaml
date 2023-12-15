@@ -1,0 +1,13 @@
+---
+- name: Install Karabiner
+  homebrew_cask:
+    name:
+      - karabiner-elements
+
+- name: Link config for Karabiner
+  file:
+    src: "{{playbook_dir}}/home/config/{{item}}"
+    dest: "~/.config/{{item}}"
+    state: link
+  loop:
+    - "karabiner/assets/complex_modifications"

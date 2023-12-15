@@ -1,0 +1,29 @@
+{
+  "title": "Disable Slack shortcuts to mark messages as read",
+  "rules": [
+    {
+      "description": "Disable Esc & Shift+Esc in Slack",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "escape",
+            "modifiers": {
+              "optional": [
+                "shift"
+              ]
+            }
+          },
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.tinyspeck\\.slackmacgap"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
