@@ -21,6 +21,14 @@
                 "command"
               ]
             }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_unless",
+              "bundle_identifiers": [
+                "^net\\.kovidgoyal\\.kitty$"
+              ]
+            }
           ]
         }
       ]

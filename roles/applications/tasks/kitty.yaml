@@ -20,3 +20,10 @@
     state: link
   loop:
     - "kitty"
+
+- name: Create Mac-specific config for kitty/terminals
+  copy:
+    content: ""
+    dest: "~/.hushlogin"
+    force: false
+  when: mac_os

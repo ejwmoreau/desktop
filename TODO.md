@@ -48,6 +48,12 @@
   * `brew update`
   * `brew upgrade`
   * `brew upgrade --cask --greedy` (to upgrade all the casks, including ones that don't have a "version")
+* Manually export all the Amethyst settings I've tweaked into a config file:
+  * https://github.com/ianyh/Amethyst/blob/development/docs/configuration-files.md
+  * It seems like there might be some synchronisation issues with the config file?
+    * It might be best to try and only edit the config file from now on, so it always loads the settings from there
+  * https://github.com/ianyh/Amethyst/blob/development/.amethyst.sample.yml
+* Exclude Kitty from the shortcut overrides in Karabiner (e.g: Ctrl+V)
 
 ## Adding to Ansible
 
