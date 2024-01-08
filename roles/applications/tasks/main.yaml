@@ -40,5 +40,4 @@
 #     ├── power-management.yaml     # io
 #     ├── redshift.yaml             # applications
 #     ├── rofi.yaml                 # applications
-#     ├── urxvt.yaml                # todo: removed
 #     └── xorg.yaml                 # applications

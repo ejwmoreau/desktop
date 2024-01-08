@@ -53,7 +53,6 @@
   * It seems like there might be some synchronisation issues with the config file?
     * It might be best to try and only edit the config file from now on, so it always loads the settings from there
   * https://github.com/ianyh/Amethyst/blob/development/.amethyst.sample.yml
-* Exclude Kitty from the shortcut overrides in Karabiner (e.g: Ctrl+V)
 
 ## Adding to Ansible
 
@@ -84,8 +83,6 @@
 * VSCode settings & preferences. Notable files:
   * `~/.config/Code/User/settings.json`
   * `~/.config/Code/User/globalStorage/storage.json` (although it also contains some highly variable config. E.g: open windows, etc)
-* Replace `urxvt` sections with `kitty`
-  * Q: Do I still need perl-clipboard if `urxvt` is gone?
 
 ## i3
 
