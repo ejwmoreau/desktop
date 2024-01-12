@@ -5,6 +5,8 @@
 ! Base16 Tomorrow Night Scheme from Chris Kempson
 ! https://github.com/chriskempson/tomorrow-theme/blob/master/Images/Tomorrow-Night-Palette.png
 
+! TODO: Check if I still need colours to be defined here, and how they are used
+
 ! Scale from near-black to white
 #define base00 #1d1f21
 #define base01 #282a2e
@@ -63,54 +65,11 @@
 ! XFT settings
 !===============================================================================
 
+! TODO: Check if I still need these XFT-related settings
+
 Xft.antialias:  true
 Xft.autohint:   false
 Xft.dpi:        192
 Xft.hinting:    true
 Xft.hintstyle:  hintslight
 Xft.rgba:       rgb
-
-!===============================================================================
-! URXVT settings
-!===============================================================================
-
-urxvt.background:         [100]#1D1F21
-urxvt.blurRadius:         0
-urxvt.borderless:         true
-urxvt.buffered:           true
-urxvt.cursorBlink:        true
-urxvt.depth:              32
-urxvt.externalBorder:     0
-urxvt.internalBorder:     1
-urxvt.fading:             false
-urxvt.fadeColor:          #1D1F21
-urxvt.iso14755:           false
-urxvt.iso14755_52:        false
-urxvt.jumpScroll:         false
-urxvt.pointerBlank:       true
-urxvt.saveLines:          65535
-urxvt.scrollBar:          false
-urxvt.scrollBar_right:    true
-urxvt.scrollBar_floating: true
-urxvt.scrollstyle:        plain
-urxvt.shading:            100
-urxvt.thickness:          3
-urxvt.transparent:        false
-urxvt.urgentOnBell:       false
-urxvt.visualBell:         false
-
-urxvt.perl-ext-common:  font-size,clipboard,default,matcher
-urxvt.keysym.M-equal:   font-size:reset
-urxvt.keysym.M-minus:   font-size:decsave
-urxvt.keysym.M-plus:    font-size:incsave
-
-urxvt.url-launcher:   /usr/bin/google-chrome-stable
-urxvt.matcher.rend.0: Uline fg6
-
-! 3 is the right click mouse button
-urxvt.matcher.button: 3
-
-urxvt.letterSpace:  1
-urxvt.lineSpace:    -1
-
-urxvt.font: xft:Anonymous Pro:style=regular:dpi=192:size=14

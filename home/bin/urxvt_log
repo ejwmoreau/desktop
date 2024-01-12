@@ -1,5 +1,0 @@
-#!/bin/bash
-
-# Get the logs from urxvt
-
-urxvt &> $HOME/error_urxvt

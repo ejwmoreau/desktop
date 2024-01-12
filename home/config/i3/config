@@ -61,9 +61,6 @@ for_window [class="Blueman-manager"] floating enable, move position center
 
 # ----- Program Key Bindings ----- #
 
-# Start a terminal with latest ~/.Xresources settings
-bindsym $mod+Shift+Return exec xrdb ~/.Xresources && urxvt
-
 # Start a terminal
 bindsym $mod+Return exec kitty
 
