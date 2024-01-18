@@ -1,2 +1,19 @@
 ---
 # A role that contains tasks related to input / output of a system
+
+- include_tasks: backlight.yaml
+  when: linux
+- include_tasks: bluetooth.yaml
+  when: linux
+- include_tasks: gpu.yaml
+  when: linux
+- include_tasks: internet.yaml
+  when: linux
+- include_tasks: sound.yaml
+  when: linux
+- include_tasks: ssd.yaml
+  when: linux
+- include_tasks: udev.yaml
+  when: linux
+- include_tasks: power-management.yaml
+  when: linux

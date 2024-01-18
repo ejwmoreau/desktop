@@ -1,5 +1,6 @@
 ---
-# TODO: Can I group some of these task lists?
+# A role that contains tasks related to applications installed on a system
+
 - import_tasks: browser.yaml
 - import_tasks: docker.yaml
 - import_tasks: flameshot.yaml
@@ -21,23 +22,15 @@
 # TODO: Move these tasks into an appropriate role
 # old-common
 # └── tasks
-#     ├── backlight.yaml            # io
-#     ├── bluetooth.yaml            # io
-#     ├── gpu.yaml                  # io
-#     ├── internet.yaml             # io
 #     ├── internet_usage.yaml       # applications
 #     ├── kernel-modules-hook.yaml  # applications?
 #     ├── main.yaml                 # todo: split
 #     ├── paprika.yaml              # applications
-#     ├── sound.yaml                # io
-#     ├── ssd.yaml                  # io
 #     ├── systemd.yaml              # applications?
-#     └── udev.yaml                 # io
 # old-desktop-environment
 # └── tasks
 #     ├── main.yaml                 # todo: split
 #     ├── notifications.yaml        # applications
-#     ├── power-management.yaml     # io
 #     ├── redshift.yaml             # applications
 #     ├── rofi.yaml                 # applications
 #     └── xorg.yaml                 # applications
