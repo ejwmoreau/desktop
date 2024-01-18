@@ -1,4 +1,16 @@
 ---
+# TODO: Migrate all of these into proper task files in the relevant roles. E.g:
+# * fonts
+# * slack
+# * cli-utils
+# * git
+# * yubikey
+# * signal
+# * python
+# * postman
+# * spotify
+# * zoom
+
 - name: Install common fonts
   become: true
   pacman:
@@ -10,18 +22,10 @@
       - ttf-dejavu
       - ttf-liberation
 
-# TODO: Uncomment if there's some missing Unicode symbols, like emojis
-#- name: Install common fonts - yay
-#  yay:
-#    name:
-#      - ttf-symbola
-
 - name: Install CLI utilities
   become: true
   pacman:
     name:
-      - bash
-      - bash-completion
       - git
       - htop
       - jq
@@ -32,7 +36,6 @@
       - unzip
       # TODO: Separate into other roles/tasks
       - arandr
-      - autorandr
       - bind
       - feh
       - gping
@@ -45,8 +48,6 @@
       - vlc
       - yubikey-manager
       - yubikey-manager-qt
-      # TODO: Is this needed?
-      #- fzf
 
 - name: Install some AUR packages - yay
   yay:

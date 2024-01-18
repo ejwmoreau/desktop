@@ -15,6 +15,10 @@
   loop:
     - bin
 
+# A group of packages needed on Linux, some of which need to be early on
+- include_tasks: linux-base.yaml
+  when: linux
+
 - include_tasks: autorandr.yaml
   when: linux
 # TODO: Cleanup bash config if I'm not going to use it anymore
@@ -59,11 +63,3 @@
   when: linux
 - include_tasks: .yaml
   when: linux
-
-# TODO: Move these tasks into an appropriate role
-# old-common
-# └── tasks
-#     ├── main.yaml                 # todo: split
-# old-desktop-environment
-# └── tasks
-#     ├── main.yaml                 # todo: split

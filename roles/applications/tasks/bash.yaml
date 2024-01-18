@@ -1,4 +1,11 @@
 ---
+- name: Install bash
+  become: true
+  pacman:
+    name:
+      - bash
+      - bash-completion
+
 # TODO: I'm not sure if bash actually uses base16-shell. It might only use the config already in ~/.bashrc
 - name: Clone terminal color repo
   when: perform_git_update
