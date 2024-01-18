@@ -8,6 +8,4 @@
     - package-manager
     - io
     - applications
-    #- common
-    #- desktop-environment
     - end

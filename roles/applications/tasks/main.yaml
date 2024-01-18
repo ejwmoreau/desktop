@@ -18,19 +18,35 @@
 - import_tasks: vim.yaml
 - import_tasks: zsh.yaml
 
+# TODO: Expand this to Mac
+- include_tasks: internet_usage.yaml
+  when: linux
+- include_tasks: kernel-modules-hook.yaml
+  when: linux
+# TODO: Maybe expand this to Mac?
+- include_tasks: paprika.yaml
+  when: linux
+- include_tasks: systemd.yaml
+  when: linux
+# TODO: Maybe expand this to Mac?
+- include_tasks: notifications.yaml
+  when: linux
+# TODO: Is there anything that would be tweaked on a Mac here?
+- include_tasks: redshift.yaml
+  when: linux
+- include_tasks: rofi.yaml
+  when: linux
+- include_tasks: xorg.yaml
+  when: linux
+- include_tasks: .yaml
+  when: linux
+
+
 
 # TODO: Move these tasks into an appropriate role
 # old-common
 # └── tasks
-#     ├── internet_usage.yaml       # applications
-#     ├── kernel-modules-hook.yaml  # applications?
 #     ├── main.yaml                 # todo: split
-#     ├── paprika.yaml              # applications
-#     ├── systemd.yaml              # applications?
 # old-desktop-environment
 # └── tasks
 #     ├── main.yaml                 # todo: split
-#     ├── notifications.yaml        # applications
-#     ├── redshift.yaml             # applications
-#     ├── rofi.yaml                 # applications
-#     └── xorg.yaml                 # applications
