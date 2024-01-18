@@ -29,10 +29,14 @@
     - 30-touchpad.conf
     - 30-mouse.conf
 
-- name: Copy xautocfg config file (for keyboard settings)
+- name: Link xautocfg config file (for keyboard settings)
   file:
-    src: "{{playbook_dir}}/home/config/{{item}}"
-    dest: "~/.config/{{item}}"
+    src: "{{playbook_dir}}/home/{{item}}"
+    dest: "~/.{{item}}"
     state: link
   loop:
-    - "xautocfg.cfg"
+    - config/xautocfg.cfg
+    - xprofile
+    - xsession
+    - Xresources
+    - inputrc

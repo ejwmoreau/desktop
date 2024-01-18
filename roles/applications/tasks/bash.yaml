@@ -1,0 +1,31 @@
+---
+# TODO: I'm not sure if bash actually uses base16-shell. It might only use the config already in ~/.bashrc
+- name: Clone terminal color repo
+  when: perform_git_update
+  git:
+    repo: "{{item.url}}"
+    dest: "{{playbook_dir}}/src/{{item.dest}}"
+    version: master
+  loop:
+    - url: "https://github.com/chriskempson/base16-shell.git"
+      dest: "github.com/chriskempson/base16-shell"
+  register: git_result
+  changed_when: "git_result.after|default('after') != git_result.before|default('before')"
+
+- name: Link terminal color package
+  file:
+    src: "{{playbook_dir}}/src/{{item.src}}"
+    dest: "~/.config/{{item.dest}}"
+    state: link
+  loop:
+    - src: "github.com/chriskempson/base16-shell"
+      dest: "base16-shell"
+
+- name: Link bash config
+  file:
+    src: "{{playbook_dir}}/home/{{item}}"
+    dest: "~/.{{item}}"
+    state: link
+  loop:
+    - bashrc
+    - bash_aliases

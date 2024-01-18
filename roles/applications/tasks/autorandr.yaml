@@ -1,0 +1,9 @@
+---
+- name: Link home directories
+  file:
+    src: "{{playbook_dir}}/{{item.src}}"
+    dest: "~/{{item.dest}}"
+    state: link
+  loop:
+    - src: "home/config/autorandr"
+      dest: ".config/autorandr"
