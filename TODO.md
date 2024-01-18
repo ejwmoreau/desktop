@@ -1,26 +1,62 @@
 # Todo List
 
+## Platform Agnostic
+
 * Finish going through Scott's vimrc for anything I want to keep
 * Add extensions for VSCode (Python, Atlassian, Yaml, Vim)
 * Add extensions for IntelliJ (Even just a manual list of them)
 * Add Firefox tab groups and such
+* Contribute the change to `base16-vim` repo, or at least keep a forked repo with the change
+* Use the existing `base16` theme in more places (intellij, i3, i3status, etc)
+
+### Adding to Ansible
+
+* There's some TODOs throughout the Ansible tasks
+* Consider converting some manual steps (`debug` tasks) into Ansible tasks
+* Add nvm & npm setup
+* Add java & jre setup
+* VSCode settings & preferences. Notable files:
+  * `~/.config/Code/User/settings.json`
+  * `~/.config/Code/User/globalStorage/storage.json` (although it also contains some highly variable config. E.g: open windows, etc)
+
+### zsh
+
+* Convert bashrc to zshrc (as best as I can)
+* See if I need to use oh-my-zsh. What benefits do I get?
+* Change from zplug to another zsh plugin manager that is maintained
+  * https://wiki.archlinux.org/title/zsh#Plugin_managers
+* Consider removing bash if I'm not going to use it anymore
+
+## Mac
+
+* Improve wallpaper choices, ideally a random wallpaper out of many options in a folder
+* Create a `brew` upgrade script that runs a few different "upgrade" commands
+  * `brew update`
+  * `brew upgrade`
+  * `brew upgrade --cask --greedy` (to upgrade all the casks, including ones that don't have a "version")
+
+### Adding to Ansible
+
+* Manually export all the Amethyst settings I've tweaked into a config file:
+  * https://github.com/ianyh/Amethyst/blob/development/docs/configuration-files.md
+  * It seems like there might be some synchronisation issues with the config file?
+    * It might be best to try and only edit the config file from now on, so it always loads the settings from there
+  * https://github.com/ianyh/Amethyst/blob/development/.amethyst.sample.yml
+
+## Linux
+
 * Change login logos to Arch logo
 * Add and use `peek` for screen recording
 * Use this for lightdm greeter
   * https://github.com/NoiSek/Aether
-* Contribute the change to `base16-vim` repo, or at least keep a forked repo with the change
-* See if there's some config in `/etc/systemd/logind.conf` that allows for suspending + hibernating after a long idle time (1+ hours)
-  * Is this more useful than configuring it in `xidlehook`? Probably, so then it triggers when manual locking too
+* Figure out if there's a faster alternative to LightDM. If not, then it might be something I just need to accept
 * Move to another notification system, so then I can dismiss notifications with particular IDs
   * Also to be able to pause notifications when I'm in a meeting or something
 * Write a short doc about `systemd-analyse`, like the commands here: https://www.techrepublic.com/article/how-to-analyze-systemd-boot-performance/
   * `systemd-analyse`, `systemd-analyse blame`, `systemd-analyse critical-chain`
-* Figure out if there's a faster alternative to LightDM. If not, then it might be something I just need to accept
 * Figure out why the keyboard doesn't seem to be fully connected/working at the start of resuming from hibernation (& suspension sometimes)
   * It eventually works, but it would be nice to have a proper signal of when it's not ready for me to type, instead of me trying to type for 5~10 seconds
-* Write a script to easily turn on/off the GPU, so I can use it when needed
-  * See if there's a way to avoid rebooting. Otherwise it might not be possible
-* Consider switching to zsh + powerlevel10k, since it looks pretty good
+* Write a script to easily turn on/off the GPU without rebooting. Not sure if it's possible
 * Improve wallpaper by picking a random one from a folder or something. Maybe change on schedule?
 * Improve dunst notifications
   * Improve their look, maybe even on a per app basis (Spotify, Slack, Google Calendar, etc)
@@ -40,27 +76,12 @@
 * Switch to `systemd-boot` or something simpler than GRUB
 * Improve colour scheme of rofi. It looks decent atm, but a bit of colour would be nice
   * Maybe some blue? Or maybe go for a Nord theme?
-  * Also, the alternating colour for each line is a bit distracting
 * Consider adding `run` and/or `ssh` modes for rofi
   * Should they be altogether in a combined mode? Or a different shortcut?
 * Add the `/etc/sudoers.d/openconnect` file to ansible
-* Create a `brew` upgrade script that runs a few different "upgrade" commands
-  * `brew update`
-  * `brew upgrade`
-  * `brew upgrade --cask --greedy` (to upgrade all the casks, including ones that don't have a "version")
-* Manually export all the Amethyst settings I've tweaked into a config file:
-  * https://github.com/ianyh/Amethyst/blob/development/docs/configuration-files.md
-  * It seems like there might be some synchronisation issues with the config file?
-    * It might be best to try and only edit the config file from now on, so it always loads the settings from there
-  * https://github.com/ianyh/Amethyst/blob/development/.amethyst.sample.yml
 
-## Adding to Ansible
+### Adding to Ansible
 
-* Split some of the packages in `common` to their own roles/tasks
-* There's some TODOs throughout the Ansible tasks
-* Consider converting some manual steps (`debug` tasks) into Ansible tasks
-* Add nvm & npm setup
-* Add java & jre setup
 * Add setup for swap (for hibernation to work)
   * Using a swapfile within the encrypted volume
   * https://wiki.archlinux.org/title/Swap#Swap_file
@@ -78,13 +99,8 @@
 * Add flatpak and all the packages I have
 * Add some minimal config for root (e.g: vimrc & bashrc) so then some root commands or ttys are nicer
 * Add notification when changing screen brightness
-* Add the NetworkManager slowness workaround setup
-  * `run sudo mv /usr/lib/nm-openconnect-auth-dialog{,.real} then put this in /usr/lib/nm-openconnect-auth-dialog and chmod +x it`
-* VSCode settings & preferences. Notable files:
-  * `~/.config/Code/User/settings.json`
-  * `~/.config/Code/User/globalStorage/storage.json` (although it also contains some highly variable config. E.g: open windows, etc)
 
-## i3
+### i3
 
 * Various TODOs in the i3 config
 * Maybe use scratchpad as a way to "minimise" some windows
@@ -92,19 +108,10 @@
   * https://www.reddit.com/r/i3wm/comments/9zpumb/any_way_to_hide_a_window/
 * Try the `[workspace=x]` criteria idea, to move a workspace to the current output:
   * https://www.reddit.com/r/i3wm/comments/56ayg3/i3msg_moving_a_specific_workspace_to_another/
-* Improve `dunst` notification looks
 * Polish & Practice using window keybindings
 * Polish & Practice using workspace keybindings
-* Maybe use more existing `base16` themes in various places (i3, i3status, IntelliJ, etc)
 * Window/Client border & looks
 * Moving workspaces to the current output
 * Obsidian is missing it's title bar for some reason :/
   * It has a titlebar when in tabbed mode, but not vertical or horizontal
 * Continue on `bin/calendar_status` & `bin/prettify_calendar_notifications` for future Linux setup
-
-## zsh
-
-* Convert bashrc to zshrc (as best as I can)
-* See if I need to use oh-my-zsh. What benefits do I get?
-* Change from zplug to another zsh plugin manager that is maintained
-  * https://wiki.archlinux.org/title/zsh#Plugin_managers
