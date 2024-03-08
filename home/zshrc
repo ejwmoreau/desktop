@@ -35,6 +35,10 @@ base16_tomorrow-night
 export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:${PATH}"
 export MANPATH="/opt/homebrew/opt/coreutils/libexec/gnuman:${MANPATH}"
 
+# Add to the PATH
+path+=("$HOME/bin-work")
+export PATH
+
 source ~/.zsh_aliases
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.

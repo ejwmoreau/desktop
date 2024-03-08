@@ -141,6 +141,16 @@ function va() {
     return 1
 }
 
+# Add the functionality to use `fg %{num}` to resume a specific background job
+# Bash has this by default, but zsh does not
+fg() {
+    if [[ $# -eq 1 && $1 = - ]]; then
+        builtin fg %-
+    else
+        builtin fg %"$@"
+    fi
+}
+
 # Python virtualenv
 alias workoff='deactivate'
 
