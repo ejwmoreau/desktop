@@ -196,6 +196,9 @@ alias python="python3"
 # Easy access to MacOS' built-in pdf combining tool
 alias pdfunite-macos="/System/Library/Automator/Combine\ PDF\ Pages.action/Contents/MacOS/join"
 
+# Using kitty's ssh command so its terminal features can be used
+alias ssh="kitty +kitten ssh"
+
 # Suspend Hobbiton
 # ssh hobbiton
 # echo 'pm-suspend' | sudo at now + 1 minutes; exit
