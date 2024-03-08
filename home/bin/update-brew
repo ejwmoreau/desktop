@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# Script to update brew and all packages installed via brew
+
+# Updates homebrew itself, and all package definitions
+brew update
+
+# Updates all packages (formulae & cask) that brew knows are "outdated"
+brew upgrade
+brew upgrade --cask
