@@ -36,7 +36,9 @@ export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:${PATH}"
 export MANPATH="/opt/homebrew/opt/coreutils/libexec/gnuman:${MANPATH}"
 
 # Add to the PATH
+path+=("$HOME/bin")
 path+=("$HOME/bin-work")
+path+=("$HOME/.local/bin") # Added by pipx
 export PATH
 
 source ~/.zsh_aliases

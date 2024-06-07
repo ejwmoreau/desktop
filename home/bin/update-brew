@@ -8,3 +8,15 @@ brew update
 # Updates all packages (formulae & cask) that brew knows are "outdated"
 brew upgrade
 brew upgrade --cask
+
+# Specific apps that use auto_updates, but I want to update them via brew instead
+brew upgrade --cask amethyst alfred bitwarden docker
+
+# TODO: Test if upgrading these apps is safe
+#karabiner-elements
+#obsidian
+#spaceman # Need to wait for a new version to come out
+
+# A bit annoying to upgrade, because it will think that it doesn't have permissions,
+# so I need to manually remove permissions & re-add them
+#bartender
