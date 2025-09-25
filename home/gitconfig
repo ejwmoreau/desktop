@@ -1,30 +1,38 @@
 [user]
-	name = Elie Moreau
-	email = emoreau@atlassian.com
-[push]
-	default = current
-[core]
-	editor = vim
-	pager = perl /usr/share/git/diff-highlight/diff-highlight | less
-[color]
-	interactive = auto
-	branch = auto
-	diff = auto
-	status = auto
-[pull]
-	rebase = true
+  name = Elie Moreau
+  email = emoreau@atlassian.com
+
+# Override https urls with ssh ones
 [url "ssh://git@stash.atlassian.com:7997/"]
-	insteadOf = https://stash.atlassian.com/scm/
+  insteadOf = https://stash.atlassian.com/scm/
 [url "git@bitbucket.org:"]
-	insteadOf = https://bitbucket.org/
+  insteadOf = https://bitbucket.org/
 [url "git@github.com:"]
-	insteadOf = https://github.com/
+  insteadOf = https://github.com/
+
+# Config for common git operations
 [init]
-	defaultBranch = main
-[filter "lfs"]
-	required = true
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
+  defaultBranch = main
+[push]
+  default = current
+[pull]
+  rebase = true
+
+# Config for visual elements of git
+[core]
+  editor = vim
+  #pager = perl /usr/share/git/diff-highlight/diff-highlight | less
 [interactive]
-	difffilter = perl /usr/share/git/diff-highlight/diff-highlight
+  #difffilter = perl /usr/share/git/diff-highlight/diff-highlight
+[color]
+  interactive = auto
+  branch = auto
+  diff = auto
+  status = auto
+
+# Config for git lfs support
+[filter "lfs"]
+  required = true
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
