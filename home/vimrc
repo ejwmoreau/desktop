@@ -42,6 +42,7 @@ set hlsearch        " Highlight matches
 set ignorecase      " Case insensitive search
 set wrapscan        " Wrap search to start of file
 set history=1000    " More history, more commands
+set rtp+=/opt/homebrew/opt/fzf " Use fzf for searching
 
 " Folding
 set foldenable        " Enable folding
