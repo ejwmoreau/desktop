@@ -21,9 +21,6 @@
 # Config for visual elements of git
 [core]
   editor = vim
-  #pager = perl /usr/share/git/diff-highlight/diff-highlight | less
-[interactive]
-  #difffilter = perl /usr/share/git/diff-highlight/diff-highlight
 [color]
   interactive = auto
   branch = auto
@@ -36,3 +33,26 @@
   clean = git-lfs clean -- %f
   smudge = git-lfs smudge -- %f
   process = git-lfs filter-process
+
+# Config for git-delta, which provides pretty diffs
+# TODO: Merge both delta modes so they look the same in both `git diff` and `git add -p`
+# TODO: Use base16 tomorrow-dark colours (try to find them via `delta --show-colors`
+[config]
+  pager = delta --color-only --features=interactive
+[interactive]
+  diffFilter = delta --color-only --features=interactive
+[delta]
+  syntax-theme = base16
+  side-by-side = true
+  features = decorations
+  keep-plus-minus-markers = false
+[delta "interactive"]
+  keep-plus-minus-markers = false
+[delta "decorations"]
+  commit-decoration-style = blue ol
+  commit-style = raw
+  file-style = omit
+  hunk-header-decoration-style = blue box
+  hunk-header-file-style = red
+  hunk-header-line-number-style = "#067a00"
+  hunk-header-style = file line-number syntax
