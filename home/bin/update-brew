@@ -2,6 +2,12 @@
 
 # Script to update brew and all packages installed via brew
 
+# Pre-load the keychain so brew can pull from github without any auth issues
+# TODO: See if I can extract this into a script or something, and use it in both here and zsh_aliases
+# https://alexanderzeitler.com/articles/using-aliases-in-zsh-scripts/
+github_key=$(ls --ignore="*.pub" -w 1 ~/.ssh/ | grep "github" | tr '\n' ' ' | xargs)
+eval `keychain --eval --agents ssh --timeout 480 --quiet $github_key`
+
 # Updates homebrew itself, and all package definitions
 brew update
 
@@ -12,10 +18,12 @@ brew upgrade --cask
 # Specific apps that use auto_updates, but I want to update them via brew instead
 brew upgrade --cask amethyst alfred bitwarden docker
 
-# TODO: Test if upgrading these apps is safe
+# Other apps that don't seem to update via `brew upgrade`
+brew upgrade loom obsidian
+
+# TODO: Test if upgrading these apps is safe. Need to wait for a new version to come out
 #karabiner-elements
-#obsidian
-#spaceman # Need to wait for a new version to come out
+#spaceman
 
 # A bit annoying to upgrade, because it will think that it doesn't have permissions,
 # so I need to manually remove permissions & re-add them

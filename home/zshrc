@@ -28,8 +28,12 @@ zplug romkatv/powerlevel10k, as:theme, depth:1
 
 zplug load
 
-# Sfter `zplug load`
+# After `zplug load`
 base16_tomorrow-night
+
+##################################################
+# Path
+##################################################
 
 # Use GNU versions of binaries (e.g: `ls`)
 export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:${PATH}"
@@ -41,10 +45,22 @@ path+=("$HOME/bin-work")
 path+=("$HOME/.local/bin") # Added by pipx
 export PATH
 
+##################################################
+# Zsh config files
+##################################################
+
 source ~/.zsh_aliases
+source ~/.zshrc_work
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+##################################################
+# Other
+##################################################
+
 export HISTSIZE=1000000
 export SAVEHIST=1000000
+
+# Set up fzf key bindings and fuzzy completion
+source <(fzf --zsh)
