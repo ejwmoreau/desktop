@@ -37,8 +37,6 @@
 * `spicetify` install & setup
   * https://formulae.brew.sh/formula/spicetify-cli
   * Adblock extension: https://github.com/rxri/spicetify-extensions/blob/main/adblock/README.md
-    * Sometimes I need to update the adblock extension because of an updated Spotify client,
-      so some easy way to update the extension's code would be great
 
 ### Adding to Ansible
 

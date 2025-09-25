@@ -206,7 +206,9 @@ alias pdfunite-macos="/System/Library/Automator/Combine\ PDF\ Pages.action/Conte
 alias ssh="kitty +kitten ssh"
 
 # Simplified spicetify command to update & apply it
-alias spicetify_force="spicetify update && spicetify apply"
+adblock_source="https://raw.githubusercontent.com/rxri/spicetify-extensions/refs/heads/main/adblock/adblock.js"
+adblock_file="~/.config/spicetify/Extensions/adblock.js"
+alias spicetify_force="spicetify update && curl $adblock_source > $adblock_file && spicetify apply"
 
 # Suspend Hobbiton
 # ssh hobbiton
