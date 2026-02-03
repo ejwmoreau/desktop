@@ -15,10 +15,12 @@
   loop:
     - bin
 
-# A group of packages needed on Linux, some of which need to be early on
+# A group of packages needed on Linux, some of which need to be installed early on
 - include_tasks: linux-base.yaml
   when: linux
 
+- include_tasks: aerospace.yaml
+  when: mac_os
 - include_tasks: autorandr.yaml
   when: linux
 # TODO: Cleanup bash config if I'm not going to use it anymore

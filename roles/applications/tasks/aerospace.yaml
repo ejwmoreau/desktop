@@ -1,0 +1,11 @@
+---
+- name: Install Aerospace
+  homebrew_cask:
+    name:
+      - aerospace
+
+- name: Link config for aerospace
+  file:
+    src: "{{playbook_dir}}/home/config/aerospace"
+    dest: "~/.config/aerospace"
+    state: link
