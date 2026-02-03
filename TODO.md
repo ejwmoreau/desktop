@@ -37,6 +37,7 @@
 * `spicetify` install & setup
   * https://formulae.brew.sh/formula/spicetify-cli
   * Adblock extension: https://github.com/rxri/spicetify-extensions/blob/main/adblock/README.md
+    * `spicetify_force` takes care of updating the extension
 
 ### Adding to Ansible
 

@@ -1,13 +1,14 @@
 #!/bin/bash
 
 # File name of the Zoom background we want to replace
-OG_BG="81B6DE22-958E-4B47-98AF-70A2AC965BEF";
+OG_BG="8B64B1A2-23FB-40F1-A0B5-ED65DD32314A";
 
 # Directory where Zoom keeps the virtual backgrounds
 ZOOM_DIR="/Users/$USER/Library/Application Support/zoom.us/data/VirtualBkgnd_Custom";
 
 # Directory of our images
-BGPATH="/Users/$USER/zoom-backgrounds/random-set";
+#BGPATH="/Users/$USER/zoom-backgrounds/2023";
+BGPATH="/Users/$USER/zoom-backgrounds/2024-and-2025";
 
 # Picking a random new background file
 NEW_BG=$(find "$BGPATH" -type f | sort -R | head -1);
