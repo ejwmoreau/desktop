@@ -1,10 +1,5 @@
 start-at-login = true
 
-# Most i3-like configs have this "normalization" feature turned off,
-# but I haven't needed to disable it yet for my usage. (TODO: Testing)
-# Typically needed to use the "split" command.
-#enable-normalization-flatten-containers = false
-
 # Default to a fullscreen-like mode
 default-root-container-layout = 'accordion'
 default-root-container-orientation = 'vertical'
@@ -40,10 +35,6 @@ automatically-unhide-macos-hidden-apps = false
   alt-shift-8 = ['move-node-to-workspace 8', 'workspace 8']
   alt-shift-9 = ['move-node-to-workspace 9', 'workspace 9']
 
-  # TODO: Testing without a "fullscreen" mode, because a borderless accordion mode is equivalent,
-  # and allows cycling between "fullscreen" windows in the same workspace.
-  #alt-f = 'fullscreen'
-
   # Layouts to toggle between
   alt-shift-space = 'layout v_accordion h_tiles'
 
@@ -61,3 +52,38 @@ automatically-unhide-macos-hidden-apps = false
 
   alt-shift-h = 'resize smart -50'
   alt-shift-l = 'resize smart +50'
+
+[workspace-to-monitor-force-assignment]
+# Slack (Workspace 8) should be on the secondary monitor
+8 = 'secondary'
+# Spotify (Workspace 7) should be on the laptop screen
+7 = 'Built-in Retina Display'
+
+# Window/Node assignments to specific workspaces
+[[on-window-detected]]
+if.app-id = 'md.obsidian'
+run = 'move-node-to-workspace 1'
+
+[[on-window-detected]]
+if.app-id = 'com.jetbrains.intellij'
+run = 'move-node-to-workspace 2'
+
+[[on-window-detected]]
+if.app-id = 'net.kovidgoyal.kitty'
+run = 'move-node-to-workspace 2'
+
+[[on-window-detected]]
+if.app-id = 'com.postmanlabs.mac'
+run = 'move-node-to-workspace 2'
+
+[[on-window-detected]]
+if.app-id = 'us.zoom.xos'
+run = 'move-node-to-workspace 5'
+
+[[on-window-detected]]
+if.app-id = 'com.spotify.client'
+run = 'move-node-to-workspace 7'
+
+[[on-window-detected]]
+if.app-id = 'com.tinyspeck.slackmacgap'
+run = 'move-node-to-workspace 8'

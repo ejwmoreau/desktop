@@ -16,7 +16,7 @@ brew upgrade
 brew upgrade --cask
 
 # Specific apps that use auto_updates, but I want to update them via brew instead
-brew upgrade --cask amethyst alfred bitwarden docker
+brew upgrade --cask amethyst alfred bitwarden docker spotify
 
 # Other apps that don't seem to update via `brew upgrade`
 brew upgrade loom obsidian

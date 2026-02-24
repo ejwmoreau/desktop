@@ -56,6 +56,13 @@ source ~/.zshrc_work
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 ##################################################
+# SDKMan Java JDK Setup
+##################################################
+
+export SDKMAN_DIR=$(brew --prefix sdkman-cli)/libexec
+[[ -s "${SDKMAN_DIR}/bin/sdkman-init.sh" ]] && source "${SDKMAN_DIR}/bin/sdkman-init.sh"
+
+##################################################
 # Other
 ##################################################
 
