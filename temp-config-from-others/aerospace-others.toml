@@ -1,0 +1,88 @@
+exec-on-workspace-change = [
+  '/bin/bash',
+  '-c',
+  'sketchybar --trigger aerospace_workspace_change_$AEROSPACE_FOCUSED_WORKSPACE FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE; sketchybar --trigger aerospace_workspace_change_$AEROSPACE_PREV_WORKSPACE FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE; ',
+]
+
+after-startup-command = [
+  # https://github.com/FelixKratz/JankyBorders
+  # 'exec-and-forget borders active_color=0xffd4be98 inactive_color=0x00494d64 width=4.0 hidpi=off',
+  # https://github.com/FelixKratz/SketchyBar
+  'exec-and-forget sketchybar'
+]
+
+[gaps]
+# outer.left = 5
+outer.top = [ { monitor."built-in" = 0 }, 30 ]
+# outer.right = 5
+# outer.bottom = 5
+inner.horizontal = 5
+inner.vertical = 5
+
+[mode.main.binding]
+
+cmd-h = 'focus --boundaries-action wrap-around-the-workspace left'
+alt-h = 'focus --boundaries-action wrap-around-the-workspace left'
+alt-j = 'focus --boundaries-action wrap-around-the-workspace down'
+alt-k = 'focus --boundaries-action wrap-around-the-workspace up'
+alt-l = 'focus --boundaries-action wrap-around-the-workspace right'
+
+alt-tab = 'workspace-back-and-forth'
+alt-leftSquareBracket = 'exec-and-forget aerospace list-workspaces --monitor focused --empty no | grep -v scratchpad | aerospace workspace --wrap-around prev'
+alt-rightSquareBracket = 'exec-and-forget aerospace list-workspaces --monitor focused --empty no | grep -v scratchpad | aerospace workspace --wrap-around next'
+alt-semicolon = 'focus-monitor --wrap-around left'
+alt-quote = 'focus-monitor --wrap-around right'
+alt-shift-semicolon = 'move-node-to-monitor --wrap-around left'
+alt-shift-quote = 'move-node-to-monitor --wrap-around right'
+alt-ctrl-semicolon = 'move-workspace-to-monitor --wrap-around left'
+alt-ctrl-quote = 'move-workspace-to-monitor --wrap-around right'
+
+alt-shift-leftSquareBracket = 'move-node-to-workspace prev'
+alt-shift-rightSquareBracket = 'move-node-to-workspace next'
+
+alt-shift-m = 'macos-native-minimize'
+alt-shift-n = 'fullscreen --no-outer-gaps'
+alt-f = 'fullscreen'
+alt-shift-f = 'layout tiling floating'
+alt-shift-q = 'close'
+
+alt-shift-s = ['mode service', 'exec-and-forget sketchybar --trigger aerospace_mode_change INFO=service']
+alt-r = ['mode resize', 'exec-and-forget sketchybar --trigger aerospace_mode_change INFO=resize']
+
+alt-enter = 'exec-and-forget open -a alacritty -n'
+alt-e = 'exec-and-forget open $HOME'
+alt-ctrl-m = 'exec-and-forget open -a zoom.us'
+alt-ctrl-d = 'exec-and-forget open -a slack'
+alt-ctrl-p = 'exec-and-forget open -a spotify'
+alt-ctrl-n = 'exec-and-forget open -a "Trello (Beta)"'
+alt-ctrl-g = 'exec-and-forget open https://calendar.google.com'
+alt-s = 'exec-and-forget ~/scripts/scratchpad.sh'
+# alt-shift-s = 'exec-and-forget open -a "System Settings"'
+alt-ctrl-o = 'exec-and-forget ~/scripts/switchmic.sh'
+alt-p = 'exec-and-forget skhd -k "alt + shift - up"'
+alt-n = 'exec-and-forget skhd -k "alt + shift - down"'
+alt-b = 'exec-and-forget pgrep sketchybar && sketchybar --reload || brew services start sketchybar' # NOTE: `brew services start sketchybar` needed to get screen recording perms
+alt-shift-c = 'reload-config'
+
+# bluetooth keyboard stopped supporting the function key actions
+f10 = 'exec-and-forget /usr/bin/osascript -e "set volume output muted not (output muted of (get volume settings))"'
+f11 = 'exec-and-forget /usr/bin/osascript -e "set volume output volume (output volume of (get volume settings) - 5)"'
+f12 = 'exec-and-forget /usr/bin/osascript -e "set volume output volume (output volume of (get volume settings) + 5)"'
+
+[mode.service.binding]
+esc = ['reload-config', 'mode main', 'exec-and-forget sketchybar --trigger aerospace_mode_change INFO=']
+r = ['flatten-workspace-tree', 'mode main', 'exec-and-forget sketchybar --trigger aerospace_mode_change INFO='] # reset layout
+f = ['layout floating tiling', 'mode main', 'exec-and-forget sketchybar --trigger aerospace_mode_change INFO='] # Toggle between floating and tiling layout
+# backspace = ['close-all-windows-but-current', 'mode main', 'exec-and-forget sketchybar --trigger aerospace_mode_change INFO=']
+
+# sticky is not yet supported https://github.com/nikitabobko/AeroSpace/issues/2
+#s = ['layout sticky tiling', 'mode main', 'exec-and-forget sketchybar --trigger aerospace_mode_change INFO=']
+
+alt-shift-h = ['join-with left', 'mode main', 'exec-and-forget sketchybar --trigger aerospace_mode_change INFO=']
+alt-shift-j = ['join-with down', 'mode main', 'exec-and-forget sketchybar --trigger aerospace_mode_change INFO=']
+alt-shift-k = ['join-with up', 'mode main', 'exec-and-forget sketchybar --trigger aerospace_mode_change INFO=']
+alt-shift-l = ['join-with right', 'mode main', 'exec-and-forget sketchybar --trigger aerospace_mode_change INFO=']
+
+down = 'volume down'
+up = 'volume up'
+shift-down = ['volume set 0', 'mode main', 'exec-and-forget sketchybar --trigger aerospace_mode_change INFO=']

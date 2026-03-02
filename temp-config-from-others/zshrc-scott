@@ -1,0 +1,533 @@
+
+_ENABLE_PROFILING=${_ENABLE_PROFILING:-0}
+if [[ ${_ENABLE_PROFILING} -eq 1 ]]; then
+    _dzero=$(gdate +%s%3N)
+    zmodload zsh/zprof
+fi
+
+#===============================================================================
+# PATH
+#-------------------------------------------------------------------------------
+export PATH="${HOME}/bin:${PATH}"                        # My scripts
+export PATH="/opt/homebrew/bin:${PATH}"                  # Homebrew for apple silicon
+export PATH="/usr/local/sbin:${PATH}"                    # Homebrew symlinks
+export PATH="${PATH}:${HOME}/bin-atlassian/"             # My work scripts
+export PATH="${PATH}:${HOME}/go/bin"                     # Go builds
+export PATH="${PATH}:$(python3 -m site --user-base)/bin" # Python3 pip installs
+#===============================================================================
+
+if command -v nvm >/dev/null 2>/dev/null; then
+    nvm unload
+fi
+
+#===============================================================================
+# Java
+#-------------------------------------------------------------------------------
+export JAVA_HOME=$(/usr/libexec/java_home -v 1.14)
+export PATH="${JAVA_HOME}/bin:${PATH}"
+#===============================================================================
+
+#===============================================================================
+# ZSH
+#-------------------------------------------------------------------------------
+# TODO: what the hell does this do?
+DISABLE_MAGIC_FUNCTIONS=true
+
+# Vim is king.
+export EDITOR="vim"
+
+# Fuck off. This is really stupid. How hard is it to type " | less"
+export PAGER="less"
+
+# I WANT ZSH TO INSTANTLY FUCKING START
+export DISABLE_UPDATE_PROMPT=true
+export DISABLE_AUTO_UPDATE=true
+
+# Path to your oh-my-zsh installation.
+export ZSH="/Users/sgreenup/.oh-my-zsh"
+
+export TERM="xterm"
+
+# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+ZSH_THEME="niknax"
+
+# https://github.com/lukechilds/zsh-nvm
+export NVM_DIR="$HOME/.nvm"
+export NVM_LAZY_LOAD=true
+plugins=(git atlas zsh-nvm)
+
+setopt LOCAL_OPTIONS NO_NOTIFY NO_MONITOR
+
+source $ZSH/oh-my-zsh.sh
+#===============================================================================
+
+#===============================================================================
+# Zsh History configuration
+#-------------------------------------------------------------------------------
+export HISTSIZE=10000000
+export SAVEHIST=${HISTSIZE}
+#-------------------------------------------------------------------------------
+setopt HIST_IGNORE_ALL_DUPS      # Delete old recorded entry if new entry is a duplicate.
+setopt HIST_IGNORE_SPACE         # Don't record an entry starting with a space.
+#===============================================================================
+
+#===============================================================================
+# Aliases
+#-------------------------------------------------------------------------------
+
+# Terminal
+alias c="clear"
+alias cc="clear && "
+
+# Tmux
+## Fixes colouring: https://github.com/tmux/tmux/issues/1926
+alias tmux="tmux -2"
+
+# Parsing output
+alias C1="awk '{print \$1}'"
+alias C2="awk '{print \$2}'"
+alias C3="awk '{print \$3}'"
+alias C4="awk '{print \$4}'"
+alias C5="awk '{print \$5}'"
+alias C6="awk '{print \$6}'"
+alias C7="awk '{print \$7}'"
+alias C8="awk '{print \$8}'"
+
+# Docker
+alias d="docker"
+alias dn="docker network"
+alias de="docker exec"
+alias dc="docker container"
+alias dca="docker container attach"
+alias dps="docker container ls --format \"table {{.Names}} \t {{.Image}} \t {{.RunningFor}} \t {{.Status}} \t {{.Ports}}\" "
+export DOCKER_SCAN_SUGGEST=false
+
+#alias dk="/usr/bin/sudo /usr/bin/docker-compose"
+#alias dkps="/usr/bin/sudo /usr/bin/docker-compose ps"
+
+alias dk="docker compose"
+alias dkp="docker compose ps"
+alias dku="docker compose up"
+
+function dkls() {
+    local _filename=""
+    if [[ -f "./docker-compose.yml" ]]; then
+        _filename="./docker-compose.yml"
+    elif [[ -f "./docker-compose.yaml" ]]; then
+        _filename="./docker-compose.yaml"
+    else
+        echo "No docker-compose.yml OR docker-compose.yaml file"
+        return 1
+    fi
+
+    cat "${_filename}" | yq -r '(["SERVICE NAME", "DOCKER IMAGE:TAG"] | (., map(length * "-"))), (.services | to_entries[] | [.key, if (.value.image == null) then (.value.build | if (type == "string") then . else .context end) else .value.image end]) | @tsv' | column -ts$'\t'
+}
+
+function dsh() {
+    docker exec -it $1 /bin/sh
+}
+
+# File management
+alias decimate="shred -uvzn 20"
+alias l='ls -l'
+alias la='ls -la'
+alias rm="rm -i"
+
+# Overwrites
+alias src="source ${HOME}/.zshrc"
+alias vim="vim -O"
+
+# Package management
+alias brewup="brew update && brew upgrade && brew upgrade --cask && brew cleanup"
+
+# Git
+GIT_COMMAND="git"
+alias g="${GIT_COMMAND} status"
+alias ga="git add"
+alias gb="git branch"
+alias gba="git branch --all"
+alias gd="git diff"
+alias gc="git commit"
+alias gco="git checkout"
+alias gi="git init && git commit --allow-empty -m 'Initial and empty commit'"
+alias gf="git fetch --all --prune --prune-tags"
+alias gff="git merge --ff-only"
+alias gm="git merge --no-ff"
+alias gpu="git pull"
+alias gp="git push origin HEAD"
+alias gs="git show HEAD"
+alias gcm="git checkout master"
+function gch() {
+    git checkout "$(git branch | fzf | tr -d '[:space:]')"
+}
+alias gdiff="git difftool -t vimdiff --no-prompt --unified=1000 --no-index"
+
+GIT_LOG_FORMAT='%Cred%h%Creset -%C(yellow)%-d%C(reset) %s %C(green)[%cd]%C(reset) %C(cyan)%G?%C(reset)'
+alias gl="git log --date-order --graph --pretty=format:'${GIT_LOG_FORMAT}' --abbrev-commit --date=relative"
+alias gld="git log --date-order --graph --pretty=format:'${GIT_LOG_FORMAT}' --abbrev-commit --date=short"
+GIT_LOG_FORMAT='%Cred%h%Creset -%C(yellow)%-d%C(reset) %s %C(green)[%cd]%C(reset) %C(bold blue)%an <%ae>%C(reset) %C(cyan)%G?%C(reset)'
+alias gla="git log --date-order --graph --pretty=format:'${GIT_LOG_FORMAT}' --abbrev-commit --date=relative --all"
+alias gls="git log --date-order --graph --pretty=format:'${GIT_LOG_FORMAT}' --abbrev-commit --date=relative --show-signature"
+alias gll="git log --date-order --graph --oneline"
+alias glm="git log --date-order --graph --pretty=format:'${GIT_LOG_FORMAT}' --abbrev-commit --date=short"
+
+# Micros
+alias am="atlas micros"
+alias ams="atlas micros service"
+alias amc="atlas micros compute"
+alias amss="atlas micros service show -s "
+alias amcs="atlas micros compute ssh -s "
+alias amce="atlas micros compute exec -s "
+
+# Kubernetes
+alias k="kubectl"
+alias kg="kubectl get"
+alias kd="kubectl describe"
+alias kga="kubectl get pods,replicasets,httpproxy"
+alias kcg="kubectl config get-contexts"
+alias kcu="kubectl config use-context"
+alias kcc="kubectl config current-context"
+alias kaf="kubectl apply -f"
+
+alias kt="kubetoken --duo=passcode"
+alias kt="atlas kitt context"
+alias kn="kubectl get nodes --sort-by=.metadata.labels.role -L role,customer,node.kubernetes.io/instance-type,topology.kubernetes.io/zone"
+
+# Kubernetes - JQ aliases
+alias jq_pod_containers="jq '.spec.containers[] | {name: .name, image: .image}'"
+
+# Kubernetes - KubeToken
+# TODO run this lazily, when we run kt
+function clever_thing() {
+    if ifconfig en0 | grep "inet " 2>/dev/null 1>/dev/null; then
+        export KUBECONFIG=$(atlas kitt context:create --pid=$$)
+    else
+        echo "No internet detected, KUBECONFIG skipped"
+    fi
+}
+
+alias kubectx="atlas kitt context"
+
+function kcurrctx() {
+    target="$HOME/.kube/config"
+    if [[ ! -r "$target" ]]; then
+        echo "Could not read $target - Do you have a kubectl configured?"
+        return 1
+    fi
+
+    if which yq 2>&1 1>/dev/null; then
+        yq -r '.["current-context"]' < "$target"
+    else
+        awk -F': ' '/^current-context: /{print $2}' < "$target"
+    fi
+}
+
+#===============================================================================
+# LDAP
+#-------------------------------------------------------------------------------
+
+
+function ad() {
+    SEARCH_BASE="${1}"
+    FILTER="${2}"
+
+    if [[ -z "${SEARCH_BASE}" ]] || [[ -z "${FILTER}" ]] || [[ "$#" -ne 2 ]]; then
+        echo "usage: ad SEARCH_BASE FILTER"
+        return
+    fi
+
+    local _LDAP_HOST="ldap://usw2a-ad01.office.atlassian.com"
+
+    # -Q -- Enable SASL Quiet mode. Never prompt.
+    # -LLL -- Better formatting
+    # -E pr=1000/noprompt -- Page results
+    # -o ldif-wrap=no -- ??
+    # -b <searchbase> -- Starting point for search
+    # -X <authzid> -- Who do we want to auth as?
+    # -O maxssf=0 -- Turn off the SASL security property maxssf. DISABLED
+    # -ZZ
+       #-H 'ldap://office.atlassian.com'\
+    ldapsearch\
+       -Q\
+       -H "${_LDAP_HOST}"\
+       -Y GSSAPI\
+       -LLL\
+       -E pr="1000/noprompt"\
+       -b "${SEARCH_BASE}"\
+       -X "dn:CN=${USER},OU=people,DC=office,DC=atlassian,DC=com"\
+       -o "ldif-wrap=no"\
+       ${FILTER}
+}
+
+# Examples:
+#   adp "(name=sgreenup")
+#   adp "(personalTitle=P7*)"
+#   adp "(displayName=Scott *)"
+#   adp "(CN=sgreenup)"
+function adp() {
+    ad "OU=people,DC=office,DC=atlassian,DC=com" ${@}
+}
+
+# Examples:
+#   adg "(CN=micros*)"
+function adg() {
+    ad "OU=roles,OU=groups,DC=office,DC=atlassian,DC=com" ${@}
+}
+
+# Examples:
+#   adg "(CN=micros*)"
+function admail() {
+    ad "OU=mailing-lists,DC=office,DC=atlassian,DC=com" ${@}
+}
+
+#===============================================================================
+
+#===============================================================================
+# Useful functions (A-Z)
+#-------------------------------------------------------------------------------
+function jqhead_old() {
+    local _number=$1
+
+    if [[ -z "${_number}" ]]; then
+        _number=1
+    fi
+
+    local _repeated=$(python -c "print('[]?' * ${_number})")
+
+    jq 'reduce path(.'"${_repeated}"') as $path (.; setpath($path; {}))'
+}
+
+function jqhead() {
+    local _path=${1}
+    local _number=${2}
+
+    if [[ -z "${_path}" ]]; then
+        _path='.'
+    else
+        shift
+    fi
+
+    if [[ -z "${_number}" ]]; then
+        _number=1
+    else
+        shift
+    fi
+
+    local _repeated=$(printf '[]?%.0s' $(seq 1 ${_number}))
+
+    jq "${_path}"' | reduce path(.'"${_repeated}"') as $path (.; setpath($path; {}))' $@
+}
+
+# Create a play directory under the temporary file system and change to that
+# directory.
+function p() {
+    cd $(mktemp -d)
+}
+
+function _ph_date() {
+    date "+%Y-%m-%d--%H%M%S"
+}
+
+# Create a play directory under $HOME and change to that directory. Allows for
+# comments.
+function ph() {
+    if [[ $# -ne 1 && $# -ne 0 ]]; then
+        echo "Usage: ph [NAME]"
+        return 1
+    fi
+
+    # If no argument, let's ask for a name.
+    if [[ $# -eq 0 ]]; then
+        echo -n "name: "
+        read _name
+
+        local _name=$(echo "${_name}" | sed -e 's/ *$//' | tr -d '\n')
+
+        for _stupid_name in asd; do
+            if [[ "${_name}" == "${_stupid_name}" ]]; then
+                echo "You can just leave the name blank instead of using a stupid name."
+                _name=""
+            fi
+        done
+
+        # If the name is not empty, then add a delimiter
+        if [[ ! -z "${_name}" ]]; then
+            _name="--${_name}"
+        fi
+
+        mkdir -p "${HOME}/tmp"
+        TEMPDIR=$(mktemp -d "${HOME}/tmp/$(_ph_date)${_name}")
+        cd "${TEMPDIR}"
+        return 0
+    fi
+
+    # If name given, then let's goooooooooooo
+    if [[ $# -eq 1 ]]; then
+        name=${1}
+        mkdir -p "${HOME}/tmp"
+        TEMPDIR=$(mktemp -d "${HOME}/tmp/$(_ph_date)--${name}")
+        cd "${TEMPDIR}"
+        return 0
+    fi
+}
+
+function notif() {
+    TITLE=${1}
+    MESSAGE=${2}
+
+    if [[ -z ${TITLE} ]] || [[ -z ${MESSAGE} ]] || [[ "${#}" -ne 2 ]]; then
+        osascript -e 'display notification "usage: notif TITLE MESSAGE" with title "Notification Failure"'
+    fi
+
+    osascript -e "display notification \"${MESSAGE}\" with title \"${TILE}\""
+}
+
+function long() {
+    if which gtime 2>/dev/null 1>/dev/null; then
+        gtime_out=$(mktemp)
+        gtime --output "${gtime_out}" --format "%E|%S|%U|%x" $@
+
+        wall_time=$(cat "${gtime_out}" | awk -F "|" '{print $1}')
+        syst_time=$(cat "${gtime_out}" | awk -F "|" '{print $2}')
+        user_time=$(cat "${gtime_out}" | awk -F "|" '{print $3}')
+        exit_code=$(cat "${gtime_out}" | awk -F "|" '{print $4}')
+        notif "Command Completed" "Took ${wall_time}\nExited with ${exit_code}"
+    else
+        time $@
+        notif "Command Completed" "$@"
+    fi
+}
+
+#===============================================================================
+# autojump
+#-------------------------------------------------------------------------------
+if [[ -f /usr/local/etc/profile.d/autojump.sh ]]; then
+    . /usr/local/etc/profile.d/autojump.sh
+fi
+
+if [[ -f /opt/homebrew/etc/profile.d/autojump.sh ]]; then
+    . /opt/homebrew/etc/profile.d/autojump.sh
+fi
+
+
+#===============================================================================
+# virtualenvwrapper
+#-------------------------------------------------------------------------------
+
+if [[ "${VIRTUALENVWRAPPER_PYTHON}" == "" ]]; then
+    echo "Warning: Loading virtualenvwrapper via .zshrc..."
+    export WORKON_HOME="${HOME}/.virtualenvs"
+    export VIRTUALENVWRAPPER_PYTHON="python3"
+    source /opt/homebrew/bin/virtualenvwrapper.sh
+fi
+
+#===============================================================================
+# cloudtoken
+#-------------------------------------------------------------------------------
+#if [[ -f "${HOME}/.config/cloudtoken/bashrc_additions" ]]; then
+#    source "${HOME}/.config/cloudtoken/bashrc_additions"
+#fi
+
+#===============================================================================
+# pyenv
+#-------------------------------------------------------------------------------
+export PYENV_ROOT="${HOME}/.pyenv"
+command -v pyenv >/dev/null || export PATH="${PATH}:${PYENV_ROOT}/bin"
+eval "$(pyenv init -)"
+
+#===============================================================================
+# NVM
+#-------------------------------------------------------------------------------
+#export NVM_DIR="$HOME/.nvm"
+#if [[ -s "/opt/homebrew/opt/nvm/nvm.sh" ]]; then
+#    . "/opt/homebrew/opt/nvm/nvm.sh"
+#fi
+#
+#
+#if [[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ]]; then
+#    . "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
+#fi
+
+function nvm_echo() {
+  command printf %s\\n "$*" 2>/dev/null
+}
+
+function nvm_find_up() {
+  local path_
+  path_="${PWD}"
+  while [ "${path_}" != "" ] && [ ! -f "${path_}/${1-}" ]; do
+    path_=${path_%/*}
+  done
+  nvm_echo "${path_}"
+}
+
+function nvm_find_nvmrc() {
+  local dir
+  dir="$(nvm_find_up '.nvmrc')"
+  if [ -e "${dir}/.nvmrc" ]; then
+    nvm_echo "${dir}/.nvmrc"
+  fi
+}
+
+# place this after nvm initialization!
+autoload -U add-zsh-hook
+load-nvmrc() {
+  local nvmrc_path="$(nvm_find_nvmrc)"
+
+  if [ -n "$nvmrc_path" ]; then
+    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+
+    if [ "$nvmrc_node_version" = "N/A" ]; then
+      nvm install
+    elif [ "$nvmrc_node_version" != "$(nvm version)" ]; then
+      nvm use
+    fi
+  elif [ -n "$(PWD=$OLDPWD nvm_find_nvmrc)" ] && [ "$(nvm version)" != "$(nvm version default)" ]; then
+    echo "Reverting to nvm default version"
+    nvm use default
+  fi
+}
+add-zsh-hook chpwd load-nvmrc
+load-nvmrc
+
+#===============================================================================
+# Base16 Shell
+#-------------------------------------------------------------------------------
+BASE16_SHELL="$HOME/.config/base16-shell/"
+source "${BASE16_SHELL}/scripts/base16-tomorrow-night.sh"
+
+#===============================================================================
+# FZF History
+#-------------------------------------------------------------------------------
+FZF_CELLAR_ROOT="$(brew --prefix)/Cellar/fzf/$(fzf --version | cut -d " " -f 1)"
+source "${FZF_CELLAR_ROOT}/shell/key-bindings.zsh"
+source "${FZF_CELLAR_ROOT}/shell/completion.zsh"
+
+#===============================================================================
+# We want the space to stick around when we tab complete. Without this, you can
+# hit tab and then go to type something, you'll find the space disppears.
+# ZLE_REMOVE_SUFFIX_CHARS=$' \t\n;&|'
+export ZLE_REMOVE_SUFFIX_CHARS=$'\t\n;&|'
+
+GPG_TTY=$(tty)
+export GPG_TTY
+
+# VIM MODE!
+#bindkey -v
+#
+## VIM MODE WITH BACKSPACE=DELETING CHARACTERS!
+#bindkey "^?" backward-delete-char
+
+set +x
+
+# Allows ctrl-z to work, use with disown/reptyr
+set -o monitor
+
+# Turns off beep on ambiguous autocompletion
+unsetopt LIST_BEEP
+
+if [[ ${_ENABLE_PROFILING} -eq 1 ]]; then
+    zprof
+    _dfinal=$(gdate +%s%3N)
+    echo "Load time: $(($_dfinal - $_dzero))"
+fi
