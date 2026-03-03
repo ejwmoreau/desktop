@@ -16,15 +16,8 @@ brew upgrade
 brew upgrade --cask
 
 # Specific apps that use auto_updates, but I want to update them via brew instead
-brew upgrade --cask amethyst alfred bitwarden docker spotify
-
-# Other apps that don't seem to update via `brew upgrade`
-brew upgrade loom obsidian
-
-# TODO: Test if upgrading these apps is safe. Need to wait for a new version to come out
-#karabiner-elements
-#spaceman
+brew upgrade --cask alfred docker spotify bartender karabiner-elements loom obsidian
 
 # A bit annoying to upgrade, because it will think that it doesn't have permissions,
 # so I need to manually remove permissions & re-add them
-#bartender
+#brew upgrade --cask bartender
