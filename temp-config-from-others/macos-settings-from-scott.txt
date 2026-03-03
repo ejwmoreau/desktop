@@ -1,0 +1,39 @@
+- System Settings > Trackpad > Scroll & Zoom > Natural Scrolling = OFF
+- System Settings > ... > Display > More Space
+- System Settings > ... > Touch ID > Add left and right index fingers
+- System Settings > ... > Desktop & Dock > Mission Control > Automatically rearrange Spaces based on most recent use = OFF
+- System Settings > ... > Desktop & Dock > Mission Control > Drag windows to top of screen to enter Mission Control = OFF
+- System Settings > ... > Desktop & Dock > Dock > Show suggested and recent apps in Dock = OFF
+- System Settings > ... > Desktop & Dock > Dock > Show indicators for open applications = OFF
+- System Settings > ... > Desktop & Dock > Dock > Animate opening applications = OFF
+- System Settings > ... > Desktop & Dock > Desktop & Stage Manager > Show Items > Desktop = OFF
+- System Settings > ... > Desktop & Dock > Desktop & Stage Manager > Click wallpaper to reveal desktop = OFF
+- System Settings > ... > Desktop & Dock > Desktop & Stage Manager > Show recent apps in Stage Manager = OFF
+- System Settings > Spotlight > Help Apple Improve Search = OFF
+- System Settings > Spotlight > Search Results
+- System Settings > Lock Screen > Start Screen Saver when inactive = For 5 minute
+- System Settings > Lock Screen > Turn display off on battery when inactive = 10 minutes
+- System Settings > Lock Screen > Turn display off on power adapter when inactive = NEVER (I would love 24 hours if it was a fucking option)
+- System Settings > Keyboard > 
+    - Keyboard navigation = OFF
+    - Keyboard Shortcuts
+        - Mission Control > Mission Control > ^F1
+        - Mission Control > Mission Control > COMMAND-Q # This stops accidentally quitting apps
+        - Mission Control > Application windows > ^F2
+        - Mission Control > Show Desktop = OFF
+        - Mission Control > Turn Stage Manager on/off = OFF
+        - Keyboard > _turn them all off_
+        - Function Keys > Use F1, F2, etc. keys as standard function keys = ON
+        - Modifier Keys > Caps Lock = Escape
+        - Services > Text > Search man Page index in Terminal = FUCK OFF
+        - Services > Text > Open man Page in Terminal = FUCK OFF
+    - Input Sources
+        - Correct spelling = OFF
+        - Capatlise auto = OFF
+        - Show inline predictive text = OFF
+        - Full stop on double space = OFF
+        - Use smart quotes and dashes = OFF
+- System Settings > Screen Saver
+    - Choose Photos
+    - Options... > Dropdown > Choose folder... = $WALLPAPER_FOLDER
+    - Style = Ken Burns
