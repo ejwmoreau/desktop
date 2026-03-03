@@ -16,8 +16,8 @@ brew upgrade
 brew upgrade --cask
 
 # Specific apps that use auto_updates, but I want to update them via brew instead
-brew upgrade --cask alfred docker spotify bartender karabiner-elements loom obsidian
+brew upgrade --cask alfred docker spotify bartender loom obsidian
 
-# A bit annoying to upgrade, because it will think that it doesn't have permissions,
+# A bit annoying to upgrade, because they will think that they don't have permissions,
 # so I need to manually remove permissions & re-add them
-#brew upgrade --cask bartender
+#brew upgrade --cask bartender karabiner-elements
