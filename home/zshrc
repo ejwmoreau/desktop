@@ -19,16 +19,11 @@ fi
 # * powerlevel10k for prompt
 ##################################################
 
-export ZPLUG_HOME=$HOMEBREW_PREFIX/opt/zplug
-source $ZPLUG_HOME/init.zsh
+# Load antidote plugin manager
+source $(brew --prefix)/opt/antidote/share/antidote/antidote.zsh
+antidote load   # reads ~/.zsh_plugins.txt, generates & sources a static cache
 
-# Before `zplug load`
-zplug chriskempson/base16-shell, from:github
-zplug romkatv/powerlevel10k, as:theme, depth:1
-
-zplug load
-
-# After `zplug load`
+# After plugins load
 base16_tomorrow-night
 
 ##################################################
@@ -56,11 +51,31 @@ source ~/.zshrc_work
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 ##################################################
-# SDKMan Java JDK Setup
+# SDKMan Java JDK Setup (lazy-loaded)
 ##################################################
 
-export SDKMAN_DIR=$(brew --prefix sdkman-cli)/libexec
-[[ -s "${SDKMAN_DIR}/bin/sdkman-init.sh" ]] && source "${SDKMAN_DIR}/bin/sdkman-init.sh"
+export SDKMAN_DIR="$(brew --prefix)/opt/sdkman-cli/libexec"
+sdk() {
+  unset -f sdk 2>/dev/null
+  [[ -s "${SDKMAN_DIR}/bin/sdkman-init.sh" ]] && source "${SDKMAN_DIR}/bin/sdkman-init.sh"
+  sdk "$@"
+}
+
+##################################################
+# NVM Setup (lazy-loaded)
+##################################################
+
+export NVM_DIR="$HOME/.nvm"
+# Define shims that load nvm on first use, then hand off to the real command.
+_load_nvm() {
+  unset -f nvm node npm npx 2>/dev/null
+  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
+  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
+}
+nvm()  { _load_nvm; nvm "$@"; }
+node() { _load_nvm; node "$@"; }
+npm()  { _load_nvm; npm "$@"; }
+npx()  { _load_nvm; npx "$@"; }
 
 ##################################################
 # Other

@@ -13,10 +13,10 @@
       - zsh
   when: linux
 
-- name: Install zplug
+- name: Install antidote
   yay:
     name:
-      - zplug
+      - antidote
   when: linux
 
 - name: Link config for zsh
@@ -31,5 +31,7 @@
       dest: ".zsh_aliases"
     - src: "home/p10k.zsh"
       dest: ".p10k.zsh"
+    - src: "home/zsh_plugins.txt"
+      dest: "zsh_plugins.txt"
 
 # TODO: Run zplug install
