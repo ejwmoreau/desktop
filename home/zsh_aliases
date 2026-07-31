@@ -87,8 +87,12 @@ function gta() {
     if [ $# -eq 0 ]; then echo "Please supply the branch name"; fi
     repo_name=$(basename -s .git `git config --get remote.origin.url`)
     default_branch_name=$(get_or_set_default_branch_ref)
-    git worktree add -b $1 ../$repo_name-$1 $default_branch_name
+    git worktree add -f $1 ../$repo_name-$1 $default_branch_name
     cd ../$repo_name-$1
+
+    # If the branch exists remotely, pull the latest changes to my local
+    git branch --set-upstream-to=origin/$1 $1
+    kc && /usr/bin/git pull
 }
 
 function gur() {
