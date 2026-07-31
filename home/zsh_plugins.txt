@@ -1,3 +1,2 @@
 romkatv/powerlevel10k
 tinted-theming/base16-shell
-/Users/emoreau/.zsh_plugins.
