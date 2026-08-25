@@ -116,22 +116,22 @@ function get_or_set_default_branch_ref() {
 }
 
 # Docker
-alias d="/usr/bin/docker"
-alias dn="/usr/bin/docker network"
-alias de="/usr/bin/docker exec"
-alias dc="/usr/bin/docker container"
-alias dca="/usr/bin/docker container attach"
-alias dps="/usr/bin/docker container ls --format \"table {{.Names}} \t {{.Image}} \t {{.RunningFor}} \t {{.Status}} \t {{.Ports}}\" "
+alias d="docker"
+alias dn="docker network"
+alias de="docker exec"
+alias dc="docker container"
+alias dca="docker container attach"
+alias dps="docker container ls --format \"table {{.Names}} \t {{.Image}} \t {{.RunningFor}} \t {{.Status}} \t {{.Ports}}\" "
 # Stops all running containers
-alias dsa='/usr/bin/docker stop $(/usr/bin/docker ps -q)'
+alias dsa='docker stop $(docker ps -q)'
 
 function dsh () {
-    /usr/bin/docker exec -it $1 /bin/sh
+    docker exec -it $1 /bin/sh
 }
 
 # Docker Compose
-alias dk="/usr/bin/docker compose"
-alias dkps="/usr/bin/docker compose ps"
+alias dk="docker compose"
+alias dkps="docker compose ps"
 
 # Applications
 alias feh="feh --auto-zoom --borderless --draw-filename --geometry 800x600"
@@ -168,7 +168,7 @@ alias workoff='deactivate'
 alias docker-logs-check='while ((1)); do docker logs -f $(docker ps | grep 8080 | cut -f1 -d" ") 2>/dev/null; sleep 1; echo No docker container; done'
 
 # Uncomment if on Linux and Docker requires sudo access
-#alias docker="sudo /usr/bin/docker"
+#alias docker="sudo docker"
 
 # Avoid remembering the untar flags
 alias untar="tar xf"
