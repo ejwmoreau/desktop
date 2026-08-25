@@ -35,31 +35,43 @@
   smudge = git-lfs smudge -- %f
   process = git-lfs filter-process
 
-# Config for git-delta, which provides pretty diffs
-# TODO: Merge both delta modes so they look the same in both `git diff` and `git add -p`
-# TODO: Use base16 tomorrow-dark colours (try to find them via `delta --show-colors`
-#[config]
-#  pager = delta --color-only --features=interactive
-#[interactive]
-#  diffFilter = delta --color-only --features=interactive
-#[delta]
-#  syntax-theme = base16
-#  side-by-side = true
-#  features = decorations
-#  keep-plus-minus-markers = false
-#[delta "interactive"]
-#  keep-plus-minus-markers = false
-#[delta "decorations"]
-#  commit-decoration-style = blue ol
-#  commit-style = raw
-#  file-style = omit
-#  hunk-header-decoration-style = blue box
-#  hunk-header-file-style = red
-#  hunk-header-line-number-style = "#067a00"
-#  hunk-header-style = file line-number syntax
-
-# Config for diff-so-fancy: https://formulae.brew.sh/formula/diff-so-fancy
+# Config for git-delta, which provides syntax highlighting and readable,
+# navigable unified diffs. It also preserves Git's patch format for `git add -p`.
 [core]
-  pager = diff-so-fancy | less --tabs=4 -RF
+  pager = delta
 [interactive]
-  diffFilter = diff-so-fancy --patch
+  diffFilter = delta --color-only --features=interactive
+[delta]
+  syntax-theme = base16
+  features = decorations
+  navigate = true
+  line-numbers = true
+  line-numbers-minus-style = "#cc6666"
+  line-numbers-plus-style = "#b5bd68"
+  line-numbers-left-style = "#969896"
+  line-numbers-right-style = "#969896"
+  line-numbers-zero-style = "#969896"
+  side-by-side = false
+  keep-plus-minus-markers = true
+  # Muted backgrounds blended from Tomorrow Night's base and red/green.
+  minus-style = syntax "#3d2c2d"
+  minus-emph-style = syntax "#522a2a"
+  plus-style = syntax "#383b2e"
+  plus-emph-style = syntax "#4a4e36"
+[delta "interactive"]
+  keep-plus-minus-markers = false
+[delta "decorations"]
+  commit-decoration-style = "#81a2be" ol
+  commit-style = raw
+  file-style = omit
+  hunk-header-decoration-style = "#81a2be" box
+  hunk-header-file-style = "#81a2be"
+  hunk-header-line-number-style = "#969896"
+  hunk-header-style = file line-number syntax
+
+# Highlight code moved within a diff, including indentation-only changes.
+[diff]
+  colorMoved = zebra
+  colorMovedWS = allow-indentation-change
+  renames = copies
+  mnemonicPrefix = true
